@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.Abm_Automovil;
+using UberFrba.Abm_Cliente;
 
 namespace UberFrba
 {
@@ -17,7 +18,7 @@ namespace UberFrba
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormListado());
+            Application.Run(new frmListClientes());
         }
     }
 }
