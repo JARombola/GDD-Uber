@@ -13,7 +13,7 @@ using UberFrba.A__Buscador;
 
 
 namespace UberFrba.Abm_Cliente{
-    public partial class frmListClientes : Form {
+    public partial class frmListClientes : ListadosAdapter {
             //PARA CONSULTAS A LA BASE..........
         private String COLUMNA_DNI = "DNI";
         private String COLUMNA_NOMBRE = "NOMBRE";
@@ -31,38 +31,29 @@ namespace UberFrba.Abm_Cliente{
 
             String query = "SELECT * FROM cliente WHERE ";
 
-
             concatenar = quiereBuscar(txtNombre.Text, ref agregarOR, ref query);
-            if (concatenar) query+=COLUMNA_NOMBRE+" LIKE '%"+txtNombre.Text+"%'";
+            if (concatenar) 
+                query+=COLUMNA_NOMBRE+" LIKE '%"+txtNombre.Text+"%'";
 
             concatenar = quiereBuscar(txtApellido.Text, ref agregarOR, ref query);
-            if (concatenar) query+=COLUMNA_APELLIDO+" LIKE '%"+txtApellido.Text+"%'";
+                if (concatenar) 
+                    query+=COLUMNA_APELLIDO+" LIKE '%"+txtApellido.Text+"%'";
 
             concatenar = quiereBuscar(txtDNI.Text, ref agregarOR, ref query);
-            if (concatenar) query+=COLUMNA_DNI+" = '"+txtDNI.Text+"'";
+                if (concatenar) 
+                    query+=COLUMNA_DNI+" = '"+txtDNI.Text+"'";
 
             MessageBox.Show(query);
             //b.ejecutarQuery(query, dgListado);
 
         }
 
-        private Boolean quiereBuscar(String palabra, ref Boolean agregarOR, ref String query) {
-            if (!string.IsNullOrEmpty(palabra)) {
-                if (agregarOR) query+=" OR ";
-                agregarOR=true;
-                return true;
-            }
-            return false;
-        }
-
         private void btnClean_Click (object sender, EventArgs e) {
             ArrayList cajasTexto = new ArrayList();
-            cajasTexto.Add(txtApellido);
-            cajasTexto.Add(txtDNI);
-            cajasTexto.Add(txtNombre);
-            foreach(TextBox t in cajasTexto){
-                t.Clear();  
-            }
+                cajasTexto.Add(txtApellido);
+                cajasTexto.Add(txtDNI);
+                cajasTexto.Add(txtNombre);
+            limpiar(cajasTexto);
         }
     }
 }
