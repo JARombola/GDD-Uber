@@ -12,16 +12,16 @@ using System.Windows.Forms;
 using UberFrba.A__Buscador;
 
 
-namespace UberFrba.Abm_Cliente{
-    public partial class frmListClientes : ListadosAdapter {
+namespace UberFrba.Abm_Chofer{
+    public partial class frmListChofer : ListadosAdapter {
             //PARA CONSULTAS A LA BASE..........
         private String COLUMNA_DNI = "DNI";
         private String COLUMNA_NOMBRE = "NOMBRE";
         private String COLUMNA_APELLIDO = "APELLIDO";
 
-        public frmListClientes () {
+        public frmListChofer () {
             InitializeComponent();
-            TABLA = "Cliente";
+            TABLA = "Chofer";
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {

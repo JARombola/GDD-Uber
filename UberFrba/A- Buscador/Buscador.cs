@@ -28,15 +28,6 @@ namespace UberFrba.A__Buscador {
             }
         }
 
-        private String obtenerDireccionBD () {
-            StreamReader file = new StreamReader(@"..\..\configBD.txt");
-            String linea = file.ReadLine();
-            int inicioURL=linea.IndexOf("=")+1;
-            linea = linea.Substring(inicioURL, linea.Length-inicioURL);
-            linea = linea.Trim();
-        return linea;
-        }
-
         public static Buscador getInstancia(){
             if (instancia == null) instancia = new Buscador();
             return instancia;
@@ -47,6 +38,15 @@ namespace UberFrba.A__Buscador {
             ConfiguradorDG config = new ConfiguradorDG();
             config.completarDataGrid(dataGrid, command);
            // return data;
+        }
+
+        private String obtenerDireccionBD () {              //LEER ARCHIVO DE CONFIGURACION...
+            StreamReader file = new StreamReader(@"..\..\configBD.txt");
+            String linea = file.ReadLine();
+            int inicioURL=linea.IndexOf("=")+1;
+            linea = linea.Substring(inicioURL, linea.Length-inicioURL);
+            linea = linea.Trim();
+            return linea;
         }
     }
 }

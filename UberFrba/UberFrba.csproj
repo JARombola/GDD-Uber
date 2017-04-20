@@ -49,17 +49,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="A- Buscador\ConfiguradorDG.cs" />
-    <Compile Include="Abm Automovil\Listado.cs">
+    <Compile Include="Abm Automovil\ListaAutos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Automovil\Listado.Designer.cs">
-      <DependentUpon>Listado.cs</DependentUpon>
+    <Compile Include="Abm Automovil\ListaAutos.Designer.cs">
+      <DependentUpon>ListaAutos.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Chofer\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Chofer\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Chofer\ListaChofer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Chofer\ListaChofer.Designer.cs">
+      <DependentUpon>ListaChofer.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Cliente\Form1.cs">
       <SubType>Form</SubType>
@@ -116,8 +122,11 @@
     <Compile Include="Rendicion Viajes\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Abm Automovil\Listado.resx">
-      <DependentUpon>Listado.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Automovil\ListaAutos.resx">
+      <DependentUpon>ListaAutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Chofer\ListaChofer.resx">
+      <DependentUpon>ListaChofer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Cliente\ListaClientes.resx">
       <DependentUpon>ListaClientes.cs</DependentUpon>

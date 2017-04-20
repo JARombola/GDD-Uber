@@ -1,5 +1,5 @@
 ﻿namespace UberFrba.Abm_Automovil {
-    partial class FormListado {
+    partial class frmListAutomoviles {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -23,15 +23,15 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent () {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblPatente = new System.Windows.Forms.Label();
+            this.lblModelo = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtExacta= new System.Windows.Forms.TextBox();
-            this.txtRelacionadas = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnSeleccionar = new System.Windows.Forms.Button();
+            this.lblChofer = new System.Windows.Forms.Label();
+            this.txtPatente = new System.Windows.Forms.TextBox();
+            this.txtModelo = new System.Windows.Forms.TextBox();
+            this.cbMarca = new System.Windows.Forms.ComboBox();
+            this.txtChofer = new System.Windows.Forms.TextBox();
+            this.selecChofer = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgListado = new System.Windows.Forms.DataGridView();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -40,97 +40,97 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lblPatente
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Palabra exacta";
+            this.lblPatente.AutoSize = true;
+            this.lblPatente.Location = new System.Drawing.Point(19, 36);
+            this.lblPatente.Name = "lblPatente";
+            this.lblPatente.Size = new System.Drawing.Size(44, 13);
+            this.lblPatente.TabIndex = 0;
+            this.lblPatente.Text = "Patente";
             // 
-            // label2
+            // lblModelo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Palabras Relacionadas";
+            this.lblModelo.AutoSize = true;
+            this.lblModelo.Location = new System.Drawing.Point(19, 80);
+            this.lblModelo.Name = "lblModelo";
+            this.lblModelo.Size = new System.Drawing.Size(42, 13);
+            this.lblModelo.TabIndex = 1;
+            this.lblModelo.Text = "Modelo";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(381, 36);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 13);
+            this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Criterio";
+            this.label3.Text = "Marca";
             // 
-            // label4
+            // lblChofer
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(381, 80);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Filtro";
+            this.lblChofer.AutoSize = true;
+            this.lblChofer.Location = new System.Drawing.Point(381, 80);
+            this.lblChofer.Name = "lblChofer";
+            this.lblChofer.Size = new System.Drawing.Size(38, 13);
+            this.lblChofer.TabIndex = 3;
+            this.lblChofer.Text = "Chofer";
             // 
-            // txtRelacionadas
+            // txtPatente
             // 
-            this.txtRelacionadas.Location = new System.Drawing.Point(153, 76);
-            this.txtRelacionadas.Name = "txtRelacionadas";
-            this.txtRelacionadas.Size = new System.Drawing.Size(185, 20);
-            this.txtRelacionadas.TabIndex = 1;
+            this.txtPatente.Location = new System.Drawing.Point(153, 32);
+            this.txtPatente.Name = "txtPatente";
+            this.txtPatente.Size = new System.Drawing.Size(185, 20);
+            this.txtPatente.TabIndex = 0;
             // 
-            // txtExacta
+            // txtModelo
             // 
-            this.txtExacta.Location = new System.Drawing.Point(153, 32);
-            this.txtExacta.Name = "txtExacta";
-            this.txtExacta.Size = new System.Drawing.Size(185, 20);
-            this.txtExacta.TabIndex = 0;
+            this.txtModelo.Location = new System.Drawing.Point(153, 76);
+            this.txtModelo.Name = "txtModelo";
+            this.txtModelo.Size = new System.Drawing.Size(185, 20);
+            this.txtModelo.TabIndex = 1;
             // 
-            // comboBox1
+            // cbMarca
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(448, 32);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(225, 21);
-            this.comboBox1.TabIndex = 2;
+            this.cbMarca.FormattingEnabled = true;
+            this.cbMarca.Location = new System.Drawing.Point(448, 32);
+            this.cbMarca.Name = "cbMarca";
+            this.cbMarca.Size = new System.Drawing.Size(225, 21);
+            this.cbMarca.TabIndex = 2;
             // 
-            // textBox1
+            // txtChofer
             // 
-            this.textBox1.Location = new System.Drawing.Point(448, 76);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(139, 20);
-            this.textBox1.TabIndex = 3;
+            this.txtChofer.Location = new System.Drawing.Point(448, 76);
+            this.txtChofer.Name = "txtChofer";
+            this.txtChofer.Size = new System.Drawing.Size(139, 20);
+            this.txtChofer.TabIndex = 3;
             // 
-            // btnSeleccionar
+            // selecChofer
             // 
-            this.btnSeleccionar.Location = new System.Drawing.Point(593, 75);
-            this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(80, 23);
-            this.btnSeleccionar.TabIndex = 4;
-            this.btnSeleccionar.Text = "Seleccionar...";
-            this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.selecChofer.Location = new System.Drawing.Point(593, 75);
+            this.selecChofer.Name = "selecChofer";
+            this.selecChofer.Size = new System.Drawing.Size(80, 23);
+            this.selecChofer.TabIndex = 4;
+            this.selecChofer.Text = "Seleccionar...";
+            this.selecChofer.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnSeleccionar);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.selecChofer);
+            this.groupBox1.Controls.Add(this.lblPatente);
+            this.groupBox1.Controls.Add(this.txtChofer);
+            this.groupBox1.Controls.Add(this.lblModelo);
+            this.groupBox1.Controls.Add(this.cbMarca);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtRelacionadas);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.txtExacta);
+            this.groupBox1.Controls.Add(this.txtModelo);
+            this.groupBox1.Controls.Add(this.lblChofer);
+            this.groupBox1.Controls.Add(this.txtPatente);
             this.groupBox1.Location = new System.Drawing.Point(30, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(700, 122);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filtros de Búsqueda";
+            this.groupBox1.Text = "Búsqueda automoviles";
             // 
             // dgListado
             // 
@@ -158,8 +158,9 @@
             this.btnClean.TabIndex = 5;
             this.btnClean.Text = "Limpiar";
             this.btnClean.UseVisualStyleBackColor = true;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
-            // FormListado
+            // frmListAutomoviles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -168,9 +169,8 @@
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.dgListado);
             this.Controls.Add(this.groupBox1);
-            this.Name = "FormListado";
-            this.Text = "Listado";
-            this.Load += new System.EventHandler(this.frmListado_Load);
+            this.Name = "frmListAutomoviles";
+            this.Text = "Listado Automoviles";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();
@@ -180,15 +180,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblPatente;
+        private System.Windows.Forms.Label lblModelo;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtRelacionadas;
-        private System.Windows.Forms.TextBox txtExacta;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button btnSeleccionar;
+        private System.Windows.Forms.Label lblChofer;
+        private System.Windows.Forms.TextBox txtModelo;
+        private System.Windows.Forms.TextBox txtPatente;
+        private System.Windows.Forms.ComboBox cbMarca;
+        private System.Windows.Forms.TextBox txtChofer;
+        private System.Windows.Forms.Button selecChofer;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgListado;
         private System.Windows.Forms.Button btnBuscar;

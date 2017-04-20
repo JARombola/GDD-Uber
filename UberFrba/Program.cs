@@ -18,6 +18,7 @@ namespace UberFrba
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+//            Application.Run(new frmListAutomoviles());
             Application.Run(new frmListClientes());
         }
     }
