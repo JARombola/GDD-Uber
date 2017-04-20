@@ -36,6 +36,8 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,11 +63,11 @@
     <Compile Include="Abm Chofer\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Chofer\ListaChofer.cs">
+    <Compile Include="Abm Chofer\frmListaChoferes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Chofer\ListaChofer.Designer.cs">
-      <DependentUpon>ListaChofer.cs</DependentUpon>
+    <Compile Include="Abm Chofer\frmListaChoferes.Designer.cs">
+      <DependentUpon>frmListaChoferes.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Cliente\Form1.cs">
       <SubType>Form</SubType>
@@ -73,19 +75,25 @@
     <Compile Include="Abm Cliente\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Cliente\ListaClientes.cs">
+    <Compile Include="Abm Cliente\frmListaClientes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Cliente\ListaClientes.Designer.cs">
-      <DependentUpon>ListaClientes.cs</DependentUpon>
+    <Compile Include="Abm Cliente\frmListaClientes.Designer.cs">
+      <DependentUpon>frmListaClientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Rol\Form1.cs">
+    <Compile Include="Abm Rol\ModifRoles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Rol\ModifRoles.Designer.cs">
+      <DependentUpon>ModifRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="A- Buscador\Buscador.cs" />
+    <Compile Include="Abm Turno\frmListaTurnos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Turno\frmListaTurnos.Designer.cs">
+      <DependentUpon>frmListaTurnos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,11 +106,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Listado Estadistico\listEstadisticas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\listEstadisticas.Designer.cs">
+      <DependentUpon>listEstadisticas.cs</DependentUpon>
     </Compile>
     <Compile Include="A- Buscador\ManejoQuerys.cs" />
     <Compile Include="ListadosAdapter.cs">
@@ -125,11 +133,20 @@
     <EmbeddedResource Include="Abm Automovil\ListaAutos.resx">
       <DependentUpon>ListaAutos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Chofer\ListaChofer.resx">
-      <DependentUpon>ListaChofer.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Chofer\frmListaChoferes.resx">
+      <DependentUpon>frmListaChoferes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Cliente\ListaClientes.resx">
-      <DependentUpon>ListaClientes.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Cliente\frmListaClientes.resx">
+      <DependentUpon>frmListaClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\ModifRoles.resx">
+      <DependentUpon>ModifRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Turno\frmListaTurnos.resx">
+      <DependentUpon>frmListaTurnos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\listEstadisticas.resx">
+      <DependentUpon>listEstadisticas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

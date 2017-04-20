@@ -13,13 +13,13 @@ using UberFrba.A__Buscador;
 
 
 namespace UberFrba.Abm_Cliente{
-    public partial class frmListClientes : ListadosAdapter {
+    public partial class frmListaClientes : ListadosAdapter {
             //PARA CONSULTAS A LA BASE..........
         private String COLUMNA_DNI = "DNI";
         private String COLUMNA_NOMBRE = "NOMBRE";
         private String COLUMNA_APELLIDO = "APELLIDO";
 
-        public frmListClientes () {
+        public frmListaClientes () {
             InitializeComponent();
             TABLA = "Cliente";
         }
