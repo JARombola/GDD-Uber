@@ -14,55 +14,25 @@ using UberFrba.A__Buscador;
 
 namespace UberFrba.Abm_Automovil {
     public partial class frmListAutomoviles : ListadosAdapter {
-
-        private String COLUMNA_PATENTE = "Patente";
-        private String COLUMNA_MODELO = "Modelo";
-        private String COLUMNA_MARCA = "Marca";
-        private String COLUMNA_CHOFER = "Chofer";
-
-
         public frmListAutomoviles () {
             InitializeComponent();
-            TABLA = "Automoviles";
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
             SqlCommand command= Buscador.getInstancia().obtenerCommand("ASD");
-            //            config.completarDataGrid(dataGrid, command);
-            command.Parameters.AddWithValue("@param", null);
+                command.Parameters.AddWithValue("@modelo", valor(txtModelo.Text));
+                command.Parameters.AddWithValue("@patente", valor(txtPatente.Text));
+                command.Parameters.AddWithValue("@chofer", valor(txtChofer.Text));
 
             ejecutarQuery(command, dgListado);
         }
 
-        protected override String completarQuery(){
-            String query = "SELECT * FROM "+ TABLA+" WHERE ";
-
-            Boolean agregarOR = false,
-                   concatenar=false;
-            concatenar = quiereBuscar(txtPatente.Text, ref agregarOR, ref query);
-            if (concatenar)
-                query+=COLUMNA_PATENTE+" = '"+txtPatente.Text+"'";
-
-            concatenar = quiereBuscar(txtModelo.Text, ref agregarOR, ref query);
-            if (concatenar)
-                query+=COLUMNA_MODELO+" LIKE '%"+txtModelo.Text+"%'";
-
-            concatenar = quiereBuscar(cbMarca.Text, ref agregarOR, ref query);
-            if (concatenar)
-                query+=COLUMNA_MARCA+" = '"+cbMarca.Text+"'";
-
-            concatenar = quiereBuscar(txtChofer.Text, ref agregarOR, ref query);
-                query+=COLUMNA_CHOFER+" = "+txtChofer.Text+"'";             //TODO: REVISAR POR LA FK.
-
-                return query;
-        }
-
         private void btnClean_Click (object sender, EventArgs e) {
-            ArrayList cajasTexto = new ArrayList();
-                cajasTexto.Add(txtChofer);
-                cajasTexto.Add(txtModelo);
-                cajasTexto.Add(txtPatente);
-            limpiar(cajasTexto);
+            txtChofer.Clear();
+            txtModelo.Clear();
+            txtPatente.Clear();
+            dgListado.DataSource = null;
+            dgListado.Refresh();
         }
     }
 }

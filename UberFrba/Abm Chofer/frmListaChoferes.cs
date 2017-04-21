@@ -14,50 +14,26 @@ using UberFrba.A__Buscador;
 
 namespace UberFrba.Abm_Chofer{
     public partial class frmListChofer : ListadosAdapter {
-            //PARA CONSULTAS A LA BASE..........
-        private String COLUMNA_DNI = "DNI";
-        private String COLUMNA_NOMBRE = "NOMBRE";
-        private String COLUMNA_APELLIDO = "APELLIDO";
 
         public frmListChofer () {
             InitializeComponent();
-            TABLA = "Chofer";
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
             SqlCommand command= Buscador.getInstancia().obtenerCommand("ASD");
-            //            config.completarDataGrid(dataGrid, command);
-            command.Parameters.AddWithValue("@param", null);
+                command.Parameters.AddWithValue("@Apellido", valor(txtApellido.Text));
+                command.Parameters.AddWithValue("@Nombre", valor(txtNombre.Text));
+                command.Parameters.AddWithValue("@DNI", valor(txtDNI.Text));
 
             ejecutarQuery(command, dgListado);
         }
 
-        protected override String completarQuery() {
-            String query = "SELECT * FROM "+TABLA+" WHERE ";
-            Boolean agregarOR = false,
-                    concatenar=false;
-
-            concatenar = quiereBuscar(txtNombre.Text, ref agregarOR, ref query);
-            if (concatenar)
-                query+=COLUMNA_NOMBRE+" LIKE '%"+txtNombre.Text+"%'";
-
-            concatenar = quiereBuscar(txtApellido.Text, ref agregarOR, ref query);
-            if (concatenar)
-                query+=COLUMNA_APELLIDO+" LIKE '%"+txtApellido.Text+"%'";
-
-            concatenar = quiereBuscar(txtDNI.Text, ref agregarOR, ref query);
-            if (concatenar)
-                query+=COLUMNA_DNI+" = '"+txtDNI.Text+"'";
-
-            return query;
-        }
-
         private void btnClean_Click (object sender, EventArgs e) {
-            ArrayList cajasTexto = new ArrayList();
-                cajasTexto.Add(txtApellido);
-                cajasTexto.Add(txtDNI);
-                cajasTexto.Add(txtNombre);
-            limpiar(cajasTexto);
+            txtApellido.Clear();
+            txtDNI.Clear();
+            txtNombre.Clear();
+            dgListado.DataSource = null;
+            dgListado.Refresh();
         }
     }
 }
