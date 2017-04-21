@@ -25,7 +25,11 @@ namespace UberFrba.Abm_Chofer{
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-            base.ejecutarQuery(dgListado);
+            SqlCommand command= Buscador.getInstancia().obtenerCommand("ASD");
+            //            config.completarDataGrid(dataGrid, command);
+            command.Parameters.AddWithValue("@param", null);
+
+            ejecutarQuery(command, dgListado);
         }
 
         protected override String completarQuery() {

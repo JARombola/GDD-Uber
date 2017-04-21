@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -10,9 +11,9 @@ using System.Windows.Forms;
 namespace UberFrba.A__Buscador {
     class Buscador {
         private static Buscador instancia{ get; set; }
-        private SqlConnection conexion;
+        public SqlConnection conexion { get; set; }
         private string DATOS_USUARIO = "user id=gd; password=gd2017";
-        private string BASE = "database=Animales; ";
+        private string BASE = "database=GD1C2017; ";
  
 
         private Buscador () {
@@ -33,10 +34,10 @@ namespace UberFrba.A__Buscador {
             return instancia;
         }
 
-        public void ejecutarQuery (string query, DataGridView dataGrid) {
-            SqlCommand command= new SqlCommand(query, conexion);
-            ConfiguradorDG config = new ConfiguradorDG();
-            config.completarDataGrid(dataGrid, command);
+        public SqlCommand obtenerCommand (string storeProcedure) {
+            SqlCommand command= new SqlCommand(storeProcedure, conexion);
+            command.CommandType = CommandType.StoredProcedure;
+            return command;
            // return data;
         }
 

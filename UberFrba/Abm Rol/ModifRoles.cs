@@ -27,6 +27,10 @@ namespace UberFrba.Abm_Rol
             MessageBox.Show(cbRol.SelectedIndex.ToString());
         }
 
+        private void btnModificar_Click (object sender, EventArgs e) {
+
+        }
+
 
     }
 }

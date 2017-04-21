@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,14 +27,16 @@ namespace UberFrba {
             return false;
         }
 
-        protected void ejecutarQuery (DataGridView lista) {                            //METODO ABSTRACTO PARA C/ SUBCLASE
-            String query = completarQuery();
-            MessageBox.Show(query);
+        protected void ejecutarQuery (SqlCommand command, DataGridView lista) {                            //TODO: Completar listas
 
-            // TODO: Agregar Conexion con BD.
-            //Buscador b = Buscador.getInstancia();             
-            //b.ejecutarQuery(query, lista);
-        }
+    /*    SqlDataReader datos = command.ExecuteReader();            // CARGA MANUAL? FEO
+
+          if (datos.Read()) {
+              //Cargar Lista
+          }
+     */
+            ConfiguradorDG config = new ConfiguradorDG();
+            config.completarDataGrid(lista, command);        }
 
         protected virtual string completarQuery () {
             throw new NotImplementedException();

@@ -51,11 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="A- Buscador\ConfiguradorDG.cs" />
-    <Compile Include="Abm Automovil\ListaAutos.cs">
+    <Compile Include="Abm Automovil\frmListaAutos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Automovil\ListaAutos.Designer.cs">
-      <DependentUpon>ListaAutos.cs</DependentUpon>
+    <Compile Include="Abm Automovil\frmListaAutos.Designer.cs">
+      <DependentUpon>frmListaAutos.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Chofer\Form1.cs">
       <SubType>Form</SubType>
@@ -130,8 +130,8 @@
     <Compile Include="Rendicion Viajes\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Abm Automovil\ListaAutos.resx">
-      <DependentUpon>ListaAutos.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Automovil\frmListaAutos.resx">
+      <DependentUpon>frmListaAutos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Chofer\frmListaChoferes.resx">
       <DependentUpon>frmListaChoferes.cs</DependentUpon>
