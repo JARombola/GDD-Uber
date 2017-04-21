@@ -21,11 +21,11 @@ namespace UberFrba
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-//            Application.Run(new frmListAutomoviles());
+            Application.Run(new frmListAutomoviles());
 //            Application.Run(new frmListaClientes());
 //            Application.Run(new frmEstadistica());
 //             Application.Run(new frmRoles());
-             Application.Run(new frmListaTurnos());
+//             Application.Run(new frmListaTurnos());
         }
     }
 }

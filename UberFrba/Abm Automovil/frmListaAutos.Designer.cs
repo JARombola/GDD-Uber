@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent () {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblPatente = new System.Windows.Forms.Label();
             this.lblModelo = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -33,9 +34,9 @@
             this.txtChofer = new System.Windows.Forms.TextBox();
             this.selecChofer = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dgListado = new System.Windows.Forms.DataGridView();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnClean = new System.Windows.Forms.Button();
+            this.dgListado = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.SuspendLayout();
@@ -92,6 +93,7 @@
             // 
             // cbMarca
             // 
+            this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMarca.FormattingEnabled = true;
             this.cbMarca.Location = new System.Drawing.Point(448, 32);
             this.cbMarca.Name = "cbMarca";
@@ -132,14 +134,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Búsqueda automoviles";
             // 
-            // dgListado
-            // 
-            this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgListado.Location = new System.Drawing.Point(30, 186);
-            this.dgListado.Name = "dgListado";
-            this.dgListado.Size = new System.Drawing.Size(700, 168);
-            this.dgListado.TabIndex = 10;
-            // 
             // btnBuscar
             // 
             this.btnBuscar.Location = new System.Drawing.Point(623, 140);
@@ -160,17 +154,38 @@
             this.btnClean.UseVisualStyleBackColor = true;
             this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
+            // dgListado
+            // 
+            this.dgListado.AllowUserToAddRows = false;
+            this.dgListado.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgListado.EnableHeadersVisualStyles = false;
+            this.dgListado.Location = new System.Drawing.Point(30, 189);
+            this.dgListado.Name = "dgListado";
+            this.dgListado.ReadOnly = true;
+            this.dgListado.Size = new System.Drawing.Size(700, 147);
+            this.dgListado.TabIndex = 10;
+            // 
             // frmListAutomoviles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 366);
+            this.Controls.Add(this.dgListado);
             this.Controls.Add(this.btnClean);
             this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.dgListado);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmListAutomoviles";
             this.Text = "Listado Automoviles";
+            this.Load += new System.EventHandler(this.frmListAutomoviles_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();
@@ -190,9 +205,9 @@
         private System.Windows.Forms.TextBox txtChofer;
         private System.Windows.Forms.Button selecChofer;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgListado;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnClean;
+        private System.Windows.Forms.DataGridView dgListado;
     }
 
 }

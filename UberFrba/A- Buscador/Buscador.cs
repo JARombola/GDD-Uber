@@ -34,8 +34,8 @@ namespace UberFrba.A__Buscador {
             return instancia;
         }
 
-        public SqlCommand obtenerCommand (string storeProcedure) {
-            SqlCommand command= new SqlCommand(storeProcedure, conexion);
+        public SqlCommand obtenerCommand (string storedProcedure) {
+            SqlCommand command= new SqlCommand(storedProcedure, conexion);
                 command.CommandType = CommandType.StoredProcedure;
             return command;
            // return data;
