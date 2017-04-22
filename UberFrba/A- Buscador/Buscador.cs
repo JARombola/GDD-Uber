@@ -36,7 +36,7 @@ namespace UberFrba.A__Buscador {
         }
 
         public SqlCommand getCommandStoredProcedure (string storedProcedure) {
-            SqlCommand command= getCommand(storedProcedure);
+            SqlCommand command= this.getCommand(storedProcedure);
                 command.CommandType = CommandType.StoredProcedure;
             return command;
         }
@@ -50,7 +50,6 @@ namespace UberFrba.A__Buscador {
         }
 
         public SqlCommand getCommand(string query) {
-            string query = "SELECT * FROM "+ESQUEMA+".";
             SqlCommand command= new SqlCommand(query, conexion);
             return command;
         }
