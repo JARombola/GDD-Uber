@@ -23,19 +23,19 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent () {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnSeleccionar = new System.Windows.Forms.Button();
             this.grFiltros = new System.Windows.Forms.GroupBox();
             this.txtDNI = new System.Windows.Forms.TextBox();
-            this.dgListado = new System.Windows.Forms.DataGridView();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnClean = new System.Windows.Forms.Button();
+            this.dgListado = new System.Windows.Forms.DataGridView();
             this.grFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.SuspendLayout();
@@ -67,15 +67,6 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "DNI";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(381, 80);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Filtro";
-            // 
             // txtApellido
             // 
             this.txtApellido.Location = new System.Drawing.Point(153, 76);
@@ -90,32 +81,13 @@
             this.txtNombre.Size = new System.Drawing.Size(185, 20);
             this.txtNombre.TabIndex = 0;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(448, 76);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(139, 20);
-            this.textBox1.TabIndex = 3;
-            // 
-            // btnSeleccionar
-            // 
-            this.btnSeleccionar.Location = new System.Drawing.Point(593, 75);
-            this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(80, 23);
-            this.btnSeleccionar.TabIndex = 4;
-            this.btnSeleccionar.Text = "Seleccionar...";
-            this.btnSeleccionar.UseVisualStyleBackColor = true;
-            // 
             // grFiltros
             // 
             this.grFiltros.Controls.Add(this.txtDNI);
-            this.grFiltros.Controls.Add(this.btnSeleccionar);
             this.grFiltros.Controls.Add(this.label1);
-            this.grFiltros.Controls.Add(this.textBox1);
             this.grFiltros.Controls.Add(this.label2);
             this.grFiltros.Controls.Add(this.label3);
             this.grFiltros.Controls.Add(this.txtNombre);
-            this.grFiltros.Controls.Add(this.label4);
             this.grFiltros.Controls.Add(this.txtApellido);
             this.grFiltros.Location = new System.Drawing.Point(30, 12);
             this.grFiltros.Name = "grFiltros";
@@ -130,14 +102,6 @@
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(185, 20);
             this.txtDNI.TabIndex = 5;
-            // 
-            // dgListado
-            // 
-            this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgListado.Location = new System.Drawing.Point(30, 186);
-            this.dgListado.Name = "dgListado";
-            this.dgListado.Size = new System.Drawing.Size(700, 168);
-            this.dgListado.TabIndex = 10;
             // 
             // btnBuscar
             // 
@@ -159,16 +123,52 @@
             this.btnClean.UseVisualStyleBackColor = true;
             this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
-            // frmListClientes
+            // dgListado
+            // 
+            this.dgListado.AllowUserToAddRows = false;
+            this.dgListado.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgListado.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgListado.EnableHeadersVisualStyles = false;
+            this.dgListado.Location = new System.Drawing.Point(30, 207);
+            this.dgListado.Name = "dgListado";
+            this.dgListado.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgListado.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgListado.Size = new System.Drawing.Size(700, 147);
+            this.dgListado.TabIndex = 12;
+            // 
+            // frmListaClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 366);
+            this.Controls.Add(this.dgListado);
             this.Controls.Add(this.btnClean);
             this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.dgListado);
             this.Controls.Add(this.grFiltros);
-            this.Name = "frmListClientes";
+            this.Name = "frmListaClientes";
             this.Text = "Listado Clientes";
             this.Load += new System.EventHandler(this.frmListado_Load);
             this.grFiltros.ResumeLayout(false);
@@ -187,16 +187,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button btnSeleccionar;
         private System.Windows.Forms.GroupBox grFiltros;
-        private System.Windows.Forms.DataGridView dgListado;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnClean;
         private System.Windows.Forms.TextBox txtDNI;
+        private System.Windows.Forms.DataGridView dgListado;
     }
 
 }

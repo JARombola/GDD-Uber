@@ -13,16 +13,16 @@ using UberFrba.A__Buscador;
 
 
 namespace UberFrba.Abm_Chofer{
-    public partial class frmListChofer : ListadosAdapter {
+    public partial class frmListaChoferes : ListadosAdapter {
 
-        public frmListChofer () {
+        public frmListaChoferes () {
             InitializeComponent();
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-            SqlCommand command= Buscador.getInstancia().obtenerCommand("ASD");
-                command.Parameters.AddWithValue("@Apellido", valor(txtApellido.Text));
-                command.Parameters.AddWithValue("@Nombre", valor(txtNombre.Text));
+            SqlCommand command= Buscador.getInstancia().getCommandFunction("fx_filtrarChoferes(@nombre, @apellido, @DNI)");
+                command.Parameters.AddWithValue("@nombre", valor(txtNombre.Text));
+                command.Parameters.AddWithValue("@apellido", valor(txtApellido.Text));
                 command.Parameters.AddWithValue("@DNI", valor(txtDNI.Text));
 
             ejecutarQuery(command, dgListado);

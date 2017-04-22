@@ -20,13 +20,16 @@ namespace UberFrba.Abm_Automovil {
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-            SqlCommand command= Buscador.getInstancia().obtenerCommand("filtrar");
-            command.Parameters.AddWithValue("@modelo", valor(txtModelo.Text));
-            command.Parameters.AddWithValue("@patente", valor(txtPatente.Text));
-            command.Parameters.AddWithValue("@marca", valor(cbMarca.Text));
+            SqlCommand command= Buscador.getInstancia().getCommandFunction("fx_filtrarAutos(@modelo, @patente, @marca)");
+                command.Parameters.AddWithValue("@modelo", valor(txtModelo.Text));
+                command.Parameters.AddWithValue("@patente", valor(txtPatente.Text));
+                command.Parameters.AddWithValue("@marca", valor(cbMarca.Text));
+                //command.Parameters.Add("@modelo", SqlDbType.VarChar).Value=valor(txtModelo.Text);
+                //command.Parameters.Add("@patente", SqlDbType.VarChar).Value=valor(txtPatente.Text);
+                //command.Parameters.Add("@marca", SqlDbType.VarChar).Value=valor(cbMarca.Text);
+           
             //TODO filtrar por chofer
             //                command.Parameters.AddWithValue("@chofer", valor(txtChofer.Text));            
-
             ejecutarQuery(command, dgListado);
         }
 

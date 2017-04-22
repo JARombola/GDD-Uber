@@ -40,12 +40,6 @@
             // 
             this.cbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRol.FormattingEnabled = true;
-            this.cbRol.Items.AddRange(new object[] {
-            "Item 0",
-            "Item 1",
-            "Perro",
-            "Pato",
-            "Puto"});
             this.cbRol.Location = new System.Drawing.Point(113, 37);
             this.cbRol.Name = "cbRol";
             this.cbRol.Size = new System.Drawing.Size(173, 21);

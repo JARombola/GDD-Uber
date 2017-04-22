@@ -16,6 +16,7 @@ namespace UberFrba.Abm_Turno {
 
         public frmListaTurnos () {
             InitializeComponent();
+            TABLA="Turnos";
         }
 
         private void button1_Click (object sender, EventArgs e) {
@@ -25,9 +26,11 @@ namespace UberFrba.Abm_Turno {
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-            SqlCommand command= Buscador.getInstancia().obtenerCommand("ASD");
-                command.Parameters.AddWithValue("@Descripcion", valor(txtDescripcion.Text));
-
+            //TODO:                 CAMBIAR ESTO CUANDO SE ARMEN LAS TABLAS REALES
+//          string query = TABLA +" Where Turno_Descripcion like '%"+valor(txtDescripcion.Text)+"%'";
+            string query = "Select Turno_hora_inicio, Turno_descripcion"
+                            +" FROM gd_esquema.Maestra Where Turno_Descripcion like '%"+valor(txtDescripcion.Text)+"%'";
+            SqlCommand command= Buscador.getInstancia().getCommand(query);
             ejecutarQuery(command, dgTurnos);
         }
 

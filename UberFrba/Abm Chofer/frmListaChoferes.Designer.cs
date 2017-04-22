@@ -1,5 +1,5 @@
 ﻿namespace UberFrba.Abm_Chofer {
-    partial class frmListChofer {
+    partial class frmListaChoferes {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -23,6 +23,9 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent () {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -30,9 +33,9 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.grFiltros = new System.Windows.Forms.GroupBox();
             this.txtDNI = new System.Windows.Forms.TextBox();
-            this.dgListado = new System.Windows.Forms.DataGridView();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnClean = new System.Windows.Forms.Button();
+            this.dgListado = new System.Windows.Forms.DataGridView();
             this.grFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.SuspendLayout();
@@ -100,14 +103,6 @@
             this.txtDNI.Size = new System.Drawing.Size(185, 20);
             this.txtDNI.TabIndex = 5;
             // 
-            // dgListado
-            // 
-            this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgListado.Location = new System.Drawing.Point(30, 186);
-            this.dgListado.Name = "dgListado";
-            this.dgListado.Size = new System.Drawing.Size(700, 168);
-            this.dgListado.TabIndex = 10;
-            // 
             // btnBuscar
             // 
             this.btnBuscar.Location = new System.Drawing.Point(623, 140);
@@ -128,17 +123,53 @@
             this.btnClean.UseVisualStyleBackColor = true;
             this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
-            // frmListChofer
+            // dgListado
+            // 
+            this.dgListado.AllowUserToAddRows = false;
+            this.dgListado.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgListado.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgListado.EnableHeadersVisualStyles = false;
+            this.dgListado.Location = new System.Drawing.Point(30, 207);
+            this.dgListado.Name = "dgListado";
+            this.dgListado.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgListado.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgListado.Size = new System.Drawing.Size(700, 147);
+            this.dgListado.TabIndex = 11;
+            // 
+            // frmListaChoferes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 366);
+            this.Controls.Add(this.dgListado);
             this.Controls.Add(this.btnClean);
             this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.dgListado);
             this.Controls.Add(this.grFiltros);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "frmListChofer";
+            this.Name = "frmListaChoferes";
             this.Text = "Listado Choferes";
             this.Load += new System.EventHandler(this.frmListado_Load);
             this.grFiltros.ResumeLayout(false);
@@ -160,10 +191,10 @@
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.GroupBox grFiltros;
-        private System.Windows.Forms.DataGridView dgListado;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnClean;
         private System.Windows.Forms.TextBox txtDNI;
+        private System.Windows.Forms.DataGridView dgListado;
     }
 
 }

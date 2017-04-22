@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent () {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -82,11 +83,23 @@
             // 
             // dgTurnos
             // 
+            this.dgTurnos.AllowUserToAddRows = false;
+            this.dgTurnos.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgTurnos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTurnos.Location = new System.Drawing.Point(39, 183);
+            this.dgTurnos.EnableHeadersVisualStyles = false;
+            this.dgTurnos.Location = new System.Drawing.Point(39, 192);
             this.dgTurnos.Name = "dgTurnos";
-            this.dgTurnos.Size = new System.Drawing.Size(648, 188);
-            this.dgTurnos.TabIndex = 3;
+            this.dgTurnos.ReadOnly = true;
+            this.dgTurnos.Size = new System.Drawing.Size(648, 175);
+            this.dgTurnos.TabIndex = 11;
             // 
             // frmListaTurnos
             // 

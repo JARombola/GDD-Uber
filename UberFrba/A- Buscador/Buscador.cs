@@ -14,6 +14,7 @@ namespace UberFrba.A__Buscador {
         public SqlConnection conexion { get; set; }
         private string DATOS_USUARIO = "user id=gd; password=gd2017";
         private string BASE = "database=GD1C2017; ";
+        private string ESQUEMA = "[ASD]";               //TODO: modificar nombre esquema
  
 
         private Buscador () {
@@ -34,12 +35,27 @@ namespace UberFrba.A__Buscador {
             return instancia;
         }
 
-        public SqlCommand obtenerCommand (string storedProcedure) {
-            SqlCommand command= new SqlCommand(storedProcedure, conexion);
+        public SqlCommand getCommandStoredProcedure (string storedProcedure) {
+            SqlCommand command= getCommand(storedProcedure);
                 command.CommandType = CommandType.StoredProcedure;
             return command;
-           // return data;
         }
+
+        public SqlCommand getCommandFunction (string funcion) {
+            string query= "SELECT * FROM "+ESQUEMA+".";
+                query+=funcion;
+            SqlCommand command= new SqlCommand(query, conexion);
+              //  command.CommandType = CommandType.TableDirect;
+            return command;
+        }
+
+        public SqlCommand getCommand(string query) {
+            string query = "SELECT * FROM "+ESQUEMA+".";
+            SqlCommand command= new SqlCommand(query, conexion);
+            return command;
+        }
+
+    
 
         private String obtenerDireccionBD () {              //LEER ARCHIVO DE CONFIGURACION...
             StreamReader file = new StreamReader(@"..\..\configBD.txt");
