@@ -37,6 +37,7 @@ namespace UberFrba.Abm_Automovil {
             txtChofer.Clear();
             txtModelo.Clear();
             txtPatente.Clear();
+            cbMarca.SelectedIndex=-1;
             dgListado.DataSource = null;
             dgListado.Refresh();
         }
@@ -51,7 +52,9 @@ namespace UberFrba.Abm_Automovil {
                 cbMarca.Items.Add(datos.GetString(0));
             }
             datos.Close();
+            cbMarca.SelectedIndex=0;
 
         }
+
     }
 }

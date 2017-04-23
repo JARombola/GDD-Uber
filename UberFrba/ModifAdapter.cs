@@ -8,13 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.Abm_Cliente
-{
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
+namespace UberFrba {
+    public partial class ModifAdapter : Form {
+        public ModifAdapter () {
             InitializeComponent();
+        }
+
+        public virtual void cargarDatosModificacion (IDominio elemento) {
         }
     }
 }

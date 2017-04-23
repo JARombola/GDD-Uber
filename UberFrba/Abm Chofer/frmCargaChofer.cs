@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace UberFrba.Abm_Chofer
 {
-    public partial class Form1 : Form
+    public partial class frmCargaChofer : Form
     {
-        public Form1()
+        public frmCargaChofer()
         {
             InitializeComponent();
+        }
+
+        public override void cargarDatosModificacion (IDominio unaPersona) {
+            Persona persona = (Persona) unaPersona;
+            //TODO: Cargar textbox con los datos que vengan de la ventana de seleccion
+
         }
     }
 }

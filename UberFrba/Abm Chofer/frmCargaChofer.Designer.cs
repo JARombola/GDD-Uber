@@ -1,6 +1,6 @@
 ﻿namespace UberFrba.Abm_Chofer
 {
-    partial class Form1
+    partial class frmCargaChofer
     {
         /// <summary>
         /// Required designer variable.
