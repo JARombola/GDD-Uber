@@ -63,11 +63,11 @@
     <Compile Include="Abm Automovil\frmListaAutos.Designer.cs">
       <DependentUpon>frmListaAutos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Chofer\Form1.cs">
+    <Compile Include="Abm Chofer\frmCargaChofer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Chofer\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Chofer\frmCargaChofer.Designer.cs">
+      <DependentUpon>frmCargaChofer.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Chofer\frmListaChoferes.cs">
       <SubType>Form</SubType>
@@ -75,11 +75,11 @@
     <Compile Include="Abm Chofer\frmListaChoferes.Designer.cs">
       <DependentUpon>frmListaChoferes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Cliente\Form1.cs">
+    <Compile Include="Abm Cliente\frmCargaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Cliente\frmCargaCliente.Designer.cs">
+      <DependentUpon>frmCargaCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Cliente\frmListaClientes.cs">
       <SubType>Form</SubType>
@@ -150,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Automovil\frmListaAutos.resx">
       <DependentUpon>frmListaAutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Chofer\frmCargaChofer.resx">
+      <DependentUpon>frmCargaChofer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Chofer\frmListaChoferes.resx">
       <DependentUpon>frmListaChoferes.cs</DependentUpon>
