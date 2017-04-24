@@ -23,19 +23,7 @@ namespace UberFrba.Abm_Automovil {
         }
 
         private void frmListAutomoviles_Load (object sender, EventArgs e) {
-            cargarMarcas();
-        }
-
-        private void cargarMarcas () {
-            SqlConnection conn = Buscador.getInstancia().conexion;              //Carga las Marcas desde la BD
-            String query = "SELECT Distinct Auto_Marca FROM "+TABLA+" order by 1";
-            SqlCommand command= new SqlCommand(query, conn);
-            SqlDataReader datos = command.ExecuteReader();
-            while (datos.Read()) {
-                cbMarca.Items.Add(datos.GetString(0));
-            }
-            datos.Close();
-            cbMarca.SelectedIndex=0;
+            Buscador.getInstancia().cargarMarcas(cbMarca,TABLA);
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
@@ -99,6 +87,10 @@ namespace UberFrba.Abm_Automovil {
 
         private void derecho (object sender, MouseEventArgs e) {
             if (e.Button==MouseButtons.Right) marcarFila(sender, e);
+        }
+
+        private void button1_Click (object sender, EventArgs e) {
+
         }
 
     }

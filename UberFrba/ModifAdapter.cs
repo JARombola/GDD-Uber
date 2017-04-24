@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace UberFrba {
     public partial class ModifAdapter : Form {
+        protected string TABLA { get; set; }
+
         public ModifAdapter () {
             InitializeComponent();
         }
 
-        public virtual void cargarDatosModificacion (IDominio elemento) {
+        protected virtual void cargarDatosModificacion (IDominio elemento) {
+        }
+        public virtual void prepararModificacion (IDominio elemento) {
+        }
+        public virtual void limpiar () {
         }
     }
 }

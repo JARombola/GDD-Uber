@@ -22,12 +22,14 @@ namespace UberFrba
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-//            Application.Run(new frmListAutomoviles(new ListadosAdapter()));
+            Application.Run(new frmListAutomoviles(new ListadosAdapter()));
      //       Application.Run(new frmListaChoferes(new ListadosAdapter()));
     //        Application.Run(new frmListaClientes(new ListadosAdapter()));
 //            Application.Run(new frmEstadistica());
    //          Application.Run(new frmRoles());
-             Application.Run(new frmListaTurnos(new ListadosAdapter()));
+      //       Application.Run(new frmListaTurnos(new ListadosAdapter()));
+//            Application.Run(new frmCargaPersona("Cliente"));
+   //         Application.Run(new frmCargaAutos());
         }
     }
 }

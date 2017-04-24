@@ -100,8 +100,6 @@
             this.cbMarca.DisplayMember = "<Ninguna>";
             this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMarca.FormattingEnabled = true;
-            this.cbMarca.Items.AddRange(new object[] {
-            "<Ninguna>"});
             this.cbMarca.Location = new System.Drawing.Point(448, 32);
             this.cbMarca.Name = "cbMarca";
             this.cbMarca.Size = new System.Drawing.Size(225, 21);

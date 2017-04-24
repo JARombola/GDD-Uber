@@ -54,8 +54,6 @@ namespace UberFrba.A__Buscador {
             return command;
         }
 
-    
-
         private String obtenerDireccionBD () {              //LEER ARCHIVO DE CONFIGURACION...
             StreamReader file = new StreamReader(@"..\..\configBD.txt");
             String linea = file.ReadLine();
@@ -63,6 +61,18 @@ namespace UberFrba.A__Buscador {
             linea = linea.Substring(inicioURL, linea.Length-inicioURL);
             linea = linea.Trim();
             return linea;
+        }
+
+
+        //------------ METODOS AUTOS--------------------------------
+        public void cargarMarcas (ComboBox cbBox, string tabla) {      //Carga las marcas desde la Base
+            String query = "SELECT Distinct Auto_Marca FROM "+tabla+" order by 1";
+            SqlCommand command= Buscador.getInstancia().getCommand(query);
+            SqlDataReader datos = command.ExecuteReader();
+            while (datos.Read()) {
+                cbBox.Items.Add(datos.GetString(0));
+            }
+            datos.Close();
         }
     }
 }

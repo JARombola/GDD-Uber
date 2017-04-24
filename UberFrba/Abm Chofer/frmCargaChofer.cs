@@ -14,7 +14,7 @@ namespace UberFrba.Abm_Chofer {
             InitializeComponent();
         }
 
-        public override void cargarDatosModificacion (IDominio unaPersona) {
+        protected override void cargarDatosModificacion (IDominio unaPersona) {
             Persona persona = (Persona) unaPersona;
             //TODO: Cargar textbox con los datos que vengan de la ventana de seleccion
 

@@ -9,6 +9,7 @@ namespace UberFrba {                    //PARA ENVIAR A LOS FORMS DE MODIFICACIO
         public string nombre {get; set; }
         public string apellido { get; set; }
         public string direccion { get; set; }
+        public string codPost { get; set; }
         public string mail { get; set; }
         public bool habilitado { get; set; }
         public DateTime fecha_nacimiento { get; set; }

@@ -157,6 +157,9 @@
     <EmbeddedResource Include="Abm Chofer\frmListaChoferes.resx">
       <DependentUpon>frmListaChoferes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Cliente\frmCargaCliente.resx">
+      <DependentUpon>frmCargaCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Cliente\frmListaClientes.resx">
       <DependentUpon>frmListaClientes.cs</DependentUpon>
     </EmbeddedResource>
