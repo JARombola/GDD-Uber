@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent () {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -36,8 +37,11 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnClean = new System.Windows.Forms.Button();
             this.dgListado = new System.Windows.Forms.DataGridView();
+            this.cmDerecho = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
+            this.cmDerecho.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -136,6 +140,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgListado.ContextMenuStrip = this.cmDerecho;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -146,6 +151,7 @@
             this.dgListado.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgListado.EnableHeadersVisualStyles = false;
             this.dgListado.Location = new System.Drawing.Point(30, 207);
+            this.dgListado.MultiSelect = false;
             this.dgListado.Name = "dgListado";
             this.dgListado.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -156,8 +162,25 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgListado.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgListado.Size = new System.Drawing.Size(700, 147);
             this.dgListado.TabIndex = 11;
+            this.dgListado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.seleccion);
+            this.dgListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.derecho);
+            // 
+            // cmDerecho
+            // 
+            this.cmDerecho.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eliminarToolStripMenuItem});
+            this.cmDerecho.Name = "cmDerecho";
+            this.cmDerecho.Size = new System.Drawing.Size(118, 26);
+            // 
+            // eliminarToolStripMenuItem
+            // 
+            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.eliminarToolStripMenuItem.Text = "Eliminar";
+            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminar);
             // 
             // frmListaChoferes
             // 
@@ -175,6 +198,7 @@
             this.grFiltros.ResumeLayout(false);
             this.grFiltros.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();
+            this.cmDerecho.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -195,6 +219,8 @@
         private System.Windows.Forms.Button btnClean;
         private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.DataGridView dgListado;
+        private System.Windows.Forms.ContextMenuStrip cmDerecho;
+        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
     }
 
 }

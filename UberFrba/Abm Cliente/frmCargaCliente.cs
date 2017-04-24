@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace UberFrba.Abm_Cliente
 {
-    public partial class frmCargaCliente : Form
+    public partial class frmCargaCliente : ModifAdapter
     {
         public frmCargaCliente()
         {

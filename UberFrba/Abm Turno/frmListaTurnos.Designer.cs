@@ -23,15 +23,19 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent () {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dgTurnos = new System.Windows.Forms.DataGridView();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.dgListado = new System.Windows.Forms.DataGridView();
+            this.cgDerecho = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgTurnos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
+            this.cgDerecho.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -71,20 +75,20 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // button1
+            // btnLimpiar
             // 
-            this.button1.Location = new System.Drawing.Point(39, 124);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Limpiar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnLimpiar.Location = new System.Drawing.Point(39, 124);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 2;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnClean_Click);
             // 
-            // dgTurnos
+            // dgListado
             // 
-            this.dgTurnos.AllowUserToAddRows = false;
-            this.dgTurnos.AllowUserToDeleteRows = false;
+            this.dgListado.AllowUserToAddRows = false;
+            this.dgListado.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -92,29 +96,49 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgTurnos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTurnos.EnableHeadersVisualStyles = false;
-            this.dgTurnos.Location = new System.Drawing.Point(39, 192);
-            this.dgTurnos.Name = "dgTurnos";
-            this.dgTurnos.ReadOnly = true;
-            this.dgTurnos.Size = new System.Drawing.Size(648, 175);
-            this.dgTurnos.TabIndex = 11;
+            this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgListado.ContextMenuStrip = this.cgDerecho;
+            this.dgListado.EnableHeadersVisualStyles = false;
+            this.dgListado.Location = new System.Drawing.Point(39, 192);
+            this.dgListado.MultiSelect = false;
+            this.dgListado.Name = "dgListado";
+            this.dgListado.ReadOnly = true;
+            this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgListado.Size = new System.Drawing.Size(648, 175);
+            this.dgListado.TabIndex = 11;
+            this.dgListado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.seleccion);
+            this.dgListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.derecho);
+            // 
+            // cgDerecho
+            // 
+            this.cgDerecho.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eliminarToolStripMenuItem});
+            this.cgDerecho.Name = "cgDerecho";
+            this.cgDerecho.Size = new System.Drawing.Size(118, 26);
+            // 
+            // eliminarToolStripMenuItem
+            // 
+            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.eliminarToolStripMenuItem.Text = "Eliminar";
+            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminar);
             // 
             // frmListaTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 400);
-            this.Controls.Add(this.dgTurnos);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dgListado);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmListaTurnos";
             this.Text = "Lista Turnos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgTurnos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();
+            this.cgDerecho.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -125,7 +149,9 @@
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dgTurnos;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.DataGridView dgListado;
+        private System.Windows.Forms.ContextMenuStrip cgDerecho;
+        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
     }
 }

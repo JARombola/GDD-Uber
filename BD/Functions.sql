@@ -71,5 +71,14 @@ AS
 			gd_esquema.Maestra.Cliente_Dni = @DNI
 		)
 GO
-
-
+----------------------FUNCION DE FILTRADO DE TURNOS------------------------------
+CREATE FUNCTION [ASD].fx_filtrarTurnos (@descripcion varchar(255))		
+Returns Table
+AS
+	RETURN
+		(Select distinct Turno_Descripcion, Turno_Precio_Base, Turno_Valor_Kilometro
+			From gd_esquema.Maestra
+		where 
+			gd_esquema.Maestra.Turno_Descripcion like '%'+ @descripcion+ '%'
+		)
+GO

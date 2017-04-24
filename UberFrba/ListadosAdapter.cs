@@ -12,7 +12,14 @@ namespace UberFrba {
     public partial class ListadosAdapter : Form {
 
         protected string TABLA { get; set; }
+        protected Form formAnterior { get; set; }
 
+  /*      public ListadosAdapter(Form anterior) {
+            formAnterior = anterior;
+            this = new Form();
+
+        }
+        */
         protected void ejecutarQuery (SqlCommand command, DataGridView lista) {                            //TODO: Completar listas
 
     /*    SqlDataReader datos = command.ExecuteReader();            // CARGA MANUAL? FEO

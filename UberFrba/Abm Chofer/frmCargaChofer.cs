@@ -8,12 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.Abm_Chofer
-{
-    public partial class frmCargaChofer : Form
-    {
-        public frmCargaChofer()
-        {
+namespace UberFrba.Abm_Chofer {
+    public partial class frmCargaChofer : ModifAdapter{
+        public frmCargaChofer () {
             InitializeComponent();
         }
 
