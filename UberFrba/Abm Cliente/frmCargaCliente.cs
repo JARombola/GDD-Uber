@@ -10,31 +10,31 @@ using System.Windows.Forms;
 
 namespace UberFrba.Abm_Cliente
 {
-    public partial class frmCargaPersona : ModifAdapter
+    public partial class frmCargaCliente : ModifAdapter
     {
-        public frmCargaPersona(String tipo)             //tipo = "Chofer / Cliente"
+        public frmCargaCliente()             
         {
             InitializeComponent();
-            this.Text += tipo;
         }
 
        public override void prepararModificacion (IDominio persona) {
+           this.Text = "Modificar Cliente";
            btnAceptar.Text = "Modificar";
            btnEliminar.Visible=true;
            cargarDatosModificacion(persona);
        }
 
 
-       protected override void cargarDatosModificacion (IDominio persona) {
-            Persona p = (Persona) persona;
-            txtApellido.Text = p.apellido;
-            txtNombre.Text = p.nombre;
-            txtDNI.Text = p.dni.ToString();
-            txtMail.Text = p.mail;
-            txtTel.Text = p.telefono.ToString();
-            txtDire.Text = p.direccion;
-            txtCodPos.Text = p.codPost;
-            dateNacimiento.Value = p.fecha_nacimiento;
+       protected override void cargarDatosModificacion (IDominio unCliente) {
+            Persona cliente = (Persona) unCliente;
+            txtApellido.Text = cliente.apellido;
+            txtNombre.Text = cliente.nombre;
+            txtDNI.Text = cliente.dni.ToString();
+            txtMail.Text = cliente.mail;
+            txtTel.Text = cliente.telefono.ToString();
+            txtDire.Text = cliente.direccion;
+            txtCodPos.Text = cliente.codPost;
+            dateNacimiento.Value = cliente.fecha_nacimiento;
         }
 
        private void frmCargaPersona_Load (object sender, EventArgs e) {

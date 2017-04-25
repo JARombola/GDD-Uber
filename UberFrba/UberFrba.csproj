@@ -94,6 +94,12 @@
       <DependentUpon>ModifRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="A- Buscador\Buscador.cs" />
+    <Compile Include="Abm Turno\frmCargaTurno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Turno\frmCargaTurno.Designer.cs">
+      <DependentUpon>frmCargaTurno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Turno\frmListaTurnos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,12 +111,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Facturacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="ModifAdapter.cs">
@@ -165,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\ModifRoles.resx">
       <DependentUpon>ModifRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Turno\frmCargaTurno.resx">
+      <DependentUpon>frmCargaTurno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Turno\frmListaTurnos.resx">
       <DependentUpon>frmListaTurnos.cs</DependentUpon>

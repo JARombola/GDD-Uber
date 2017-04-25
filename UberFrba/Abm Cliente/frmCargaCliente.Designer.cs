@@ -1,6 +1,6 @@
 ﻿namespace UberFrba.Abm_Cliente
 {
-    partial class frmCargaPersona
+    partial class frmCargaCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -255,16 +255,16 @@
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Visible = false;
             // 
-            // frmCargaPersona
+            // frmCargaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(596, 462);
+            this.ClientSize = new System.Drawing.Size(596, 466);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.groupBox1);
-            this.Name = "frmCargaPersona";
-            this.Text = "Registro ";
+            this.Name = "frmCargaCliente";
+            this.Text = "Registrar Cliente";
             this.Load += new System.EventHandler(this.frmCargaPersona_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
