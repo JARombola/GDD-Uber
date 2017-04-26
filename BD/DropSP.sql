@@ -16,4 +16,7 @@ IF OBJECT_ID ('[ASD].SP_eliminarTodosTurnos', 'P') IS NOT NULL
     DROP PROCEDURE [ASD].SP_eliminarTodosTurnos;  
 GO
 
+IF OBJECT_ID ('[ASD].SP_altaCliente', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_altaCliente;  
+GO
 

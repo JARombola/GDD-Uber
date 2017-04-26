@@ -35,6 +35,24 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [ASD].SP_altaCliente(
+		@nombre varchar(255),
+		@apellido varchar(255),
+		@dni numeric(18,0),
+		@telefono numeric(18,0),
+		@direccion varchar(255),
+		@mail varchar(255),
+		@fecha_nacimiento datetime)
+AS
+BEGIN
+	INSERT INTO [ASD].Clientes
+	values(@nombre, @apellido, @dni, @telefono, @direccion, @mail, @fecha_nacimiento, 1)
+END
+GO
+
+
+
+
 ------------------------------ >> TURNOS
 CREATE PROCEDURE [ASD].SP_altaTurno(@inicio numeric(18,0),
 								 @fin numeric(18,0),

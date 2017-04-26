@@ -14,3 +14,19 @@ GO
 IF OBJECT_ID (N'[ASD].fx_filtrarTurnos', N'IF') IS NOT NULL  
     DROP FUNCTION [ASD].fx_filtrarTurnos;  
 GO  
+
+IF OBJECT_ID (N'[ASD].fx_getCliente', N'IF') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getCliente;  
+GO
+
+IF OBJECT_ID (N'[ASD].fx_getChofer', N'IF') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getChofer;  
+GO    
+
+IF OBJECT_ID (N'[ASD].fx_getAuto', N'IF') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getAuto;  
+GO  
+
+IF OBJECT_ID (N'[ASD].fx_getTurno', N'IF') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getTurno;  
+GO  

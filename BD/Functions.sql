@@ -82,3 +82,47 @@ AS
 			gd_esquema.Maestra.Turno_Descripcion like '%'+ @descripcion+ '%'
 		)
 GO
+----------------------- BUSQUEDAS POR ID --------------------------
+CREATE FUNCTION [ASD].fx_getCliente 
+(	@id int
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	SELECT * From [ASD].Clientes WHERE id = @id
+)
+GO
+
+CREATE FUNCTION [ASD].fx_getChofer 
+(	@id int
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	SELECT * From [ASD].Choferes WHERE id = @id
+)
+GO
+
+CREATE FUNCTION [ASD].fx_getAuto 
+(	@id int
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	SELECT * From [ASD].Autos WHERE id = @id
+)
+GO
+
+CREATE FUNCTION [ASD].fx_getTurno 
+(	@id int
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	SELECT * From [ASD].Turnos WHERE id = @id
+)
+GO
