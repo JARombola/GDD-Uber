@@ -11,32 +11,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.A__Buscador;
 using UberFrba.Abm_Chofer;
+using UberFrba.Dominio;
 
 
 namespace UberFrba.Abm_Automovil {
-    public partial class frmListAutomoviles : ListadosAdapter {
+    public partial class frmListaAutos : ListadosAdapter {
         
-        public frmListAutomoviles (ListadosAdapter anterior) {
+        public frmListaAutos (Form anterior) {
             InitializeComponent();
             formAnterior = anterior;
-            TABLA = "gd_esquema.Maestra";
         }
 
         private void frmListAutomoviles_Load (object sender, EventArgs e) {
-            Buscador.getInstancia().cargarMarcas(cbMarca,TABLA);
+            Buscador.getInstancia().cargarMarcas(cbMarca);
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
             SqlCommand command= Buscador.getInstancia().getCommandFunction("fx_filtrarAutos(@modelo, @patente, @marca)");
-                command.Parameters.AddWithValue("@modelo", valor(txtModelo.Text));
-                command.Parameters.AddWithValue("@patente", valor(txtPatente.Text));
-                command.Parameters.AddWithValue("@marca", valor(cbMarca.Text));
-                //command.Parameters.Add("@modelo", SqlDbType.VarChar).Value=valor(txtModelo.Text);
-                //command.Parameters.Add("@patente", SqlDbType.VarChar).Value=valor(txtPatente.Text);
-                //command.Parameters.Add("@marca", SqlDbType.VarChar).Value=valor(cbMarca.Text);
-           
-            //TODO filtrar por chofer
-            //                command.Parameters.AddWithValue("@chofer", valor(txtChofer.Text));            
+            command.Parameters.AddRange(new[]{
+                    new SqlParameter ("@modelo", valor(txtModelo.Text)),
+                    new SqlParameter ("@patente", valor(txtPatente.Text)),
+                    new SqlParameter ("@marca", valor(cbMarca.Text)),
+                    //TODO filtrar por chofer
+            //                command.Parameters.AddWithValue("@chofer", valor(txtChofer.Text));    
+            });
+
+                    
             ejecutarQuery(command, dgListado);
         }
 
@@ -47,8 +47,21 @@ namespace UberFrba.Abm_Automovil {
                     dgListado.Rows.RemoveAt(dgListado.CurrentRow.Index);
         }
 
-        private void mostrarDatos () {
-            MessageBox.Show(dgListado.CurrentRow.Cells["Auto_Patente"].Value.ToString());
+        private void enviarDatos () {
+            Auto auto = new Auto();
+            auto.id = (int) dgListado.CurrentRow.Cells["ID"].Value;
+            auto.licencia = dgListado.CurrentRow.Cells["Licencia"].Value.ToString();
+            auto.marca = dgListado.CurrentRow.Cells["Marca"].Value.ToString();
+            auto.modelo = dgListado.CurrentRow.Cells["Modelo"].Value.ToString();
+            auto.patente = dgListado.CurrentRow.Cells["Patente"].Value.ToString();
+            auto.rodado = dgListado.CurrentRow.Cells["Rodado"].Value.ToString();
+            auto.habilitado =(bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
+
+            CargasAdapter frmModif = new frmCargaAuto(formAnterior);
+            frmModif.prepararModificacion(auto);
+            frmModif.Show();
+            this.Close();
+            
         }
 
         private void btnClean_Click (object sender, EventArgs e) {
@@ -69,13 +82,13 @@ namespace UberFrba.Abm_Automovil {
         //------------------------------------------------------------------------
 
         private void seleccion (object sender, MouseEventArgs e) {
-            if (e.Button==MouseButtons.Left) mostrarDatos();
+            if (e.Button==MouseButtons.Left) enviarDatos();
         }
 
        protected override bool ProcessCmdKey (ref System.Windows.Forms.Message msg, System.Windows.Forms.Keys keyData) {
             if ((!dgListado.Focused)) return base.ProcessCmdKey(ref msg, keyData);
             if (keyData != Keys.Enter && keyData != Keys.Space) return base.ProcessCmdKey(ref msg, keyData);
-            mostrarDatos();
+            enviarDatos();
             return true;
         }
 
@@ -86,12 +99,34 @@ namespace UberFrba.Abm_Automovil {
         }
 
         private void derecho (object sender, MouseEventArgs e) {
-            if (e.Button==MouseButtons.Right) marcarFila(sender, e);
+            if (e.Button==MouseButtons.Right) {
+                marcarFila(sender, e);
+                bool habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
+                if (habilitado) {
+                    menuDerecho.Items[0].Visible=false;            //Habilitar
+                    menuDerecho.Items[1].Visible=true;
+                }
+                else {
+                    menuDerecho.Items[0].Visible=true;
+                    menuDerecho.Items[1].Visible=false;
+                }
+            }
         }
 
-        private void button1_Click (object sender, EventArgs e) {
-
+        private void habilitar (object sender, EventArgs e) {
+            int p = base.habilitar("Auto", (int) dgListado.CurrentRow.Cells["ID"].Value);
+            MessageBox.Show("Habilitados: "+ p);
+            dgListado.CurrentRow.Cells["Habilitado"].Value = true;
+            dgListado.Refresh();
         }
+
+        private void deshabilitar (object sender, EventArgs e) {
+            int p = base.deshabilitar("Auto", (int) dgListado.CurrentRow.Cells["ID"].Value);
+            MessageBox.Show("Deshabilitados: "+ p);
+            dgListado.CurrentRow.Cells["Habilitado"].Value= false;
+            dgListado.Refresh();
+        }
+        
 
     }
 }

@@ -66,8 +66,8 @@ namespace UberFrba.A__Buscador {
 
 
         //------------ METODOS AUTOS--------------------------------
-        public void cargarMarcas (ComboBox cbBox, string tabla) {      //Carga las marcas desde la Base
-            String query = "SELECT Distinct Auto_Marca FROM "+tabla+" order by 1";
+        public void cargarMarcas (ComboBox cbBox) {      //TODO: Actualizar nombre esquema
+            String query = "SELECT Distinct Marca FROM "+ESQUEMA+".Autos order by 1";
             SqlCommand command= Buscador.getInstancia().getCommand(query);
             SqlDataReader datos = command.ExecuteReader();
             while (datos.Read()) {

@@ -9,6 +9,7 @@ using UberFrba.Abm_Cliente;
 using UberFrba.Abm_Rol;
 using UberFrba.Abm_Turno;
 using UberFrba.Listado_Estadistico;
+using UberFrba.Menues;
 
 namespace UberFrba
 {
@@ -29,8 +30,9 @@ namespace UberFrba
 //            Application.Run(new frmEstadistica());
    //          Application.Run(new frmRoles());
       //       Application.Run(new frmListaTurnos(new ListadosAdapter()));
-            Application.Run(new frmCargaCliente());
+      //      Application.Run(new frmCargaCliente());
    //         Application.Run(new frmCargaAutos());
+            Application.Run(new MenuInicial());
         }
     }
 }

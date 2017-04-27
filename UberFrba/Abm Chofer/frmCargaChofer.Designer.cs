@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnHabilitacion = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dateNacimiento = new System.Windows.Forms.DateTimePicker();
@@ -50,22 +50,21 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnEliminar
+            // btnHabilitacion
             // 
-            this.btnEliminar.BackColor = System.Drawing.SystemColors.Control;
-            this.btnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnEliminar.FlatAppearance.BorderSize = 2;
-            this.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(421, 414);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(125, 27);
-            this.btnEliminar.TabIndex = 12;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = false;
-            this.btnEliminar.Visible = false;
+            this.btnHabilitacion.BackColor = System.Drawing.SystemColors.Control;
+            this.btnHabilitacion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnHabilitacion.FlatAppearance.BorderSize = 2;
+            this.btnHabilitacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btnHabilitacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnHabilitacion.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnHabilitacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHabilitacion.Location = new System.Drawing.Point(421, 414);
+            this.btnHabilitacion.Name = "btnHabilitacion";
+            this.btnHabilitacion.Size = new System.Drawing.Size(125, 27);
+            this.btnHabilitacion.TabIndex = 12;
+            this.btnHabilitacion.UseVisualStyleBackColor = false;
+            this.btnHabilitacion.Visible = false;
             // 
             // btnAceptar
             // 
@@ -241,11 +240,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(597, 466);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnHabilitacion);
             this.Controls.Add(this.btnAceptar);
             this.Name = "frmCargaChofer";
             this.Text = "Registrar Chofer";
-            this.Load += new System.EventHandler(this.frmCargaChofer_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -254,7 +252,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnHabilitacion;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DateTimePicker dateNacimiento;

@@ -14,7 +14,7 @@ using UberFrba.A__Buscador;
 namespace UberFrba.Abm_Turno {
     public partial class frmListaTurnos : ListadosAdapter {
 
-        public frmListaTurnos (ListadosAdapter anterior) {
+        public frmListaTurnos (Form anterior) {
             InitializeComponent();
             formAnterior = anterior;
         }

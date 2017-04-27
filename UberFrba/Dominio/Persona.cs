@@ -13,8 +13,8 @@ namespace UberFrba {                    //PARA ENVIAR A LOS FORMS DE MODIFICACIO
         public string mail { get; set; }
         public bool habilitado { get; set; }
         public DateTime fecha_nacimiento { get; set; }
-        public int dni { get; set; }
-        public int telefono { get; set; }
+        public string dni { get; set; }
+        public string telefono { get; set; }
         public int id { get; set; }
     }
 }

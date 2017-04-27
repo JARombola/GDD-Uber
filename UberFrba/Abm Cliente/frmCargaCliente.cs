@@ -14,17 +14,19 @@ namespace UberFrba.Abm_Cliente
 {
     public partial class frmCargaCliente : CargasAdapter
     {
-        public frmCargaCliente()             
+        public frmCargaCliente(Form anterior)             
         {
             InitializeComponent();
-            ID = 2;
+            frmAnterior = anterior;
         }
 
        public override void prepararModificacion (IDominio persona) {
-           this.Text = "Modificar Cliente";
+           this.Text = "Modificación Cliente";
            btnAceptar.Text = "Modificar";
-           btnEliminar.Visible=true;
-           cargarDatosModificacion(persona);
+           Persona cliente = (Persona) persona;
+           btnHabilitacion.Text = cliente.habilitado?"Deshabilitar":"Habilitar";
+           btnHabilitacion.Visible=true;
+           cargarDatosModificacion(cliente);
        }
 
 
@@ -38,18 +40,13 @@ namespace UberFrba.Abm_Cliente
             txtDire.Text = cliente.direccion;
             dateNacimiento.Value = cliente.fecha_nacimiento;
             ID = cliente.id;
+            if (!cliente.habilitado) ID*=-1;            // Solo importa para la habilitacion/deshabilitacion
         }
 
-       private void frmCargaPersona_Load (object sender, EventArgs e) {
-
-       }
-
        private void btnAceptar_Click (object sender, EventArgs e) {
-          // if (ID==-1) registrarCliente();          //NO hay un ID asociado ====> Es un registro
-          // else modificarCliente();
-           SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_bajaCliente");
-           cmd.Parameters.AddWithValue("@id", 2);
-           cmd.ExecuteNonQuery();
+           if (ID==-1) registrarCliente();          //NO hay un ID asociado ====> Es un registro
+           else modificarCliente();
+           volver();
        }
 
        private void registrarCliente () {
@@ -62,7 +59,7 @@ namespace UberFrba.Abm_Cliente
        private void modificarCliente () {
            SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_modifCliente");
                setParametros(ref cmd);
-               cmd.Parameters.AddWithValue("@id", ID);
+               cmd.Parameters.AddWithValue("@id", Math.Abs(ID));
            int p = cmd.ExecuteNonQuery();
            MessageBox.Show("Modificados = "+ p);
        }
@@ -90,5 +87,17 @@ namespace UberFrba.Abm_Cliente
            txtDire.Clear();
            dateNacimiento.ResetText();
        }
+
+       private void btnHabilitacion_Click (object sender, EventArgs e) {
+           SqlCommand command ;
+           if (ID<0)           //Deshabilitado => Hay que habilitar
+               command = Buscador.getInstancia().getCommandStoredProcedure("SP_habilitarCliente");
+           else command = Buscador.getInstancia().getCommandStoredProcedure("SP_deshabilitarCliente");
+           command.Parameters.AddWithValue("@id", Math.Abs(ID));
+           int resultado = command.ExecuteNonQuery();
+           MessageBox.Show("Actualizados: "+resultado);
+           volver();
+       }
+
     }
 }

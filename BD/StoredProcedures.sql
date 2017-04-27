@@ -46,7 +46,7 @@ CREATE PROCEDURE [ASD].SP_altaCliente(
 AS
 BEGIN
 	INSERT INTO [ASD].Clientes
-	values(@nombre, @apellido, @dni, @telefono, @direccion, @mail, @fecha_nacimiento, 1)
+	values(@nombre, @apellido, @dni, @telefono, @direccion, @mail, @fecha_nacimiento,1)
 END
 GO
 
@@ -72,15 +72,23 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_bajaCliente(@id int)
+CREATE PROCEDURE [ASD].SP_deshabilitarCliente(@id int)
 AS BEGIN
 	UPDATE [ASD].fx_getCliente(@id)
 	SET Habilitado=0
 END
 GO
 
+CREATE PROCEDURE [ASD].SP_habilitarCliente(@id int)
+AS BEGIN
+	UPDATE [ASD].fx_getCliente(@id)
+	SET Habilitado=1
+END
+GO
+
 
 -------------------------------- >> CHOFERES
+
 CREATE PROCEDURE [ASD].SP_cargarChoferes 
 AS
 BEGIN
@@ -146,10 +154,86 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_bajaChofer(@id int)
+CREATE PROCEDURE [ASD].SP_deshabilitarChofer(@id int)
 AS BEGIN
 	UPDATE [ASD].fx_getChofer(@id)
 	SET Habilitado=0
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_habilitarChofer(@id int)
+AS BEGIN
+	UPDATE [ASD].fx_getChofer(@id)
+	SET Habilitado=1
+END
+GO
+
+------------------------------ >> AUTOS
+CREATE PROCEDURE [ASD].SP_cargarAutos
+AS
+BEGIN
+	INSERT INTO [ASD].Autos(Marca, Modelo, Patente, Licencia, Rodado)
+	SELECT DISTINCT 
+		[gd_esquema].Maestra.Auto_Marca,
+		[gd_esquema].Maestra.Auto_Modelo,
+		[gd_esquema].Maestra.Auto_Patente,
+		[gd_esquema].Maestra.Auto_Licencia,
+		[gd_esquema].Maestra.Auto_Rodado
+	FROM [gd_esquema].Maestra
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_eliminarTodosAutos
+AS
+Begin
+	Delete from [ASD].Autos
+End
+go
+
+CREATE PROCEDURE [ASD].SP_altaAuto(
+			@marca varchar(255),
+			@modelo varchar(255),
+			@patente varchar(10),
+			@licencia varchar(26),
+			@rodado varchar(10))
+AS
+BEGIN
+	Insert into [ASD].Autos
+	values(@marca, @modelo, @patente, @licencia, @rodado,1)
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_deshabilitarAuto(@id int)
+AS BEGIN
+	UPDATE [ASD].fx_getAuto(@id)
+	SET Habilitado=0
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_habilitarAuto(@id int)
+AS BEGIN
+	UPDATE [ASD].fx_getAuto(@id)
+	SET Habilitado=1
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_modifAuto(
+				@id int,
+				@marca varchar(255),
+				@modelo varchar(255),
+				@patente varchar(10),
+				@licencia varchar(26),
+				@rodado varchar(10)
+				)
+AS
+BEGIN
+	UPDATE [ASD].Autos
+	SET Marca = @marca,
+		Modelo = @modelo,
+		Patente = @patente,
+		Licencia = @licencia,
+		Rodado = @rodado
+	WHERE ID = @id
 END
 GO
 
@@ -175,5 +259,41 @@ BEGIN
 	
 	DELETE FROM [ASD].Turnos
 	DBCC CHECKIDENT ('[ASD].Turnos', RESEED, 0)
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_deshabilitarTurno(@id int)
+AS
+BEGIN
+	UPDATE [ASD].fx_getTurno(@id)
+	SET Habilitado=0
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_habilitarTurno(@id int)
+AS
+BEGIN
+	UPDATE [ASD].fx_getTurno(@id)
+	SET Habilitado=1
+END
+GO
+
+
+CREATE PROCEDURE [ASD].SP_modifTurno(
+					@id int,
+					@inicio numeric(18,0),
+					@fin numeric(18,0),
+					@precioBase numeric(18,2),
+					@precioKm numeric(18,2),
+					@descripcion varchar(255))
+AS
+BEGIN
+	UPDATE [ASD].Turnos
+	SET Hora_Inicio = @inicio,
+		Hora_Fin = @fin,
+		Precio_Base = @precioBase,
+		Precio_km = @precioKM,
+		Descripcion = @descripcion
+	WHERE ID = @id
 END
 GO

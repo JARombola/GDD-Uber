@@ -15,8 +15,12 @@ IF OBJECT_ID ('[ASD].SP_modifCliente', 'P') IS NOT NULL
     DROP PROCEDURE [ASD].SP_modifCliente;  
 GO
 
-IF OBJECT_ID ('[ASD].SP_bajaCliente', 'P') IS NOT NULL  
-    DROP PROCEDURE [ASD].SP_bajaCliente;  
+IF OBJECT_ID ('[ASD].SP_deshabilitarCliente', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_deshabilitarCliente;  
+GO
+
+IF OBJECT_ID ('[ASD].SP_habilitarCliente', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_habilitarCliente;  
 GO
 
 ------------------------------------------------->>TURNOS
@@ -28,6 +32,17 @@ IF OBJECT_ID ('[ASD].SP_eliminarTodosTurnos', 'P') IS NOT NULL
     DROP PROCEDURE [ASD].SP_eliminarTodosTurnos;  
 GO
 
+IF OBJECT_ID ('[ASD].SP_deshabilitarTurno', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_deshabilitarTurno;  
+GO
+
+IF OBJECT_ID ('[ASD].SP_habilitarTurno', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_habilitarTurno;  
+GO
+
+IF OBJECT_ID ('[ASD].SP_modifTurno', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_modifTurno;  
+GO
 
 ------------------------------------------------->>CHOFERES
 IF OBJECT_ID ('[ASD].SP_cargarChoferes', 'P') IS NOT NULL  
@@ -46,8 +61,35 @@ IF OBJECT_ID ('[ASD].SP_modifChofer', 'P') IS NOT NULL
     DROP PROCEDURE [ASD].SP_modifChofer;  
 GO
 
-IF OBJECT_ID ('[ASD].SP_bajaChofer', 'P') IS NOT NULL  
-    DROP PROCEDURE [ASD].SP_modifChofer;  
+IF OBJECT_ID ('[ASD].SP_deshabilitarChofer', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_deshabilitarChofer;  
 GO
 
+IF OBJECT_ID ('[ASD].SP_habilitarChofer', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_habilitarChofer;  
+GO
 
+------------------------------------- AUTOS
+IF OBJECT_ID ('[ASD].SP_cargarAutos', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_cargarAutos;  
+GO
+
+IF OBJECT_ID ('[ASD].SP_eliminarTodosAutos', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_eliminarTodosAutos
+GO
+
+IF OBJECT_ID ('[ASD].SP_altaAuto', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_altaAuto
+GO
+
+IF OBJECT_ID ('[ASD].SP_deshabilitarAuto', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_deshabilitarAuto
+GO
+
+IF OBJECT_ID ('[ASD].SP_habilitarAuto', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_habilitarAuto
+GO
+
+IF OBJECT_ID ('[ASD].SP_modifAuto', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_modifAuto
+GO
