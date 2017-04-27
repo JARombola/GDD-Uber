@@ -9,29 +9,29 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UberFrba.Abm_Chofer {
-    public partial class frmCargaChofer : ModifAdapter{
+    public partial class frmCargaChofer : CargasAdapter{
         public frmCargaChofer () {
             InitializeComponent();
         }
 
-        public override void prepararModificacion (IDominio cliente) {
-            this.Text = "Modificar Cliente";
+        public override void prepararModificacion (IDominio chofer) {
+            this.Text = "Modificar Chofer";
             btnAceptar.Text = "Modificar";
             btnEliminar.Visible=true;
-            cargarDatosModificacion(cliente);
+            cargarDatosModificacion(chofer);
         }
 
 
-        protected override void cargarDatosModificacion (IDominio unCliente) {
-            Persona cliente = (Persona) unCliente;
-            txtApellido.Text = cliente.apellido;
-            txtNombre.Text = cliente.nombre;
-            txtDNI.Text = cliente.dni.ToString();
-            txtMail.Text = cliente.mail;
-            txtTel.Text = cliente.telefono.ToString();
-            txtDire.Text = cliente.direccion;
-            txtCodPos.Text = cliente.codPost;
-            dateNacimiento.Value = cliente.fecha_nacimiento;
+        protected override void cargarDatosModificacion (IDominio unChofer) {
+            Persona chofer = (Persona) unChofer;
+            txtApellido.Text = chofer.apellido;
+            txtNombre.Text = chofer.nombre;
+            txtDNI.Text = chofer.dni.ToString();
+            txtMail.Text = chofer.mail;
+            txtTel.Text = chofer.telefono.ToString();
+            txtDire.Text = chofer.direccion;
+            dateNacimiento.Value = chofer.fecha_nacimiento;
+            ID = chofer.id;
         }
 
         private void frmCargaPersona_Load (object sender, EventArgs e) {
@@ -42,15 +42,18 @@ namespace UberFrba.Abm_Chofer {
 
         }
 
-        private void limpiar () {
+        public override void limpiar () {
             txtApellido.Clear();
             txtNombre.Clear();
             txtDNI.Clear();
             txtMail.Clear();
             txtTel.Clear();
             txtDire.Clear();
-            txtCodPos.Clear();
             dateNacimiento.ResetText();
+        }
+
+        private void frmCargaChofer_Load (object sender, EventArgs e) {
+
         }
     }
 }

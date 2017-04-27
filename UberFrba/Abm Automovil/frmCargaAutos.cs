@@ -11,7 +11,7 @@ using UberFrba.A__Buscador;
 using UberFrba.Dominio;
 
 namespace UberFrba.Abm_Automovil {
-    public partial class frmCargaAutos : ModifAdapter {
+    public partial class frmCargaAutos : CargasAdapter {
         
         public frmCargaAutos () {
             InitializeComponent();

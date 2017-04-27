@@ -36,7 +36,8 @@ namespace UberFrba.A__Buscador {
         }
 
         public SqlCommand getCommandStoredProcedure (string storedProcedure) {
-            SqlCommand command= this.getCommand(storedProcedure);
+            string query = ESQUEMA + "."+storedProcedure;
+            SqlCommand command= this.getCommand(query);
                 command.CommandType = CommandType.StoredProcedure;
             return command;
         }

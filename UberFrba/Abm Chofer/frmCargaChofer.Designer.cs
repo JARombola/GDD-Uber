@@ -33,8 +33,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dateNacimiento = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtCodPos = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.txtDire = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtTel = new System.Windows.Forms.TextBox();
@@ -83,8 +81,6 @@
             // 
             this.groupBox1.Controls.Add(this.dateNacimiento);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.txtCodPos);
-            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.txtDire);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.txtTel);
@@ -98,50 +94,34 @@
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.shapeContainer1);
-            this.groupBox1.Location = new System.Drawing.Point(35, 13);
+            this.groupBox1.Location = new System.Drawing.Point(34, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(512, 378);
-            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Datos Chofer";
+            this.groupBox1.Text = "Datos Cliente";
             // 
             // dateNacimiento
             // 
             this.dateNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateNacimiento.Location = new System.Drawing.Point(175, 337);
+            this.dateNacimiento.Location = new System.Drawing.Point(396, 116);
             this.dateNacimiento.Name = "dateNacimiento";
-            this.dateNacimiento.Size = new System.Drawing.Size(215, 20);
+            this.dateNacimiento.Size = new System.Drawing.Size(110, 20);
             this.dateNacimiento.TabIndex = 7;
             this.dateNacimiento.TabStop = false;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(47, 337);
+            this.label8.Location = new System.Drawing.Point(282, 119);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(108, 13);
             this.label8.TabIndex = 15;
             this.label8.Text = "Fecha de Nacimiento";
             // 
-            // txtCodPos
-            // 
-            this.txtCodPos.Location = new System.Drawing.Point(175, 283);
-            this.txtCodPos.Name = "txtCodPos";
-            this.txtCodPos.Size = new System.Drawing.Size(131, 20);
-            this.txtCodPos.TabIndex = 6;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(47, 286);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Cod. Pos.";
-            // 
             // txtDire
             // 
-            this.txtDire.Location = new System.Drawing.Point(175, 244);
+            this.txtDire.Location = new System.Drawing.Point(131, 244);
             this.txtDire.Name = "txtDire";
             this.txtDire.Size = new System.Drawing.Size(215, 20);
             this.txtDire.TabIndex = 5;
@@ -157,7 +137,7 @@
             // 
             // txtTel
             // 
-            this.txtTel.Location = new System.Drawing.Point(175, 203);
+            this.txtTel.Location = new System.Drawing.Point(131, 203);
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(191, 20);
             this.txtTel.TabIndex = 4;
@@ -173,7 +153,7 @@
             // 
             // txtMail
             // 
-            this.txtMail.Location = new System.Drawing.Point(175, 162);
+            this.txtMail.Location = new System.Drawing.Point(131, 162);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(215, 20);
             this.txtMail.TabIndex = 3;
@@ -189,9 +169,9 @@
             // 
             // txtDNI
             // 
-            this.txtDNI.Location = new System.Drawing.Point(175, 116);
+            this.txtDNI.Location = new System.Drawing.Point(131, 116);
             this.txtDNI.Name = "txtDNI";
-            this.txtDNI.Size = new System.Drawing.Size(164, 20);
+            this.txtDNI.Size = new System.Drawing.Size(131, 20);
             this.txtDNI.TabIndex = 2;
             // 
             // label3
@@ -205,7 +185,7 @@
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(175, 74);
+            this.txtApellido.Location = new System.Drawing.Point(131, 74);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(215, 20);
             this.txtApellido.TabIndex = 1;
@@ -221,7 +201,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(175, 37);
+            this.txtNombre.Location = new System.Drawing.Point(131, 37);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(215, 20);
             this.txtNombre.TabIndex = 0;
@@ -260,11 +240,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(597, 466);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAceptar);
-            this.Controls.Add(this.groupBox1);
             this.Name = "frmCargaChofer";
             this.Text = "Registrar Chofer";
+            this.Load += new System.EventHandler(this.frmCargaChofer_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -278,8 +259,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DateTimePicker dateNacimiento;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtCodPos;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtDire;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtTel;
