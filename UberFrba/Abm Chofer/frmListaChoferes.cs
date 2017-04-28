@@ -13,11 +13,11 @@ using UberFrba.A__Buscador;
 
 
 namespace UberFrba.Abm_Chofer{
-    public partial class frmListaChoferes : ListadosAdapter {
+    public partial class frmListaChoferes : FormsAdapter {
 
         public frmListaChoferes (Form formularioAnterior) {
             InitializeComponent();
-            formAnterior = formularioAnterior;
+            formAnterior = (FormsAdapter) formularioAnterior;
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
@@ -56,9 +56,8 @@ namespace UberFrba.Abm_Chofer{
             chofer.id = (int) dgListado.CurrentRow.Cells["ID"].Value;
             chofer.habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
 
-            CargasAdapter frmModif = new frmCargaChofer(formAnterior);
-            frmModif.prepararModificacion(chofer);
-            frmModif.Show();
+            formAnterior.configurar(chofer);
+            formAnterior.Show();
             this.Close();
         }
 

@@ -15,11 +15,11 @@ using UberFrba.Dominio;
 
 
 namespace UberFrba.Abm_Automovil {
-    public partial class frmListaAutos : ListadosAdapter {
+    public partial class frmListaAutos : FormsAdapter {
         
         public frmListaAutos (Form anterior) {
             InitializeComponent();
-            formAnterior = anterior;
+            formAnterior = (FormsAdapter) anterior;
         }
 
         private void frmListAutomoviles_Load (object sender, EventArgs e) {
@@ -27,13 +27,12 @@ namespace UberFrba.Abm_Automovil {
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-            SqlCommand command= Buscador.getInstancia().getCommandFunction("fx_filtrarAutos(@modelo, @patente, @marca)");
+            SqlCommand command= Buscador.getInstancia().getCommandFunction("fx_filtrarAutos(@modelo, @patente, @marca, @choferID)");
             command.Parameters.AddRange(new[]{
                     new SqlParameter ("@modelo", valor(txtModelo.Text)),
                     new SqlParameter ("@patente", valor(txtPatente.Text)),
                     new SqlParameter ("@marca", valor(cbMarca.Text)),
-                    //TODO filtrar por chofer
-            //                command.Parameters.AddWithValue("@chofer", valor(txtChofer.Text));    
+                    new SqlParameter ("@choferID", ID),       //TODO: verificar que funcione
             });
 
                     
@@ -57,11 +56,17 @@ namespace UberFrba.Abm_Automovil {
             auto.rodado = dgListado.CurrentRow.Cells["Rodado"].Value.ToString();
             auto.habilitado =(bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
 
-            CargasAdapter frmModif = new frmCargaAuto(formAnterior);
-            frmModif.prepararModificacion(auto);
+            FormsAdapter frmModif = new frmCargaAuto(formAnterior);
+            frmModif.configurar(auto);
             frmModif.Show();
             this.Close();
             
+        }
+
+        public override void configurar (IDominio elemento) {
+            Persona chofer = (Persona) elemento;
+            txtChofer.Text = chofer.nombre + " (ID: "+chofer.id.ToString()+")";
+            ID = chofer.id;
         }
 
         private void btnClean_Click (object sender, EventArgs e) {
@@ -125,6 +130,11 @@ namespace UberFrba.Abm_Automovil {
             MessageBox.Show("Deshabilitados: "+ p);
             dgListado.CurrentRow.Cells["Habilitado"].Value= false;
             dgListado.Refresh();
+        }
+
+        private void selecChofer_Click (object sender, EventArgs e) {
+            new frmListaChoferes(this).Show();
+            this.Hide();
         }
         
 

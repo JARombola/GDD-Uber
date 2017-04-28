@@ -65,6 +65,7 @@
             this.btnHabilitacion.TabIndex = 12;
             this.btnHabilitacion.UseVisualStyleBackColor = false;
             this.btnHabilitacion.Visible = false;
+            this.btnHabilitacion.Click += new System.EventHandler(this.btnHabilitacion_Click);
             // 
             // btnAceptar
             // 

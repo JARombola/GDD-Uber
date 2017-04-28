@@ -12,11 +12,11 @@ using System.Windows.Forms;
 using UberFrba.A__Buscador;
 
 namespace UberFrba.Abm_Turno {
-    public partial class frmListaTurnos : ListadosAdapter {
+    public partial class frmListaTurnos : FormsAdapter {
 
         public frmListaTurnos (Form anterior) {
             InitializeComponent();
-            formAnterior = anterior;
+            formAnterior = (FormsAdapter) anterior;
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {

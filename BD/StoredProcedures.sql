@@ -123,11 +123,12 @@ CREATE PROCEDURE [ASD].SP_altaChofer(
 		@telefono numeric(18,0),
 		@direccion varchar(255),
 		@mail varchar(255),
-		@fecha_nacimiento datetime)
+		@fecha_nacimiento datetime,
+		@cocheID int)
 AS
 BEGIN
 	INSERT INTO [ASD].Choferes
-	values(@nombre, @apellido, @dni, @telefono, @direccion, @mail, @fecha_nacimiento, 1)
+	values(@nombre, @apellido, @dni, @telefono, @direccion, @mail, @fecha_nacimiento,@cocheID, 1)
 END
 GO
 
@@ -186,7 +187,11 @@ GO
 CREATE PROCEDURE [ASD].SP_eliminarTodosAutos
 AS
 Begin
-	Delete from [ASD].Autos
+	SET NOCOUNT OFF;
+	DELETE FROM [ASD].Autos
+	
+	DELETE FROM [ASD].Autos
+	DBCC CHECKIDENT ('[ASD].Autos', RESEED, 0)
 End
 go
 

@@ -11,10 +11,10 @@ using System.Windows.Forms;
 using UberFrba.A__Buscador;
 
 namespace UberFrba.Abm_Turno {
-    public partial class frmCargaTurno : CargasAdapter {
+    public partial class frmCargaTurno : FormsAdapter {
         public frmCargaTurno (Form anterior) {
             InitializeComponent();
-            frmAnterior = anterior;
+            formAnterior = (FormsAdapter) anterior;
         }
 
         private void btnAceptar_Click (object sender, EventArgs e) {

@@ -12,25 +12,25 @@ using UberFrba.A__Buscador;
 
 namespace UberFrba.Abm_Cliente
 {
-    public partial class frmCargaCliente : CargasAdapter
+    public partial class frmCargaCliente : FormsAdapter
     {
         public frmCargaCliente(Form anterior)             
         {
             InitializeComponent();
-            frmAnterior = anterior;
+            formAnterior = (FormsAdapter) anterior;
         }
 
-       public override void prepararModificacion (IDominio persona) {
+       public override void configurar (IDominio persona) {
            this.Text = "Modificación Cliente";
            btnAceptar.Text = "Modificar";
            Persona cliente = (Persona) persona;
            btnHabilitacion.Text = cliente.habilitado?"Deshabilitar":"Habilitar";
            btnHabilitacion.Visible=true;
-           cargarDatosModificacion(cliente);
+           cargarDatos(cliente);
        }
 
 
-       protected override void cargarDatosModificacion (IDominio unCliente) {
+       public override void cargarDatos (IDominio unCliente) {
             Persona cliente = (Persona) unCliente;
             txtApellido.Text = cliente.apellido;
             txtNombre.Text = cliente.nombre;

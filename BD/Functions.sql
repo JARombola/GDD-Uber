@@ -15,7 +15,8 @@ GO
 ----------------------FUNCION DE FILTRADO DE AUTOS------------------------------
 CREATE FUNCTION [ASD].fx_filtrarAutos (@modelo varchar(255),			
 								 @patente varchar(10),
-								 @marca varchar(255))
+								 @marca varchar(255),
+								 @choferID int)
 Returns Table
 AS
 	RETURN
@@ -25,7 +26,16 @@ AS
 			OR
 			Patente = @patente
 			OR
-			Marca = @marca)
+			Marca = @marca
+		UNION 
+		Select * From [ASD].Autos autito
+		where Exists(
+			select * from [ASD].Choferes 
+			where ID = @choferID
+			AND coche = autito.ID
+			)
+		)
+
 GO
 ----------------------FUNCION DE FILTRADO DE CHOFERES------------------------------
 CREATE FUNCTION [ASD].fx_filtrarChoferes (@nombre varchar(255),			

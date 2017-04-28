@@ -113,12 +113,6 @@
     <Compile Include="Facturacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dominio\CargasAdapter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dominio\CargasAdapter.Designer.cs">
-      <DependentUpon>CargasAdapter.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dominio\IDominio.cs" />
     <Compile Include="Listado Estadistico\listEstadisticas.cs">
       <SubType>Form</SubType>
@@ -127,7 +121,7 @@
       <DependentUpon>listEstadisticas.cs</DependentUpon>
     </Compile>
     <Compile Include="A- Buscador\ManejoQuerys.cs" />
-    <Compile Include="Dominio\ListadosAdapter.cs">
+    <Compile Include="Dominio\FormsAdapter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dominio\Persona.cs" />

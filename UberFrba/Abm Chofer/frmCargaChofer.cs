@@ -11,24 +11,24 @@ using System.Windows.Forms;
 using UberFrba.A__Buscador;
 
 namespace UberFrba.Abm_Chofer {
-    public partial class frmCargaChofer : CargasAdapter{
+    public partial class frmCargaChofer : FormsAdapter{
         
         public frmCargaChofer (Form anterior) {
             InitializeComponent();
-            frmAnterior = anterior;
+            formAnterior = (FormsAdapter) anterior;
         }
 
-        public override void prepararModificacion (IDominio persona) {
+        public override void configurar (IDominio persona) {
             this.Text = "Modificación Chofer";
             btnAceptar.Text = "Modificar";
             Persona chofer = (Persona) persona;
             btnHabilitacion.Text = chofer.habilitado?"Deshabilitar":"Habilitar";
             btnHabilitacion.Visible=true;
-            cargarDatosModificacion(chofer);
+            cargarDatos(chofer);
         }
 
 
-        protected override void cargarDatosModificacion (IDominio unChofer) {
+        private void cargarDatos (IDominio unChofer) {
             Persona chofer = (Persona) unChofer;
             txtApellido.Text = chofer.apellido;
             txtNombre.Text = chofer.nombre;
@@ -96,6 +96,5 @@ namespace UberFrba.Abm_Chofer {
             txtDire.Clear();
             dateNacimiento.ResetText();
         }
-
     }
 }

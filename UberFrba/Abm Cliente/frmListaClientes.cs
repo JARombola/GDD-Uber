@@ -13,18 +13,18 @@ using UberFrba.A__Buscador;
 
 
 namespace UberFrba.Abm_Cliente{
-    public partial class frmListaClientes : ListadosAdapter {
+    public partial class frmListaClientes : FormsAdapter {
     
         public frmListaClientes (Form anterior) {
             InitializeComponent();
-            formAnterior = anterior;
+            formAnterior = (FormsAdapter) anterior;
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
             SqlCommand command= Buscador.getInstancia().getCommandFunction("fx_filtrarClientes(@nombre, @apellido, @DNI)");
-            command.Parameters.AddWithValue("@nombre", valor(txtNombre.Text));
-            command.Parameters.AddWithValue("@apellido", valor(txtApellido.Text));
-            command.Parameters.AddWithValue("@DNI", valor(txtDNI.Text));
+                command.Parameters.AddWithValue("@nombre", valor(txtNombre.Text));
+                command.Parameters.AddWithValue("@apellido", valor(txtApellido.Text));
+                command.Parameters.AddWithValue("@DNI", valor(txtDNI.Text));
 
             ejecutarQuery(command, dgListado);
         }
@@ -49,8 +49,8 @@ namespace UberFrba.Abm_Cliente{
             cliente.fecha_nacimiento = DateTime.Parse(dgListado.CurrentRow.Cells["Fecha_Nacimiento"].Value.ToString());
             cliente.habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
 
-            CargasAdapter frmModif = new frmCargaCliente(formAnterior);
-            frmModif.prepararModificacion(cliente);
+            FormsAdapter frmModif = new frmCargaCliente(formAnterior);
+            frmModif.configurar(cliente);
             frmModif.Show();
             this.Close();
         }

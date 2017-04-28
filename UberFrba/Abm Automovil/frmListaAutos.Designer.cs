@@ -108,6 +108,7 @@
             // 
             // txtChofer
             // 
+            this.txtChofer.Enabled = false;
             this.txtChofer.Location = new System.Drawing.Point(448, 76);
             this.txtChofer.Name = "txtChofer";
             this.txtChofer.Size = new System.Drawing.Size(139, 20);
@@ -121,6 +122,7 @@
             this.selecChofer.TabIndex = 4;
             this.selecChofer.Text = "Seleccionar...";
             this.selecChofer.UseVisualStyleBackColor = true;
+            this.selecChofer.Click += new System.EventHandler(this.selecChofer_Click);
             // 
             // groupBox1
             // 
