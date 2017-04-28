@@ -81,21 +81,25 @@ namespace UberFrba.A__Buscador {
             String query = "SELECT Distinct Rol FROM "+ESQUEMA+".Roles order by 1";
             SqlCommand command= Buscador.getInstancia().getCommand(query);
             SqlDataReader datos = command.ExecuteReader();
+            int i = 0;
             while (datos.Read()) {
-                cbRoles.Items.Add(datos.GetString(0));
+                cbRoles.Items.Insert(i,datos.GetString(0));
             }
             datos.Close();
         }
 
-        public void cargarFunciones (string rol, CheckedListBox listaFunciones) {
+        public Boolean cargarFunciones (string rol, CheckedListBox listaFunciones) {
             String query = "SELECT * FROM "+ESQUEMA+".Roles where ROL = '"+rol+"'";
             SqlCommand command= Buscador.getInstancia().getCommand(query);
             SqlDataReader datos = command.ExecuteReader();
             datos.Read();
-            for(int i =1; i<datos.FieldCount;i++){
+            int i;
+            for(i=1 ; i<datos.FieldCount-1;i++){
                 listaFunciones.SetItemChecked(i-1, datos.GetBoolean(i)) ;
             }
+            Boolean habilitado = datos.GetBoolean(i);
             datos.Close();
+            return habilitado;           //devuelve si el rol está habilitado o no, se usa en el form de roles para el boton de habilitar
         }
 
     }

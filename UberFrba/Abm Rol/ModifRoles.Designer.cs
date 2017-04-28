@@ -32,9 +32,10 @@
             this.lblRol = new System.Windows.Forms.Label();
             this.btnOk = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnHabilitar = new System.Windows.Forms.Button();
+            this.btnDeshabiliar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listFunciones = new System.Windows.Forms.CheckedListBox();
-            this.btnbaja = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -45,6 +46,7 @@
             this.cbRol.Location = new System.Drawing.Point(113, 37);
             this.cbRol.Name = "cbRol";
             this.cbRol.Size = new System.Drawing.Size(173, 21);
+            this.cbRol.Sorted = true;
             this.cbRol.TabIndex = 0;
             this.cbRol.SelectedIndexChanged += new System.EventHandler(this.cbRol_SelectedIndexChanged);
             this.cbRol.TextUpdate += new System.EventHandler(this.botonRegistrar);
@@ -71,7 +73,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnbaja);
+            this.groupBox1.Controls.Add(this.btnHabilitar);
+            this.groupBox1.Controls.Add(this.btnDeshabiliar);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.cbRol);
             this.groupBox1.Controls.Add(this.lblRol);
@@ -81,6 +84,30 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información Rol";
+            // 
+            // btnHabilitar
+            // 
+            this.btnHabilitar.Enabled = false;
+            this.btnHabilitar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHabilitar.Location = new System.Drawing.Point(332, 31);
+            this.btnHabilitar.Name = "btnHabilitar";
+            this.btnHabilitar.Size = new System.Drawing.Size(127, 31);
+            this.btnHabilitar.TabIndex = 4;
+            this.btnHabilitar.Text = "Habilitar";
+            this.btnHabilitar.UseVisualStyleBackColor = true;
+            this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click);
+            // 
+            // btnDeshabiliar
+            // 
+            this.btnDeshabiliar.Enabled = false;
+            this.btnDeshabiliar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeshabiliar.Location = new System.Drawing.Point(332, 77);
+            this.btnDeshabiliar.Name = "btnDeshabiliar";
+            this.btnDeshabiliar.Size = new System.Drawing.Size(127, 31);
+            this.btnDeshabiliar.TabIndex = 3;
+            this.btnDeshabiliar.Text = "Deshabilitar";
+            this.btnDeshabiliar.UseVisualStyleBackColor = true;
+            this.btnDeshabiliar.Click += new System.EventHandler(this.btnDeshabilitar_Click);
             // 
             // groupBox2
             // 
@@ -111,18 +138,6 @@
             this.listFunciones.Size = new System.Drawing.Size(457, 199);
             this.listFunciones.TabIndex = 0;
             // 
-            // btnbaja
-            // 
-            this.btnbaja.Enabled = false;
-            this.btnbaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnbaja.Location = new System.Drawing.Point(329, 32);
-            this.btnbaja.Name = "btnbaja";
-            this.btnbaja.Size = new System.Drawing.Size(127, 31);
-            this.btnbaja.TabIndex = 3;
-            this.btnbaja.Text = "Eliminar";
-            this.btnbaja.UseVisualStyleBackColor = true;
-            this.btnbaja.Click += new System.EventHandler(this.btnbaja_Click);
-            // 
             // frmRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -148,6 +163,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckedListBox listFunciones;
-        private System.Windows.Forms.Button btnbaja;
+        private System.Windows.Forms.Button btnDeshabiliar;
+        private System.Windows.Forms.Button btnHabilitar;
     }
 }

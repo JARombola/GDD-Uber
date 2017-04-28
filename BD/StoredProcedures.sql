@@ -345,7 +345,7 @@ AS
 BEGIN
 	UPDATE [ASD].fx_getRol(@rol)
 	SET Habilitado = 0
-	EXEC SP_eliminarRolEnUsuarios @rol
+	EXEC [ASD].SP_eliminarRolEnUsuarios @rol
 END
 GO
 
@@ -362,9 +362,6 @@ AS
 BEGIN
 	SET NOCOUNT OFF;
 	DELETE FROM [ASD].Roles
-	
-	DELETE FROM [ASD].Roles
-	DBCC CHECKIDENT ('[ASD].Roles', RESEED, 0)
 END
 GO
 
