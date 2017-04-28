@@ -30,23 +30,24 @@
         {
             this.cbRol = new System.Windows.Forms.ComboBox();
             this.lblRol = new System.Windows.Forms.Label();
-            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnOk = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.listFunciones = new System.Windows.Forms.CheckedListBox();
+            this.btnbaja = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbRol
             // 
-            this.cbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRol.FormattingEnabled = true;
             this.cbRol.Location = new System.Drawing.Point(113, 37);
             this.cbRol.Name = "cbRol";
             this.cbRol.Size = new System.Drawing.Size(173, 21);
             this.cbRol.TabIndex = 0;
             this.cbRol.SelectedIndexChanged += new System.EventHandler(this.cbRol_SelectedIndexChanged);
+            this.cbRol.TextUpdate += new System.EventHandler(this.botonRegistrar);
             // 
             // lblRol
             // 
@@ -57,23 +58,24 @@
             this.lblRol.TabIndex = 1;
             this.lblRol.Text = "Rol";
             // 
-            // btnModificar
+            // btnOk
             // 
-            this.btnModificar.Location = new System.Drawing.Point(588, 190);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(127, 31);
-            this.btnModificar.TabIndex = 2;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Visible = false;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            this.btnOk.Location = new System.Drawing.Point(207, 401);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(127, 31);
+            this.btnOk.TabIndex = 2;
+            this.btnOk.Text = "Aceptar";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Visible = false;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnbaja);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.cbRol);
             this.groupBox1.Controls.Add(this.lblRol);
-            this.groupBox1.Location = new System.Drawing.Point(40, 12);
+            this.groupBox1.Location = new System.Drawing.Point(21, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(486, 369);
             this.groupBox1.TabIndex = 3;
@@ -82,7 +84,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.checkedListBox1);
+            this.groupBox2.Controls.Add(this.listFunciones);
             this.groupBox2.Location = new System.Drawing.Point(0, 114);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(486, 255);
@@ -90,21 +92,44 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Funcionalidades";
             // 
-            // checkedListBox1
+            // listFunciones
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(11, 36);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(457, 199);
-            this.checkedListBox1.TabIndex = 0;
+            this.listFunciones.CheckOnClick = true;
+            this.listFunciones.FormattingEnabled = true;
+            this.listFunciones.Items.AddRange(new object[] {
+            "Admin Clientes",
+            "Admin Choferes",
+            "Admin Autos",
+            "Admin Roles",
+            "Admin Turnos",
+            "Registro Viajes",
+            "Facturacion",
+            "Rendicion",
+            "Estadísticas"});
+            this.listFunciones.Location = new System.Drawing.Point(11, 36);
+            this.listFunciones.Name = "listFunciones";
+            this.listFunciones.Size = new System.Drawing.Size(457, 199);
+            this.listFunciones.TabIndex = 0;
+            // 
+            // btnbaja
+            // 
+            this.btnbaja.Enabled = false;
+            this.btnbaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnbaja.Location = new System.Drawing.Point(329, 32);
+            this.btnbaja.Name = "btnbaja";
+            this.btnbaja.Size = new System.Drawing.Size(127, 31);
+            this.btnbaja.TabIndex = 3;
+            this.btnbaja.Text = "Eliminar";
+            this.btnbaja.UseVisualStyleBackColor = true;
+            this.btnbaja.Click += new System.EventHandler(this.btnbaja_Click);
             // 
             // frmRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(757, 410);
+            this.ClientSize = new System.Drawing.Size(531, 455);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnModificar);
+            this.Controls.Add(this.btnOk);
             this.Name = "frmRoles";
             this.Text = "Modificación Roles";
             this.Load += new System.EventHandler(this.frmModifRol_Load);
@@ -119,9 +144,10 @@
 
         private System.Windows.Forms.ComboBox cbRol;
         private System.Windows.Forms.Label lblRol;
-        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox listFunciones;
+        private System.Windows.Forms.Button btnbaja;
     }
 }

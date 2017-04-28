@@ -28,11 +28,11 @@ namespace UberFrba
      //       Application.Run(new frmListaChoferes(new ListadosAdapter()));
     //        Application.Run(new frmListaClientes(new ListadosAdapter()));
 //            Application.Run(new frmEstadistica());
-   //          Application.Run(new frmRoles());
+             Application.Run(new frmRoles());
       //       Application.Run(new frmListaTurnos(new ListadosAdapter()));
       //      Application.Run(new frmCargaCliente());
    //         Application.Run(new frmCargaAutos());
-            Application.Run(new MenuInicial());
+        //    Application.Run(new MenuInicial());
         }
     }
 }

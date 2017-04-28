@@ -66,14 +66,37 @@ namespace UberFrba.A__Buscador {
 
 
         //------------ METODOS AUTOS--------------------------------
-        public void cargarMarcas (ComboBox cbBox) {      //TODO: Actualizar nombre esquema
+        public void cargarMarcas (ComboBox cbMarcas) {      
             String query = "SELECT Distinct Marca FROM "+ESQUEMA+".Autos order by 1";
             SqlCommand command= Buscador.getInstancia().getCommand(query);
             SqlDataReader datos = command.ExecuteReader();
             while (datos.Read()) {
-                cbBox.Items.Add(datos.GetString(0));
+                cbMarcas.Items.Add(datos.GetString(0));
             }
             datos.Close();
         }
+
+        //------------ METODOS ROLES--------------------------------
+        public void cargarRoles(ComboBox cbRoles){
+            String query = "SELECT Distinct Rol FROM "+ESQUEMA+".Roles order by 1";
+            SqlCommand command= Buscador.getInstancia().getCommand(query);
+            SqlDataReader datos = command.ExecuteReader();
+            while (datos.Read()) {
+                cbRoles.Items.Add(datos.GetString(0));
+            }
+            datos.Close();
+        }
+
+        public void cargarFunciones (string rol, CheckedListBox listaFunciones) {
+            String query = "SELECT * FROM "+ESQUEMA+".Roles where ROL = '"+rol+"'";
+            SqlCommand command= Buscador.getInstancia().getCommand(query);
+            SqlDataReader datos = command.ExecuteReader();
+            datos.Read();
+            for(int i =1; i<datos.FieldCount;i++){
+                listaFunciones.SetItemChecked(i-1, datos.GetBoolean(i)) ;
+            }
+            datos.Close();
+        }
+
     }
 }
