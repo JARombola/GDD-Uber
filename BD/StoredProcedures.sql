@@ -302,3 +302,145 @@ BEGIN
 	WHERE ID = @id
 END
 GO
+
+------------------------------ >> ROLES
+CREATE PROCEDURE [ASD].SP_altaRol(@rol varchar(20),
+					@clientes bit, @choferes bit, @autos bit, @roles bit,@turnos bit,
+					@viajes	bit, @facturacion bit, @rendicion bit, @estadisticas bit)
+AS
+BEGIN
+	INSERT INTO [ASD].Roles
+	values(@rol, @clientes,@choferes,@autos,@roles,@turnos,@viajes,@facturacion,@rendicion,@estadisticas,1)
+END
+GO
+
+
+CREATE PROCEDURE [ASD].SP_modificarRol(@rol varchar(20),
+					@clientes bit, @choferes bit, @autos bit, @roles bit,@turnos bit,
+					@viajes	bit, @facturacion bit, @rendicion bit, @estadisticas bit)
+AS
+BEGIN
+	UPDATE [ASD].fx_getRol(@rol)
+	SET Clientes = @clientes,
+	Choferes = @choferes,
+	Autos = @autos,
+	Roles = @roles,
+	Turnos = @turnos,
+	Viajes = @viajes,
+	Facturacion = @facturacion,
+	Rendicion = @rendicion,
+	Estadisticas = @estadisticas
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_eliminarRolEnUsuarios(@rol varchar(20))
+AS
+BEGIN
+	DELETE [ASD].RolXUsuario where Rol = @rol
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_deshabilitarRol(@rol varchar(20))
+AS
+BEGIN
+	UPDATE [ASD].fx_getRol(@rol)
+	SET Habilitado = 0
+	EXEC SP_eliminarRolEnUsuarios @rol
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_habilitarRol(@rol varchar(20))
+AS
+BEGIN
+	UPDATE [ASD].fx_getRol(@rol)
+	SET Habilitado = 1
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_eliminarTodosRoles
+AS
+BEGIN
+	SET NOCOUNT OFF;
+	DELETE FROM [ASD].Roles
+	
+	DELETE FROM [ASD].Roles
+	DBCC CHECKIDENT ('[ASD].Roles', RESEED, 0)
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_crearRolesDefault
+AS
+BEGIN
+	Exec [ASD].SP_altaRol 'admin',1,1,1,1,1,1,1,1,1
+	Exec [ASD].SP_altaRol 'cliente',0,0,0,0,0,0,0,1,0
+	Exec [ASD].SP_altaRol 'chofer',0,0,0,0,0,0,1,0,0
+								 -- @rol, @clientes, @choferes, @autos, @roles, @turnos, @viajes,
+								 -- @facturacion, @rendicion, @estadisticas
+END
+GO
+
+---------------------------------- USUARIOS
+CREATE PROCEDURE [ASD].SP_altaUsuario(@usuario varchar(30), @pass varchar(256))
+AS
+BEGIN
+	INSERT INTO [ASD].Usuarios
+	values(@usuario,HASHBYTES('SHA2_256',@pass),0)
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_crearUsuariosDefault
+AS
+BEGIN
+	Exec [ASD].SP_altaUsuario 'admin','w23e'
+	Exec [ASD].SP_altaUsuario 'cliente','cliente'
+	Exec [ASD].SP_altaUsuario 'chofer','chofer'
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_eliminarTodosUsuarios
+AS
+BEGIN
+	DELETE FROM [ASD].Usuarios
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_loginOk(@usuario varchar(30))
+AS
+BEGIN
+	Declare @intentos int
+	SET @intentos = (select intentosLogueo from [ASD].fx_getUsuario(@usuario))
+	if (@intentos >=3) return 0
+	else BEGIN
+		UPDATE [ASD].fx_getUsuario(@usuario)
+		SET intentosLogueo = 0
+		return 1
+	END
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_loginFail(@usuario varchar(30))
+AS
+BEGIN
+	Declare @intentos int
+	SET @intentos = (select intentosLogueo from [ASD].fx_getUsuario(@usuario))
+	if (@intentos < 3) BEGIN 
+						UPDATE [ASD].fx_getUsuario(@usuario)
+						SET intentosLogueo = intentosLogueo + 1
+					   END
+	else THROW 51000,'EL USUARIO ESTA DESHABILITADO',1;
+	return 0
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_login(@usuario varchar(30), @password varchar(256))
+AS
+BEGIN 
+	Declare @contraseña varchar(256), @resultado bit
+	SET @contraseña = (Select pass from [ASD].fx_getUsuario(@usuario))
+	if( HASHBYTES('SHA2_256',@password) = @contraseña)
+		EXEC @resultado = [ASD].SP_loginOk @usuario
+	else Exec @resultado = [ASD].SP_loginFail @usuario
+	return @resultado
+END
+GO
+

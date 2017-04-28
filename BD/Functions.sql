@@ -80,46 +80,42 @@ AS
 		)
 GO
 ----------------------- BUSQUEDAS POR ID --------------------------
-CREATE FUNCTION [ASD].fx_getCliente 
-(	@id int
-)
+CREATE FUNCTION [ASD].fx_getCliente(@id int)
 RETURNS TABLE 
 AS
 RETURN 
-(
-	SELECT * From [ASD].Clientes WHERE id = @id
-)
+(SELECT * From [ASD].Clientes WHERE id = @id)
 GO
 
-CREATE FUNCTION [ASD].fx_getChofer 
-(	@id int
-)
+CREATE FUNCTION [ASD].fx_getChofer(@id int)
 RETURNS TABLE 
 AS
-RETURN 
-(
-	SELECT * From [ASD].Choferes WHERE id = @id
-)
+RETURN (SELECT * From [ASD].Choferes WHERE id = @id)
 GO
 
-CREATE FUNCTION [ASD].fx_getAuto 
-(	@id int
-)
+CREATE FUNCTION [ASD].fx_getAuto(@id int)
 RETURNS TABLE 
 AS
-RETURN 
-(
-	SELECT * From [ASD].Autos WHERE id = @id
-)
+RETURN (SELECT * From [ASD].Autos WHERE id = @id)
 GO
 
-CREATE FUNCTION [ASD].fx_getTurno 
-(	@id int
-)
+CREATE FUNCTION [ASD].fx_getTurno(@id int)
 RETURNS TABLE 
 AS
-RETURN 
-(
-	SELECT * From [ASD].Turnos WHERE id = @id
-)
+RETURN (SELECT * From [ASD].Turnos WHERE id = @id)
 GO
+
+CREATE FUNCTION [ASD].fx_getRol(@rol varchar(20))
+RETURNS TABLE 
+AS
+RETURN (SELECT * From [ASD].Roles WHERE Rol = @rol)
+GO
+
+CREATE FUNCTION [ASD].fx_getUsuario(@user varchar(30))
+RETURNS TABLE 
+AS
+RETURN (SELECT * From [ASD].Usuarios WHERE Usuario = @user)
+GO
+
+---------------------------------- LOGIN USUARIO
+

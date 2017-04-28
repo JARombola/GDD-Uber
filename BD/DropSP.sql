@@ -93,3 +93,58 @@ GO
 IF OBJECT_ID ('[ASD].SP_modifAuto', 'P') IS NOT NULL  
     DROP PROCEDURE [ASD].SP_modifAuto
 GO
+
+
+------------------------------------- ROLES
+IF OBJECT_ID ('[ASD].SP_altaRol', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_altaRol
+GO
+
+IF OBJECT_ID ('[ASD].SP_eliminarRolEnUsuarios', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_eliminarRolEnUsuarios
+GO
+
+IF OBJECT_ID ('[ASD].SP_modificarRol', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_modificarRol
+GO
+
+IF OBJECT_ID ('[ASD].SP_deshabilitarRol', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_deshabilitarRol
+GO
+
+IF OBJECT_ID ('[ASD].SP_habilitarRol', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_habilitarRol
+GO
+
+IF OBJECT_ID ('[ASD].SP_eliminarTodosRoles', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_eliminarTodosRoles
+GO
+
+IF OBJECT_ID ('[ASD].SP_crearRolesDefault', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_crearRolesDefault
+GO
+
+----------------------------------- USUARIOS
+IF OBJECT_ID ('[ASD].SP_altaUsuario', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_altaUsuario
+GO
+
+IF OBJECT_ID ('[ASD].SP_eliminarTodosUsuarios', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_eliminarTodosUsuarios
+GO
+
+IF OBJECT_ID ('[ASD].SP_crearUsuariosDefault', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_crearUsuariosDefault
+GO
+
+IF OBJECT_ID ('[ASD].SP_login', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_login
+GO
+
+IF OBJECT_ID ('[ASD].SP_loginOk', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_loginOk
+GO
+
+IF OBJECT_ID ('[ASD].SP_loginFail', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_loginFail
+GO

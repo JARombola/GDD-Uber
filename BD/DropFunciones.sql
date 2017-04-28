@@ -30,3 +30,11 @@ GO
 IF OBJECT_ID (N'[ASD].fx_getTurno', N'IF') IS NOT NULL  
     DROP FUNCTION [ASD].fx_getTurno;  
 GO  
+
+IF OBJECT_ID (N'[ASD].fx_getRol', N'IF') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getRol;  
+GO
+
+IF OBJECT_ID (N'[ASD].fx_getUsuario', N'IF') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getUsuario;  
+GO    
