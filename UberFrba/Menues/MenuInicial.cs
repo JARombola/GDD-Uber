@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace UberFrba.Menues {
     public partial class MenuInicial : FormsAdapter {
         public MenuInicial (string rol) {
-            InitializeComponent();
+            InitializeComponent();              //TODO: Buscar funcionalidades y eliminar los botones que no corresponden
         }
 
         private void btnClientes_Click (object sender, EventArgs e) {
@@ -33,5 +33,6 @@ namespace UberFrba.Menues {
             new MenuABM("TURNO").Show();
             this.Hide();
         }
+
     }
 }
