@@ -123,12 +123,11 @@ CREATE PROCEDURE [ASD].SP_altaChofer(
 		@telefono numeric(18,0),
 		@direccion varchar(255),
 		@mail varchar(255),
-		@fecha_nacimiento datetime,
-		@cocheID int)
+		@fecha_nacimiento datetime)
 AS
 BEGIN
 	INSERT INTO [ASD].Choferes
-	values(@nombre, @apellido, @dni, @telefono, @direccion, @mail, @fecha_nacimiento,@cocheID, 1)
+	values(@nombre, @apellido, @dni, @telefono, @direccion, @mail, @fecha_nacimiento, 1)
 END
 GO
 
@@ -200,11 +199,12 @@ CREATE PROCEDURE [ASD].SP_altaAuto(
 			@modelo varchar(255),
 			@patente varchar(10),
 			@licencia varchar(26),
-			@rodado varchar(10))
+			@rodado varchar(10),
+			@chofer int)
 AS
 BEGIN
 	Insert into [ASD].Autos
-	values(@marca, @modelo, @patente, @licencia, @rodado,1)
+	values(@marca, @modelo, @patente, @licencia, @rodado,@chofer,1)
 END
 GO
 
@@ -228,8 +228,8 @@ CREATE PROCEDURE [ASD].SP_modifAuto(
 				@modelo varchar(255),
 				@patente varchar(10),
 				@licencia varchar(26),
-				@rodado varchar(10)
-				)
+				@rodado varchar(10),
+				@chofer int)
 AS
 BEGIN
 	UPDATE [ASD].Autos
@@ -243,6 +243,20 @@ END
 GO
 
 ------------------------------ >> TURNOS
+CREATE PROCEDURE [ASD].SP_cargarTurnos
+AS
+BEGIN
+	INSERT INTO [ASD].Turnos(Hora_Inicio, Hora_Fin, Precio_Base, Precio_km, Descripcion)
+	SELECT DISTINCT 
+		[gd_esquema].Maestra.Turno_Hora_Inicio,
+		[gd_esquema].Maestra.Turno_Hora_Fin,
+		[gd_esquema].Maestra.Turno_Precio_Base,
+		[gd_esquema].Maestra.Turno_Valor_Kilometro,
+		[gd_esquema].Maestra.Turno_Descripcion
+	FROM [gd_esquema].Maestra
+END
+GO
+
 CREATE PROCEDURE [ASD].SP_altaTurno(@inicio numeric(18,0),
 								 @fin numeric(18,0),
 								 @precioBase numeric(18,2),
@@ -315,13 +329,15 @@ END
 GO
 
 
-CREATE PROCEDURE [ASD].SP_modificarRol(@rol varchar(20),
+CREATE PROCEDURE [ASD].SP_modificarRol(@id int, @rol varchar(20),
 					@clientes bit, @choferes bit, @autos bit, @roles bit,@turnos bit,
 					@viajes	bit, @facturacion bit, @rendicion bit, @estadisticas bit)
 AS
 BEGIN
-	UPDATE [ASD].fx_getRol(@rol)
-	SET Clientes = @clientes,
+	UPDATE [ASD].fx_getRol(@id)
+	SET 
+	Rol = @rol,
+	Clientes = @clientes,
 	Choferes = @choferes,
 	Autos = @autos,
 	Roles = @roles,
@@ -333,26 +349,26 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_eliminarRolEnUsuarios(@rol varchar(20))
+CREATE PROCEDURE [ASD].SP_eliminarRolEnUsuarios(@id int)
 AS
 BEGIN
-	DELETE [ASD].RolXUsuario where Rol = @rol
+	DELETE [ASD].RolXUsuario where Rol = @id
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_deshabilitarRol(@rol varchar(20))
+CREATE PROCEDURE [ASD].SP_deshabilitarRol(@id int)
 AS
 BEGIN
-	UPDATE [ASD].fx_getRol(@rol)
+	UPDATE [ASD].fx_getRol(@id)
 	SET Habilitado = 0
-	EXEC [ASD].SP_eliminarRolEnUsuarios @rol
+	EXEC [ASD].SP_eliminarRolEnUsuarios @id
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_habilitarRol(@rol varchar(20))
+CREATE PROCEDURE [ASD].SP_habilitarRol(@id int)
 AS
 BEGIN
-	UPDATE [ASD].fx_getRol(@rol)
+	UPDATE [ASD].fx_getRol(@id)
 	SET Habilitado = 1
 END
 GO
@@ -362,6 +378,9 @@ AS
 BEGIN
 	SET NOCOUNT OFF;
 	DELETE FROM [ASD].Roles
+
+	DELETE FROM [ASD].Turnos
+	DBCC CHECKIDENT ('[ASD].Roles', RESEED, 0)
 END
 GO
 
@@ -410,7 +429,7 @@ BEGIN
 	else BEGIN
 		UPDATE [ASD].fx_getUsuario(@usuario)
 		SET intentosLogueo = 0
-		return 1
+		return 3
 	END
 END
 GO
@@ -418,26 +437,29 @@ GO
 CREATE PROCEDURE [ASD].SP_loginFail(@usuario varchar(30))
 AS
 BEGIN
-	Declare @intentos int
-	SET @intentos = (select intentosLogueo from [ASD].fx_getUsuario(@usuario))
-	if (@intentos < 3) BEGIN 
+	Declare @intentosRealizados int, @msg varchar(100)
+	SET @intentosRealizados = (select intentosLogueo from [ASD].fx_getUsuario(@usuario))
+	if (@intentosRealizados < 3) BEGIN							-- se le agrega un intento fallido
 						UPDATE [ASD].fx_getUsuario(@usuario)
 						SET intentosLogueo = intentosLogueo + 1
-					   END
-	else THROW 51000,'EL USUARIO ESTA DESHABILITADO',1;
-	return 0
+						return (3-(@intentosRealizados+1))
+					   END;
+	else BEGIN
+		if (@intentosRealizados=3) return 0			--Intentos realizados = 3 = max => Deshabilitado
+		else throw 51000, 'Usuario Inexistente',1		-- Mal el usuario
+		END 
 END
 GO
 
 CREATE PROCEDURE [ASD].SP_login(@usuario varchar(30), @password varchar(256))
 AS
 BEGIN 
-	Declare @contraseña varchar(256), @resultado bit
+	Declare @contraseña varchar(256), @resultado int
 	SET @contraseña = (Select pass from [ASD].fx_getUsuario(@usuario))
 	if( HASHBYTES('SHA2_256',@password) = @contraseña)
 		EXEC @resultado = [ASD].SP_loginOk @usuario
 	else Exec @resultado = [ASD].SP_loginFail @usuario
-	return @resultado
+	SELECT @resultado
 END
 GO
 

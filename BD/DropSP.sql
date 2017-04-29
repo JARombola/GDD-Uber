@@ -24,6 +24,10 @@ IF OBJECT_ID ('[ASD].SP_habilitarCliente', 'P') IS NOT NULL
 GO
 
 ------------------------------------------------->>TURNOS
+IF OBJECT_ID ('[ASD].SP_cargarTurnos', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_cargarTurnos;  
+GO
+
 IF OBJECT_ID ('[ASD].SP_altaTurno', 'P') IS NOT NULL  
     DROP PROCEDURE [ASD].SP_altaTurno;  
 GO

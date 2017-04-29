@@ -43,12 +43,19 @@ namespace UberFrba.A__Buscador {
         }
 
         public SqlCommand getCommandFunction (string funcion) {
-            string query= "SELECT * FROM "+ESQUEMA+".";
+            string query= "SELECT "+ESQUEMA+".";
                 query+=funcion;
             SqlCommand command= new SqlCommand(query, conexion);
-              //  command.CommandType = CommandType.TableDirect;
             return command;
         }
+
+        public SqlCommand getCommandFunctionDeTabla (string funcion) {
+            string query= "SELECT * From "+ESQUEMA+".";
+                query+=funcion;
+            SqlCommand command= new SqlCommand(query, conexion);
+            return command;
+        }
+
 
         public SqlCommand getCommand(string query) {
             SqlCommand command= new SqlCommand(query, conexion);
@@ -69,11 +76,11 @@ namespace UberFrba.A__Buscador {
         public void cargarMarcas (ComboBox cbMarcas) {      
             String query = "SELECT Distinct Marca FROM "+ESQUEMA+".Autos order by 1";
             SqlCommand command= Buscador.getInstancia().getCommand(query);
-            SqlDataReader datos = command.ExecuteReader();
-            while (datos.Read()) {
-                cbMarcas.Items.Add(datos.GetString(0));
+            SqlDataReader marcas = command.ExecuteReader();
+            while (marcas.Read()) {
+                cbMarcas.Items.Add(marcas.GetString(0));
             }
-            datos.Close();
+            marcas.Close();
         }
 
         //------------ METODOS ROLES--------------------------------
@@ -88,13 +95,13 @@ namespace UberFrba.A__Buscador {
             datos.Close();
         }
 
-        public Boolean cargarFunciones (string rol, CheckedListBox listaFunciones) {
-            String query = "SELECT * FROM "+ESQUEMA+".Roles where ROL = '"+rol+"'";
+        public Boolean cargarFunciones (int rolId, CheckedListBox listaFunciones) {
+            String query = "SELECT * FROM "+ESQUEMA+".Roles where ID = '"+rolId+"'";
             SqlCommand command= Buscador.getInstancia().getCommand(query);
             SqlDataReader datos = command.ExecuteReader();
             datos.Read();
             int i;
-            for(i=1 ; i<datos.FieldCount-1;i++){
+            for(i=1 ; i<datos.FieldCount-2;i++){        
                 listaFunciones.SetItemChecked(i-1, datos.GetBoolean(i)) ;
             }
             Boolean habilitado = datos.GetBoolean(i);

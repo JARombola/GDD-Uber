@@ -31,11 +31,12 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.dgListado = new System.Windows.Forms.DataGridView();
-            this.cgDerecho = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuDerecho = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deshabilitarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
-            this.cgDerecho.SuspendLayout();
+            this.menuDerecho.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -98,7 +99,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgListado.ContextMenuStrip = this.cgDerecho;
+            this.dgListado.ContextMenuStrip = this.menuDerecho;
             this.dgListado.EnableHeadersVisualStyles = false;
             this.dgListado.Location = new System.Drawing.Point(39, 192);
             this.dgListado.MultiSelect = false;
@@ -110,19 +111,27 @@
             this.dgListado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.seleccion);
             this.dgListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.derecho);
             // 
-            // cgDerecho
+            // menuDerecho
             // 
-            this.cgDerecho.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.eliminarToolStripMenuItem});
-            this.cgDerecho.Name = "cgDerecho";
-            this.cgDerecho.Size = new System.Drawing.Size(118, 26);
+            this.menuDerecho.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eliminarToolStripMenuItem,
+            this.deshabilitarToolStripMenuItem});
+            this.menuDerecho.Name = "cgDerecho";
+            this.menuDerecho.Size = new System.Drawing.Size(153, 70);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-            this.eliminarToolStripMenuItem.Text = "Eliminar";
-            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminar);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.eliminarToolStripMenuItem.Text = "Habilitar";
+            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.habilitar);
+            // 
+            // deshabilitarToolStripMenuItem
+            // 
+            this.deshabilitarToolStripMenuItem.Name = "deshabilitarToolStripMenuItem";
+            this.deshabilitarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deshabilitarToolStripMenuItem.Text = "Deshabilitar";
+            this.deshabilitarToolStripMenuItem.Click += new System.EventHandler(this.deshabilitar);
             // 
             // frmListaTurnos
             // 
@@ -138,7 +147,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();
-            this.cgDerecho.ResumeLayout(false);
+            this.menuDerecho.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -151,7 +160,8 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.DataGridView dgListado;
-        private System.Windows.Forms.ContextMenuStrip cgDerecho;
+        private System.Windows.Forms.ContextMenuStrip menuDerecho;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deshabilitarToolStripMenuItem;
     }
 }

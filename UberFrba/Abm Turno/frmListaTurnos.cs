@@ -20,16 +20,13 @@ namespace UberFrba.Abm_Turno {
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-        SqlCommand command= Buscador.getInstancia().getCommandFunction("fx_filtrarTurnos(@descripcion)");
+        SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla("fx_filtrarTurnos(@descripcion)");
                 command.Parameters.AddWithValue("@descripcion", valor(txtDescripcion.Text));
         ejecutarQuery(command, dgListado);
         }
 
         private void eliminar (object sender, EventArgs e) {
-            DialogResult opcion = MessageBox.Show(null, "Eliminar "+dgListado.CurrentRow.Cells["Turno_Descripcion"].Value.ToString()+"?", "Baja Auto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (opcion == DialogResult.Yes)
-                //TODO: Borrado real
-                dgListado.Rows.RemoveAt(dgListado.CurrentRow.Index);
+
         }
 
         private void mostrarDatos () {
@@ -62,14 +59,41 @@ namespace UberFrba.Abm_Turno {
             return true;
         }
 
-        private void dgListado_MouseDown (object sender, MouseEventArgs e) {
+        private void marcarFila (object sender, MouseEventArgs e) {
             var hit = dgListado.HitTest(e.X, e.Y);
             dgListado.ClearSelection();
-            dgListado[hit.ColumnIndex, hit.RowIndex].Selected = true;
+            try { dgListado[hit.ColumnIndex, hit.RowIndex].Selected = true; }
+            catch (System.ArgumentOutOfRangeException) { //.... Hizo click derecho en cualquier lado
+            }
         }
 
         private void derecho (object sender, MouseEventArgs e) {
-            if (e.Button==MouseButtons.Right) dgListado_MouseDown(sender, e);
+            if (e.Button==MouseButtons.Right) {
+                marcarFila(sender, e);
+                bool habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
+                if (habilitado) {
+                    menuDerecho.Items[0].Visible=false;            //Habilitar
+                    menuDerecho.Items[1].Visible=true;
+                }
+                else {
+                    menuDerecho.Items[0].Visible=true;
+                    menuDerecho.Items[1].Visible=false;
+                }
+            }
+        }
+
+        private void habilitar (object sender, EventArgs e) {
+            int p = base.habilitar("Turno", (int) dgListado.CurrentRow.Cells["ID"].Value);
+            MessageBox.Show("Habilitados: "+ p);
+            dgListado.CurrentRow.Cells["Habilitado"].Value = true;
+            dgListado.Refresh();
+        }
+
+        private void deshabilitar (object sender, EventArgs e) {
+            int p = base.deshabilitar("Turno", (int) dgListado.CurrentRow.Cells["ID"].Value);
+            MessageBox.Show("Deshabilitados: "+ p);
+            dgListado.CurrentRow.Cells["Habilitado"].Value= false;
+            dgListado.Refresh();
         }
 
     }

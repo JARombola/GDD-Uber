@@ -20,21 +20,15 @@ CREATE FUNCTION [ASD].fx_filtrarAutos (@modelo varchar(255),
 Returns Table
 AS
 	RETURN
-		(Select distinct * From [ASD].Autos
+		(Select * From [ASD].Autos
 		where 
 			Modelo like '%'+@modelo+'%'
 			OR
 			Patente = @patente
 			OR
 			Marca = @marca
-		UNION 
-		Select * From [ASD].Autos autito
-		where Exists(
-			select * from [ASD].Choferes 
-			where ID = @choferID
-			AND coche = autito.ID
-			)
-		)
+			OR
+			Chofer = @choferID)
 
 GO
 ----------------------FUNCION DE FILTRADO DE CHOFERES------------------------------
@@ -44,7 +38,7 @@ CREATE FUNCTION [ASD].fx_filtrarChoferes (@nombre varchar(255),
 Returns Table
 AS
 	RETURN
-		(Select distinct * From [ASD].Choferes
+		(Select * From [ASD].Choferes
 		where 
 			Nombre like '%'+ @nombre+ '%'
 			OR
@@ -60,7 +54,7 @@ CREATE FUNCTION [ASD].fx_filtrarClientes (@nombre varchar(255),
 Returns Table
 AS
 	RETURN
-		(Select distinct * From [ASD].Clientes
+		(Select * From [ASD].Clientes
 		where 
 			Nombre like '%'+ @nombre+ '%'
 			OR
@@ -74,7 +68,7 @@ CREATE FUNCTION [ASD].fx_filtrarTurnos (@descripcion varchar(255))
 Returns Table
 AS
 	RETURN
-		(Select distinct * From [ASD].Turnos
+		(Select * From [ASD].Turnos
 		where 
 			Descripcion like '%'+ @descripcion+ '%'
 		)
@@ -105,10 +99,18 @@ AS
 RETURN (SELECT * From [ASD].Turnos WHERE id = @id)
 GO
 
-CREATE FUNCTION [ASD].fx_getRol(@rol varchar(20))
+CREATE FUNCTION [ASD].fx_getRol(@Id int)
 RETURNS TABLE 
 AS
-RETURN (SELECT * From [ASD].Roles WHERE Rol = @rol)
+RETURN (SELECT * From [ASD].Roles WHERE ID = @id)
+GO
+
+CREATE FUNCTION [ASD].fx_getRolId(@rol varchar(20))
+RETURNS int 
+AS
+BEGIN
+	RETURN (SELECT ID From [ASD].Roles WHERE Rol = @rol)
+END;
 GO
 
 CREATE FUNCTION [ASD].fx_getUsuario(@user varchar(30))
@@ -118,4 +120,17 @@ RETURN (SELECT * From [ASD].Usuarios WHERE Usuario = @user)
 GO
 
 ---------------------------------- LOGIN USUARIO
+CREATE FUNCTION [ASD].fx_getRolesDeUsuario(@usuario varchar(30))
+RETURNS TABLE
+AS
+RETURN (Select Rol From [ASD].Roles 
+		Where ID IN (Select Rol FROM [ASD].RolXUsuario Where Usuario = @usuario))
+GO
 
+CREATE FUNCTION [ASD].fx_getCantidadRolesDeUsuario(@usuario varchar(30))			--Devuelve la cantidad de roles que tiene ese usuario
+RETURNS int																		--(Usada para otorgar funcionalidades)
+AS
+BEGIN
+	RETURN (Select count(*) as 'Cantidad de Roles' FROM [ASD].RolXUsuario Where Usuario = @usuario)
+END;
+GO

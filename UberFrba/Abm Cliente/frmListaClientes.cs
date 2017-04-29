@@ -21,7 +21,7 @@ namespace UberFrba.Abm_Cliente{
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-            SqlCommand command= Buscador.getInstancia().getCommandFunction("fx_filtrarClientes(@nombre, @apellido, @DNI)");
+            SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla("fx_filtrarClientes(@nombre, @apellido, @DNI)");
                 command.Parameters.AddWithValue("@nombre", valor(txtNombre.Text));
                 command.Parameters.AddWithValue("@apellido", valor(txtApellido.Text));
                 command.Parameters.AddWithValue("@DNI", valor(txtDNI.Text));

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using UberFrba.A__Buscador;
 using UberFrba.Dominio;
 
-namespace UberFrba.Abm_Automovil {
+namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
     public partial class frmCargaAuto : FormsAdapter {
         
         public frmCargaAuto (Form anterior) {
@@ -73,6 +73,7 @@ namespace UberFrba.Abm_Automovil {
                      new SqlParameter("@patente",valor(txtPatente.Text)),
                      new SqlParameter("@licencia",valor(txtLicencia.Text)),
                      new SqlParameter("@rodado",valor(txtRodado.Text)),
+                     new SqlParameter("@chofer",valor(cbChofer.Text)),
                 }
                  );
         }
@@ -80,8 +81,8 @@ namespace UberFrba.Abm_Automovil {
         private void btnHabilitacion_Click (object sender, EventArgs e) {
             SqlCommand command;
             if (ID<0)           //Deshabilitado => Hay que habilitar
-                command = Buscador.getInstancia().getCommandStoredProcedure("SP_habilitarChofer");
-            else command = Buscador.getInstancia().getCommandStoredProcedure("SP_deshabilitarChofer");
+                command = Buscador.getInstancia().getCommandStoredProcedure("SP_habilitarAuto");
+            else command = Buscador.getInstancia().getCommandStoredProcedure("SP_deshabilitarAuto");
             command.Parameters.AddWithValue("@id", Math.Abs(ID));
             int resultado = command.ExecuteNonQuery();
             MessageBox.Show("Actualizados: "+resultado);

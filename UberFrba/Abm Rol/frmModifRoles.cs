@@ -12,10 +12,10 @@ using UberFrba.A__Buscador;
 
 namespace UberFrba.Abm_Rol
 {
-    public partial class frmRoles : Form
+    public partial class frmModifRoles : Form
     {
-        bool modificacion = false;
-        public frmRoles()
+        int rolId;
+        public frmModifRoles()
         {
             InitializeComponent();
         }
@@ -26,39 +26,54 @@ namespace UberFrba.Abm_Rol
         }
 
         private void cbRol_SelectedIndexChanged (object sender, EventArgs e) {
-            btnOk.Text="Modificar";
-            Boolean habilitado = Buscador.getInstancia().cargarFunciones(cbRol.Text, listFunciones);
-            btnOk.Visible=true;
-            btnOk.Enabled=true;
+            rolId = obtenerId();
+            Boolean habilitado = Buscador.getInstancia().cargarFunciones(rolId, listFunciones);
             if (habilitado) { btnDeshabiliar.Enabled=true;
-                              btnHabilitar.Enabled=false;}
+                              btnHabilitar.Enabled=false;
+                              listFunciones.Enabled=true;
+                              txtNombre.Text=cbRol.SelectedItem.ToString();
+                              txtNombre.Enabled=true;
+                              btnOk.Visible=true;
+            }
             else {  btnDeshabiliar.Enabled=false;
-                    btnHabilitar.Enabled=true;}
-            modificacion=true;
+                    btnHabilitar.Enabled=true;
+                    listFunciones.Enabled=false;
+                    txtNombre.Enabled=false;
+                    txtNombre.Text="";
+                    btnOk.Visible=false;
+            }
+        }
+
+        private int obtenerId () {
+            SqlCommand obtenerId = Buscador.getInstancia().getCommandFunction("fx_getRolId(@rol)");
+                obtenerId.Parameters.AddWithValue("@rol", cbRol.Text);
+            return (int)obtenerId.ExecuteScalar();
         }
 
         private void botonRegistrar (object sender, EventArgs e) {
-            if (cbRol.Text=="") limpiar();
-            else btnOk.Visible=true;
-                btnOk.Text="Registrar";
+                listFunciones.Enabled=true;
                 btnHabilitar.Enabled=false;
                 btnDeshabiliar.Enabled=false;
-                modificacion=false;
         }
 
         private void btnOk_Click (object sender, EventArgs e) {
             SqlCommand storedProcedure;
-            if (modificacion) storedProcedure = Buscador.getInstancia().getCommandStoredProcedure("SP_modificarRol");
-            else storedProcedure = Buscador.getInstancia().getCommandStoredProcedure("SP_altaRol");
+            storedProcedure = Buscador.getInstancia().getCommandStoredProcedure("SP_modificarRol");
             setearParametros(ref storedProcedure);
-            int x = storedProcedure.ExecuteNonQuery();
-            MessageBox.Show("Actualizado: "+x.ToString());
+            try {
+                int x = storedProcedure.ExecuteNonQuery();
+                MessageBox.Show("Actualizado: "+x.ToString());
+            }
+            catch(SqlException){
+                MessageBox.Show(null,"Ya existe un rol con el nombre \" "+cbRol.Text+"\".\nIntente con uno diferente.","Error de Registro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
             limpiar();
         }
 
         private void setearParametros (ref SqlCommand stored) {
             stored.Parameters.AddRange(new[]{
-                new SqlParameter("@rol", cbRol.Text),
+                new SqlParameter("@rol", txtNombre.Text),
+                new SqlParameter("@id", rolId),
                 new SqlParameter("@clientes", listFunciones.GetItemChecked(0)),
                 new SqlParameter("@choferes", listFunciones.GetItemChecked(1)),
                 new SqlParameter("@autos", listFunciones.GetItemChecked(2)),
@@ -73,7 +88,7 @@ namespace UberFrba.Abm_Rol
 
         private void btnDeshabilitar_Click (object sender, EventArgs e) {
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_deshabilitarRol");
-                command.Parameters.AddWithValue("rol", cbRol.Text);
+                command.Parameters.AddWithValue("id", rolId);
             int x = command.ExecuteNonQuery();
             if (x>0) MessageBox.Show("Rol Deshabilitado Correctamente");
             limpiar();
@@ -81,7 +96,7 @@ namespace UberFrba.Abm_Rol
 
         private void btnHabilitar_Click (object sender, EventArgs e) {
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_habilitarRol");
-                command.Parameters.AddWithValue("rol", cbRol.Text);
+                command.Parameters.AddWithValue("id", rolId);
                 int x = command.ExecuteNonQuery();
             if (x>0) MessageBox.Show("Rol habilitado Correctamente");
             limpiar();
@@ -93,8 +108,9 @@ namespace UberFrba.Abm_Rol
                 listFunciones.SetItemCheckState(i, CheckState.Unchecked);
             }
             btnOk.Visible=false;
-            modificacion=false;
             cbRol.Text="";
+            txtNombre.Text="";
+            txtNombre.Enabled=false;
             frmModifRol_Load(null, null);
         }
     }

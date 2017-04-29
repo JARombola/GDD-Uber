@@ -87,11 +87,17 @@
     <Compile Include="Abm Cliente\frmListaClientes.Designer.cs">
       <DependentUpon>frmListaClientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Rol\ModifRoles.cs">
+    <Compile Include="Abm Rol\frmCargaRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\ModifRoles.Designer.cs">
-      <DependentUpon>ModifRoles.cs</DependentUpon>
+    <Compile Include="Abm Rol\frmCargaRol.Designer.cs">
+      <DependentUpon>frmCargaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\frmModifRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\frmModifRoles.Designer.cs">
+      <DependentUpon>frmModifRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="A- Buscador\Buscador.cs" />
     <Compile Include="Abm Turno\frmCargaTurno.cs">
@@ -143,6 +149,12 @@
     <Compile Include="Menues\MenuInicial.Designer.cs">
       <DependentUpon>MenuInicial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Menues\menuRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menues\menuRoles.Designer.cs">
+      <DependentUpon>menuRoles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registro Viajes\Form1.cs">
@@ -175,8 +187,11 @@
     <EmbeddedResource Include="Abm Cliente\frmListaClientes.resx">
       <DependentUpon>frmListaClientes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Rol\ModifRoles.resx">
-      <DependentUpon>ModifRoles.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Rol\frmCargaRol.resx">
+      <DependentUpon>frmCargaRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\frmModifRoles.resx">
+      <DependentUpon>frmModifRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Turno\frmCargaTurno.resx">
       <DependentUpon>frmCargaTurno.cs</DependentUpon>
@@ -187,11 +202,17 @@
     <EmbeddedResource Include="Listado Estadistico\listEstadisticas.resx">
       <DependentUpon>listEstadisticas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Menues\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menues\MenuABM.resx">
       <DependentUpon>MenuABM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menues\MenuInicial.resx">
       <DependentUpon>MenuInicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menues\menuRoles.resx">
+      <DependentUpon>menuRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

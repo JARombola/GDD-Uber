@@ -28,7 +28,7 @@ namespace UberFrba.Abm_Chofer {
         }
 
 
-        private void cargarDatos (IDominio unChofer) {
+        public override void cargarDatos (IDominio unChofer) {
             Persona chofer = (Persona) unChofer;
             txtApellido.Text = chofer.apellido;
             txtNombre.Text = chofer.nombre;

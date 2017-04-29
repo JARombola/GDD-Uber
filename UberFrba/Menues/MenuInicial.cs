@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace UberFrba.Menues {
     public partial class MenuInicial : FormsAdapter {
-        public MenuInicial () {
+        public MenuInicial (string rol) {
             InitializeComponent();
         }
 

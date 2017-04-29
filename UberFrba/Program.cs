@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,16 +24,20 @@ namespace UberFrba
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-//            Application.Run(new frmListAutomoviles(new ListadosAdapter()));
-    //        Application.Run(new frmCargaTurno());
-     //       Application.Run(new frmListaChoferes(new ListadosAdapter()));
-    //        Application.Run(new frmListaClientes(new ListadosAdapter()));
+   //     Application.Run(new frmListaAutos(new FormsAdapter()));
+        //    Application.Run(new frmCargaTurno(new FormsAdapter()));
+    //     Application.Run(new frmListaChoferes(new FormsAdapter()));
+      //      Application.Run(new frmListaClientes(new FormsAdapter()));
 //            Application.Run(new frmEstadistica());
-             Application.Run(new frmRoles());
-      //       Application.Run(new frmListaTurnos(new ListadosAdapter()));
-      //      Application.Run(new frmCargaCliente());
-   //         Application.Run(new frmCargaAutos());
-        //    Application.Run(new MenuInicial());
+        //      Application.Run(new frmModifRoles());
+        //  Application.Run(new frmCargaRol());
+
+        //     Application.Run(new frmListaTurnos(new FormsAdapter()));
+            //   Application.Run(new frmCargaCliente(new FormsAdapter()));
+      //      Application.Run(new frmCargaAuto(new FormsAdapter()));
+            //    Application.Run(new MenuInicial());
+//            Application.Run(new Login());
+
         }
     }
 }

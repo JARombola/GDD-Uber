@@ -21,7 +21,7 @@ namespace UberFrba.Abm_Chofer{
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-            SqlCommand command= Buscador.getInstancia().getCommandFunction("fx_filtrarChoferes(@nombre, @apellido, @DNI)");
+            SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla("fx_filtrarChoferes(@nombre, @apellido, @DNI)");
                 command.Parameters.AddWithValue("@nombre", valor(txtNombre.Text));
                 command.Parameters.AddWithValue("@apellido", valor(txtApellido.Text));
                 command.Parameters.AddWithValue("@DNI", valor(txtDNI.Text));
@@ -83,7 +83,9 @@ namespace UberFrba.Abm_Chofer{
         private void marcarFila (object sender, MouseEventArgs e) {
             var hit = dgListado.HitTest(e.X, e.Y);
             dgListado.ClearSelection();
-            dgListado[hit.ColumnIndex, hit.RowIndex].Selected = true;
+            try { dgListado[hit.ColumnIndex, hit.RowIndex].Selected = true; }
+            catch (System.ArgumentOutOfRangeException) { //.... y que queres que haga?
+            }
         }
 
         private void derecho (object sender, MouseEventArgs e) {

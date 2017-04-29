@@ -1,4 +1,5 @@
 	-- Si la funcion existe => La borra
+	-- IF = Funciones de Tabla, FN = Funciones escalares
 IF OBJECT_ID(N'[ASD].fx_filtrarChoferes', N'IF') IS NOT NULL 
 	DROP FUNCTION [ASD].fx_filtrarChoferes
 GO
@@ -35,6 +36,18 @@ IF OBJECT_ID (N'[ASD].fx_getRol', N'IF') IS NOT NULL
     DROP FUNCTION [ASD].fx_getRol;  
 GO
 
+IF OBJECT_ID (N'[ASD].fx_getRolId', N'FN') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getRolId;  
+GO
+
 IF OBJECT_ID (N'[ASD].fx_getUsuario', N'IF') IS NOT NULL  
     DROP FUNCTION [ASD].fx_getUsuario;  
+GO    
+
+IF OBJECT_ID (N'[ASD].fx_getRolesDeUsuario', N'IF') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getRolesDeUsuario;  
+GO    
+
+IF OBJECT_ID (N'[ASD].fx_getCantidadRolesDeUsuario', N'FN') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getCantidadRolesDeUsuario;  
 GO    

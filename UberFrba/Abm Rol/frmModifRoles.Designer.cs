@@ -1,6 +1,6 @@
 ﻿namespace UberFrba.Abm_Rol
 {
-    partial class frmRoles
+    partial class frmModifRoles
     {
         /// <summary>
         /// Required designer variable.
@@ -36,12 +36,15 @@
             this.btnDeshabiliar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listFunciones = new System.Windows.Forms.CheckedListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbRol
             // 
+            this.cbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRol.FormattingEnabled = true;
             this.cbRol.Location = new System.Drawing.Point(113, 37);
             this.cbRol.Name = "cbRol";
@@ -66,13 +69,15 @@
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(127, 31);
             this.btnOk.TabIndex = 2;
-            this.btnOk.Text = "Aceptar";
+            this.btnOk.Text = "Modificar";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Visible = false;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtNombre);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnHabilitar);
             this.groupBox1.Controls.Add(this.btnDeshabiliar);
             this.groupBox1.Controls.Add(this.groupBox2);
@@ -138,6 +143,23 @@
             this.listFunciones.Size = new System.Drawing.Size(457, 199);
             this.listFunciones.TabIndex = 0;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(27, 77);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Nombre nuevo";
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Enabled = false;
+            this.txtNombre.Location = new System.Drawing.Point(113, 74);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(173, 20);
+            this.txtNombre.TabIndex = 1;
+            // 
             // frmRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -165,5 +187,7 @@
         private System.Windows.Forms.CheckedListBox listFunciones;
         private System.Windows.Forms.Button btnDeshabiliar;
         private System.Windows.Forms.Button btnHabilitar;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Label label1;
     }
 }

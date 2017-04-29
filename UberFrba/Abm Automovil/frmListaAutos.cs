@@ -27,7 +27,7 @@ namespace UberFrba.Abm_Automovil {
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-            SqlCommand command= Buscador.getInstancia().getCommandFunction("fx_filtrarAutos(@modelo, @patente, @marca, @choferID)");
+            SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla("fx_filtrarAutos(@modelo, @patente, @marca, @choferID)");
             command.Parameters.AddRange(new[]{
                     new SqlParameter ("@modelo", valor(txtModelo.Text)),
                     new SqlParameter ("@patente", valor(txtPatente.Text)),
