@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using UberFrba.Abm_Automovil;
 using UberFrba.Abm_Chofer;
 using UberFrba.Abm_Cliente;
+using UberFrba.Abm_Rol;
 using UberFrba.Abm_Turno;
 
 namespace UberFrba.Menues {
@@ -24,7 +25,7 @@ namespace UberFrba.Menues {
         private void btnCarga_Click (object sender, EventArgs e) {
             switch (tipo) {
                 case "CLIENTE": new frmCargaCliente(this).Show();
-                    this.Hide();            
+                    this.Hide();
                     break;
                 case "CHOFER": new frmCargaChofer(this).Show();
                     this.Hide();
@@ -35,6 +36,10 @@ namespace UberFrba.Menues {
                 case "TURNO": new frmCargaTurno(this).Show();
                     this.Hide();
                     break;
+                case "ROL": new frmCargaRol(this).Show();
+                    this.Hide();
+                    break;
+
                 default: MessageBox.Show("ESTO NO DEBERIA HABER PASADO, MAL MENUES CARGA");
                     break;
             }
@@ -52,6 +57,9 @@ namespace UberFrba.Menues {
                     this.Hide();
                     break;
                 case "TURNO": new frmListaTurnos(this).Show();
+                    this.Hide();
+                    break;
+                case "ROL": new frmModifRoles(this).Show();
                     this.Hide();
                     break;
                 default: MessageBox.Show("ESTO NO DEBERIA HABER PASADO, MAL MENUES MODIF");

@@ -38,6 +38,12 @@ namespace UberFrba.Menues {
             this.Hide();
         }
 
+        private void btnRoles_Click (object sender, EventArgs e) {
+            new MenuABM("ROL").Show();
+            this.Hide();
+        }
+
+
         private void obtenerFuncionalidades(string rol){
             SqlCommand commandFuncionalidades = Buscador.getInstancia().getCommandFunction("fx_getRolId(@rol)");
                 commandFuncionalidades.Parameters.AddWithValue("@rol", rol);
@@ -84,6 +90,8 @@ namespace UberFrba.Menues {
             funcionalidades.Close();
 
         }
+
+       
 
     }
 }

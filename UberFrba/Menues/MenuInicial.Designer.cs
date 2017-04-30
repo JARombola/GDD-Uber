@@ -148,6 +148,7 @@
             this.btnRoles.TabIndex = 8;
             this.btnRoles.Text = "Roles";
             this.btnRoles.UseVisualStyleBackColor = true;
+            this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
             // 
             // groupBox1
             // 

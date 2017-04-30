@@ -11,9 +11,10 @@ using System.Windows.Forms;
 using UberFrba.A__Buscador;
 
 namespace UberFrba.Abm_Rol {
-    public partial class frmCargaRol : Form {
-        public frmCargaRol () {
+    public partial class frmCargaRol : FormsAdapter {
+        public frmCargaRol (FormsAdapter anterior) {
             InitializeComponent();
+            formAnterior=anterior;
         }
 
         private void btnOk_Click (object sender, EventArgs e) {
@@ -26,6 +27,8 @@ namespace UberFrba.Abm_Rol {
                 catch (SqlException x) {
                     MessageBox.Show(x.Message);
                 }
+                formAnterior.Show();
+                this.Close();
         }
 
         private void setearParametros (ref SqlCommand stored) {
@@ -41,6 +44,17 @@ namespace UberFrba.Abm_Rol {
                 new SqlParameter("@rendicion", listFunciones.GetItemChecked(7)),
                 new SqlParameter("@estadisticas", listFunciones.GetItemChecked(8))
             });
+        }
+
+        private void button1_Click (object sender, EventArgs e) {
+            formAnterior.Show();
+            this.Close();
+        }
+
+        private void txtNombre_TextChanged (object sender, EventArgs e) {
+            if (txtNombre.Text=="") btnOk.Enabled=false;
+            else
+            btnOk.Enabled=true;
         }
     }
 }

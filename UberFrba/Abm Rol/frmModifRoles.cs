@@ -12,12 +12,13 @@ using UberFrba.A__Buscador;
 
 namespace UberFrba.Abm_Rol
 {
-    public partial class frmModifRoles : Form
+    public partial class frmModifRoles : FormsAdapter
     {
         int rolId;
-        public frmModifRoles()
+        public frmModifRoles(FormsAdapter anterior)
         {
             InitializeComponent();
+            formAnterior = anterior;
         }
 
         private void frmModifRol_Load (object sender, EventArgs e) {
@@ -101,7 +102,7 @@ namespace UberFrba.Abm_Rol
             if (x>0) MessageBox.Show("Rol habilitado Correctamente");
             limpiar();
         }
-        private void limpiar () {
+        public override void limpiar () {
             btnDeshabiliar.Enabled=false;
             btnHabilitar.Enabled = false;
             foreach (int i in listFunciones.CheckedIndices) {
@@ -112,6 +113,11 @@ namespace UberFrba.Abm_Rol
             txtNombre.Text="";
             txtNombre.Enabled=false;
             frmModifRol_Load(null, null);
+        }
+
+        private void button1_Click (object sender, EventArgs e) {
+            formAnterior.Show();
+            this.Close();
         }
     }
 }
