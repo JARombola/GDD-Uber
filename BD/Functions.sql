@@ -113,6 +113,9 @@ BEGIN
 END;
 GO
 
+
+
+
 CREATE FUNCTION [ASD].fx_getUsuario(@user varchar(30))
 RETURNS TABLE 
 AS

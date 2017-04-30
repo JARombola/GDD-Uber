@@ -22,14 +22,14 @@ namespace UberFrba.Menues {
             else txtPass.UseSystemPasswordChar=true ;
         }
 
-        private void btnValidar_Click (object sender, EventArgs e) {
+        private void btnValidar_Click (object sender, EventArgs e) {            //Verifica Usuario y Contraseña
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_login");
             command.Parameters.AddRange(new[]{
                 new SqlParameter("@usuario",txtUser.Text),
                 new SqlParameter("@password",txtPass.Text),
             });
             try {
-                int restantes =(int) command.ExecuteScalar();
+                int restantes =(int) command.ExecuteScalar();           // Devuelve la cantidad de intentos restantes del usuario
                 if (restantes == 3) iniciarSesion();                // Pass ok!, inicia sesion
                 else {
                     if (restantes>0) {                              // Pass mal, le quedan X intentos
@@ -47,7 +47,7 @@ namespace UberFrba.Menues {
             }
         }
 
-        private void actualizarLabelIntentos (int restantes) {
+        private void actualizarLabelIntentos (int restantes) {          //Actualiza el label con la cantidad de intentos restantes
             MessageBox.Show("Intentos Restantes:"+restantes, "Contraseña Incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             lblIntentos.Text="- Intentos restantes: "+restantes;
             lblIntentos.Visible=true;
@@ -55,15 +55,13 @@ namespace UberFrba.Menues {
 
         private void iniciarSesion () {
             verificarRoles();
-            //TODO: llamar al form siguiente,
-            //verificar si existen varios roles => Darle a elegir
         }
 
         private void verificarRoles () {
             SqlDataReader roles = obtenerRoles();
             ArrayList nombresRoles = new ArrayList();
             while (roles.Read()) {
-                nombresRoles.Add(roles.GetString(0));           //Obtiene el nombre del Rol
+                nombresRoles.Add(roles.GetString(0));           //Obtiene el nombre de cada Rol del usuario
             }
             roles.Close();
 
@@ -75,23 +73,16 @@ namespace UberFrba.Menues {
             this.Hide();
         }
    
-        private void consultarRol(ArrayList roles)                //TODO: Form para consultar sol 
+        private void consultarRol(ArrayList roles)                //En el proximo rol se le consulta con cual iniciar sesion
         {
            new menuRoles(roles).Show();
         }
 
-        private SqlDataReader obtenerRoles(){
+        private SqlDataReader obtenerRoles(){               //Devuelve el DatReader con los roles del usuario
             SqlCommand commandRol = Buscador.getInstancia().getCommandFunctionDeTabla("fx_getRolesDeUsuario(@usuario)");
                 commandRol.Parameters.AddWithValue("@usuario", txtUser.Text);
             SqlDataReader rolesReader = commandRol.ExecuteReader();
             return rolesReader;
-        }
-
-        private SqlDataReader obtenerFuncionalidades (string rol) {
-            SqlCommand commandFuncionalidades = Buscador.getInstancia().getCommandFunction("fx_getRol(@rol)");
-                commandFuncionalidades.Parameters.AddWithValue("@rol", rol);
-            SqlDataReader funcionalidadesReader = commandFuncionalidades.ExecuteReader();
-            return funcionalidadesReader;
         }
        
     }

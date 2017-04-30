@@ -20,8 +20,12 @@ namespace UberFrba.Menues {
         }
 
         private void button1_Click (object sender, EventArgs e) {
-            new MenuInicial(cbRol.SelectedText).Show();
+            new MenuInicial(cbRol.SelectedItem.ToString()).Show();
             this.Close();
+        }
+
+        private void cbRol_SelectedIndexChanged (object sender, EventArgs e) {
+            btnIngresar.Enabled=true;
         }
     }
 }

@@ -25,7 +25,7 @@
         private void InitializeComponent () {
             this.cbRol = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnIngresar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -38,6 +38,7 @@
             this.cbRol.Name = "cbRol";
             this.cbRol.Size = new System.Drawing.Size(206, 21);
             this.cbRol.TabIndex = 0;
+            this.cbRol.SelectedIndexChanged += new System.EventHandler(this.cbRol_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -48,15 +49,16 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Rol";
             // 
-            // button1
+            // btnIngresar
             // 
-            this.button1.Location = new System.Drawing.Point(239, 112);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Ingresar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnIngresar.Enabled = false;
+            this.btnIngresar.Location = new System.Drawing.Point(239, 112);
+            this.btnIngresar.Name = "btnIngresar";
+            this.btnIngresar.Size = new System.Drawing.Size(75, 23);
+            this.btnIngresar.TabIndex = 2;
+            this.btnIngresar.Text = "Ingresar";
+            this.btnIngresar.UseVisualStyleBackColor = true;
+            this.btnIngresar.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox1
             // 
@@ -75,7 +77,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 176);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnIngresar);
             this.Name = "menuRoles";
             this.Text = "Rol de Acceso";
             this.groupBox1.ResumeLayout(false);
@@ -88,7 +90,7 @@
 
         private System.Windows.Forms.ComboBox cbRol;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnIngresar;
         private System.Windows.Forms.GroupBox groupBox1;
     }
 }
