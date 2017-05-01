@@ -24,12 +24,12 @@
         /// </summary>
         private void InitializeComponent () {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnRegChofer = new System.Windows.Forms.Button();
+            this.txtChofer = new System.Windows.Forms.TextBox();
+            this.txtTurno = new System.Windows.Forms.TextBox();
+            this.txtRodado = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnBuscChofer = new System.Windows.Forms.Button();
-            this.cbChofer = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnRegTurno = new System.Windows.Forms.Button();
-            this.cbTurno = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtLicencia = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -42,21 +42,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnHabilitacion = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
-            this.txtRodado = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtChofer);
+            this.groupBox1.Controls.Add(this.txtTurno);
             this.groupBox1.Controls.Add(this.txtRodado);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.btnRegChofer);
             this.groupBox1.Controls.Add(this.btnBuscChofer);
-            this.groupBox1.Controls.Add(this.cbChofer);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.btnRegTurno);
-            this.groupBox1.Controls.Add(this.cbTurno);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtLicencia);
             this.groupBox1.Controls.Add(this.label4);
@@ -74,33 +71,51 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Auto";
             // 
-            // btnRegChofer
+            // txtChofer
             // 
-            this.btnRegChofer.Location = new System.Drawing.Point(308, 318);
-            this.btnRegChofer.Name = "btnRegChofer";
-            this.btnRegChofer.Size = new System.Drawing.Size(75, 23);
-            this.btnRegChofer.TabIndex = 15;
-            this.btnRegChofer.TabStop = false;
-            this.btnRegChofer.Text = "Registrar Nuevo";
-            this.btnRegChofer.UseVisualStyleBackColor = true;
+            this.txtChofer.Location = new System.Drawing.Point(150, 289);
+            this.txtChofer.MaxLength = 26;
+            this.txtChofer.Name = "txtChofer";
+            this.txtChofer.ReadOnly = true;
+            this.txtChofer.Size = new System.Drawing.Size(233, 20);
+            this.txtChofer.TabIndex = 19;
+            // 
+            // txtTurno
+            // 
+            this.txtTurno.Location = new System.Drawing.Point(150, 215);
+            this.txtTurno.MaxLength = 26;
+            this.txtTurno.Name = "txtTurno";
+            this.txtTurno.ReadOnly = true;
+            this.txtTurno.Size = new System.Drawing.Size(233, 20);
+            this.txtTurno.TabIndex = 18;
+            // 
+            // txtRodado
+            // 
+            this.txtRodado.Location = new System.Drawing.Point(150, 166);
+            this.txtRodado.MaxLength = 26;
+            this.txtRodado.Name = "txtRodado";
+            this.txtRodado.Size = new System.Drawing.Size(233, 20);
+            this.txtRodado.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(39, 170);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Rodado";
             // 
             // btnBuscChofer
             // 
-            this.btnBuscChofer.Location = new System.Drawing.Point(150, 318);
+            this.btnBuscChofer.Location = new System.Drawing.Point(399, 285);
             this.btnBuscChofer.Name = "btnBuscChofer";
-            this.btnBuscChofer.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscChofer.Size = new System.Drawing.Size(75, 26);
             this.btnBuscChofer.TabIndex = 14;
             this.btnBuscChofer.TabStop = false;
             this.btnBuscChofer.Text = "Buscar...";
             this.btnBuscChofer.UseVisualStyleBackColor = true;
-            // 
-            // cbChofer
-            // 
-            this.cbChofer.FormattingEnabled = true;
-            this.cbChofer.Location = new System.Drawing.Point(150, 291);
-            this.cbChofer.Name = "cbChofer";
-            this.cbChofer.Size = new System.Drawing.Size(233, 21);
-            this.cbChofer.TabIndex = 5;
+            this.btnBuscChofer.Click += new System.EventHandler(this.btnBuscChofer_Click);
             // 
             // label6
             // 
@@ -110,24 +125,6 @@
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 12;
             this.label6.Text = "Chofer";
-            // 
-            // btnRegTurno
-            // 
-            this.btnRegTurno.Location = new System.Drawing.Point(308, 245);
-            this.btnRegTurno.Name = "btnRegTurno";
-            this.btnRegTurno.Size = new System.Drawing.Size(75, 23);
-            this.btnRegTurno.TabIndex = 11;
-            this.btnRegTurno.TabStop = false;
-            this.btnRegTurno.Text = "Registrar Nuevo";
-            this.btnRegTurno.UseVisualStyleBackColor = true;
-            // 
-            // cbTurno
-            // 
-            this.cbTurno.FormattingEnabled = true;
-            this.cbTurno.Location = new System.Drawing.Point(150, 218);
-            this.cbTurno.Name = "cbTurno";
-            this.cbTurno.Size = new System.Drawing.Size(233, 21);
-            this.cbTurno.TabIndex = 4;
             // 
             // label5
             // 
@@ -199,13 +196,14 @@
             // 
             // btnBuscTurno
             // 
-            this.btnBuscTurno.Location = new System.Drawing.Point(150, 245);
+            this.btnBuscTurno.Location = new System.Drawing.Point(399, 213);
             this.btnBuscTurno.Name = "btnBuscTurno";
             this.btnBuscTurno.Size = new System.Drawing.Size(75, 23);
             this.btnBuscTurno.TabIndex = 1;
             this.btnBuscTurno.TabStop = false;
             this.btnBuscTurno.Text = "Buscar...";
             this.btnBuscTurno.UseVisualStyleBackColor = true;
+            this.btnBuscTurno.Click += new System.EventHandler(this.btnBuscTurno_Click);
             // 
             // label1
             // 
@@ -242,22 +240,16 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // txtRodado
+            // btnVolver
             // 
-            this.txtRodado.Location = new System.Drawing.Point(150, 166);
-            this.txtRodado.MaxLength = 26;
-            this.txtRodado.Name = "txtRodado";
-            this.txtRodado.Size = new System.Drawing.Size(233, 20);
-            this.txtRodado.TabIndex = 16;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(39, 170);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 13);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Rodado";
+            this.btnVolver.Location = new System.Drawing.Point(27, 422);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 26);
+            this.btnVolver.TabIndex = 15;
+            this.btnVolver.TabStop = false;
+            this.btnVolver.Text = "<< Atras";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // frmCargaAuto
             // 
@@ -265,10 +257,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(575, 472);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnHabilitacion);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmCargaAuto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro Autos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -281,12 +275,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnBuscTurno;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnRegChofer;
         private System.Windows.Forms.Button btnBuscChofer;
-        private System.Windows.Forms.ComboBox cbChofer;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btnRegTurno;
-        private System.Windows.Forms.ComboBox cbTurno;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtLicencia;
         private System.Windows.Forms.Label label4;
@@ -297,7 +287,10 @@
         private System.Windows.Forms.ComboBox cbMarca;
         private System.Windows.Forms.Button btnHabilitacion;
         private System.Windows.Forms.Button btnAceptar;
-        private System.Windows.Forms.TextBox txtRodado;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtChofer;
+        private System.Windows.Forms.TextBox txtTurno;
+        private System.Windows.Forms.TextBox txtRodado;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

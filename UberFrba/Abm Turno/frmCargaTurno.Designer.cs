@@ -25,6 +25,8 @@
         private void InitializeComponent () {
             this.btnAceptar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.horaFin = new System.Windows.Forms.NumericUpDown();
+            this.horaInicio = new System.Windows.Forms.NumericUpDown();
             this.precioKm = new System.Windows.Forms.NumericUpDown();
             this.precioBase = new System.Windows.Forms.NumericUpDown();
             this.chkHabilitado = new System.Windows.Forms.CheckBox();
@@ -36,13 +38,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.horaInicio = new System.Windows.Forms.NumericUpDown();
-            this.horaFin = new System.Windows.Forms.NumericUpDown();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.horaFin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.horaInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.precioKm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.precioBase)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.horaInicio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.horaFin)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAceptar
@@ -75,6 +76,32 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Turno";
+            // 
+            // horaFin
+            // 
+            this.horaFin.Location = new System.Drawing.Point(151, 66);
+            this.horaFin.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.horaFin.Name = "horaFin";
+            this.horaFin.Size = new System.Drawing.Size(94, 20);
+            this.horaFin.TabIndex = 23;
+            this.horaFin.Tag = "";
+            // 
+            // horaInicio
+            // 
+            this.horaInicio.Location = new System.Drawing.Point(151, 29);
+            this.horaInicio.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.horaInicio.Name = "horaInicio";
+            this.horaInicio.Size = new System.Drawing.Size(94, 20);
+            this.horaInicio.TabIndex = 22;
+            this.horaInicio.Tag = "";
             // 
             // precioKm
             // 
@@ -176,47 +203,34 @@
             this.lineShape1.Y1 = 130;
             this.lineShape1.Y2 = 130;
             // 
-            // horaInicio
+            // btnVolver
             // 
-            this.horaInicio.Location = new System.Drawing.Point(151, 29);
-            this.horaInicio.Maximum = new decimal(new int[] {
-            24,
-            0,
-            0,
-            0});
-            this.horaInicio.Name = "horaInicio";
-            this.horaInicio.Size = new System.Drawing.Size(94, 20);
-            this.horaInicio.TabIndex = 22;
-            this.horaInicio.Tag = "";
-            // 
-            // horaFin
-            // 
-            this.horaFin.Location = new System.Drawing.Point(151, 66);
-            this.horaFin.Maximum = new decimal(new int[] {
-            24,
-            0,
-            0,
-            0});
-            this.horaFin.Name = "horaFin";
-            this.horaFin.Size = new System.Drawing.Size(94, 20);
-            this.horaFin.TabIndex = 23;
-            this.horaFin.Tag = "";
+            this.btnVolver.Location = new System.Drawing.Point(27, 396);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 26);
+            this.btnVolver.TabIndex = 16;
+            this.btnVolver.TabStop = false;
+            this.btnVolver.Text = "<< Atras";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // frmCargaTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(567, 448);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmCargaTurno";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar Turno";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.horaFin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.horaInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.precioKm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.precioBase)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.horaInicio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.horaFin)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -238,5 +252,6 @@
         private System.Windows.Forms.NumericUpDown precioBase;
         private System.Windows.Forms.NumericUpDown horaFin;
         private System.Windows.Forms.NumericUpDown horaInicio;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

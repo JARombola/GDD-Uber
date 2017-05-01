@@ -41,6 +41,8 @@
             this.menuDerecho = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.opcHabilitar = new System.Windows.Forms.ToolStripMenuItem();
             this.opcDeshabilitar = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTodos = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.menuDerecho.SuspendLayout();
@@ -122,7 +124,6 @@
             this.selecChofer.TabIndex = 4;
             this.selecChofer.Text = "Seleccionar...";
             this.selecChofer.UseVisualStyleBackColor = true;
-            this.selecChofer.Click += new System.EventHandler(this.selecChofer_Click);
             // 
             // groupBox1
             // 
@@ -193,32 +194,55 @@
             this.opcHabilitar,
             this.opcDeshabilitar});
             this.menuDerecho.Name = "cgDerecho";
-            this.menuDerecho.Size = new System.Drawing.Size(153, 70);
+            this.menuDerecho.Size = new System.Drawing.Size(137, 48);
             // 
             // opcHabilitar
             // 
             this.opcHabilitar.Name = "opcHabilitar";
-            this.opcHabilitar.Size = new System.Drawing.Size(152, 22);
+            this.opcHabilitar.Size = new System.Drawing.Size(136, 22);
             this.opcHabilitar.Text = "Habilitar";
             this.opcHabilitar.Click += new System.EventHandler(this.habilitar);
             // 
             // opcDeshabilitar
             // 
             this.opcDeshabilitar.Name = "opcDeshabilitar";
-            this.opcDeshabilitar.Size = new System.Drawing.Size(152, 22);
+            this.opcDeshabilitar.Size = new System.Drawing.Size(136, 22);
             this.opcDeshabilitar.Text = "Deshabilitar";
             this.opcDeshabilitar.Click += new System.EventHandler(this.deshabilitar);
+            // 
+            // btnTodos
+            // 
+            this.btnTodos.Location = new System.Drawing.Point(655, 342);
+            this.btnTodos.Name = "btnTodos";
+            this.btnTodos.Size = new System.Drawing.Size(75, 23);
+            this.btnTodos.TabIndex = 11;
+            this.btnTodos.Text = "Ver Todos";
+            this.btnTodos.UseVisualStyleBackColor = true;
+            this.btnTodos.Click += new System.EventHandler(this.btnTodos_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(30, 342);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "<< Atras";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmListaAutos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 366);
+            this.ClientSize = new System.Drawing.Size(774, 373);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnTodos);
             this.Controls.Add(this.dgListado);
             this.Controls.Add(this.btnClean);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmListaAutos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado Automoviles";
             this.Load += new System.EventHandler(this.frmListAutomoviles_Load);
             this.groupBox1.ResumeLayout(false);
@@ -247,6 +271,8 @@
         private System.Windows.Forms.ContextMenuStrip menuDerecho;
         private System.Windows.Forms.ToolStripMenuItem opcHabilitar;
         private System.Windows.Forms.ToolStripMenuItem opcDeshabilitar;
+        private System.Windows.Forms.Button btnTodos;
+        private System.Windows.Forms.Button button1;
     }
 
 }

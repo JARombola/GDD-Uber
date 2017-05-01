@@ -34,6 +34,8 @@
             this.menuDerecho = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deshabilitarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTodos = new System.Windows.Forms.Button();
+            this.btnAtras = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.menuDerecho.SuspendLayout();
@@ -117,32 +119,53 @@
             this.eliminarToolStripMenuItem,
             this.deshabilitarToolStripMenuItem});
             this.menuDerecho.Name = "cgDerecho";
-            this.menuDerecho.Size = new System.Drawing.Size(153, 70);
+            this.menuDerecho.Size = new System.Drawing.Size(137, 48);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.eliminarToolStripMenuItem.Text = "Habilitar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.habilitar);
             // 
             // deshabilitarToolStripMenuItem
             // 
             this.deshabilitarToolStripMenuItem.Name = "deshabilitarToolStripMenuItem";
-            this.deshabilitarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deshabilitarToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.deshabilitarToolStripMenuItem.Text = "Deshabilitar";
             this.deshabilitarToolStripMenuItem.Click += new System.EventHandler(this.deshabilitar);
+            // 
+            // btnTodos
+            // 
+            this.btnTodos.Location = new System.Drawing.Point(612, 373);
+            this.btnTodos.Name = "btnTodos";
+            this.btnTodos.Size = new System.Drawing.Size(75, 23);
+            this.btnTodos.TabIndex = 12;
+            this.btnTodos.Text = "Ver todos";
+            this.btnTodos.UseVisualStyleBackColor = true;
+            // 
+            // btnAtras
+            // 
+            this.btnAtras.Location = new System.Drawing.Point(39, 373);
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.Size = new System.Drawing.Size(75, 23);
+            this.btnAtras.TabIndex = 13;
+            this.btnAtras.Text = "<< Atras";
+            this.btnAtras.UseVisualStyleBackColor = true;
             // 
             // frmListaTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 400);
+            this.Controls.Add(this.btnAtras);
+            this.Controls.Add(this.btnTodos);
             this.Controls.Add(this.dgListado);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmListaTurnos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lista Turnos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -163,5 +186,7 @@
         private System.Windows.Forms.ContextMenuStrip menuDerecho;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deshabilitarToolStripMenuItem;
+        private System.Windows.Forms.Button btnTodos;
+        private System.Windows.Forms.Button btnAtras;
     }
 }

@@ -99,6 +99,14 @@ AS
 RETURN (SELECT * From [ASD].Turnos WHERE id = @id)
 GO
 
+CREATE FUNCTION [ASD].fx_getDescripcion(@id int)
+RETURNS VARCHAR(256) 
+AS
+BEGIN
+	RETURN (SELECT Descripcion From [ASD].fx_getTurno(@id))
+END;
+GO
+
 CREATE FUNCTION [ASD].fx_getRol(@Id int)
 RETURNS TABLE 
 AS
@@ -113,6 +121,11 @@ BEGIN
 END;
 GO
 
+CREATE FUNCTION [ASD].fx_getNombreChofer(@id int)
+RETURNS TABLE
+AS
+	RETURN (SELECT Nombre, Apellido From [ASD].fx_getChofer(@id))
+GO
 
 
 

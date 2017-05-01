@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.A__Buscador;
+using UberFrba.Dominio;
 
 namespace UberFrba.Abm_Turno {
     public partial class frmListaTurnos : FormsAdapter {
@@ -29,8 +30,18 @@ namespace UberFrba.Abm_Turno {
 
         }
 
-        private void mostrarDatos () {
-            MessageBox.Show(dgListado.CurrentRow.Cells["Turno_Descripcion"].Value.ToString());
+        private void enviarDatos () {               //Crea un Turno para que el formulario de carga muestre estos datos (para modificar)
+            Turno turno = new Turno();
+                turno.inicio = (decimal) dgListado.CurrentRow.Cells["Hora_inicio"].Value;
+                turno.fin = (decimal) dgListado.CurrentRow.Cells["Hora_fin"].Value;
+                turno.precioBase= (decimal) dgListado.CurrentRow.Cells["Precio_Base"].Value;
+                turno.precioKm= (decimal) dgListado.CurrentRow.Cells["Precio_Km"].Value;
+                turno.descripcion= (string) dgListado.CurrentRow.Cells["Descripcion"].Value;
+                turno.habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
+                turno.id = (int) dgListado.CurrentRow.Cells["ID"].Value;
+         formAnterior.configurar(turno);
+         formAnterior.Show();
+         this.Close();  
         }
 
 
@@ -49,13 +60,13 @@ namespace UberFrba.Abm_Turno {
         //------------------------------------------------------------------------
 
         private void seleccion (object sender, MouseEventArgs e) {
-            if (e.Button==MouseButtons.Left) mostrarDatos();
+            if (e.Button==MouseButtons.Left) enviarDatos();
         }
 
         protected override bool ProcessCmdKey (ref System.Windows.Forms.Message msg, System.Windows.Forms.Keys keyData) {
             if ((!dgListado.Focused)) return base.ProcessCmdKey(ref msg, keyData);
             if (keyData != Keys.Enter && keyData != Keys.Space) return base.ProcessCmdKey(ref msg, keyData);
-            mostrarDatos();
+            enviarDatos();
             return true;
         }
 
@@ -83,17 +94,27 @@ namespace UberFrba.Abm_Turno {
         }
 
         private void habilitar (object sender, EventArgs e) {
-            int p = base.habilitar("Turno", (int) dgListado.CurrentRow.Cells["ID"].Value);
+            int p = base.habilitar("Turno", (int) dgListado.CurrentRow.Cells["ID"].Value);              //La SuperClase implementa el metodo para habilitar
             MessageBox.Show("Habilitados: "+ p);
             dgListado.CurrentRow.Cells["Habilitado"].Value = true;
             dgListado.Refresh();
         }
 
         private void deshabilitar (object sender, EventArgs e) {
-            int p = base.deshabilitar("Turno", (int) dgListado.CurrentRow.Cells["ID"].Value);
+            int p = base.deshabilitar("Turno", (int) dgListado.CurrentRow.Cells["ID"].Value);           //La superclase implementa el metodo para deshabilitar
             MessageBox.Show("Deshabilitados: "+ p);
             dgListado.CurrentRow.Cells["Habilitado"].Value= false;
             dgListado.Refresh();
+        }
+
+
+        private void btnTodos_Click (object sender, EventArgs e) {
+            ejecutarQuery(Buscador.getInstancia().verTodos("Turnos"), dgListado);
+        }
+
+        private void btnAtras_Click (object sender, EventArgs e) {
+            formAnterior.Show();
+            this.Close();
         }
 
     }

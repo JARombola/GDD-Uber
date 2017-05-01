@@ -79,6 +79,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnIngresar);
             this.Name = "menuRoles";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rol de Acceso";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -12,7 +12,7 @@ using UberFrba.A__Buscador;
 
 namespace UberFrba.Abm_Rol
 {
-    public partial class frmModifRoles : FormsAdapter
+    public partial class frmModifRoles : FormsAdapter           //TODO: verificar que se actualice el menu inicial, si el modificado es JUSTO el rol de la persona
     {
         int rolId;
         public frmModifRoles(FormsAdapter anterior)

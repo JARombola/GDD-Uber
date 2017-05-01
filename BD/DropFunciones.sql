@@ -24,12 +24,20 @@ IF OBJECT_ID (N'[ASD].fx_getChofer', N'IF') IS NOT NULL
     DROP FUNCTION [ASD].fx_getChofer;  
 GO    
 
+IF OBJECT_ID (N'[ASD].fx_getNombreChofer', N'IF') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getNombreChofer;  
+GO   
+
 IF OBJECT_ID (N'[ASD].fx_getAuto', N'IF') IS NOT NULL  
     DROP FUNCTION [ASD].fx_getAuto;  
 GO  
 
 IF OBJECT_ID (N'[ASD].fx_getTurno', N'IF') IS NOT NULL  
     DROP FUNCTION [ASD].fx_getTurno;  
+GO  
+
+IF OBJECT_ID (N'[ASD].fx_getDescripcion', N'FN') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getDescripcion;  
 GO  
 
 IF OBJECT_ID (N'[ASD].fx_getRol', N'IF') IS NOT NULL  

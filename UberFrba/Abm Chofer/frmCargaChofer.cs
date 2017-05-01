@@ -96,5 +96,10 @@ namespace UberFrba.Abm_Chofer {
             txtDire.Clear();
             dateNacimiento.ResetText();
         }
+
+        private void btnVolver_Click (object sender, EventArgs e) {
+            formAnterior.Show();
+            this.Close();
+        }
     }
 }

@@ -25,6 +25,7 @@
         private void InitializeComponent () {
             this.btnAlta = new System.Windows.Forms.Button();
             this.btnModif = new System.Windows.Forms.Button();
+            this.btnAtras = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAlta
@@ -47,14 +48,26 @@
             this.btnModif.UseVisualStyleBackColor = true;
             this.btnModif.Click += new System.EventHandler(this.btnModif_Click);
             // 
+            // btnAtras
+            // 
+            this.btnAtras.Location = new System.Drawing.Point(31, 284);
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.Size = new System.Drawing.Size(75, 23);
+            this.btnAtras.TabIndex = 3;
+            this.btnAtras.Text = "<< Atras";
+            this.btnAtras.UseVisualStyleBackColor = true;
+            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
+            // 
             // MenuABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(556, 335);
+            this.Controls.Add(this.btnAtras);
             this.Controls.Add(this.btnModif);
             this.Controls.Add(this.btnAlta);
             this.Name = "MenuABM";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuABM";
             this.ResumeLayout(false);
 
@@ -64,5 +77,6 @@
 
         private System.Windows.Forms.Button btnAlta;
         private System.Windows.Forms.Button btnModif;
+        private System.Windows.Forms.Button btnAtras;
     }
 }

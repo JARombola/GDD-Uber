@@ -180,6 +180,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnOk);
             this.Name = "frmModifRoles";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificación Roles";
             this.Load += new System.EventHandler(this.frmModifRol_Load);
             this.groupBox1.ResumeLayout(false);

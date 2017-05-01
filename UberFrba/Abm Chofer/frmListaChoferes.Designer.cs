@@ -40,6 +40,8 @@
             this.menuDerecho = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.opcHabilitar = new System.Windows.Forms.ToolStripMenuItem();
             this.opcDeshabilitar = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTodos = new System.Windows.Forms.Button();
+            this.btnAtras = new System.Windows.Forms.Button();
             this.grFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.menuDerecho.SuspendLayout();
@@ -191,17 +193,40 @@
             this.opcDeshabilitar.Text = "Deshabilitar";
             this.opcDeshabilitar.Click += new System.EventHandler(this.deshabilitar);
             // 
+            // btnTodos
+            // 
+            this.btnTodos.Location = new System.Drawing.Point(623, 360);
+            this.btnTodos.Name = "btnTodos";
+            this.btnTodos.Size = new System.Drawing.Size(80, 23);
+            this.btnTodos.TabIndex = 12;
+            this.btnTodos.Text = "Ver todos";
+            this.btnTodos.UseVisualStyleBackColor = true;
+            this.btnTodos.Click += new System.EventHandler(this.btnTodos_Click);
+            // 
+            // btnAtras
+            // 
+            this.btnAtras.Location = new System.Drawing.Point(30, 360);
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.Size = new System.Drawing.Size(80, 23);
+            this.btnAtras.TabIndex = 13;
+            this.btnAtras.Text = "<< Atras";
+            this.btnAtras.UseVisualStyleBackColor = true;
+            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
+            // 
             // frmListaChoferes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 366);
+            this.ClientSize = new System.Drawing.Size(767, 391);
+            this.Controls.Add(this.btnAtras);
+            this.Controls.Add(this.btnTodos);
             this.Controls.Add(this.dgListado);
             this.Controls.Add(this.btnClean);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.grFiltros);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmListaChoferes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado Choferes";
             this.Load += new System.EventHandler(this.frmListado_Load);
             this.grFiltros.ResumeLayout(false);
@@ -231,6 +256,8 @@
         private System.Windows.Forms.ContextMenuStrip menuDerecho;
         private System.Windows.Forms.ToolStripMenuItem opcHabilitar;
         private System.Windows.Forms.ToolStripMenuItem opcDeshabilitar;
+        private System.Windows.Forms.Button btnTodos;
+        private System.Windows.Forms.Button btnAtras;
     }
 
 }

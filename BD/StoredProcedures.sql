@@ -169,6 +169,7 @@ END
 GO
 
 ------------------------------ >> AUTOS
+
 CREATE PROCEDURE [ASD].SP_cargarAutos
 AS
 BEGIN
@@ -200,11 +201,12 @@ CREATE PROCEDURE [ASD].SP_altaAuto(
 			@patente varchar(10),
 			@licencia varchar(26),
 			@rodado varchar(10),
-			@chofer int)
+			@chofer int,
+			@turno int)
 AS
 BEGIN
 	Insert into [ASD].Autos
-	values(@marca, @modelo, @patente, @licencia, @rodado,@chofer,1)
+	values(@marca, @modelo, @patente, @licencia, @rodado,@chofer,@turno,1)
 END
 GO
 
@@ -229,7 +231,8 @@ CREATE PROCEDURE [ASD].SP_modifAuto(
 				@patente varchar(10),
 				@licencia varchar(26),
 				@rodado varchar(10),
-				@chofer int)
+				@chofer int,
+				@turno int)
 AS
 BEGIN
 	UPDATE [ASD].Autos
@@ -237,12 +240,15 @@ BEGIN
 		Modelo = @modelo,
 		Patente = @patente,
 		Licencia = @licencia,
-		Rodado = @rodado
+		Rodado = @rodado,
+		Turno = @turno,
+		Chofer = @chofer
 	WHERE ID = @id
 END
 GO
 
 ------------------------------ >> TURNOS
+
 CREATE PROCEDURE [ASD].SP_cargarTurnos
 AS
 BEGIN
@@ -298,13 +304,14 @@ END
 GO
 
 
-CREATE PROCEDURE [ASD].SP_modifTurno(
+CREATE PROCEDURE [ASD].[SP_modifTurno](
 					@id int,
 					@inicio numeric(18,0),
 					@fin numeric(18,0),
 					@precioBase numeric(18,2),
 					@precioKm numeric(18,2),
-					@descripcion varchar(255))
+					@descripcion varchar(255),
+					@habilitado bit)
 AS
 BEGIN
 	UPDATE [ASD].Turnos
@@ -312,7 +319,8 @@ BEGIN
 		Hora_Fin = @fin,
 		Precio_Base = @precioBase,
 		Precio_km = @precioKM,
-		Descripcion = @descripcion
+		Descripcion = @descripcion,
+		Habilitado = @habilitado
 	WHERE ID = @id
 END
 GO

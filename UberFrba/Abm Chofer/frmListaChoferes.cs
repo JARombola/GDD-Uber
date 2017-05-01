@@ -37,13 +37,6 @@ namespace UberFrba.Abm_Chofer{
             dgListado.Refresh();
         }
 
-        private void eliminar (object sender, EventArgs e) {
-            DialogResult opcion = MessageBox.Show(null, "Eliminar "+dgListado.CurrentRow.Cells["Chofer_nombre"].Value.ToString()+"?", "Baja Auto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (opcion == DialogResult.Yes)
-                //TODO: Borrado real
-                dgListado.Rows.RemoveAt(dgListado.CurrentRow.Index);
-        }
-
         private void enviarDatos () {
             Persona chofer = new Persona();
             chofer.nombre = dgListado.CurrentRow.Cells["Nombre"].Value.ToString();
@@ -56,8 +49,8 @@ namespace UberFrba.Abm_Chofer{
             chofer.id = (int) dgListado.CurrentRow.Cells["ID"].Value;
             chofer.habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
 
-            formAnterior.configurar(chofer);
-            formAnterior.Show();
+            formSiguiente.configurar(chofer);
+            formSiguiente.Show();
             this.Close();
         }
 
@@ -115,6 +108,15 @@ namespace UberFrba.Abm_Chofer{
             MessageBox.Show("Deshabilitados: "+ p);
             dgListado.CurrentRow.Cells["Habilitado"].Value= false;
             dgListado.Refresh();
+        }
+
+        private void btnTodos_Click (object sender, EventArgs e) {
+            ejecutarQuery(Buscador.getInstancia().verTodos("Choferes"),dgListado);
+        }
+
+        private void btnAtras_Click (object sender, EventArgs e) {
+            formAnterior.Show();
+            this.Close();
         }
 
     }

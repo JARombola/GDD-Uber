@@ -35,15 +35,8 @@ namespace UberFrba.Abm_Automovil {
                     new SqlParameter ("@choferID", ID),       //TODO: verificar que funcione
             });
 
-                    
-            ejecutarQuery(command, dgListado);
-        }
 
-        private void eliminar (object sender, EventArgs e) {
-            DialogResult opcion = MessageBox.Show(null,"Eliminar "+dgListado.CurrentRow.Cells["Auto_Patente"].Value.ToString()+"?","Baja Auto",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-                if(opcion == DialogResult.Yes) 
-            //TODO: Borrado real
-                    dgListado.Rows.RemoveAt(dgListado.CurrentRow.Index);
+            ejecutarQuery(command, dgListado);
         }
 
         private void enviarDatos () {
@@ -56,11 +49,44 @@ namespace UberFrba.Abm_Automovil {
             auto.rodado = dgListado.CurrentRow.Cells["Rodado"].Value.ToString();
             auto.habilitado =(bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
 
-            FormsAdapter frmModif = new frmCargaAuto(formAnterior);
-            frmModif.configurar(auto);
-            frmModif.Show();
+            if (dgListado.CurrentRow.Cells["Chofer"].Value == DBNull.Value) {           //Carga los datos del chofer para la modificacion
+                auto.choferID=-1;
+            }
+            else {
+                auto.choferID =(int) dgListado.CurrentRow.Cells["Chofer"].Value;
+                auto.choferNombre = nombreChofer();
+            }
+
+            if (dgListado.CurrentRow.Cells["Turno"].Value == DBNull.Value) {        //carga los datos del turno para la modificacion
+                auto.turnoID = -1;
+            }
+            else {
+                auto.turnoID = (int) dgListado.CurrentRow.Cells["Turno"].Value;
+                auto.turnoDescripcion = descripcionTurno();
+            }
+
+            formSiguiente.configurar(auto);
+            formSiguiente.Show();
             this.Close();
-            
+        }
+         
+        private string nombreChofer(){
+            SqlCommand nombreChofer = Buscador.getInstancia().getCommandFunctionDeTabla("fx_getNombreChofer(@id)");
+                nombreChofer.Parameters.AddWithValue("@id", dgListado.CurrentRow.Cells["Chofer"].Value);
+            SqlDataReader datosChofer = nombreChofer.ExecuteReader();
+            string nombre = null;
+            while (datosChofer.Read()) {
+                nombre = datosChofer["nombre"] + " "+ datosChofer["apellido"];
+            }
+            datosChofer.Close();
+            return nombre;
+        }
+
+        private string descripcionTurno () {
+            SqlCommand descripcionTurno = Buscador.getInstancia().getCommandFunction("fx_getDescripcion(@id)");
+            descripcionTurno.Parameters.AddWithValue("@id", dgListado.CurrentRow.Cells["Turno"].Value);
+            string descripcion = (string) descripcionTurno.ExecuteScalar();
+            return descripcion;
         }
 
         public override void configurar (IDominio elemento) {
@@ -122,19 +148,26 @@ namespace UberFrba.Abm_Automovil {
             int p = base.habilitar("Auto", (int) dgListado.CurrentRow.Cells["ID"].Value);
             MessageBox.Show("Habilitados: "+ p);
             dgListado.CurrentRow.Cells["Habilitado"].Value = true;
-            dgListado.Refresh();
         }
 
         private void deshabilitar (object sender, EventArgs e) {
             int p = base.deshabilitar("Auto", (int) dgListado.CurrentRow.Cells["ID"].Value);
             MessageBox.Show("Deshabilitados: "+ p);
             dgListado.CurrentRow.Cells["Habilitado"].Value= false;
-            dgListado.Refresh();
         }
 
         private void selecChofer_Click (object sender, EventArgs e) {
             new frmListaChoferes(this).Show();
             this.Hide();
+        }
+
+        private void btnTodos_Click (object sender, EventArgs e) {
+            ejecutarQuery(Buscador.getInstancia().verTodos("Autos"), dgListado);
+        }
+
+        private void button1_Click (object sender, EventArgs e) {
+            formAnterior.Show();
+            this.Close();
         }
         
 

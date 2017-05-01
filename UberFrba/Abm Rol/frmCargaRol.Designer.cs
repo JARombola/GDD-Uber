@@ -122,6 +122,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnOk);
             this.Name = "frmCargaRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta Rol";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

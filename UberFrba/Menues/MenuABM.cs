@@ -17,9 +17,10 @@ namespace UberFrba.Menues {
     public partial class MenuABM : FormsAdapter {
         private string tipo { get; set; }
        
-        public MenuABM (String clase) {
+        public MenuABM (String clase, FormsAdapter anterior) {
             InitializeComponent();
             tipo = clase;
+            formAnterior = anterior;
         }
 
         private void btnCarga_Click (object sender, EventArgs e) {
@@ -47,26 +48,51 @@ namespace UberFrba.Menues {
 
         private void btnModif_Click (object sender, EventArgs e) {
             switch (tipo) {
-                case "CLIENTE": new frmListaClientes(this).Show();
+                case "CLIENTE": 
+                    FormsAdapter nuevo = new frmListaClientes(this);
+                    nuevo.formSiguiente = new frmCargaCliente(this);
+                    nuevo.Show();
                     this.Hide();
                     break;
-                case "CHOFER": new frmListaChoferes(new frmCargaChofer(this)).Show();       //Es raro, no importa.... :)
+                
+                case "CHOFER": 
+                    nuevo = new frmListaChoferes(this);
+                    nuevo.formSiguiente = new frmCargaChofer(this);
+                    nuevo.Show();
                     this.Hide();
                     break;
-                case "AUTO": new frmListaAutos(this).Show();
+
+                case "AUTO":
+                    nuevo = new frmListaAutos(this);
+                    nuevo.formSiguiente = new frmCargaAuto(this);
+                    nuevo.Show();
                     this.Hide();
                     break;
-                case "TURNO": new frmListaTurnos(this).Show();
+
+                case "TURNO": 
+                    nuevo = new frmListaTurnos(this);
+                    nuevo.formSiguiente = new frmCargaTurno(this);
+                    nuevo.Show();
                     this.Hide();
                     break;
-                case "ROL": new frmModifRoles(this).Show();
+
+                case "ROL":
+                    nuevo = new frmModifRoles(this);
+                    nuevo.formSiguiente = new frmCargaRol(this);
+                    nuevo.Show();
                     this.Hide();
                     break;
+
                 default: MessageBox.Show("ESTO NO DEBERIA HABER PASADO, MAL MENUES MODIF");
                     break;
             }
             
             
+        }
+
+        private void btnAtras_Click (object sender, EventArgs e) {
+            formAnterior.Show();
+            this.Close();
         }
     }
 }

@@ -19,27 +19,27 @@ namespace UberFrba.Menues {
         }
 
         private void btnClientes_Click (object sender, EventArgs e) {
-            new MenuABM("CLIENTE").Show();
+            new MenuABM("CLIENTE",this).Show();
             this.Hide();
         }
 
         private void btnChoferes_Click (object sender, EventArgs e) {
-            new MenuABM("CHOFER").Show();
+            new MenuABM("CHOFER",this).Show();
             this.Hide();
         }
 
         private void btnAutos_Click (object sender, EventArgs e) {
-            new MenuABM("AUTO").Show();
+            new MenuABM("AUTO", this).Show();
             this.Hide();
         }
 
         private void btnTurnos_Click (object sender, EventArgs e) {
-            new MenuABM("TURNO").Show();
+            new MenuABM("TURNO", this).Show();
             this.Hide();
         }
 
         private void btnRoles_Click (object sender, EventArgs e) {
-            new MenuABM("ROL").Show();
+            new MenuABM("ROL", this).Show();
             this.Hide();
         }
 

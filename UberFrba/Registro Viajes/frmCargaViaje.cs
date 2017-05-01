@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace UberFrba.Registro_Viajes
 {
-    public partial class Form1 : Form
+    public partial class frmCargaViaje : Form
     {
-        public Form1()
+        public frmCargaViaje()
         {
             InitializeComponent();
+
         }
+
+        private void frmCargaViaje_Load (object sender, EventArgs e) {
+            txtKms.Maximum=Decimal.MaxValue;
+        }
+
     }
 }

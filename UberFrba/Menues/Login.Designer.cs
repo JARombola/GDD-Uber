@@ -123,6 +123,7 @@
             this.Controls.Add(this.btnValidar);
             this.Controls.Add(this.groupBox1);
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -117,5 +117,16 @@ namespace UberFrba.Abm_Cliente{
             dgListado.Refresh();
         }
 
+        private void btnTodos_Click (object sender, EventArgs e) {
+            ejecutarQuery(Buscador.getInstancia().verTodos("Clientes"), dgListado);
+        }
+
+        private void btnVolver_Click (object sender, EventArgs e) {
+            formAnterior.Show();
+            this.Close();
+        }
+
+
+
     }
 }

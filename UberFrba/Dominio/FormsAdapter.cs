@@ -13,6 +13,7 @@ namespace UberFrba {
 
         protected string TABLA { get; set; }
         protected FormsAdapter formAnterior { get; set; }
+        public FormsAdapter formSiguiente { get; set; }
         public int ID { get; set; }
 
         public FormsAdapter () {
@@ -52,6 +53,18 @@ namespace UberFrba {
         public virtual void cargarDatos (IDominio elemento) {
         }
         public virtual void limpiar () {
+        }
+
+        private void InitializeComponent () {
+            this.SuspendLayout();
+            // 
+            // FormsAdapter
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "FormsAdapter";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.ResumeLayout(false);
+
         }
     }
 }

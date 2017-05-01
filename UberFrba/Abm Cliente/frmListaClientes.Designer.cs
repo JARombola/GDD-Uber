@@ -40,6 +40,8 @@
             this.menuDerecho = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.opcHabilitar = new System.Windows.Forms.ToolStripMenuItem();
             this.opcDeshabilitar = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTodos = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.grFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.menuDerecho.SuspendLayout();
@@ -191,16 +193,39 @@
             this.opcDeshabilitar.Text = "Deshabilitar";
             this.opcDeshabilitar.Click += new System.EventHandler(this.deshabilitar);
             // 
+            // btnTodos
+            // 
+            this.btnTodos.Location = new System.Drawing.Point(623, 360);
+            this.btnTodos.Name = "btnTodos";
+            this.btnTodos.Size = new System.Drawing.Size(80, 23);
+            this.btnTodos.TabIndex = 13;
+            this.btnTodos.Text = "Ver todos";
+            this.btnTodos.UseVisualStyleBackColor = true;
+            this.btnTodos.Click += new System.EventHandler(this.btnTodos_Click);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(30, 360);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(80, 23);
+            this.btnVolver.TabIndex = 14;
+            this.btnVolver.Text = "<< Atras";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // frmListaClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 366);
+            this.ClientSize = new System.Drawing.Size(760, 387);
+            this.Controls.Add(this.btnVolver);
+            this.Controls.Add(this.btnTodos);
             this.Controls.Add(this.dgListado);
             this.Controls.Add(this.btnClean);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.grFiltros);
             this.Name = "frmListaClientes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado Clientes";
             this.Load += new System.EventHandler(this.frmListado_Load);
             this.grFiltros.ResumeLayout(false);
@@ -230,6 +255,8 @@
         private System.Windows.Forms.ContextMenuStrip menuDerecho;
         private System.Windows.Forms.ToolStripMenuItem opcHabilitar;
         private System.Windows.Forms.ToolStripMenuItem opcDeshabilitar;
+        private System.Windows.Forms.Button btnTodos;
+        private System.Windows.Forms.Button btnVolver;
     }
 
 }

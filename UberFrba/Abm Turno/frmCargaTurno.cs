@@ -9,24 +9,71 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.A__Buscador;
+using UberFrba.Dominio;
 
 namespace UberFrba.Abm_Turno {
     public partial class frmCargaTurno : FormsAdapter {
         public frmCargaTurno (Form anterior) {
             InitializeComponent();
             formAnterior = (FormsAdapter) anterior;
+            precioBase.Maximum = decimal.MaxValue;
+            precioKm.Maximum = decimal.MaxValue;
         }
 
         private void btnAceptar_Click (object sender, EventArgs e) {
-            SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("[ASD].SP_altaTurno");
-                command.Parameters.AddWithValue("@inicio", horaInicio.Value);
-                command.Parameters.AddWithValue("@fin", horaFin.Value);
-                command.Parameters.AddWithValue("@precioBase", precioBase.Value);
-                command.Parameters.AddWithValue("@precioKm", precioKm.Value);
-                command.Parameters.AddWithValue("@descripcion", txtDescripcion.Text);
-                command.Parameters.AddWithValue("@habilitado", chkHabilitado.Checked);
+            if (ID == 0) registrarTurno();
+            else modificarTurno();
+        }
+
+        private void registrarTurno(){
+            SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_altaTurno");
+            setearParametros(ref command);
                 command.ExecuteNonQuery();
             MessageBox.Show("Guardado");
         }
+
+        private void modificarTurno () {
+            SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_modifTurno");
+            command.Parameters.AddWithValue("@id", ID);                         //Necesito agregarle el ID porque es una modificacion
+            setearParametros(ref command);
+                command.ExecuteNonQuery();
+            MessageBox.Show("Modificado!");
+        }
+
+        private void setearParametros (ref SqlCommand command) {
+            command.Parameters.AddRange(new[] {
+                new SqlParameter ("@inicio", horaInicio.Value),
+                new SqlParameter ("@fin", horaFin.Value),
+                new SqlParameter ("@precioBase", precioBase.Value),
+                new SqlParameter ("@precioKm", precioKm.Value),
+                new SqlParameter ("@descripcion", txtDescripcion.Text),
+                new SqlParameter ("@habilitado", chkHabilitado.Checked),
+            }
+            );
+        }
+
+        public override void cargarDatos (IDominio unTurno) {              //Carga los datos porque es una modificacion
+            Turno turno = (Turno) unTurno;
+            horaInicio.Value= turno.inicio;
+            horaFin.Value= turno.fin;
+            precioBase.Value= turno.precioBase;
+            precioKm.Value= turno.precioKm;
+            txtDescripcion.Text=turno.descripcion;
+            ID = turno.id;   
+        }
+
+        public override void configurar (IDominio unTurno) {                //IDominio, para respetar polimorfismo superclase
+            this.Text="Modificación Turno";
+            btnAceptar.Text = "Modificar";
+            Turno turnito = (Turno) unTurno;
+            chkHabilitado.Checked = turnito.habilitado;
+            cargarDatos(turnito);
+        }
+
+        private void btnVolver_Click (object sender, EventArgs e) {
+            formAnterior.Show();
+            this.Close();
+        }
+
     }
 }

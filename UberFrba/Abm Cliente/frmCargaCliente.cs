@@ -99,5 +99,10 @@ namespace UberFrba.Abm_Cliente
            volver();
        }
 
+       private void btnVolver_Click (object sender, EventArgs e) {
+           formAnterior.Show();
+           this.Close();
+       }
+
     }
 }
