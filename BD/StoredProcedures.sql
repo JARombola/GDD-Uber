@@ -471,3 +471,27 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [ASD].SP_asignarRol(@usuario varchar(30), @rol varchar(20))
+AS
+BEGIN 
+	declare @rolId int
+	set @rolId = [ASD].fx_getRolId(@rol)
+	if (not exists (Select 1 from [ASD].RolXUsuario			-- Si no tenia asignado el rol se lo asigna. Sino no hace nada
+						where usuario = @usuario and rol = @rolId))			  
+	Begin
+		Insert into [ASD].RolXUsuario
+		values(@usuario,@rolId)
+	End
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_quitarRol(@usuario varchar(30), @rol varchar(20))
+AS
+BEGIN 
+	DECLARE @RolId int
+	Set @RolId = [ASD].fx_getRolId(@rol)
+	Delete from [ASD].RolXUsuario where(
+	Usuario = @usuario AND Rol = @RolId)
+END
+GO
+

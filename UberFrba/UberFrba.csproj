@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="A- Buscador\ConfiguradorDG.cs" />
     <Compile Include="Abm Automovil\frmCargaAuto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,11 +92,11 @@
     <Compile Include="Abm Rol\frmCargaRol.Designer.cs">
       <DependentUpon>frmCargaRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Rol\frmModifRoles.cs">
+    <Compile Include="Abm Rol\frmModifRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\frmModifRoles.Designer.cs">
-      <DependentUpon>frmModifRoles.cs</DependentUpon>
+    <Compile Include="Abm Rol\frmModifRol.Designer.cs">
+      <DependentUpon>frmModifRol.cs</DependentUpon>
     </Compile>
     <Compile Include="A- Buscador\Buscador.cs" />
     <Compile Include="Abm Turno\frmCargaTurno.cs">
@@ -111,6 +110,12 @@
     </Compile>
     <Compile Include="Abm Turno\frmListaTurnos.Designer.cs">
       <DependentUpon>frmListaTurnos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\frmAsignarRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\frmAsignarRoles.designer.cs">
+      <DependentUpon>frmAsignarRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Dominio\Auto.cs" />
     <Compile Include="Dominio\Turno.cs" />
@@ -127,33 +132,38 @@
     <Compile Include="Listado Estadistico\listEstadisticas.Designer.cs">
       <DependentUpon>listEstadisticas.cs</DependentUpon>
     </Compile>
-    <Compile Include="A- Buscador\ManejoQuerys.cs" />
     <Compile Include="Dominio\FormsAdapter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dominio\Persona.cs" />
-    <Compile Include="Menues\Login.cs">
+    <Compile Include="Menus\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menues\Login.Designer.cs">
+    <Compile Include="Menus\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menues\MenuABM.cs">
+    <Compile Include="Menus\MenuABM.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menues\MenuABM.Designer.cs">
+    <Compile Include="Menus\MenuABM.Designer.cs">
       <DependentUpon>MenuABM.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menues\MenuInicial.cs">
+    <Compile Include="Menus\MenuABMRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menues\MenuInicial.Designer.cs">
+    <Compile Include="Menus\MenuABMRol.Designer.cs">
+      <DependentUpon>MenuABMRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menus\MenuInicial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menus\MenuInicial.Designer.cs">
       <DependentUpon>MenuInicial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menues\menuRoles.cs">
+    <Compile Include="Menus\menuRoles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menues\menuRoles.Designer.cs">
+    <Compile Include="Menus\menuRoles.Designer.cs">
       <DependentUpon>menuRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -191,8 +201,8 @@
     <EmbeddedResource Include="Abm Rol\frmCargaRol.resx">
       <DependentUpon>frmCargaRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Rol\frmModifRoles.resx">
-      <DependentUpon>frmModifRoles.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Rol\frmModifRol.resx">
+      <DependentUpon>frmModifRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Turno\frmCargaTurno.resx">
       <DependentUpon>frmCargaTurno.cs</DependentUpon>
@@ -200,22 +210,28 @@
     <EmbeddedResource Include="Abm Turno\frmListaTurnos.resx">
       <DependentUpon>frmListaTurnos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\frmAsignarRoles.resx">
+      <DependentUpon>frmAsignarRoles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dominio\FormsAdapter.resx">
       <DependentUpon>FormsAdapter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listado Estadistico\listEstadisticas.resx">
       <DependentUpon>listEstadisticas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menues\Login.resx">
+    <EmbeddedResource Include="Menus\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menues\MenuABM.resx">
+    <EmbeddedResource Include="Menus\MenuABM.resx">
       <DependentUpon>MenuABM.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menues\MenuInicial.resx">
+    <EmbeddedResource Include="Menus\MenuABMRol.resx">
+      <DependentUpon>MenuABMRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menus\MenuInicial.resx">
       <DependentUpon>MenuInicial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menues\menuRoles.resx">
+    <EmbeddedResource Include="Menus\menuRoles.resx">
       <DependentUpon>menuRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

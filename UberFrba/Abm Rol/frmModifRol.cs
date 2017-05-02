@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.A__Buscador;
 
-namespace UberFrba.Abm_Rol
+namespace UberFrba.Abm_Usuario
 {
-    public partial class frmModifRoles : FormsAdapter           //TODO: verificar que se actualice el menu inicial, si el modificado es JUSTO el rol de la persona
+    public partial class frmModifRol : FormsAdapter           //TODO: verificar que se actualice el menu inicial, si el modificado es JUSTO el rol de la persona
     {
         int rolId;
-        public frmModifRoles(FormsAdapter anterior)
+        public frmModifRol(FormsAdapter anterior)
         {
             InitializeComponent();
             formAnterior = anterior;

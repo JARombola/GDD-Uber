@@ -75,7 +75,7 @@ namespace UberFrba.A__Buscador {
         //------------ METODOS AUTOS--------------------------------
         public void cargarMarcas (ComboBox cbMarcas) {      
             String query = "SELECT Distinct Marca FROM "+ESQUEMA+".Autos order by 1";
-            SqlCommand command= Buscador.getInstancia().getCommand(query);
+            SqlCommand command= this.getCommand(query);
             SqlDataReader marcas = command.ExecuteReader();
             while (marcas.Read()) {
                 cbMarcas.Items.Add(marcas.GetString(0));
@@ -86,7 +86,7 @@ namespace UberFrba.A__Buscador {
         //------------ METODOS ROLES--------------------------------
         public void cargarRoles(ComboBox cbRoles){
             String query = "SELECT Rol FROM "+ESQUEMA+".Roles order by 1";
-            SqlCommand command= Buscador.getInstancia().getCommand(query);
+            SqlCommand command= this.getCommand(query);
             SqlDataReader datos = command.ExecuteReader();
             while (datos.Read()) {
                 cbRoles.Items.Add(datos.GetString(0));
@@ -96,7 +96,7 @@ namespace UberFrba.A__Buscador {
 
         public Boolean cargarFunciones (int rolId, CheckedListBox listaFunciones) {
             String query = "SELECT * FROM "+ESQUEMA+".Roles where ID = '"+rolId+"'";
-            SqlCommand command= Buscador.getInstancia().getCommand(query);
+            SqlCommand command= this.getCommand(query);
             SqlDataReader datos = command.ExecuteReader();
             datos.Read();
             int i;
@@ -108,11 +108,36 @@ namespace UberFrba.A__Buscador {
             return habilitado;           //devuelve si el rol está habilitado o no, se usa en el form de roles para el boton de habilitar
         }
 
+        //-------------- METODOS USUARIOS
+
+        internal void cargarUsuarios (ComboBox cbUser) {
+            string query = "Select usuario From "+ESQUEMA+".Usuarios";
+            SqlCommand command = this.getCommand(query);
+            SqlDataReader usuarios= command.ExecuteReader();
+            while (usuarios.Read()) {
+                cbUser.Items.Add(usuarios["usuario"]);
+            }
+            usuarios.Close();
+        }
+
+        internal void cargarRoles (CheckedListBox listRoles) {
+            string query = "Select Rol From "+ESQUEMA+".Roles order by 1";
+            SqlCommand command = this.getCommand(query);
+            SqlDataReader roles= command.ExecuteReader();
+            while (roles.Read()) {
+                listRoles.Items.Add(roles.GetString(0));
+            }
+            roles.Close();
+        }
+
+
 
         internal SqlCommand verTodos (string tabla) {
             string query = "SELECT * FROM "+ESQUEMA+"."+tabla;
             SqlCommand command = this.getCommand(query);
             return command;
         }
+
+        
     }
 }

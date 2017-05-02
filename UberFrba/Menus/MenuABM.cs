@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using UberFrba.Abm_Automovil;
 using UberFrba.Abm_Chofer;
 using UberFrba.Abm_Cliente;
-using UberFrba.Abm_Rol;
+using UberFrba.Abm_Usuario;
 using UberFrba.Abm_Turno;
 
 namespace UberFrba.Menues {
@@ -77,7 +77,7 @@ namespace UberFrba.Menues {
                     break;
 
                 case "ROL":
-                    nuevo = new frmModifRoles(this);
+                    nuevo = new frmModifRol(this);
                     nuevo.formSiguiente = new frmCargaRol(this);
                     nuevo.Show();
                     this.Hide();

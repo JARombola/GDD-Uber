@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using UberFrba.Abm_Automovil;
 using UberFrba.Abm_Chofer;
 using UberFrba.Abm_Cliente;
-using UberFrba.Abm_Rol;
+using UberFrba.Abm_Usuario;
 using UberFrba.Abm_Turno;
 using UberFrba.Listado_Estadistico;
 using UberFrba.Menues;
@@ -37,8 +37,7 @@ namespace UberFrba
             //   Application.Run(new frmCargaCliente(new FormsAdapter()));
       //      Application.Run(new frmCargaAuto(new FormsAdapter()));
             //      Application.Run(new Login());
-            //            Application.Run(new MenuInicial("admin"));
-                Application.Run(new frmCargaViaje());
+                Application.Run(new MenuInicial("admin"));
 
         }
     }

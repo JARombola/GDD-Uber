@@ -152,3 +152,11 @@ GO
 IF OBJECT_ID ('[ASD].SP_loginFail', 'P') IS NOT NULL  
     DROP PROCEDURE [ASD].SP_loginFail
 GO
+
+IF OBJECT_ID ('[ASD].SP_asignarRol', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_asignarRol
+GO
+
+IF OBJECT_ID ('[ASD].SP_quitarRol', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_quitarRol
+GO

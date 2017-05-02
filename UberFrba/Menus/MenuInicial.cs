@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.A__Buscador;
+using UberFrba.Menus;
 
 namespace UberFrba.Menues {
     public partial class MenuInicial : FormsAdapter {
@@ -39,7 +40,7 @@ namespace UberFrba.Menues {
         }
 
         private void btnRoles_Click (object sender, EventArgs e) {
-            new MenuABM("ROL", this).Show();
+            new MenuABMRol(this).Show();
             this.Hide();
         }
 

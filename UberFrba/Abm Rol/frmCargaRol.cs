@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.A__Buscador;
 
-namespace UberFrba.Abm_Rol {
+namespace UberFrba.Abm_Usuario {
     public partial class frmCargaRol : FormsAdapter {
         public frmCargaRol (FormsAdapter anterior) {
             InitializeComponent();

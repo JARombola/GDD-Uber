@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -21,8 +22,10 @@ namespace UberFrba {
         }
 
         protected void ejecutarQuery (SqlCommand command, DataGridView lista) {                            //TODO: Completar listas
-            ConfiguradorDG config = new ConfiguradorDG();
-            config.completarDataGrid(lista, command);
+            DataTable tabla = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            adapter.Fill(tabla);
+            lista.DataSource = tabla;
         }
 
 

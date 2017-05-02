@@ -1,6 +1,6 @@
-﻿namespace UberFrba.Abm_Rol
+﻿namespace UberFrba.Abm_Usuario
 {
-    partial class frmModifRoles
+    partial class frmModifRol
     {
         /// <summary>
         /// Required designer variable.
