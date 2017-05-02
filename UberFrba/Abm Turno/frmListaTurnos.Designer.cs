@@ -143,6 +143,7 @@
             this.btnTodos.TabIndex = 12;
             this.btnTodos.Text = "Ver todos";
             this.btnTodos.UseVisualStyleBackColor = true;
+            this.btnTodos.Click += new System.EventHandler(this.btnTodos_Click_1);
             // 
             // btnAtras
             // 
@@ -152,6 +153,7 @@
             this.btnAtras.TabIndex = 13;
             this.btnAtras.Text = "<< Atras";
             this.btnAtras.UseVisualStyleBackColor = true;
+            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click_1);
             // 
             // frmListaTurnos
             // 

@@ -28,8 +28,13 @@ namespace UberFrba.Abm_Turno {
         private void registrarTurno(){
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_altaTurno");
             setearParametros(ref command);
+            try {
                 command.ExecuteNonQuery();
-            MessageBox.Show("Guardado");
+                MessageBox.Show("Guardado");
+            }
+            catch (SqlException error) {                // La excepcion desde SQL envia el mensaje de falla
+                MessageBox.Show(null,error.Message,"Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void modificarTurno () {

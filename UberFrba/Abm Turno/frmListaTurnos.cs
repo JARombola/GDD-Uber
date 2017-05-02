@@ -26,9 +26,6 @@ namespace UberFrba.Abm_Turno {
         ejecutarQuery(command, dgListado);
         }
 
-        private void eliminar (object sender, EventArgs e) {
-
-        }
 
         private void enviarDatos () {               //Crea un Turno para que el formulario de carga muestre estos datos (para modificar)
             Turno turno = new Turno();
@@ -39,8 +36,8 @@ namespace UberFrba.Abm_Turno {
                 turno.descripcion= (string) dgListado.CurrentRow.Cells["Descripcion"].Value;
                 turno.habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
                 turno.id = (int) dgListado.CurrentRow.Cells["ID"].Value;
-         formAnterior.configurar(turno);
-         formAnterior.Show();
+         formSiguiente.configurar(turno);
+         formSiguiente.Show();
          this.Close();  
         }
 
@@ -113,6 +110,15 @@ namespace UberFrba.Abm_Turno {
         }
 
         private void btnAtras_Click (object sender, EventArgs e) {
+            formAnterior.Show();
+            this.Close();
+        }
+
+        private void btnTodos_Click_1 (object sender, EventArgs e) {
+            ejecutarQuery(Buscador.getInstancia().verTodos("Turnos"),dgListado);
+        }
+
+        private void btnAtras_Click_1 (object sender, EventArgs e) {
             formAnterior.Show();
             this.Close();
         }
