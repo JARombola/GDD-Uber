@@ -117,6 +117,18 @@
     <Compile Include="Abm Rol\frmAsignarRoles.designer.cs">
       <DependentUpon>frmAsignarRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Usuarios\frmAltaUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Usuarios\frmAltaUsuario.Designer.cs">
+      <DependentUpon>frmAltaUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Usuarios\frmModifUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Usuarios\frmModifUsuario.Designer.cs">
+      <DependentUpon>frmModifUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dominio\Auto.cs" />
     <Compile Include="Dominio\Turno.cs" />
     <Compile Include="Facturacion\Form1.cs">
@@ -212,6 +224,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\frmAsignarRoles.resx">
       <DependentUpon>frmAsignarRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Usuarios\frmAltaUsuario.resx">
+      <DependentUpon>frmAltaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Usuarios\frmModifUsuario.resx">
+      <DependentUpon>frmModifUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dominio\FormsAdapter.resx">
       <DependentUpon>FormsAdapter.cs</DependentUpon>

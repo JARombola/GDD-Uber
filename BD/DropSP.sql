@@ -133,6 +133,15 @@ IF OBJECT_ID ('[ASD].SP_altaUsuario', 'P') IS NOT NULL
     DROP PROCEDURE [ASD].SP_altaUsuario
 GO
 
+IF OBJECT_ID ('[ASD].SP_modifPass', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_modifPass
+GO
+
+IF OBJECT_ID ('[ASD].SP_eliminarUsuario', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_eliminarUsuario
+GO
+
+
 IF OBJECT_ID ('[ASD].SP_eliminarTodosUsuarios', 'P') IS NOT NULL  
     DROP PROCEDURE [ASD].SP_eliminarTodosUsuarios
 GO

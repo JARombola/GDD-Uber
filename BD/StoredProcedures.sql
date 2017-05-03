@@ -412,6 +412,25 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [ASD].SP_modifPass(@usuario varchar(30), @pass varchar(256))
+AS
+BEGIN
+	UPDATE [ASD].Usuarios
+	SET Pass = HASHBYTES('SHA2_256',@pass)
+	WHERE Usuario = @usuario
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_eliminarUsuario(@usuario varchar(30))
+AS
+BEGIN
+	DELETE [ASD].RolXUsuario						--- Primero se le borran los roles para evitar problemas con FK
+	WHERE Usuario = @usuario
+	Delete [ASD].Usuarios							--- Despues se borra el usuario
+	WHERE Usuario = @usuario
+END
+GO
+
 CREATE PROCEDURE [ASD].SP_crearUsuariosDefault
 AS
 BEGIN
