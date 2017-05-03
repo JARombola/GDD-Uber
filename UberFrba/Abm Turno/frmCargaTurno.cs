@@ -41,8 +41,13 @@ namespace UberFrba.Abm_Turno {
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_modifTurno");
             command.Parameters.AddWithValue("@id", ID);                         //Necesito agregarle el ID porque es una modificacion
             setearParametros(ref command);
+            try {
                 command.ExecuteNonQuery();
-            MessageBox.Show("Modificado!");
+                MessageBox.Show("Modificado!");
+            }
+            catch (SqlException error) {
+                MessageBox.Show(null, error.Message, "Error de modificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void setearParametros (ref SqlCommand command) {
