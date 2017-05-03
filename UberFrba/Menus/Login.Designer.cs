@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent () {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkPass = new System.Windows.Forms.CheckBox();
             this.txtPass = new System.Windows.Forms.TextBox();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,7 +36,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.checkPass);
             this.groupBox1.Controls.Add(this.txtPass);
             this.groupBox1.Controls.Add(this.txtUser);
             this.groupBox1.Controls.Add(this.label2);
@@ -48,23 +48,24 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Iniciar Sesión";
             // 
-            // checkBox1
+            // checkPass
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(305, 111);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(118, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Mostrar Contraseña";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkPass.AutoSize = true;
+            this.checkPass.Location = new System.Drawing.Point(305, 111);
+            this.checkPass.Name = "checkPass";
+            this.checkPass.Size = new System.Drawing.Size(118, 17);
+            this.checkPass.TabIndex = 2;
+            this.checkPass.TabStop = false;
+            this.checkPass.Text = "Mostrar Contraseña";
+            this.checkPass.UseVisualStyleBackColor = true;
+            this.checkPass.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // txtPass
             // 
             this.txtPass.Location = new System.Drawing.Point(219, 72);
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(204, 20);
-            this.txtPass.TabIndex = 3;
+            this.txtPass.TabIndex = 1;
             this.txtPass.UseSystemPasswordChar = true;
             // 
             // txtUser
@@ -72,7 +73,7 @@
             this.txtUser.Location = new System.Drawing.Point(219, 34);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(204, 20);
-            this.txtUser.TabIndex = 2;
+            this.txtUser.TabIndex = 0;
             // 
             // label2
             // 
@@ -97,7 +98,7 @@
             this.btnValidar.Location = new System.Drawing.Point(228, 181);
             this.btnValidar.Name = "btnValidar";
             this.btnValidar.Size = new System.Drawing.Size(95, 31);
-            this.btnValidar.TabIndex = 1;
+            this.btnValidar.TabIndex = 2;
             this.btnValidar.Text = "Ingresar";
             this.btnValidar.UseVisualStyleBackColor = true;
             this.btnValidar.Click += new System.EventHandler(this.btnValidar_Click);
@@ -140,7 +141,7 @@
         private System.Windows.Forms.Button btnValidar;
         private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.TextBox txtPass;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkPass;
         private System.Windows.Forms.Label lblIntentos;
     }
 }

@@ -43,6 +43,7 @@
             this.opcDeshabilitar = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTodos = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.lblHabilitados = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.menuDerecho.SuspendLayout();
@@ -96,7 +97,7 @@
             this.txtModelo.Location = new System.Drawing.Point(153, 76);
             this.txtModelo.Name = "txtModelo";
             this.txtModelo.Size = new System.Drawing.Size(185, 20);
-            this.txtModelo.TabIndex = 1;
+            this.txtModelo.TabIndex = 2;
             // 
             // cbMarca
             // 
@@ -106,7 +107,7 @@
             this.cbMarca.Location = new System.Drawing.Point(448, 32);
             this.cbMarca.Name = "cbMarca";
             this.cbMarca.Size = new System.Drawing.Size(225, 21);
-            this.cbMarca.TabIndex = 2;
+            this.cbMarca.TabIndex = 1;
             // 
             // txtChofer
             // 
@@ -121,9 +122,10 @@
             this.selecChofer.Location = new System.Drawing.Point(593, 75);
             this.selecChofer.Name = "selecChofer";
             this.selecChofer.Size = new System.Drawing.Size(80, 23);
-            this.selecChofer.TabIndex = 4;
+            this.selecChofer.TabIndex = 3;
             this.selecChofer.Text = "Seleccionar...";
             this.selecChofer.UseVisualStyleBackColor = true;
+            this.selecChofer.Click += new System.EventHandler(this.selecChofer_Click_1);
             // 
             // groupBox1
             // 
@@ -139,7 +141,7 @@
             this.groupBox1.Location = new System.Drawing.Point(30, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(700, 122);
-            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Búsqueda automoviles";
             // 
@@ -148,7 +150,7 @@
             this.btnBuscar.Location = new System.Drawing.Point(623, 140);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(80, 23);
-            this.btnBuscar.TabIndex = 6;
+            this.btnBuscar.TabIndex = 4;
             this.btnBuscar.Text = "Buscar!";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -215,7 +217,7 @@
             this.btnTodos.Location = new System.Drawing.Point(655, 342);
             this.btnTodos.Name = "btnTodos";
             this.btnTodos.Size = new System.Drawing.Size(75, 23);
-            this.btnTodos.TabIndex = 11;
+            this.btnTodos.TabIndex = 7;
             this.btnTodos.Text = "Ver Todos";
             this.btnTodos.UseVisualStyleBackColor = true;
             this.btnTodos.Click += new System.EventHandler(this.btnTodos_Click);
@@ -225,16 +227,27 @@
             this.button1.Location = new System.Drawing.Point(30, 342);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 12;
+            this.button1.TabIndex = 6;
             this.button1.Text = "<< Atras";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lblHabilitados
+            // 
+            this.lblHabilitados.AutoSize = true;
+            this.lblHabilitados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHabilitados.Location = new System.Drawing.Point(27, 173);
+            this.lblHabilitados.Name = "lblHabilitados";
+            this.lblHabilitados.Size = new System.Drawing.Size(219, 13);
+            this.lblHabilitados.TabIndex = 13;
+            this.lblHabilitados.Text = "<Sólo se verán los autos habilitados>";
             // 
             // frmListaAutos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 373);
+            this.Controls.Add(this.lblHabilitados);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnTodos);
             this.Controls.Add(this.dgListado);
@@ -250,6 +263,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();
             this.menuDerecho.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -273,6 +287,7 @@
         private System.Windows.Forms.ToolStripMenuItem opcDeshabilitar;
         private System.Windows.Forms.Button btnTodos;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblHabilitados;
     }
 
 }

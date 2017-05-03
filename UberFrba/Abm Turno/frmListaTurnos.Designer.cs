@@ -36,6 +36,7 @@
             this.deshabilitarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTodos = new System.Windows.Forms.Button();
             this.btnAtras = new System.Windows.Forms.Button();
+            this.lblHabilitados = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.menuDerecho.SuspendLayout();
@@ -57,7 +58,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(204, 35);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(307, 20);
-            this.txtDescripcion.TabIndex = 1;
+            this.txtDescripcion.TabIndex = 0;
             // 
             // label1
             // 
@@ -109,7 +110,7 @@
             this.dgListado.ReadOnly = true;
             this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgListado.Size = new System.Drawing.Size(648, 175);
-            this.dgListado.TabIndex = 11;
+            this.dgListado.TabIndex = 3;
             this.dgListado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.seleccion);
             this.dgListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.derecho);
             // 
@@ -140,7 +141,7 @@
             this.btnTodos.Location = new System.Drawing.Point(612, 373);
             this.btnTodos.Name = "btnTodos";
             this.btnTodos.Size = new System.Drawing.Size(75, 23);
-            this.btnTodos.TabIndex = 12;
+            this.btnTodos.TabIndex = 4;
             this.btnTodos.Text = "Ver todos";
             this.btnTodos.UseVisualStyleBackColor = true;
             this.btnTodos.Click += new System.EventHandler(this.btnTodos_Click_1);
@@ -150,16 +151,27 @@
             this.btnAtras.Location = new System.Drawing.Point(39, 373);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(75, 23);
-            this.btnAtras.TabIndex = 13;
+            this.btnAtras.TabIndex = 3;
             this.btnAtras.Text = "<< Atras";
             this.btnAtras.UseVisualStyleBackColor = true;
             this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click_1);
+            // 
+            // lblHabilitados
+            // 
+            this.lblHabilitados.AutoSize = true;
+            this.lblHabilitados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHabilitados.Location = new System.Drawing.Point(36, 176);
+            this.lblHabilitados.Name = "lblHabilitados";
+            this.lblHabilitados.Size = new System.Drawing.Size(223, 13);
+            this.lblHabilitados.TabIndex = 14;
+            this.lblHabilitados.Text = "<Sólo se verán los turnos habilitados>";
             // 
             // frmListaTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 400);
+            this.Controls.Add(this.lblHabilitados);
             this.Controls.Add(this.btnAtras);
             this.Controls.Add(this.btnTodos);
             this.Controls.Add(this.dgListado);
@@ -169,11 +181,13 @@
             this.Name = "frmListaTurnos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lista Turnos";
+            this.Load += new System.EventHandler(this.frmListaTurnos_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();
             this.menuDerecho.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -190,5 +204,6 @@
         private System.Windows.Forms.ToolStripMenuItem deshabilitarToolStripMenuItem;
         private System.Windows.Forms.Button btnTodos;
         private System.Windows.Forms.Button btnAtras;
+        private System.Windows.Forms.Label lblHabilitados;
     }
 }

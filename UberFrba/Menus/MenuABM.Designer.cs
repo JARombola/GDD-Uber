@@ -43,7 +43,7 @@
             this.btnModif.Location = new System.Drawing.Point(176, 165);
             this.btnModif.Name = "btnModif";
             this.btnModif.Size = new System.Drawing.Size(160, 36);
-            this.btnModif.TabIndex = 2;
+            this.btnModif.TabIndex = 1;
             this.btnModif.Text = "Modificacion / Baja";
             this.btnModif.UseVisualStyleBackColor = true;
             this.btnModif.Click += new System.EventHandler(this.btnModif_Click);
@@ -53,7 +53,7 @@
             this.btnAtras.Location = new System.Drawing.Point(31, 284);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(75, 23);
-            this.btnAtras.TabIndex = 3;
+            this.btnAtras.TabIndex = 2;
             this.btnAtras.Text = "<< Atras";
             this.btnAtras.UseVisualStyleBackColor = true;
             this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);

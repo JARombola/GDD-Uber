@@ -14,16 +14,20 @@ using UberFrba.Dominio;
 
 namespace UberFrba.Abm_Turno {
     public partial class frmListaTurnos : FormsAdapter {
+        
+        public bool soloHabilitados {get; set;}                    // Indica si SOLO deben mostrarse los habilitados (true) o todos (false)
 
         public frmListaTurnos (Form anterior) {
             InitializeComponent();
+            soloHabilitados=false;
             formAnterior = (FormsAdapter) anterior;
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-        SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla("fx_filtrarTurnos(@descripcion)");
-                command.Parameters.AddWithValue("@descripcion", valor(txtDescripcion.Text));
-        ejecutarQuery(command, dgListado);
+            string query =(soloHabilitados)? "fx_filtrarTurnosHabilitados(@descripcion)":"fx_filtrarTurnos(@descripcion)";
+            SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla(query);
+                    command.Parameters.AddWithValue("@descripcion", valor(txtDescripcion.Text));
+            ejecutarQuery(command, dgListado);
         }
 
 
@@ -115,12 +119,17 @@ namespace UberFrba.Abm_Turno {
         }
 
         private void btnTodos_Click_1 (object sender, EventArgs e) {
-            ejecutarQuery(Buscador.getInstancia().verTodos("Turnos"),dgListado);
+            if(soloHabilitados)ejecutarQuery(Buscador.getInstancia().verTodosHabilitados("Turnos"),dgListado);
+            else ejecutarQuery(Buscador.getInstancia().verTodos("Turnos"), dgListado);
         }
 
         private void btnAtras_Click_1 (object sender, EventArgs e) {
             formAnterior.Show();
             this.Close();
+        }
+
+        private void frmListaTurnos_Load (object sender, EventArgs e) {
+            lblHabilitados.Visible=soloHabilitados;
         }
 
     }

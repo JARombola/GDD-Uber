@@ -69,7 +69,7 @@
             this.btnOk.Location = new System.Drawing.Point(207, 401);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(127, 31);
-            this.btnOk.TabIndex = 2;
+            this.btnOk.TabIndex = 1;
             this.btnOk.Text = "Modificar";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Visible = false;
@@ -87,7 +87,7 @@
             this.groupBox1.Location = new System.Drawing.Point(21, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(486, 369);
-            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información Rol";
             // 
@@ -115,7 +115,7 @@
             this.btnHabilitar.Location = new System.Drawing.Point(332, 31);
             this.btnHabilitar.Name = "btnHabilitar";
             this.btnHabilitar.Size = new System.Drawing.Size(127, 31);
-            this.btnHabilitar.TabIndex = 4;
+            this.btnHabilitar.TabIndex = 2;
             this.btnHabilitar.Text = "Habilitar";
             this.btnHabilitar.UseVisualStyleBackColor = true;
             this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click);
@@ -159,19 +159,19 @@
             this.listFunciones.Location = new System.Drawing.Point(11, 36);
             this.listFunciones.Name = "listFunciones";
             this.listFunciones.Size = new System.Drawing.Size(457, 199);
-            this.listFunciones.TabIndex = 0;
+            this.listFunciones.TabIndex = 4;
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(21, 406);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(74, 26);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "<< Atras";
+            this.button1.TabIndex = 2;
+            this.button1.Text = "<< Atrás";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // frmModifRoles
+            // frmModifRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -179,7 +179,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnOk);
-            this.Name = "frmModifRoles";
+            this.Name = "frmModifRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificación Roles";
             this.Load += new System.EventHandler(this.frmModifRol_Load);

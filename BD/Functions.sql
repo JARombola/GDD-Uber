@@ -29,7 +29,25 @@ AS
 			Marca = @marca
 			OR
 			Chofer = @choferID)
+GO
 
+CREATE FUNCTION [ASD].fx_filtrarAutosHabilitados (@modelo varchar(255),			
+								 @patente varchar(10),
+								 @marca varchar(255),
+								 @choferID int)
+Returns Table
+AS
+	RETURN
+		(Select * From [ASD].Autos
+		where (
+			Modelo like '%'+@modelo+'%'
+			OR
+			Patente = @patente
+			OR
+			Marca = @marca
+			OR
+			Chofer = @choferID)
+			AND Habilitado=1)
 GO
 ----------------------FUNCION DE FILTRADO DE CHOFERES------------------------------
 CREATE FUNCTION [ASD].fx_filtrarChoferes (@nombre varchar(255),			
@@ -45,6 +63,23 @@ AS
 			Apellido like '%'+@apellido+'%'
 			OR
 			DNI = @DNI
+		)
+GO
+
+CREATE FUNCTION [ASD].fx_filtrarChoferesHabilitados (@nombre varchar(255),			
+								 @apellido varchar(255),
+								 @DNI numeric(18,0))
+Returns Table
+AS
+	RETURN
+		(Select * From [ASD].Choferes
+		where (
+			Nombre like '%'+ @nombre+ '%'
+			OR
+			Apellido like '%'+@apellido+'%'
+			OR
+			DNI = @DNI )
+			AND Habilitado=1
 		)
 GO
 ----------------------FUNCION DE FILTRADO DE CLIENTES------------------------------
@@ -63,6 +98,23 @@ AS
 			DNI = @DNI
 		)
 GO
+
+CREATE FUNCTION [ASD].fx_filtrarClientesHabilitados (@nombre varchar(255),			
+								 @apellido varchar(255),
+								 @DNI numeric(18,0))
+Returns Table
+AS
+	RETURN
+		(Select * From [ASD].Clientes
+		where (
+			Nombre like '%'+ @nombre+ '%'
+			OR
+			Apellido like '%'+@apellido+'%'
+			OR
+			DNI = @DNI
+		) AND Habilitado = 1
+		)
+GO
 ----------------------FUNCION DE FILTRADO DE TURNOS------------------------------
 CREATE FUNCTION [ASD].fx_filtrarTurnos (@descripcion varchar(255))		
 Returns Table
@@ -71,6 +123,17 @@ AS
 		(Select * From [ASD].Turnos
 		where 
 			Descripcion like '%'+ @descripcion+ '%'
+		)
+GO
+
+CREATE FUNCTION [ASD].fx_filtrarTurnosHabilitados (@descripcion varchar(255))		
+Returns Table
+AS
+	RETURN
+		(Select * From [ASD].Turnos
+		where 
+			Descripcion like '%'+ @descripcion+ '%'
+			AND Habilitado=1
 		)
 GO
 ----------------------- BUSQUEDAS POR ID --------------------------

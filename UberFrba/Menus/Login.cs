@@ -13,12 +13,16 @@ using UberFrba.A__Buscador;
 
 namespace UberFrba.Menues {
     public partial class Login : Form {
+
+        private static Form singleton;
+
         public Login () {
             InitializeComponent();
+            if (singleton==null) singleton = this;
         }
 
         private void checkBox1_CheckedChanged (object sender, EventArgs e) {
-            if (checkBox1.Checked) txtPass.UseSystemPasswordChar=false;
+            if (checkPass.Checked) txtPass.UseSystemPasswordChar=false;
             else txtPass.UseSystemPasswordChar=true ;
         }
 
@@ -54,23 +58,19 @@ namespace UberFrba.Menues {
         }
 
         private void iniciarSesion () {
-            verificarRoles();
-        }
-
-        private void verificarRoles () {
             SqlDataReader roles = obtenerRoles();
             ArrayList nombresRoles = new ArrayList();
             while (roles.Read()) {
                 nombresRoles.Add(roles.GetString(0));           //Obtiene el nombre de cada Rol del usuario
             }
             roles.Close();
-
-            if (nombresRoles.Count>1) {                         // Si hay mas de un rol, el usuario elige en el proximo form
-                consultarRol(nombresRoles);
+            if (nombresRoles.Count==0) MessageBox.Show("El usuario no tiene ningun rol asignado.\nNo podrá ingresar al sistema.", "Usuario sin roles", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                limpiar();
+                if (nombresRoles.Count>1) consultarRol(nombresRoles);                     // Si hay mas de un rol, el usuario elige en el proximo form
+                else new MenuInicial((string) nombresRoles[0]).Show() ;          // 1 solo rol => Se inicia con ese 
+                this.Hide();
             }
-            else 
-                new MenuInicial((string) nombresRoles[0]).Show();          // 1 solo rol => Se inicia con ese 
-            this.Hide();
         }
    
         private void consultarRol(ArrayList roles)                //En el proximo rol se le consulta con cual iniciar sesion
@@ -84,6 +84,16 @@ namespace UberFrba.Menues {
             SqlDataReader rolesReader = commandRol.ExecuteReader();
             return rolesReader;
         }
-       
+
+        public static void mostrar () {
+            singleton.Show();
+        }
+
+        private void limpiar () {
+            txtUser.Text="";
+            txtPass.Text="";
+            lblIntentos.Visible=false;
+            checkPass.Checked=false;
+        }
     }
 }

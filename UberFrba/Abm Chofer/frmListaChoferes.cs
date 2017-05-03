@@ -15,13 +15,17 @@ using UberFrba.A__Buscador;
 namespace UberFrba.Abm_Chofer{
     public partial class frmListaChoferes : FormsAdapter {
 
+        public bool soloHabilitados { get; set; }
+
         public frmListaChoferes (Form formularioAnterior) {
             InitializeComponent();
+            soloHabilitados=false;
             formAnterior = (FormsAdapter) formularioAnterior;
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-            SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla("fx_filtrarChoferes(@nombre, @apellido, @DNI)");
+            string query = soloHabilitados?"fx_filtrarChoferesHabilitados(@nombre, @apellido, @DNI)":"fx_filtrarChoferes(@nombre, @apellido, @DNI)";
+            SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla(query);
                 command.Parameters.AddWithValue("@nombre", valor(txtNombre.Text));
                 command.Parameters.AddWithValue("@apellido", valor(txtApellido.Text));
                 command.Parameters.AddWithValue("@DNI", valor(txtDNI.Text));
@@ -111,7 +115,8 @@ namespace UberFrba.Abm_Chofer{
         }
 
         private void btnTodos_Click (object sender, EventArgs e) {
-            ejecutarQuery(Buscador.getInstancia().verTodos("Choferes"),dgListado);
+            if(soloHabilitados) ejecutarQuery(Buscador.getInstancia().verTodosHabilitados("Choferes"),dgListado);
+            else ejecutarQuery(Buscador.getInstancia().verTodos("Choferes"), dgListado);
         }
 
         private void btnAtras_Click (object sender, EventArgs e) {
@@ -119,5 +124,7 @@ namespace UberFrba.Abm_Chofer{
             this.Close();
         }
 
+
+        
     }
 }

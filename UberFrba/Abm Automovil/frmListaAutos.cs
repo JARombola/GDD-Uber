@@ -16,22 +16,26 @@ using UberFrba.Dominio;
 
 namespace UberFrba.Abm_Automovil {
     public partial class frmListaAutos : FormsAdapter {
-        
+
+        public bool soloHabilitados { get; set; }
+
         public frmListaAutos (Form anterior) {
             InitializeComponent();
+            soloHabilitados=false;
             formAnterior = (FormsAdapter) anterior;
         }
 
         private void frmListAutomoviles_Load (object sender, EventArgs e) {
             Buscador.getInstancia().cargarMarcas(cbMarca);
+            lblHabilitados.Visible=soloHabilitados;
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
             SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla("fx_filtrarAutos(@modelo, @patente, @marca, @choferID)");
             command.Parameters.AddRange(new[]{
-                    new SqlParameter ("@modelo", valor(txtModelo.Text)),
-                    new SqlParameter ("@patente", valor(txtPatente.Text)),
-                    new SqlParameter ("@marca", valor(cbMarca.Text)),
+                    new SqlParameter ("@modelo", txtModelo.Text),
+                    new SqlParameter ("@patente", txtPatente.Text),
+                    new SqlParameter ("@marca", cbMarca.Text),
                     new SqlParameter ("@choferID", ID),       //TODO: verificar que funcione
             });
 
@@ -168,6 +172,14 @@ namespace UberFrba.Abm_Automovil {
         private void button1_Click (object sender, EventArgs e) {
             formAnterior.Show();
             this.Close();
+        }
+
+        private void selecChofer_Click_1 (object sender, EventArgs e) {
+            frmListaChoferes listaChoferes = new frmListaChoferes(this);
+                listaChoferes.formSiguiente=this;
+                listaChoferes.soloHabilitados=false;
+                listaChoferes.Show();
+            this.Hide();
         }
         
 

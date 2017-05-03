@@ -42,6 +42,7 @@
             this.opcDeshabilitar = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTodos = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.lblHabilitados = new System.Windows.Forms.Label();
             this.grFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.menuDerecho.SuspendLayout();
@@ -79,7 +80,7 @@
             this.txtApellido.Location = new System.Drawing.Point(153, 76);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(185, 20);
-            this.txtApellido.TabIndex = 1;
+            this.txtApellido.TabIndex = 2;
             // 
             // txtNombre
             // 
@@ -99,7 +100,7 @@
             this.grFiltros.Location = new System.Drawing.Point(30, 12);
             this.grFiltros.Name = "grFiltros";
             this.grFiltros.Size = new System.Drawing.Size(700, 122);
-            this.grFiltros.TabIndex = 9;
+            this.grFiltros.TabIndex = 0;
             this.grFiltros.TabStop = false;
             this.grFiltros.Text = "Búsqueda Clientes";
             // 
@@ -108,14 +109,14 @@
             this.txtDNI.Location = new System.Drawing.Point(448, 32);
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(185, 20);
-            this.txtDNI.TabIndex = 5;
+            this.txtDNI.TabIndex = 1;
             // 
             // btnBuscar
             // 
             this.btnBuscar.Location = new System.Drawing.Point(623, 140);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(80, 23);
-            this.btnBuscar.TabIndex = 6;
+            this.btnBuscar.TabIndex = 3;
             this.btnBuscar.Text = "Buscar!";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -125,7 +126,7 @@
             this.btnClean.Location = new System.Drawing.Point(30, 140);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(80, 23);
-            this.btnClean.TabIndex = 5;
+            this.btnClean.TabIndex = 4;
             this.btnClean.Text = "Limpiar";
             this.btnClean.UseVisualStyleBackColor = true;
             this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
@@ -198,7 +199,7 @@
             this.btnTodos.Location = new System.Drawing.Point(623, 360);
             this.btnTodos.Name = "btnTodos";
             this.btnTodos.Size = new System.Drawing.Size(80, 23);
-            this.btnTodos.TabIndex = 13;
+            this.btnTodos.TabIndex = 6;
             this.btnTodos.Text = "Ver todos";
             this.btnTodos.UseVisualStyleBackColor = true;
             this.btnTodos.Click += new System.EventHandler(this.btnTodos_Click);
@@ -208,16 +209,27 @@
             this.btnVolver.Location = new System.Drawing.Point(30, 360);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(80, 23);
-            this.btnVolver.TabIndex = 14;
+            this.btnVolver.TabIndex = 5;
             this.btnVolver.Text = "<< Atras";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
+            // lblHabilitados
+            // 
+            this.lblHabilitados.AutoSize = true;
+            this.lblHabilitados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHabilitados.Location = new System.Drawing.Point(27, 191);
+            this.lblHabilitados.Name = "lblHabilitados";
+            this.lblHabilitados.Size = new System.Drawing.Size(232, 13);
+            this.lblHabilitados.TabIndex = 15;
+            this.lblHabilitados.Text = "<Sólo se verán los clientes habilitados>";
             // 
             // frmListaClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(760, 387);
+            this.Controls.Add(this.lblHabilitados);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnTodos);
             this.Controls.Add(this.dgListado);
@@ -233,11 +245,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();
             this.menuDerecho.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         private void frmListado_Load (object sender, System.EventArgs e) {
-            
+            lblHabilitados.Visible=soloHabilitados;
         }
 
         #endregion
@@ -257,6 +270,7 @@
         private System.Windows.Forms.ToolStripMenuItem opcDeshabilitar;
         private System.Windows.Forms.Button btnTodos;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Label lblHabilitados;
     }
 
 }

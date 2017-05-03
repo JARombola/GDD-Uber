@@ -13,6 +13,7 @@ using UberFrba.Menus;
 
 namespace UberFrba.Menues {
     public partial class MenuInicial : FormsAdapter {
+
         public MenuInicial (string rol) {
             InitializeComponent();              //TODO: Buscar funcionalidades y eliminar los botones que no corresponden
             groupBox1.Text="Funciones ("+rol+")";
@@ -90,6 +91,11 @@ namespace UberFrba.Menues {
             
             funcionalidades.Close();
 
+        }
+
+        private void button1_Click (object sender, EventArgs e) {
+            this.Close();
+            Login.mostrar();
         }
 
        

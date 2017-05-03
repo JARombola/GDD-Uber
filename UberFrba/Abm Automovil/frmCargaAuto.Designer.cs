@@ -95,7 +95,7 @@
             this.txtRodado.MaxLength = 26;
             this.txtRodado.Name = "txtRodado";
             this.txtRodado.Size = new System.Drawing.Size(233, 20);
-            this.txtRodado.TabIndex = 16;
+            this.txtRodado.TabIndex = 4;
             // 
             // label7
             // 
@@ -111,7 +111,7 @@
             this.btnBuscChofer.Location = new System.Drawing.Point(399, 285);
             this.btnBuscChofer.Name = "btnBuscChofer";
             this.btnBuscChofer.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscChofer.TabIndex = 14;
+            this.btnBuscChofer.TabIndex = 6;
             this.btnBuscChofer.TabStop = false;
             this.btnBuscChofer.Text = "Buscar...";
             this.btnBuscChofer.UseVisualStyleBackColor = true;
@@ -199,7 +199,7 @@
             this.btnBuscTurno.Location = new System.Drawing.Point(399, 213);
             this.btnBuscTurno.Name = "btnBuscTurno";
             this.btnBuscTurno.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscTurno.TabIndex = 1;
+            this.btnBuscTurno.TabIndex = 5;
             this.btnBuscTurno.TabStop = false;
             this.btnBuscTurno.Text = "Buscar...";
             this.btnBuscTurno.UseVisualStyleBackColor = true;
@@ -226,7 +226,7 @@
             this.btnHabilitacion.Location = new System.Drawing.Point(407, 420);
             this.btnHabilitacion.Name = "btnHabilitacion";
             this.btnHabilitacion.Size = new System.Drawing.Size(125, 27);
-            this.btnHabilitacion.TabIndex = 7;
+            this.btnHabilitacion.TabIndex = 8;
             this.btnHabilitacion.UseVisualStyleBackColor = false;
             this.btnHabilitacion.Visible = false;
             // 
@@ -235,7 +235,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(196, 417);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(164, 31);
-            this.btnAceptar.TabIndex = 6;
+            this.btnAceptar.TabIndex = 7;
             this.btnAceptar.Text = "Registrar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -245,7 +245,7 @@
             this.btnVolver.Location = new System.Drawing.Point(27, 422);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 26);
-            this.btnVolver.TabIndex = 15;
+            this.btnVolver.TabIndex = 9;
             this.btnVolver.TabStop = false;
             this.btnVolver.Text = "<< Atras";
             this.btnVolver.UseVisualStyleBackColor = true;

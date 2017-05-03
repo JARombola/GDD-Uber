@@ -115,14 +115,20 @@ namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
         }
 
         private void btnBuscTurno_Click (object sender, EventArgs e) {
-            new frmListaTurnos(this).Show();
+            frmListaTurnos listaTurnos = new frmListaTurnos(this);
+            listaTurnos.soloHabilitados = true;
             buscaTurno = true;
+            listaTurnos.formSiguiente=this;
+            listaTurnos.Show();
             this.Hide();
         }
 
         private void btnBuscChofer_Click (object sender, EventArgs e) {
-            new frmListaChoferes(this).Show();
+            frmListaChoferes listaChoferes = new frmListaChoferes(this);
+            listaChoferes.soloHabilitados=true;
             buscaChofer=true;
+            listaChoferes.formSiguiente=this;
+            listaChoferes.Show();
             this.Hide();
         }
 

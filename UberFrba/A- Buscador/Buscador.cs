@@ -138,6 +138,12 @@ namespace UberFrba.A__Buscador {
             return command;
         }
 
+        internal SqlCommand verTodosHabilitados (string tabla) {
+            string query = "SELECT * FROM "+ESQUEMA+"."+tabla+" Where Habilitado = 1";
+            SqlCommand command = this.getCommand(query);
+            return command;
+        }
+
         
     }
 }

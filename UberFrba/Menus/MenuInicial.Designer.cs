@@ -34,6 +34,8 @@
             this.panel = new System.Windows.Forms.FlowLayoutPanel();
             this.btnRoles = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -77,7 +79,7 @@
             this.btnTurnos.Margin = new System.Windows.Forms.Padding(10);
             this.btnTurnos.Name = "btnTurnos";
             this.btnTurnos.Size = new System.Drawing.Size(171, 34);
-            this.btnTurnos.TabIndex = 3;
+            this.btnTurnos.TabIndex = 4;
             this.btnTurnos.Text = "Turnos";
             this.btnTurnos.UseVisualStyleBackColor = true;
             this.btnTurnos.Click += new System.EventHandler(this.btnTurnos_Click);
@@ -88,7 +90,7 @@
             this.btnFacturacion.Margin = new System.Windows.Forms.Padding(10);
             this.btnFacturacion.Name = "btnFacturacion";
             this.btnFacturacion.Size = new System.Drawing.Size(171, 34);
-            this.btnFacturacion.TabIndex = 4;
+            this.btnFacturacion.TabIndex = 6;
             this.btnFacturacion.Text = "Facturacion";
             this.btnFacturacion.UseVisualStyleBackColor = true;
             // 
@@ -108,7 +110,7 @@
             this.btnRendicion.Margin = new System.Windows.Forms.Padding(10);
             this.btnRendicion.Name = "btnRendicion";
             this.btnRendicion.Size = new System.Drawing.Size(171, 34);
-            this.btnRendicion.TabIndex = 6;
+            this.btnRendicion.TabIndex = 8;
             this.btnRendicion.Text = "Rendicion";
             this.btnRendicion.UseVisualStyleBackColor = true;
             // 
@@ -145,7 +147,7 @@
             this.btnRoles.Margin = new System.Windows.Forms.Padding(10);
             this.btnRoles.Name = "btnRoles";
             this.btnRoles.Size = new System.Drawing.Size(171, 34);
-            this.btnRoles.TabIndex = 8;
+            this.btnRoles.TabIndex = 3;
             this.btnRoles.Text = "Roles";
             this.btnRoles.UseVisualStyleBackColor = true;
             this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
@@ -160,11 +162,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Funciones";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(21, 302);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Salir";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(242, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(169, 20);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Seleccione una opción";
+            // 
             // MenuInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 319);
+            this.ClientSize = new System.Drawing.Size(676, 337);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Name = "MenuInicial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -172,6 +196,7 @@
             this.panel.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -188,5 +213,7 @@
         private System.Windows.Forms.FlowLayoutPanel panel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnRoles;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
     }
 }

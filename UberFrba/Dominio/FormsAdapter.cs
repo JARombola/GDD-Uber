@@ -13,7 +13,7 @@ namespace UberFrba {
     public partial class FormsAdapter : Form {
 
         protected string TABLA { get; set; }
-        protected FormsAdapter formAnterior { get; set; }
+        public FormsAdapter formAnterior { get; set; }
         public FormsAdapter formSiguiente { get; set; }
         public int ID { get; set; }
 

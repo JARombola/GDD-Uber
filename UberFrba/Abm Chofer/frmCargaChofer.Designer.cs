@@ -63,7 +63,7 @@
             this.btnHabilitacion.Location = new System.Drawing.Point(421, 414);
             this.btnHabilitacion.Name = "btnHabilitacion";
             this.btnHabilitacion.Size = new System.Drawing.Size(125, 27);
-            this.btnHabilitacion.TabIndex = 12;
+            this.btnHabilitacion.TabIndex = 8;
             this.btnHabilitacion.UseVisualStyleBackColor = false;
             this.btnHabilitacion.Visible = false;
             this.btnHabilitacion.Click += new System.EventHandler(this.btnHabilitacion_Click);
@@ -73,7 +73,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(210, 411);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(164, 31);
-            this.btnAceptar.TabIndex = 11;
+            this.btnAceptar.TabIndex = 7;
             this.btnAceptar.Text = "Registrar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -98,7 +98,7 @@
             this.groupBox1.Location = new System.Drawing.Point(34, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(512, 378);
-            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Cliente";
             // 
@@ -108,7 +108,7 @@
             this.dateNacimiento.Location = new System.Drawing.Point(396, 116);
             this.dateNacimiento.Name = "dateNacimiento";
             this.dateNacimiento.Size = new System.Drawing.Size(110, 20);
-            this.dateNacimiento.TabIndex = 7;
+            this.dateNacimiento.TabIndex = 3;
             this.dateNacimiento.TabStop = false;
             // 
             // label8
@@ -125,7 +125,7 @@
             this.txtDire.Location = new System.Drawing.Point(131, 244);
             this.txtDire.Name = "txtDire";
             this.txtDire.Size = new System.Drawing.Size(215, 20);
-            this.txtDire.TabIndex = 5;
+            this.txtDire.TabIndex = 6;
             // 
             // label6
             // 
@@ -141,7 +141,7 @@
             this.txtTel.Location = new System.Drawing.Point(131, 203);
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(191, 20);
-            this.txtTel.TabIndex = 4;
+            this.txtTel.TabIndex = 5;
             // 
             // label5
             // 
@@ -157,7 +157,7 @@
             this.txtMail.Location = new System.Drawing.Point(131, 162);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(215, 20);
-            this.txtMail.TabIndex = 3;
+            this.txtMail.TabIndex = 4;
             // 
             // label4
             // 
@@ -241,7 +241,7 @@
             this.btnVolver.Location = new System.Drawing.Point(37, 411);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 26);
-            this.btnVolver.TabIndex = 16;
+            this.btnVolver.TabIndex = 9;
             this.btnVolver.TabStop = false;
             this.btnVolver.Text = "<< Atras";
             this.btnVolver.UseVisualStyleBackColor = true;

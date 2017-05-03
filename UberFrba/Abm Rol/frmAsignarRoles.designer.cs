@@ -65,7 +65,7 @@
             this.btnOk.Location = new System.Drawing.Point(207, 401);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(127, 31);
-            this.btnOk.TabIndex = 2;
+            this.btnOk.TabIndex = 1;
             this.btnOk.Text = "Modificar";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -78,7 +78,7 @@
             this.groupBox1.Location = new System.Drawing.Point(21, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(486, 369);
-            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Usuario";
             // 
@@ -88,7 +88,7 @@
             this.groupBox2.Location = new System.Drawing.Point(0, 89);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(486, 280);
-            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Roles";
             // 
@@ -106,8 +106,8 @@
             this.button1.Location = new System.Drawing.Point(21, 406);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(74, 26);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "<< Atras";
+            this.button1.TabIndex = 2;
+            this.button1.Text = "<< Atrás";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

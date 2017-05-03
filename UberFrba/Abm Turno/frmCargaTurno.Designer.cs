@@ -51,7 +51,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(196, 396);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(164, 31);
-            this.btnAceptar.TabIndex = 6;
+            this.btnAceptar.TabIndex = 1;
             this.btnAceptar.Text = "Registrar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -73,7 +73,7 @@
             this.groupBox1.Location = new System.Drawing.Point(24, 23);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(511, 347);
-            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Turno";
             // 
@@ -87,7 +87,7 @@
             0});
             this.horaFin.Name = "horaFin";
             this.horaFin.Size = new System.Drawing.Size(94, 20);
-            this.horaFin.TabIndex = 23;
+            this.horaFin.TabIndex = 1;
             this.horaFin.Tag = "";
             // 
             // horaInicio
@@ -100,7 +100,7 @@
             0});
             this.horaInicio.Name = "horaInicio";
             this.horaInicio.Size = new System.Drawing.Size(94, 20);
-            this.horaInicio.TabIndex = 22;
+            this.horaInicio.TabIndex = 0;
             this.horaInicio.Tag = "";
             // 
             // precioKm
@@ -208,9 +208,8 @@
             this.btnVolver.Location = new System.Drawing.Point(27, 396);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 26);
-            this.btnVolver.TabIndex = 16;
-            this.btnVolver.TabStop = false;
-            this.btnVolver.Text = "<< Atras";
+            this.btnVolver.TabIndex = 2;
+            this.btnVolver.Text = "<< Atrás";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 

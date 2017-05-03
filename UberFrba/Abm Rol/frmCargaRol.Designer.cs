@@ -39,8 +39,8 @@
             this.button1.Location = new System.Drawing.Point(42, 401);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(74, 26);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "<< Atras";
+            this.button1.TabIndex = 2;
+            this.button1.Text = "<<Atrás";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -52,7 +52,7 @@
             this.groupBox1.Location = new System.Drawing.Point(31, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(486, 369);
-            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información Rol";
             // 
@@ -61,7 +61,7 @@
             this.txtNombre.Location = new System.Drawing.Point(107, 47);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(206, 20);
-            this.txtNombre.TabIndex = 1;
+            this.txtNombre.TabIndex = 0;
             this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // label1
@@ -100,7 +100,7 @@
             this.listFunciones.Location = new System.Drawing.Point(11, 36);
             this.listFunciones.Name = "listFunciones";
             this.listFunciones.Size = new System.Drawing.Size(457, 199);
-            this.listFunciones.TabIndex = 0;
+            this.listFunciones.TabIndex = 1;
             // 
             // btnOk
             // 
@@ -108,7 +108,7 @@
             this.btnOk.Location = new System.Drawing.Point(217, 401);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(127, 31);
-            this.btnOk.TabIndex = 4;
+            this.btnOk.TabIndex = 1;
             this.btnOk.Text = "Registrar";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);

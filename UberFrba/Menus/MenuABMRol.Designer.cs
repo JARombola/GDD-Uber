@@ -34,7 +34,7 @@
             this.btnAtras.Location = new System.Drawing.Point(42, 260);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(75, 23);
-            this.btnAtras.TabIndex = 6;
+            this.btnAtras.TabIndex = 3;
             this.btnAtras.Text = "<< Atras";
             this.btnAtras.UseVisualStyleBackColor = true;
             this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
@@ -44,7 +44,7 @@
             this.btnModif.Location = new System.Drawing.Point(187, 100);
             this.btnModif.Name = "btnModif";
             this.btnModif.Size = new System.Drawing.Size(160, 36);
-            this.btnModif.TabIndex = 5;
+            this.btnModif.TabIndex = 1;
             this.btnModif.Text = "Modificacion / Baja";
             this.btnModif.UseVisualStyleBackColor = true;
             this.btnModif.Click += new System.EventHandler(this.btnModif_Click);
@@ -54,7 +54,7 @@
             this.btnAlta.Location = new System.Drawing.Point(187, 34);
             this.btnAlta.Name = "btnAlta";
             this.btnAlta.Size = new System.Drawing.Size(160, 36);
-            this.btnAlta.TabIndex = 4;
+            this.btnAlta.TabIndex = 0;
             this.btnAlta.Text = "Alta";
             this.btnAlta.UseVisualStyleBackColor = true;
             this.btnAlta.Click += new System.EventHandler(this.btnAlta_Click);
@@ -64,7 +64,7 @@
             this.btnAsignar.Location = new System.Drawing.Point(187, 175);
             this.btnAsignar.Name = "btnAsignar";
             this.btnAsignar.Size = new System.Drawing.Size(160, 36);
-            this.btnAsignar.TabIndex = 7;
+            this.btnAsignar.TabIndex = 2;
             this.btnAsignar.Text = "Asignar Rol";
             this.btnAsignar.UseVisualStyleBackColor = true;
             this.btnAsignar.Click += new System.EventHandler(this.btnAsignar_Click);

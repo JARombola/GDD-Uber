@@ -14,26 +14,23 @@ using UberFrba.A__Buscador;
 
 namespace UberFrba.Abm_Cliente{
     public partial class frmListaClientes : FormsAdapter {
-    
+
+        public bool soloHabilitados{ get; set; }
+
         public frmListaClientes (Form anterior) {
             InitializeComponent();
+            soloHabilitados=false;
             formAnterior = (FormsAdapter) anterior;
         }
 
         private void btnBuscar_Click (object sender, EventArgs e) {
-            SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla("fx_filtrarClientes(@nombre, @apellido, @DNI)");
+            string query = soloHabilitados?"fx_filtrarClientesHabilitados(@nombre, @apellido, @DNI)":"fx_filtrarClientes(@nombre, @apellido, @DNI)";
+            SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla(query);
                 command.Parameters.AddWithValue("@nombre", valor(txtNombre.Text));
                 command.Parameters.AddWithValue("@apellido", valor(txtApellido.Text));
                 command.Parameters.AddWithValue("@DNI", valor(txtDNI.Text));
 
             ejecutarQuery(command, dgListado);
-        }
-
-        private void eliminar (object sender, EventArgs e) {
-            DialogResult opcion = MessageBox.Show(null, "Eliminar "+dgListado.CurrentRow.Cells["Cliente_nombre"].Value.ToString()+"?", "Baja Auto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (opcion == DialogResult.Yes)
-                //TODO: Borrado real
-                dgListado.Rows.RemoveAt(dgListado.CurrentRow.Index);
         }
 
         private void enviarDatos () {
@@ -118,15 +115,14 @@ namespace UberFrba.Abm_Cliente{
         }
 
         private void btnTodos_Click (object sender, EventArgs e) {
-            ejecutarQuery(Buscador.getInstancia().verTodos("Clientes"), dgListado);
+            if(soloHabilitados) ejecutarQuery(Buscador.getInstancia().verTodosHabilitados("Clientes"), dgListado);
+            else ejecutarQuery(Buscador.getInstancia().verTodos("Clientes"), dgListado); 
         }
 
         private void btnVolver_Click (object sender, EventArgs e) {
             formAnterior.Show();
             this.Close();
         }
-
-
 
     }
 }
