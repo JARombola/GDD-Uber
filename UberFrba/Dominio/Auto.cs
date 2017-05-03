@@ -15,7 +15,5 @@ namespace UberFrba.Dominio {
         public bool habilitado { get; set; }
         public int choferID { get; set; }
         public string choferNombre { get; set; }
-        public int turnoID { get; set; }
-        public string turnoDescripcion { get; set; }
     }
 }

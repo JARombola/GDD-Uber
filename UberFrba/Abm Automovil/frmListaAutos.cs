@@ -33,12 +33,11 @@ namespace UberFrba.Abm_Automovil {
         private void btnBuscar_Click (object sender, EventArgs e) {
             SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla("fx_filtrarAutos(@modelo, @patente, @marca, @choferID)");
             command.Parameters.AddRange(new[]{
-                    new SqlParameter ("@modelo", txtModelo.Text),
-                    new SqlParameter ("@patente", txtPatente.Text),
-                    new SqlParameter ("@marca", cbMarca.Text),
+                    new SqlParameter ("@modelo", valor(txtModelo.Text)),
+                    new SqlParameter ("@patente", valor(txtPatente.Text)),
+                    new SqlParameter ("@marca", valor(cbMarca.Text)),
                     new SqlParameter ("@choferID", ID),       //TODO: verificar que funcione
             });
-
 
             ejecutarQuery(command, dgListado);
         }
@@ -59,14 +58,6 @@ namespace UberFrba.Abm_Automovil {
             else {
                 auto.choferID =(int) dgListado.CurrentRow.Cells["Chofer"].Value;
                 auto.choferNombre = nombreChofer();
-            }
-
-            if (dgListado.CurrentRow.Cells["Turno"].Value == DBNull.Value) {        //carga los datos del turno para la modificacion
-                auto.turnoID = -1;
-            }
-            else {
-                auto.turnoID = (int) dgListado.CurrentRow.Cells["Turno"].Value;
-                auto.turnoDescripcion = descripcionTurno();
             }
 
             formSiguiente.configurar(auto);
