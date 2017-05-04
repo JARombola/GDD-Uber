@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UberFrba.A__Buscador;
+using UberFrba.Dominio;
 using UberFrba.Abm_Chofer;
 using UberFrba.Dominio;
 

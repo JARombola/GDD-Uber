@@ -41,9 +41,11 @@
             this.groupBox1.Controls.Add(this.txtUser);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(47, 12);
+            this.groupBox1.Location = new System.Drawing.Point(63, 15);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(477, 134);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(636, 165);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Iniciar Sesión";
@@ -51,9 +53,10 @@
             // checkPass
             // 
             this.checkPass.AutoSize = true;
-            this.checkPass.Location = new System.Drawing.Point(305, 111);
+            this.checkPass.Location = new System.Drawing.Point(407, 137);
+            this.checkPass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkPass.Name = "checkPass";
-            this.checkPass.Size = new System.Drawing.Size(118, 17);
+            this.checkPass.Size = new System.Drawing.Size(155, 21);
             this.checkPass.TabIndex = 2;
             this.checkPass.TabStop = false;
             this.checkPass.Text = "Mostrar Contraseña";
@@ -62,42 +65,48 @@
             // 
             // txtPass
             // 
-            this.txtPass.Location = new System.Drawing.Point(219, 72);
+            this.txtPass.Location = new System.Drawing.Point(292, 89);
+            this.txtPass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPass.Name = "txtPass";
-            this.txtPass.Size = new System.Drawing.Size(204, 20);
+            this.txtPass.Size = new System.Drawing.Size(271, 22);
             this.txtPass.TabIndex = 1;
             this.txtPass.UseSystemPasswordChar = true;
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(219, 34);
+            this.txtUser.BackColor = System.Drawing.SystemColors.Window;
+            this.txtUser.Location = new System.Drawing.Point(292, 42);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(204, 20);
+            this.txtUser.Size = new System.Drawing.Size(271, 22);
             this.txtUser.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(81, 76);
+            this.label2.Location = new System.Drawing.Point(108, 94);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.Size = new System.Drawing.Size(81, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "Contraseña";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(81, 38);
+            this.label1.Location = new System.Drawing.Point(108, 47);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.Size = new System.Drawing.Size(57, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Usuario";
             // 
             // btnValidar
             // 
-            this.btnValidar.Location = new System.Drawing.Point(228, 181);
+            this.btnValidar.Location = new System.Drawing.Point(304, 223);
+            this.btnValidar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnValidar.Name = "btnValidar";
-            this.btnValidar.Size = new System.Drawing.Size(95, 31);
+            this.btnValidar.Size = new System.Drawing.Size(127, 38);
             this.btnValidar.TabIndex = 2;
             this.btnValidar.Text = "Ingresar";
             this.btnValidar.UseVisualStyleBackColor = true;
@@ -108,21 +117,23 @@
             this.lblIntentos.AutoSize = true;
             this.lblIntentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIntentos.ForeColor = System.Drawing.Color.Red;
-            this.lblIntentos.Location = new System.Drawing.Point(128, 149);
+            this.lblIntentos.Location = new System.Drawing.Point(171, 183);
+            this.lblIntentos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIntentos.Name = "lblIntentos";
-            this.lblIntentos.Size = new System.Drawing.Size(102, 13);
+            this.lblIntentos.Size = new System.Drawing.Size(146, 17);
             this.lblIntentos.TabIndex = 2;
-            this.lblIntentos.Text = "- Intentos Restantes";
+            this.lblIntentos.Text = "**Intentos Restantes**";
             this.lblIntentos.Visible = false;
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(599, 224);
+            this.ClientSize = new System.Drawing.Size(799, 276);
             this.Controls.Add(this.lblIntentos);
             this.Controls.Add(this.btnValidar);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";

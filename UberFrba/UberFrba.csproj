@@ -98,7 +98,7 @@
     <Compile Include="Abm Rol\frmModifRol.Designer.cs">
       <DependentUpon>frmModifRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="A- Buscador\Buscador.cs" />
+    <Compile Include="Dominio\Buscador.cs" />
     <Compile Include="Abm Turno\frmCargaTurno.cs">
       <SubType>Form</SubType>
     </Compile>

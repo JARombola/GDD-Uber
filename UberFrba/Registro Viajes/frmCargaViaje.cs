@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace UberFrba.Registro_Viajes
 {
-    public partial class frmCargaViaje : Form
+    public partial class frmCargaViaje : FormsAdapter
     {
-        public frmCargaViaje()
+        public frmCargaViaje(FormsAdapter anterior)
         {
             InitializeComponent();
+            formAnterior = anterior;
 
         }
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UberFrba.A__Buscador;
+using UberFrba.Dominio;
 
 namespace UberFrba {
     public partial class FormsAdapter : Form {

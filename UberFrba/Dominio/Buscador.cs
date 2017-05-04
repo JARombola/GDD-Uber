@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.A__Buscador {
+namespace UberFrba.Dominio {
     class Buscador {
         private static Buscador instancia{ get; set; }
         public SqlConnection conexion { get; set; }
