@@ -6,6 +6,10 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-IF OBJECT_ID ('[ASD].controlTurnosSuperpuestos', 'TR') IS NOT NULL  
-    DROP TRIGGER [ASD].controlTurnosSuperpuestos;  
+IF OBJECT_ID ('[ASD].tg_controlTurnosSuperpuestos', 'TR') IS NOT NULL  
+    DROP TRIGGER [ASD].tg_controlTurnosSuperpuestos;  
+GO
+
+IF OBJECT_ID ('[ASD].tg_controlActualizacionTurnos', 'TR') IS NOT NULL  
+    DROP TRIGGER [ASD].tg_controlActualizacionTurnos;  
 GO
