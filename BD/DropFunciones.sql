@@ -36,7 +36,6 @@ IF OBJECT_ID (N'[ASD].fx_getCliente', N'IF') IS NOT NULL
     DROP FUNCTION [ASD].fx_getCliente;  
 GO
 
-
 IF OBJECT_ID (N'[ASD].fx_getChofer', N'IF') IS NOT NULL  
     DROP FUNCTION [ASD].fx_getChofer;  
 GO    
@@ -44,6 +43,10 @@ GO
 IF OBJECT_ID (N'[ASD].fx_getNombreChofer', N'IF') IS NOT NULL  
     DROP FUNCTION [ASD].fx_getNombreChofer;  
 GO   
+
+IF OBJECT_ID (N'[ASD].fx_getAutoDelChofer', N'IF') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getAutoDelChofer;  
+GO
 
 IF OBJECT_ID (N'[ASD].fx_getAuto', N'IF') IS NOT NULL  
     DROP FUNCTION [ASD].fx_getAuto;  

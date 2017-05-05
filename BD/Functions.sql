@@ -49,6 +49,7 @@ AS
 			Chofer = @choferID)
 			AND Habilitado=1)
 GO
+
 ----------------------FUNCION DE FILTRADO DE CHOFERES------------------------------
 CREATE FUNCTION [ASD].fx_filtrarChoferes (@nombre varchar(255),			
 								 @apellido varchar(255),
@@ -190,8 +191,6 @@ AS
 	RETURN (SELECT Nombre, Apellido From [ASD].fx_getChofer(@id))
 GO
 
-
-
 CREATE FUNCTION [ASD].fx_getUsuario(@user varchar(30))
 RETURNS TABLE 
 AS
@@ -213,3 +212,16 @@ BEGIN
 	RETURN (Select count(*) as 'Cantidad de Roles' FROM [ASD].RolXUsuario Where Usuario = @usuario)
 END;
 GO
+
+----------------------- FUNCION PARA LOS VIAJES
+-- Devuelve los datos del Auto para autocompletar el viaje una vez seleccionado el chofer
+
+CREATE FUNCTION [ASD].fx_getAutoDelChofer(@idChofer int)
+Returns Table
+AS Return(
+		Select * from [ASD].Autos where
+		(Chofer = @idChofer 
+		AND Habilitado = 1)
+	)
+GO
+

@@ -30,7 +30,7 @@ namespace UberFrba.Abm_Chofer{
                 command.Parameters.AddWithValue("@apellido", valor(txtApellido.Text));
                 command.Parameters.AddWithValue("@DNI", valor(txtDNI.Text));
 
-            ejecutarQuery(command, dgListado);
+                ejecutarQuery(command, dgListado);
         }
 
         private void btnClean_Click (object sender, EventArgs e) {
@@ -43,15 +43,15 @@ namespace UberFrba.Abm_Chofer{
 
         private void enviarDatos () {
             Persona chofer = new Persona();
-            chofer.nombre = dgListado.CurrentRow.Cells["Nombre"].Value.ToString();
-            chofer.telefono = dgListado.CurrentRow.Cells["Telefono"].Value.ToString();
-            chofer.apellido = dgListado.CurrentRow.Cells["Apellido"].Value.ToString();
-            chofer.direccion = dgListado.CurrentRow.Cells["Direccion"].Value.ToString();
-            chofer.dni = dgListado.CurrentRow.Cells["DNI"].Value.ToString();
-            chofer.fecha_nacimiento = DateTime.Parse(dgListado.CurrentRow.Cells["Fecha_Nacimiento"].Value.ToString());
-            chofer.mail= dgListado.CurrentRow.Cells["Mail"].Value.ToString();
-            chofer.id = (int) dgListado.CurrentRow.Cells["ID"].Value;
-            chofer.habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
+                chofer.nombre = dgListado.CurrentRow.Cells["Nombre"].Value.ToString();
+                chofer.telefono = dgListado.CurrentRow.Cells["Telefono"].Value.ToString();
+                chofer.apellido = dgListado.CurrentRow.Cells["Apellido"].Value.ToString();
+                chofer.direccion = dgListado.CurrentRow.Cells["Direccion"].Value.ToString();
+                chofer.dni = dgListado.CurrentRow.Cells["DNI"].Value.ToString();
+                chofer.fecha_nacimiento = DateTime.Parse(dgListado.CurrentRow.Cells["Fecha_Nacimiento"].Value.ToString());
+                chofer.mail= dgListado.CurrentRow.Cells["Mail"].Value.ToString();
+                chofer.id = (int) dgListado.CurrentRow.Cells["ID"].Value;
+                chofer.habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
 
             formSiguiente.configurar(chofer);
             formSiguiente.Show();
@@ -124,7 +124,15 @@ namespace UberFrba.Abm_Chofer{
             this.Close();
         }
 
+        private void actualizarResultados (object sender, DataGridViewRowsAddedEventArgs e) {
+            lblCantResultados.Visible=true;
+            lblCantResultados.Text = "Resultados: "+dgListado.RowCount.ToString();
+        }
 
+        private void actualizarResultados (object sender, DataGridViewRowsRemovedEventArgs e) {
+            lblCantResultados.Visible=true;
+            lblCantResultados.Text = "Resultados: "+dgListado.RowCount.ToString();
+        }
         
     }
 }

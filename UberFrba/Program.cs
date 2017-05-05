@@ -26,7 +26,7 @@ namespace UberFrba
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
    //     Application.Run(new frmListaAutos(new FormsAdapter()));
-        //    Application.Run(new frmCargaTurno(new FormsAdapter()));
+       //     Application.Run(new frmCargaTurno(new FormsAdapter()));
     //     Application.Run(new frmListaChoferes(new FormsAdapter()));
       //      Application.Run(new frmListaClientes(new FormsAdapter()));
 //            Application.Run(new frmEstadistica());
@@ -37,7 +37,7 @@ namespace UberFrba
             //   Application.Run(new frmCargaCliente(new FormsAdapter()));
       //      Application.Run(new frmCargaAuto(new FormsAdapter()));
 //            Application.Run(new Login());
-            Application.Run(new frmCargaViaje());
+            Application.Run(new frmCargaViaje(new FormsAdapter()));
          //       Application.Run(new MenuInicial("admin"));
 
         }

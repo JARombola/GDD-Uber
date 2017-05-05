@@ -7,7 +7,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
--------------------------------- >> CLIENTES
+--------------------------------------------------------------- >> CLIENTES
 CREATE PROCEDURE [ASD].SP_cargarClientes 
 AS
 BEGIN
@@ -87,7 +87,7 @@ END
 GO
 
 
--------------------------------- >> CHOFERES
+--------------------------------------------------------------- >> CHOFERES
 
 CREATE PROCEDURE [ASD].SP_cargarChoferes 
 AS
@@ -168,7 +168,7 @@ AS BEGIN
 END
 GO
 
------------------------------- >> AUTOS
+--------------------------------------------------------------- >> AUTOS
 
 CREATE PROCEDURE [ASD].SP_cargarAutos
 AS
@@ -244,7 +244,7 @@ BEGIN
 END
 GO
 
------------------------------- >> TURNOS
+--------------------------------------------------------------- >> TURNOS
 
 CREATE PROCEDURE [ASD].SP_cargarTurnos
 AS
@@ -322,7 +322,7 @@ BEGIN
 END
 GO
 
------------------------------- >> ROLES
+--------------------------------------------------------------- >> ROLES
 CREATE PROCEDURE [ASD].SP_altaRol(@rol varchar(20),
 					@clientes bit, @choferes bit, @autos bit, @roles bit,@turnos bit,
 					@viajes	bit, @facturacion bit, @rendicion bit, @estadisticas bit)
@@ -400,7 +400,7 @@ BEGIN
 END
 GO
 
----------------------------------- USUARIOS
+--------------------------------------------------------------- USUARIOS
 CREATE PROCEDURE [ASD].SP_altaUsuario(@usuario varchar(30), @pass varchar(256))
 AS
 BEGIN
@@ -511,3 +511,22 @@ BEGIN
 END
 GO
 
+--------------------------------------------------------------- VIAJES
+CREATE PROCEDURE [ASD].SP_altaViaje(@idChofer int,
+									@idAuto int,
+									@kms numeric(18,0),
+									@fecha datetime,
+									@idCliente int)
+AS
+BEGIN 
+	Declare @idTurno int
+	Select @idTurno = ID from [ASD].Turnos where (
+		DATEPART(HOUR,@fecha) between Hora_Inicio and Hora_Fin
+	)
+	if (@idTurno is null) throw 51000,'No hay turno en ese horario',16;
+	else BEGIN
+			INSERT INTO [ASD].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente)
+			values(@idChofer, @idAuto,@idTurno , @kms, @fecha, @idCliente)
+		END
+END
+GO

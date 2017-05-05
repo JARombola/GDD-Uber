@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.Dominio;
-using UberFrba.Dominio;
 
 namespace UberFrba.Abm_Turno {
     public partial class frmCargaTurno : FormsAdapter {

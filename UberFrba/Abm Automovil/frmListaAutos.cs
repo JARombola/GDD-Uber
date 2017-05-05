@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.Dominio;
 using UberFrba.Abm_Chofer;
-using UberFrba.Dominio;
 
 
 namespace UberFrba.Abm_Automovil {
@@ -171,6 +170,16 @@ namespace UberFrba.Abm_Automovil {
                 listaChoferes.soloHabilitados=false;
                 listaChoferes.Show();
             this.Hide();
+        }
+
+        private void actualizarResultados (object sender, DataGridViewRowsAddedEventArgs e) {
+            lblCantResultados.Visible=true;
+            lblCantResultados.Text = "Resultados: "+dgListado.RowCount.ToString();
+        }
+
+        private void actualizarResultados (object sender, DataGridViewRowsRemovedEventArgs e) {
+            lblCantResultados.Visible=true;
+            lblCantResultados.Text = "Resultados: "+dgListado.RowCount.ToString();
         }
         
 

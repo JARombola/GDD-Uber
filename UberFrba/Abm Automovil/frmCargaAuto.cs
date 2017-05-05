@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using UberFrba.Dominio;
 using UberFrba.Abm_Chofer;
 using UberFrba.Abm_Turno;
-using UberFrba.Dominio;
 
 namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
     public partial class frmCargaAuto : FormsAdapter {
@@ -58,7 +57,7 @@ namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
         }
 
         private void btnAceptar_Click (object sender, EventArgs e) {
-            if (ID==-1) registrarAuto();          //NO hay un ID asociado ====> Es un registro. SINO, es una modificacion
+            if (ID==-1) registrarAuto();          //NO hay un ID asociado ====> Es un registro. SINO, sería una modificacion
             else modificarAuto();
             volver();
         }

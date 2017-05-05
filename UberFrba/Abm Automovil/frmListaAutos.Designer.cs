@@ -44,6 +44,7 @@
             this.btnTodos = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.lblHabilitados = new System.Windows.Forms.Label();
+            this.lblCantResultados = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.menuDerecho.SuspendLayout();
@@ -187,6 +188,8 @@
             this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgListado.Size = new System.Drawing.Size(700, 147);
             this.dgListado.TabIndex = 10;
+            this.dgListado.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.actualizarResultados);
+            this.dgListado.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.actualizarResultados);
             this.dgListado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.seleccion);
             this.dgListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.derecho);
             // 
@@ -242,11 +245,22 @@
             this.lblHabilitados.TabIndex = 13;
             this.lblHabilitados.Text = "<Sólo se verán los autos habilitados>";
             // 
+            // lblCantResultados
+            // 
+            this.lblCantResultados.AutoSize = true;
+            this.lblCantResultados.Location = new System.Drawing.Point(475, 347);
+            this.lblCantResultados.Name = "lblCantResultados";
+            this.lblCantResultados.Size = new System.Drawing.Size(97, 13);
+            this.lblCantResultados.TabIndex = 14;
+            this.lblCantResultados.Text = "<Cant Resultados>";
+            this.lblCantResultados.Visible = false;
+            // 
             // frmListaAutos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 373);
+            this.Controls.Add(this.lblCantResultados);
             this.Controls.Add(this.lblHabilitados);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnTodos);
@@ -288,6 +302,7 @@
         private System.Windows.Forms.Button btnTodos;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblHabilitados;
+        private System.Windows.Forms.Label lblCantResultados;
     }
 
 }
