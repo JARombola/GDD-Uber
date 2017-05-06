@@ -24,6 +24,9 @@
         /// </summary>
         private void InitializeComponent () {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtTurno = new System.Windows.Forms.TextBox();
+            this.btnBuscTurno = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtChofer = new System.Windows.Forms.TextBox();
             this.txtRodado = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -45,6 +48,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtTurno);
+            this.groupBox1.Controls.Add(this.btnBuscTurno);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtChofer);
             this.groupBox1.Controls.Add(this.txtRodado);
             this.groupBox1.Controls.Add(this.label7);
@@ -64,6 +70,35 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Auto";
+            // 
+            // txtTurno
+            // 
+            this.txtTurno.Location = new System.Drawing.Point(150, 257);
+            this.txtTurno.MaxLength = 26;
+            this.txtTurno.Name = "txtTurno";
+            this.txtTurno.ReadOnly = true;
+            this.txtTurno.Size = new System.Drawing.Size(233, 20);
+            this.txtTurno.TabIndex = 22;
+            // 
+            // btnBuscTurno
+            // 
+            this.btnBuscTurno.Location = new System.Drawing.Point(399, 253);
+            this.btnBuscTurno.Name = "btnBuscTurno";
+            this.btnBuscTurno.Size = new System.Drawing.Size(75, 26);
+            this.btnBuscTurno.TabIndex = 20;
+            this.btnBuscTurno.TabStop = false;
+            this.btnBuscTurno.Text = "Buscar...";
+            this.btnBuscTurno.UseVisualStyleBackColor = true;
+            this.btnBuscTurno.Click += new System.EventHandler(this.btnBuscTurno_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(39, 263);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Turno";
             // 
             // txtChofer
             // 
@@ -254,5 +289,8 @@
         private System.Windows.Forms.TextBox txtChofer;
         private System.Windows.Forms.TextBox txtRodado;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.TextBox txtTurno;
+        private System.Windows.Forms.Button btnBuscTurno;
+        private System.Windows.Forms.Label label5;
     }
 }

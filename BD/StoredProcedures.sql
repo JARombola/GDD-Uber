@@ -201,11 +201,12 @@ CREATE PROCEDURE [ASD].SP_altaAuto(
 			@patente varchar(10),
 			@licencia varchar(26),
 			@rodado varchar(10),
-			@chofer int)
+			@chofer int,
+			@turno int)
 AS
 BEGIN
 	Insert into [ASD].Autos
-	values(@marca, @modelo, @patente, @licencia, @rodado,@chofer,1)
+	values(@marca, @modelo, @patente, @licencia, @rodado,1,@chofer,@turno)
 END
 GO
 
@@ -230,7 +231,8 @@ CREATE PROCEDURE [ASD].SP_modifAuto(
 				@patente varchar(10),
 				@licencia varchar(26),
 				@rodado varchar(10),
-				@chofer int)
+				@chofer int,
+				@turno int)
 AS
 BEGIN
 	UPDATE [ASD].Autos
@@ -239,7 +241,8 @@ BEGIN
 		Patente = @patente,
 		Licencia = @licencia,
 		Rodado = @rodado,
-		Chofer = @chofer
+		Chofer = @chofer,
+		Turno = @turno
 	WHERE ID = @id
 END
 GO
