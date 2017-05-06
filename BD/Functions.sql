@@ -83,6 +83,13 @@ AS
 			AND Habilitado=1
 		)
 GO
+
+CREATE FUNCTION [ASD].fx_getChoferId(@Dni numeric(18,0))
+RETURNS int 
+as Begin
+	return (Select id from [ASD].Choferes where Dni = @Dni)
+End;
+GO
 ----------------------FUNCION DE FILTRADO DE CLIENTES------------------------------
 CREATE FUNCTION [ASD].fx_filtrarClientes (@nombre varchar(255),			
 								 @apellido varchar(255),
@@ -137,6 +144,16 @@ AS
 			AND Habilitado=1
 		)
 GO
+
+CREATE FUNCTION [ASD].fx_getTurnoId (@hora_inicio numeric(18,0))		
+Returns int
+AS BEGIN
+	RETURN
+		(Select ID From [ASD].Turnos t
+		where @hora_inicio =Hora_Inicio)
+	END;
+GO
+
 ----------------------- BUSQUEDAS POR ID --------------------------
 CREATE FUNCTION [ASD].fx_getCliente(@id int)
 RETURNS TABLE 

@@ -175,3 +175,8 @@ IF OBJECT_ID ('[ASD].SP_altaViaje', 'P') IS NOT NULL
     DROP PROCEDURE [ASD].SP_altaViaje
 GO
 
+IF OBJECT_ID ('[ASD].SP_eliminarTodosViajes', 'P') IS NOT NULL  
+    DROP PROCEDURE [ASD].SP_eliminarTodosViajes
+GO
+
+

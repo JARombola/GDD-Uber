@@ -32,6 +32,15 @@ IF OBJECT_ID (N'[ASD].fx_filtrarTurnosHabilitados', N'IF') IS NOT NULL
     DROP FUNCTION [ASD].fx_filtrarTurnosHabilitados;  
 GO  
 
+IF OBJECT_ID (N'[ASD].fx_getTurnoId', N'FN') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getTurnoId;  
+GO  
+
+IF OBJECT_ID (N'[ASD].fx_getChoferId', N'FN') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getChoferId;  
+GO 
+
+---------------------------------------------------------------------
 IF OBJECT_ID (N'[ASD].fx_getCliente', N'IF') IS NOT NULL  
     DROP FUNCTION [ASD].fx_getCliente;  
 GO

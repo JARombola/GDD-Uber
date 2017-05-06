@@ -94,13 +94,13 @@ AS
 BEGIN
 	Insert into [ASD].Choferes(Nombre,Apellido,DNI,Telefono,Direccion,Mail,Fecha_Nacimiento)
 	SELECT Distinct
-		[gd_esquema].Maestra.Cliente_Nombre,
-		[gd_esquema].Maestra.Cliente_Apellido,
-		[gd_esquema].Maestra.Cliente_DNI,
-		[gd_esquema].Maestra.Cliente_Telefono,
-		[gd_esquema].Maestra.Cliente_Direccion,
-		[gd_esquema].Maestra.Cliente_Mail,
-		[gd_esquema].Maestra.Cliente_Fecha_Nac		
+		[gd_esquema].Maestra.Chofer_Nombre,
+		[gd_esquema].Maestra.Chofer_Apellido,
+		[gd_esquema].Maestra.Chofer_DNI,
+		[gd_esquema].Maestra.Chofer_Telefono,
+		[gd_esquema].Maestra.Chofer_Direccion,
+		[gd_esquema].Maestra.Chofer_Mail,
+		[gd_esquema].Maestra.Chofer_Fecha_Nac		
 	FROM [gd_esquema].Maestra
 END
 GO
@@ -173,13 +173,16 @@ GO
 CREATE PROCEDURE [ASD].SP_cargarAutos
 AS
 BEGIN
-	INSERT INTO [ASD].Autos(Marca, Modelo, Patente, Licencia, Rodado)
+	INSERT INTO [ASD].Autos(Marca, Modelo, Patente, Licencia, Rodado, Chofer, Turno)
 	SELECT DISTINCT 
 		[gd_esquema].Maestra.Auto_Marca,
 		[gd_esquema].Maestra.Auto_Modelo,
 		[gd_esquema].Maestra.Auto_Patente,
 		[gd_esquema].Maestra.Auto_Licencia,
-		[gd_esquema].Maestra.Auto_Rodado
+		[gd_esquema].Maestra.Auto_Rodado,
+		[ASD].fx_getChoferId([gd_esquema].Maestra.Chofer_Dni),
+		[ASD].fx_getTurnoId([gd_esquema].Maestra.Turno_Hora_Inicio)
+
 	FROM [gd_esquema].Maestra
 END
 GO
@@ -531,5 +534,13 @@ BEGIN
 			INSERT INTO [ASD].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente)
 			values(@idChofer, @idAuto,@idTurno , @kms, @fecha, @idCliente)
 		END
+END
+GO
+
+CREATE PROCEDURE [ASD].SP_eliminarTodosViajes
+AS
+BEGIN
+	DELETE FROM [ASD].Viajes
+	DBCC CHECKIDENT ('[ASD].Roles', RESEED, 0)
 END
 GO
