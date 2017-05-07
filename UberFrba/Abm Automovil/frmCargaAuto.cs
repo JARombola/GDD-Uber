@@ -45,8 +45,6 @@ namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
             cbMarca.Text = auto.marca;
             txtModelo.Text = auto.modelo;
             txtPatente.Text = auto.patente;
-            txtLicencia.Text = auto.licencia;
-            txtRodado.Text = auto.rodado;
             if (auto.choferID != -1) {
                 idChofer = auto.choferID;
                 txtChofer.Text = auto.choferNombre;
@@ -83,8 +81,6 @@ namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
                     {new SqlParameter("@marca",valor(cbMarca.Text)),
                      new SqlParameter("@modelo",valor(txtModelo.Text)),
                      new SqlParameter("@patente",valor(txtPatente.Text)),
-                     new SqlParameter("@licencia",valor(txtLicencia.Text)),
-                     new SqlParameter("@rodado",valor(txtRodado.Text)),
                      new SqlParameter("@chofer",idChofer),
                 }
                  );

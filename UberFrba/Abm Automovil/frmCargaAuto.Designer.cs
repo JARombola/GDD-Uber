@@ -25,12 +25,8 @@
         private void InitializeComponent () {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtChofer = new System.Windows.Forms.TextBox();
-            this.txtRodado = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.btnBuscChofer = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtLicencia = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtPatente = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtModelo = new System.Windows.Forms.TextBox();
@@ -46,12 +42,8 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtChofer);
-            this.groupBox1.Controls.Add(this.txtRodado);
-            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.btnBuscChofer);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.txtLicencia);
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtPatente);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtModelo);
@@ -67,33 +59,16 @@
             // 
             // txtChofer
             // 
-            this.txtChofer.Location = new System.Drawing.Point(151, 210);
+            this.txtChofer.Location = new System.Drawing.Point(150, 175);
             this.txtChofer.MaxLength = 26;
             this.txtChofer.Name = "txtChofer";
             this.txtChofer.ReadOnly = true;
             this.txtChofer.Size = new System.Drawing.Size(233, 20);
             this.txtChofer.TabIndex = 19;
             // 
-            // txtRodado
-            // 
-            this.txtRodado.Location = new System.Drawing.Point(150, 166);
-            this.txtRodado.MaxLength = 26;
-            this.txtRodado.Name = "txtRodado";
-            this.txtRodado.Size = new System.Drawing.Size(233, 20);
-            this.txtRodado.TabIndex = 4;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(39, 170);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 13);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Rodado";
-            // 
             // btnBuscChofer
             // 
-            this.btnBuscChofer.Location = new System.Drawing.Point(400, 206);
+            this.btnBuscChofer.Location = new System.Drawing.Point(399, 171);
             this.btnBuscChofer.Name = "btnBuscChofer";
             this.btnBuscChofer.Size = new System.Drawing.Size(75, 26);
             this.btnBuscChofer.TabIndex = 6;
@@ -105,28 +80,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(40, 216);
+            this.label6.Location = new System.Drawing.Point(39, 181);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 12;
             this.label6.Text = "Chofer";
-            // 
-            // txtLicencia
-            // 
-            this.txtLicencia.Location = new System.Drawing.Point(150, 133);
-            this.txtLicencia.MaxLength = 26;
-            this.txtLicencia.Name = "txtLicencia";
-            this.txtLicencia.Size = new System.Drawing.Size(233, 20);
-            this.txtLicencia.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(39, 137);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Licencia";
             // 
             // txtPatente
             // 
@@ -241,8 +199,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscChofer;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtLicencia;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtPatente;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtModelo;
@@ -250,9 +206,7 @@
         private System.Windows.Forms.ComboBox cbMarca;
         private System.Windows.Forms.Button btnHabilitacion;
         private System.Windows.Forms.Button btnAceptar;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtChofer;
-        private System.Windows.Forms.TextBox txtRodado;
         private System.Windows.Forms.Button btnVolver;
     }
 }

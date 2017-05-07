@@ -106,13 +106,14 @@ namespace UberFrba.Registro_Viajes
 
         private void btnRegistrar_Click (object sender, EventArgs e) {
             if (txtKms.Value != 0) {
-                registrarViaje();
+                if(horaInicio.Value < horaFin.Value)    registrarViaje();
+                else MessageBox.Show("La hora de inicio no puede ser menor que la de fin", "Error horarios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else MessageBox.Show("La cantidad de kms. debe ser distinta de 0", "Error Kms.", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void registrarViaje () {
-            DateTime date = fecha.Value.AddHours(hora.Value.Hour).AddMinutes(hora.Value.Minute);
+            DateTime date = fecha.Value.AddHours(horaInicio.Value.Hour).AddMinutes(horaInicio.Value.Minute);
 
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_altaViaje");
             command.Parameters.AddRange(new[]{
@@ -120,7 +121,9 @@ namespace UberFrba.Registro_Viajes
                     new SqlParameter ("@idAuto",autoId),
                     new SqlParameter ("@kms",txtKms.Value),
                     new SqlParameter ("@fecha",date),
-                    new SqlParameter ("@idCliente",clienteId)
+                    new SqlParameter ("@idCliente",clienteId),
+                    new SqlParameter ("@horaFin",horaFin.Value),
+
                 });
             try {
                 command.ExecuteNonQuery();

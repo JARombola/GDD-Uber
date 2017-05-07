@@ -200,14 +200,12 @@ CREATE PROCEDURE [ASD].SP_altaAuto(
 			@marca varchar(255),
 			@modelo varchar(255),
 			@patente varchar(10),
-			@licencia varchar(26),
-			@rodado varchar(10),
 			@chofer int)
 		--	@turno int)
 AS
 BEGIN
-	Insert into [ASD].Autos
-	values(@marca, @modelo, @patente, @licencia, @rodado,1,@chofer)
+	Insert into [ASD].Autos(Marca,Modelo,Patente,Chofer)
+	values(@marca, @modelo, @patente,@chofer)
 END
 GO
 
@@ -230,8 +228,6 @@ CREATE PROCEDURE [ASD].SP_modifAuto(
 				@marca varchar(255),
 				@modelo varchar(255),
 				@patente varchar(10),
-				@licencia varchar(26),
-				@rodado varchar(10),
 				@chofer int)
 				--@turno int)
 AS
@@ -240,8 +236,6 @@ BEGIN
 	SET Marca = @marca,
 		Modelo = @modelo,
 		Patente = @patente,
-		Licencia = @licencia,
-		Rodado = @rodado,
 		Chofer = @chofer
 --		Turno = @turno
 	WHERE ID = @id
@@ -444,6 +438,7 @@ GO
 CREATE PROCEDURE [ASD].SP_eliminarTodosUsuarios
 AS
 BEGIN
+	DELETE FROM [ASD].RolXUsuario
 	DELETE FROM [ASD].Usuarios
 END
 GO
@@ -520,7 +515,8 @@ CREATE PROCEDURE [ASD].SP_altaViaje(@idChofer int,
 									@idAuto int,
 									@kms numeric(18,0),
 									@fecha datetime,
-									@idCliente int)
+									@idCliente int,
+									@horaFin time)
 AS
 BEGIN 
 	Declare @idTurno int
@@ -529,8 +525,8 @@ BEGIN
 	)
 	if (@idTurno is null) throw 51000,'No hay turno en ese horario',16;
 	else BEGIN
-			INSERT INTO [ASD].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente)
-			values(@idChofer, @idAuto,@idTurno , @kms, @fecha, @idCliente)
+			INSERT INTO [ASD].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente,Hora_Fin)
+			values(@idChofer, @idAuto,@idTurno , @kms, @fecha, @idCliente,@horaFin)
 		END
 END
 GO
@@ -539,14 +535,14 @@ CREATE PROCEDURE [ASD].SP_eliminarTodosViajes
 AS
 BEGIN
 	DELETE FROM [ASD].Viajes
-	DBCC CHECKIDENT ('[ASD].Roles', RESEED, 0)
+	DBCC CHECKIDENT ('[ASD].Viajes', RESEED, 0)
 END
 GO
 -------- ***** TIENEN QUE ESTAR CHOFERES, AUTOS, TURNOS y CLIENES CARGADOS****-----------
 CREATE PROCEDURE [ASD].SP_cargarViajes
 AS
 BEGIN
-	Insert into [ASD].Viajes
+	Insert into [ASD].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente)
 	Select distinct 
 		[ASD].fx_getChoferId(Chofer_dni),
 		[ASD].fx_getAutoId(Auto_Patente),

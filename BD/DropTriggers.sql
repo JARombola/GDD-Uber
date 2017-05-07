@@ -13,3 +13,7 @@ GO
 IF OBJECT_ID ('[ASD].tg_controlActualizacionTurnos', 'TR') IS NOT NULL  
     DROP TRIGGER [ASD].tg_controlActualizacionTurnos;  
 GO
+
+IF OBJECT_ID ('[ASD].tg_controlViajesSuperpuestos', 'TR') IS NOT NULL  
+    DROP TRIGGER [ASD].tg_controlViajesSuperpuestos;  
+GO

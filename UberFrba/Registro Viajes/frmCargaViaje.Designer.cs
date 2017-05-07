@@ -38,13 +38,15 @@
             this.lblAuto = new System.Windows.Forms.Label();
             this.txtChofer = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.hora = new System.Windows.Forms.DateTimePicker();
+            this.horaInicio = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.fecha = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtKms = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.horaFin = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnAtras = new System.Windows.Forms.Button();
             this.infoAuto = new System.Windows.Forms.ToolTip(this.components);
@@ -146,31 +148,31 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Chofer";
             // 
-            // hora
+            // horaInicio
             // 
-            this.hora.CustomFormat = "HH:mm";
-            this.hora.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.hora.Location = new System.Drawing.Point(342, 50);
-            this.hora.Name = "hora";
-            this.hora.ShowUpDown = true;
-            this.hora.Size = new System.Drawing.Size(92, 20);
-            this.hora.TabIndex = 11;
-            this.hora.Value = new System.DateTime(2017, 5, 1, 18, 0, 0, 0);
+            this.horaInicio.CustomFormat = "HH:mm";
+            this.horaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.horaInicio.Location = new System.Drawing.Point(342, 35);
+            this.horaInicio.Name = "horaInicio";
+            this.horaInicio.ShowUpDown = true;
+            this.horaInicio.Size = new System.Drawing.Size(92, 20);
+            this.horaInicio.TabIndex = 11;
+            this.horaInicio.Value = new System.DateTime(2017, 5, 1, 18, 0, 0, 0);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(289, 54);
+            this.label3.Location = new System.Drawing.Point(289, 39);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.Size = new System.Drawing.Size(32, 13);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Hora";
+            this.label3.Text = "Inicio";
             // 
             // fecha
             // 
             this.fecha.CustomFormat = "dd/MM/yyyy";
             this.fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.fecha.Location = new System.Drawing.Point(125, 52);
+            this.fecha.Location = new System.Drawing.Point(125, 31);
             this.fecha.Name = "fecha";
             this.fecha.Size = new System.Drawing.Size(120, 20);
             this.fecha.TabIndex = 9;
@@ -179,7 +181,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 56);
+            this.label2.Location = new System.Drawing.Point(27, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 6;
@@ -188,7 +190,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 108);
+            this.label4.Location = new System.Drawing.Point(26, 125);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 13);
             this.label4.TabIndex = 12;
@@ -196,15 +198,17 @@
             // 
             // txtKms
             // 
-            this.txtKms.Location = new System.Drawing.Point(125, 106);
+            this.txtKms.Location = new System.Drawing.Point(125, 123);
             this.txtKms.Name = "txtKms";
             this.txtKms.Size = new System.Drawing.Size(120, 20);
             this.txtKms.TabIndex = 13;
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.horaFin);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.fecha);
-            this.groupBox2.Controls.Add(this.hora);
+            this.groupBox2.Controls.Add(this.horaInicio);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label3);
@@ -214,6 +218,26 @@
             this.groupBox2.Size = new System.Drawing.Size(523, 178);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
+            // 
+            // horaFin
+            // 
+            this.horaFin.CustomFormat = "HH:mm";
+            this.horaFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.horaFin.Location = new System.Drawing.Point(342, 61);
+            this.horaFin.Name = "horaFin";
+            this.horaFin.ShowUpDown = true;
+            this.horaFin.Size = new System.Drawing.Size(92, 20);
+            this.horaFin.TabIndex = 15;
+            this.horaFin.Value = new System.DateTime(2017, 5, 1, 18, 0, 0, 0);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(289, 65);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(21, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Fin";
             // 
             // btnRegistrar
             // 
@@ -275,7 +299,7 @@
         private System.Windows.Forms.TextBox txtChofer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker fecha;
-        private System.Windows.Forms.DateTimePicker hora;
+        private System.Windows.Forms.DateTimePicker horaInicio;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown txtKms;
         private System.Windows.Forms.Label label4;
@@ -286,5 +310,7 @@
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Button btnAtras;
         private System.Windows.Forms.ToolTip infoAuto;
+        private System.Windows.Forms.DateTimePicker horaFin;
+        private System.Windows.Forms.Label label6;
     }
 }
