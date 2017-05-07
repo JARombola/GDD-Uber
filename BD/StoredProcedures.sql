@@ -169,20 +169,18 @@ END
 GO
 
 --------------------------------------------------------------- >> AUTOS
-
+--		******** TIENEN QUE ESTAR CARGADOS LOS CHOFERES ANTES*********
 CREATE PROCEDURE [ASD].SP_cargarAutos
 AS
 BEGIN
-	INSERT INTO [ASD].Autos(Marca, Modelo, Patente, Licencia, Rodado, Chofer, Turno)
+	INSERT INTO [ASD].Autos(Marca, Modelo, Patente, Licencia, Rodado, Chofer)
 	SELECT DISTINCT 
 		[gd_esquema].Maestra.Auto_Marca,
 		[gd_esquema].Maestra.Auto_Modelo,
 		[gd_esquema].Maestra.Auto_Patente,
 		[gd_esquema].Maestra.Auto_Licencia,
 		[gd_esquema].Maestra.Auto_Rodado,
-		[ASD].fx_getChoferId([gd_esquema].Maestra.Chofer_Dni),
-		[ASD].fx_getTurnoId([gd_esquema].Maestra.Turno_Hora_Inicio)
-
+		[ASD].fx_getChoferId([gd_esquema].Maestra.Chofer_Dni)
 	FROM [gd_esquema].Maestra
 END
 GO
@@ -204,12 +202,12 @@ CREATE PROCEDURE [ASD].SP_altaAuto(
 			@patente varchar(10),
 			@licencia varchar(26),
 			@rodado varchar(10),
-			@chofer int,
-			@turno int)
+			@chofer int)
+		--	@turno int)
 AS
 BEGIN
 	Insert into [ASD].Autos
-	values(@marca, @modelo, @patente, @licencia, @rodado,1,@chofer,@turno)
+	values(@marca, @modelo, @patente, @licencia, @rodado,1,@chofer)
 END
 GO
 
@@ -234,8 +232,8 @@ CREATE PROCEDURE [ASD].SP_modifAuto(
 				@patente varchar(10),
 				@licencia varchar(26),
 				@rodado varchar(10),
-				@chofer int,
-				@turno int)
+				@chofer int)
+				--@turno int)
 AS
 BEGIN
 	UPDATE [ASD].Autos
@@ -244,8 +242,8 @@ BEGIN
 		Patente = @patente,
 		Licencia = @licencia,
 		Rodado = @rodado,
-		Chofer = @chofer,
-		Turno = @turno
+		Chofer = @chofer
+--		Turno = @turno
 	WHERE ID = @id
 END
 GO
@@ -542,5 +540,20 @@ AS
 BEGIN
 	DELETE FROM [ASD].Viajes
 	DBCC CHECKIDENT ('[ASD].Roles', RESEED, 0)
+END
+GO
+-------- ***** TIENEN QUE ESTAR CHOFERES, AUTOS, TURNOS y CLIENES CARGADOS****-----------
+CREATE PROCEDURE [ASD].SP_cargarViajes
+AS
+BEGIN
+	Insert into [ASD].Viajes
+	Select distinct 
+		[ASD].fx_getChoferId(Chofer_dni),
+		[ASD].fx_getAutoId(Auto_Patente),
+		[ASD].fx_getTurnoId(Turno_Hora_Inicio),
+		Viaje_Cant_Kilometros,
+		Viaje_Fecha,
+		[ASD].fx_getClienteId(Cliente_Dni)
+	From [gd_esquema].Maestra
 END
 GO

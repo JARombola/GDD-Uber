@@ -40,6 +40,14 @@ IF OBJECT_ID (N'[ASD].fx_getChoferId', N'FN') IS NOT NULL
     DROP FUNCTION [ASD].fx_getChoferId;  
 GO 
 
+IF OBJECT_ID (N'[ASD].fx_getAutoId', N'FN') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getAutoId;  
+GO 
+
+IF OBJECT_ID (N'[ASD].fx_getClienteId', N'FN') IS NOT NULL  
+    DROP FUNCTION [ASD].fx_getClienteId;  
+GO 
+
 ---------------------------------------------------------------------
 IF OBJECT_ID (N'[ASD].fx_getCliente', N'IF') IS NOT NULL  
     DROP FUNCTION [ASD].fx_getCliente;  

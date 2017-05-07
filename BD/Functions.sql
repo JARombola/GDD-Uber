@@ -12,7 +12,7 @@ GO
 -- Description:	Creacion de Funciones
 -- =============================================
 
-----------------------FUNCION DE FILTRADO DE AUTOS------------------------------
+----------------------FUNCIONES DE AUTOS------------------------------
 CREATE FUNCTION [ASD].fx_filtrarAutos (@modelo varchar(255),			
 								 @patente varchar(10),
 								 @marca varchar(255),
@@ -48,6 +48,13 @@ AS
 			OR
 			Chofer = @choferID)
 			AND Habilitado=1)
+GO
+
+CREATE FUNCTION [ASD].fx_getAutoId(@patente varchar(10))
+RETURNS INT AS
+BEGIN
+	RETURN(Select id from [ASD].Autos Where Patente = @patente)
+END;
 GO
 
 ----------------------FUNCION DE FILTRADO DE CHOFERES------------------------------
@@ -90,7 +97,7 @@ as Begin
 	return (Select id from [ASD].Choferes where Dni = @Dni)
 End;
 GO
-----------------------FUNCION DE FILTRADO DE CLIENTES------------------------------
+----------------------FUNCIONES DE CLIENTES------------------------------
 CREATE FUNCTION [ASD].fx_filtrarClientes (@nombre varchar(255),			
 								 @apellido varchar(255),
 								 @DNI numeric(18,0))
@@ -122,6 +129,13 @@ AS
 			DNI = @DNI
 		) AND Habilitado = 1
 		)
+GO
+
+CREATE FUNCTION [ASD].fx_getClienteId(@dni int)
+RETURNS INT
+AS BEGIN
+	RETURN(Select id from [ASD].Clientes where DNI = @dni)
+END;
 GO
 ----------------------FUNCION DE FILTRADO DE TURNOS------------------------------
 CREATE FUNCTION [ASD].fx_filtrarTurnos (@descripcion varchar(255))		
