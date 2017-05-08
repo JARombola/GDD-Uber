@@ -24,6 +24,9 @@
         /// </summary>
         private void InitializeComponent () {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtTurno = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtChofer = new System.Windows.Forms.TextBox();
             this.btnBuscChofer = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -36,9 +39,6 @@
             this.btnHabilitacion = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.txtTurno = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +62,35 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Auto";
+            // 
+            // txtTurno
+            // 
+            this.txtTurno.Location = new System.Drawing.Point(150, 224);
+            this.txtTurno.MaxLength = 26;
+            this.txtTurno.Name = "txtTurno";
+            this.txtTurno.ReadOnly = true;
+            this.txtTurno.Size = new System.Drawing.Size(233, 20);
+            this.txtTurno.TabIndex = 22;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(399, 220);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 26);
+            this.button1.TabIndex = 20;
+            this.button1.TabStop = false;
+            this.button1.Text = "Buscar...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(39, 230);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "Turno";
             // 
             // txtChofer
             // 
@@ -179,34 +208,6 @@
             this.btnVolver.Text = "<< Atras";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
-            // 
-            // txtTurno
-            // 
-            this.txtTurno.Location = new System.Drawing.Point(150, 224);
-            this.txtTurno.MaxLength = 26;
-            this.txtTurno.Name = "txtTurno";
-            this.txtTurno.ReadOnly = true;
-            this.txtTurno.Size = new System.Drawing.Size(233, 20);
-            this.txtTurno.TabIndex = 22;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(399, 220);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 26);
-            this.button1.TabIndex = 20;
-            this.button1.TabStop = false;
-            this.button1.Text = "Buscar...";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(39, 230);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "Turno";
             // 
             // frmCargaAuto
             // 

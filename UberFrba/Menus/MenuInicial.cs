@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.Dominio;
 using UberFrba.Menus;
+using UberFrba.Registro_Viajes;
 
 namespace UberFrba.Menues {
     public partial class MenuInicial : FormsAdapter {
@@ -96,6 +97,11 @@ namespace UberFrba.Menues {
         private void button1_Click (object sender, EventArgs e) {
             this.Close();
             Login.mostrar();
+        }
+
+        private void btnViajes_Click (object sender, EventArgs e) {
+            new frmCargaViaje(this).Show();
+            this.Hide();
         }
 
        

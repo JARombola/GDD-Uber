@@ -58,10 +58,11 @@ namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
             if (auto.turnoID!=-1) {
                 idTurno = auto.turnoID;
                 txtTurno.Text=auto.turnoDescripcion;
+            }   
             ID = auto.id;
             if (!auto.habilitado) ID*=-1;               //Solo importa para la habilitacion/deshabilitacion... Si <0 => Deshabilitado,  
-            }                                                                                            //        >0 => Habilitado
-        }
+        }                                                                              //        >0 => Habilitado
+        
 
         private void btnAceptar_Click (object sender, EventArgs e) {
             if (ID==-1) registrarAuto();          //NO hay un ID asociado ====> Es un registro. SINO, sería una modificacion
@@ -121,13 +122,13 @@ namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
             this.Close();
         }
 
-        private void btnBuscTurno_Click (object sender, EventArgs e) {
+        private void button1_Click (object sender, EventArgs e) {
             frmListaTurnos listaTurnos = new frmListaTurnos(this);
-                listaTurnos.soloHabilitados = true;
-                buscaTurno = true;
-                listaTurnos.formSiguiente=this;
-                listaTurnos.Show();
-                this.Hide();
+            listaTurnos.soloHabilitados = true;
+            buscaTurno = true;
+            listaTurnos.formSiguiente=this;
+            listaTurnos.Show();
+            this.Hide();
         }
 
     }

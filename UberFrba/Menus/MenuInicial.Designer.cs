@@ -103,6 +103,7 @@
             this.btnViajes.TabIndex = 5;
             this.btnViajes.Text = "Viajes";
             this.btnViajes.UseVisualStyleBackColor = true;
+            this.btnViajes.Click += new System.EventHandler(this.btnViajes_Click);
             // 
             // btnRendicion
             // 

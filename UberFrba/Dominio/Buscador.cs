@@ -14,7 +14,7 @@ namespace UberFrba.Dominio {
         public SqlConnection conexion { get; set; }
         private string DATOS_USUARIO = "user id=gd; password=gd2017";
         private string BASE = "database=GD1C2017; ";
-        private string ESQUEMA = "[ASD]";               //TODO: modificar nombre esquema
+        private string ESQUEMA = "[MAIDEN]";               //TODO: modificar nombre esquema
  
 
         private Buscador () {
