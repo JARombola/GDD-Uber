@@ -1,0 +1,2 @@
+sqlcmd -S LOCALHOST\SQLSERVER2012 -U gd -P gd2017 -i DropFunciones.sql, DropSP.sql, DropTriggers.sql, ^
+ScriptCreacionBD.sql, Functions.sql, StoredProcedures.sql, Triggers.sql -a 32767 -o resultado_output.txt

@@ -13,14 +13,14 @@ GO
 -- =============================================
 
 ----------------------FUNCIONES DE AUTOS------------------------------
-CREATE FUNCTION [ASD].fx_filtrarAutos (@modelo varchar(255),			
+CREATE FUNCTION [MAIDEN].fx_filtrarAutos (@modelo varchar(255),			
 								 @patente varchar(10),
 								 @marca varchar(255),
 								 @choferID int)
 Returns Table
 AS
 	RETURN
-		(Select * From [ASD].Autos
+		(Select * From [MAIDEN].Autos
 		where 
 			Modelo like '%'+@modelo+'%'
 			OR
@@ -31,14 +31,14 @@ AS
 			Chofer = @choferID)
 GO
 
-CREATE FUNCTION [ASD].fx_filtrarAutosHabilitados (@modelo varchar(255),			
+CREATE FUNCTION [MAIDEN].fx_filtrarAutosHabilitados (@modelo varchar(255),			
 								 @patente varchar(10),
 								 @marca varchar(255),
 								 @choferID int)
 Returns Table
 AS
 	RETURN
-		(Select * From [ASD].Autos
+		(Select * From [MAIDEN].Autos
 		where (
 			Modelo like '%'+@modelo+'%'
 			OR
@@ -50,21 +50,21 @@ AS
 			AND Habilitado=1)
 GO
 
-CREATE FUNCTION [ASD].fx_getAutoId(@patente varchar(10))
+CREATE FUNCTION [MAIDEN].fx_getAutoId(@patente varchar(10))
 RETURNS INT AS
 BEGIN
-	RETURN(Select id from [ASD].Autos Where Patente = @patente)
+	RETURN(Select id from [MAIDEN].Autos Where Patente = @patente)
 END;
 GO
 
 ----------------------FUNCION DE FILTRADO DE CHOFERES------------------------------
-CREATE FUNCTION [ASD].fx_filtrarChoferes (@nombre varchar(255),			
+CREATE FUNCTION [MAIDEN].fx_filtrarChoferes (@nombre varchar(255),			
 								 @apellido varchar(255),
 								 @DNI numeric(18,0))
 Returns Table
 AS
 	RETURN
-		(Select * From [ASD].Choferes
+		(Select * From [MAIDEN].Choferes
 		where 
 			Nombre like '%'+ @nombre+ '%'
 			OR
@@ -74,13 +74,13 @@ AS
 		)
 GO
 
-CREATE FUNCTION [ASD].fx_filtrarChoferesHabilitados (@nombre varchar(255),			
+CREATE FUNCTION [MAIDEN].fx_filtrarChoferesHabilitados (@nombre varchar(255),			
 								 @apellido varchar(255),
 								 @DNI numeric(18,0))
 Returns Table
 AS
 	RETURN
-		(Select * From [ASD].Choferes
+		(Select * From [MAIDEN].Choferes
 		where (
 			Nombre like '%'+ @nombre+ '%'
 			OR
@@ -91,20 +91,20 @@ AS
 		)
 GO
 
-CREATE FUNCTION [ASD].fx_getChoferId(@Dni numeric(18,0))
+CREATE FUNCTION [MAIDEN].fx_getChoferId(@Dni numeric(18,0))
 RETURNS int 
 as Begin
-	return (Select id from [ASD].Choferes where Dni = @Dni)
+	return (Select id from [MAIDEN].Choferes where Dni = @Dni)
 End;
 GO
 ----------------------FUNCIONES DE CLIENTES------------------------------
-CREATE FUNCTION [ASD].fx_filtrarClientes (@nombre varchar(255),			
+CREATE FUNCTION [MAIDEN].fx_filtrarClientes (@nombre varchar(255),			
 								 @apellido varchar(255),
 								 @DNI numeric(18,0))
 Returns Table
 AS
 	RETURN
-		(Select * From [ASD].Clientes
+		(Select * From [MAIDEN].Clientes
 		where 
 			Nombre like '%'+ @nombre+ '%'
 			OR
@@ -114,13 +114,13 @@ AS
 		)
 GO
 
-CREATE FUNCTION [ASD].fx_filtrarClientesHabilitados (@nombre varchar(255),			
+CREATE FUNCTION [MAIDEN].fx_filtrarClientesHabilitados (@nombre varchar(255),			
 								 @apellido varchar(255),
 								 @DNI numeric(18,0))
 Returns Table
 AS
 	RETURN
-		(Select * From [ASD].Clientes
+		(Select * From [MAIDEN].Clientes
 		where (
 			Nombre like '%'+ @nombre+ '%'
 			OR
@@ -131,126 +131,126 @@ AS
 		)
 GO
 
-CREATE FUNCTION [ASD].fx_getClienteId(@dni int)
+CREATE FUNCTION [MAIDEN].fx_getClienteId(@dni int)
 RETURNS INT
 AS BEGIN
-	RETURN(Select id from [ASD].Clientes where DNI = @dni)
+	RETURN(Select id from [MAIDEN].Clientes where DNI = @dni)
 END;
 GO
 ----------------------FUNCION DE FILTRADO DE TURNOS------------------------------
-CREATE FUNCTION [ASD].fx_filtrarTurnos (@descripcion varchar(255))		
+CREATE FUNCTION [MAIDEN].fx_filtrarTurnos (@descripcion varchar(255))		
 Returns Table
 AS
 	RETURN
-		(Select * From [ASD].Turnos
+		(Select * From [MAIDEN].Turnos
 		where 
 			Descripcion like '%'+ @descripcion+ '%'
 		)
 GO
 
-CREATE FUNCTION [ASD].fx_filtrarTurnosHabilitados (@descripcion varchar(255))		
+CREATE FUNCTION [MAIDEN].fx_filtrarTurnosHabilitados (@descripcion varchar(255))		
 Returns Table
 AS
 	RETURN
-		(Select * From [ASD].Turnos
+		(Select * From [MAIDEN].Turnos
 		where 
 			Descripcion like '%'+ @descripcion+ '%'
 			AND Habilitado=1
 		)
 GO
 
-CREATE FUNCTION [ASD].fx_getTurnoId (@hora_inicio numeric(18,0))		
+CREATE FUNCTION [MAIDEN].fx_getTurnoId (@hora_inicio numeric(18,0))		
 Returns int
 AS BEGIN
 	RETURN
-		(Select ID From [ASD].Turnos t
+		(Select ID From [MAIDEN].Turnos t
 		where @hora_inicio =Hora_Inicio)
 	END;
 GO
 
 ----------------------- BUSQUEDAS POR ID --------------------------
-CREATE FUNCTION [ASD].fx_getCliente(@id int)
+CREATE FUNCTION [MAIDEN].fx_getCliente(@id int)
 RETURNS TABLE 
 AS
 RETURN 
-(SELECT * From [ASD].Clientes WHERE id = @id)
+(SELECT * From [MAIDEN].Clientes WHERE id = @id)
 GO
 
-CREATE FUNCTION [ASD].fx_getChofer(@id int)
+CREATE FUNCTION [MAIDEN].fx_getChofer(@id int)
 RETURNS TABLE 
 AS
-RETURN (SELECT * From [ASD].Choferes WHERE id = @id)
+RETURN (SELECT * From [MAIDEN].Choferes WHERE id = @id)
 GO
 
-CREATE FUNCTION [ASD].fx_getAuto(@id int)
+CREATE FUNCTION [MAIDEN].fx_getAuto(@id int)
 RETURNS TABLE 
 AS
-RETURN (SELECT * From [ASD].Autos WHERE id = @id)
+RETURN (SELECT * From [MAIDEN].Autos WHERE id = @id)
 GO
 
-CREATE FUNCTION [ASD].fx_getTurno(@id int)
+CREATE FUNCTION [MAIDEN].fx_getTurno(@id int)
 RETURNS TABLE 
 AS
-RETURN (SELECT * From [ASD].Turnos WHERE id = @id)
+RETURN (SELECT * From [MAIDEN].Turnos WHERE id = @id)
 GO
 
-CREATE FUNCTION [ASD].fx_getDescripcion(@id int)
+CREATE FUNCTION [MAIDEN].fx_getDescripcion(@id int)
 RETURNS VARCHAR(256) 
 AS
 BEGIN
-	RETURN (SELECT Descripcion From [ASD].fx_getTurno(@id))
+	RETURN (SELECT Descripcion From [MAIDEN].fx_getTurno(@id))
 END;
 GO
 
-CREATE FUNCTION [ASD].fx_getRol(@Id int)
+CREATE FUNCTION [MAIDEN].fx_getRol(@Id int)
 RETURNS TABLE 
 AS
-RETURN (SELECT * From [ASD].Roles WHERE ID = @id)
+RETURN (SELECT * From [MAIDEN].Roles WHERE ID = @id)
 GO
 
-CREATE FUNCTION [ASD].fx_getRolId(@rol varchar(20))
+CREATE FUNCTION [MAIDEN].fx_getRolId(@rol varchar(20))
 RETURNS int 
 AS
 BEGIN
-	RETURN (SELECT ID From [ASD].Roles WHERE Rol = @rol)
+	RETURN (SELECT ID From [MAIDEN].Roles WHERE Rol = @rol)
 END;
 GO
 
-CREATE FUNCTION [ASD].fx_getNombreChofer(@id int)
+CREATE FUNCTION [MAIDEN].fx_getNombreChofer(@id int)
 RETURNS TABLE
 AS
-	RETURN (SELECT Nombre, Apellido From [ASD].fx_getChofer(@id))
+	RETURN (SELECT Nombre, Apellido From [MAIDEN].fx_getChofer(@id))
 GO
 
-CREATE FUNCTION [ASD].fx_getUsuario(@user varchar(30))
+CREATE FUNCTION [MAIDEN].fx_getUsuario(@user varchar(30))
 RETURNS TABLE 
 AS
-RETURN (SELECT * From [ASD].Usuarios WHERE Usuario = @user)
+RETURN (SELECT * From [MAIDEN].Usuarios WHERE Usuario = @user)
 GO
 
 ---------------------------------- LOGIN USUARIO
-CREATE FUNCTION [ASD].fx_getRolesDeUsuario(@usuario varchar(30))
+CREATE FUNCTION [MAIDEN].fx_getRolesDeUsuario(@usuario varchar(30))
 RETURNS TABLE
 AS
-RETURN (Select Rol From [ASD].Roles 
-		Where ID IN (Select Rol FROM [ASD].RolXUsuario Where Usuario = @usuario))
+RETURN (Select Rol From [MAIDEN].Roles 
+		Where ID IN (Select Rol FROM [MAIDEN].RolXUsuario Where Usuario = @usuario))
 GO
 
-CREATE FUNCTION [ASD].fx_getCantidadRolesDeUsuario(@usuario varchar(30))			--Devuelve la cantidad de roles que tiene ese usuario
+CREATE FUNCTION [MAIDEN].fx_getCantidadRolesDeUsuario(@usuario varchar(30))			--Devuelve la cantidad de roles que tiene ese usuario
 RETURNS int																		--(Usada para otorgar funcionalidades)
 AS
 BEGIN
-	RETURN (Select count(*) as 'Cantidad de Roles' FROM [ASD].RolXUsuario Where Usuario = @usuario)
+	RETURN (Select count(*) as 'Cantidad de Roles' FROM [MAIDEN].RolXUsuario Where Usuario = @usuario)
 END;
 GO
 
 ----------------------- FUNCION PARA LOS VIAJES
 -- Devuelve los datos del Auto para autocompletar el viaje una vez seleccionado el chofer
 
-CREATE FUNCTION [ASD].fx_getAutoDelChofer(@idChofer int)
+CREATE FUNCTION [MAIDEN].fx_getAutoDelChofer(@idChofer int)
 Returns Table
 AS Return(
-		Select * from [ASD].Autos where
+		Select * from [MAIDEN].Autos where
 		(Chofer = @idChofer 
 		AND Habilitado = 1)
 	)

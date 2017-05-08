@@ -1,98 +1,98 @@
 	-- Si la funcion existe => La borra
 	-- IF = Funciones de Tabla, FN = Funciones escalares
-IF OBJECT_ID(N'[ASD].fx_filtrarChoferes', N'IF') IS NOT NULL 
-	DROP FUNCTION [ASD].fx_filtrarChoferes
+IF OBJECT_ID(N'[MAIDEN].fx_filtrarChoferes', N'IF') IS NOT NULL 
+	DROP FUNCTION [MAIDEN].fx_filtrarChoferes
 GO
 
-IF OBJECT_ID(N'[ASD].fx_filtrarChoferesHabilitados', N'IF') IS NOT NULL 
-	DROP FUNCTION [ASD].fx_filtrarChoferesHabilitados
+IF OBJECT_ID(N'[MAIDEN].fx_filtrarChoferesHabilitados', N'IF') IS NOT NULL 
+	DROP FUNCTION [MAIDEN].fx_filtrarChoferesHabilitados
 GO
 
-IF OBJECT_ID(N'[ASD].fx_filtrarClientes', N'IF') IS NOT NULL 
-	DROP FUNCTION [ASD].fx_filtrarClientes
+IF OBJECT_ID(N'[MAIDEN].fx_filtrarClientes', N'IF') IS NOT NULL 
+	DROP FUNCTION [MAIDEN].fx_filtrarClientes
 GO
 
-IF OBJECT_ID(N'[ASD].fx_filtrarClientesHabilitados', N'IF') IS NOT NULL 
-	DROP FUNCTION [ASD].fx_filtrarClientesHabilitados
+IF OBJECT_ID(N'[MAIDEN].fx_filtrarClientesHabilitados', N'IF') IS NOT NULL 
+	DROP FUNCTION [MAIDEN].fx_filtrarClientesHabilitados
 GO
 
-IF OBJECT_ID(N'[ASD].fx_filtrarAutos', N'IF') IS NOT NULL 
-	DROP FUNCTION [ASD].fx_filtrarAutos
+IF OBJECT_ID(N'[MAIDEN].fx_filtrarAutos', N'IF') IS NOT NULL 
+	DROP FUNCTION [MAIDEN].fx_filtrarAutos
 GO
 
-IF OBJECT_ID(N'[ASD].fx_filtrarAutosHabilitados', N'IF') IS NOT NULL 
-	DROP FUNCTION [ASD].fx_filtrarAutosHabilitados
+IF OBJECT_ID(N'[MAIDEN].fx_filtrarAutosHabilitados', N'IF') IS NOT NULL 
+	DROP FUNCTION [MAIDEN].fx_filtrarAutosHabilitados
 GO
 
-IF OBJECT_ID (N'[ASD].fx_filtrarTurnos', N'IF') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_filtrarTurnos;  
+IF OBJECT_ID (N'[MAIDEN].fx_filtrarTurnos', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_filtrarTurnos;  
 GO  
 
-IF OBJECT_ID (N'[ASD].fx_filtrarTurnosHabilitados', N'IF') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_filtrarTurnosHabilitados;  
+IF OBJECT_ID (N'[MAIDEN].fx_filtrarTurnosHabilitados', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_filtrarTurnosHabilitados;  
 GO  
 
-IF OBJECT_ID (N'[ASD].fx_getTurnoId', N'FN') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getTurnoId;  
+IF OBJECT_ID (N'[MAIDEN].fx_getTurnoId', N'FN') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getTurnoId;  
 GO  
 
-IF OBJECT_ID (N'[ASD].fx_getChoferId', N'FN') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getChoferId;  
+IF OBJECT_ID (N'[MAIDEN].fx_getChoferId', N'FN') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getChoferId;  
 GO 
 
-IF OBJECT_ID (N'[ASD].fx_getAutoId', N'FN') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getAutoId;  
+IF OBJECT_ID (N'[MAIDEN].fx_getAutoId', N'FN') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getAutoId;  
 GO 
 
-IF OBJECT_ID (N'[ASD].fx_getClienteId', N'FN') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getClienteId;  
+IF OBJECT_ID (N'[MAIDEN].fx_getClienteId', N'FN') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getClienteId;  
 GO 
 
 ---------------------------------------------------------------------
-IF OBJECT_ID (N'[ASD].fx_getCliente', N'IF') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getCliente;  
+IF OBJECT_ID (N'[MAIDEN].fx_getCliente', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getCliente;  
 GO
 
-IF OBJECT_ID (N'[ASD].fx_getChofer', N'IF') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getChofer;  
+IF OBJECT_ID (N'[MAIDEN].fx_getChofer', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getChofer;  
 GO    
 
-IF OBJECT_ID (N'[ASD].fx_getNombreChofer', N'IF') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getNombreChofer;  
+IF OBJECT_ID (N'[MAIDEN].fx_getNombreChofer', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getNombreChofer;  
 GO   
 
-IF OBJECT_ID (N'[ASD].fx_getAutoDelChofer', N'IF') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getAutoDelChofer;  
+IF OBJECT_ID (N'[MAIDEN].fx_getAutoDelChofer', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getAutoDelChofer;  
 GO
 
-IF OBJECT_ID (N'[ASD].fx_getAuto', N'IF') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getAuto;  
+IF OBJECT_ID (N'[MAIDEN].fx_getAuto', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getAuto;  
 GO  
 
-IF OBJECT_ID (N'[ASD].fx_getTurno', N'IF') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getTurno;  
+IF OBJECT_ID (N'[MAIDEN].fx_getTurno', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getTurno;  
 GO  
 
-IF OBJECT_ID (N'[ASD].fx_getDescripcion', N'FN') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getDescripcion;  
+IF OBJECT_ID (N'[MAIDEN].fx_getDescripcion', N'FN') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getDescripcion;  
 GO  
 
-IF OBJECT_ID (N'[ASD].fx_getRol', N'IF') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getRol;  
+IF OBJECT_ID (N'[MAIDEN].fx_getRol', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getRol;  
 GO
 
-IF OBJECT_ID (N'[ASD].fx_getRolId', N'FN') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getRolId;  
+IF OBJECT_ID (N'[MAIDEN].fx_getRolId', N'FN') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getRolId;  
 GO
 
-IF OBJECT_ID (N'[ASD].fx_getUsuario', N'IF') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getUsuario;  
+IF OBJECT_ID (N'[MAIDEN].fx_getUsuario', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getUsuario;  
 GO    
 
-IF OBJECT_ID (N'[ASD].fx_getRolesDeUsuario', N'IF') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getRolesDeUsuario;  
+IF OBJECT_ID (N'[MAIDEN].fx_getRolesDeUsuario', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getRolesDeUsuario;  
 GO    
 
-IF OBJECT_ID (N'[ASD].fx_getCantidadRolesDeUsuario', N'FN') IS NOT NULL  
-    DROP FUNCTION [ASD].fx_getCantidadRolesDeUsuario;  
+IF OBJECT_ID (N'[MAIDEN].fx_getCantidadRolesDeUsuario', N'FN') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getCantidadRolesDeUsuario;  
 GO    

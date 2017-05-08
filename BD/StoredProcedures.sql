@@ -8,10 +8,10 @@ GO
 -- Description:	<Description,,>
 -- =============================================
 --------------------------------------------------------------- >> CLIENTES
-CREATE PROCEDURE [ASD].SP_cargarClientes 
+CREATE PROCEDURE [MAIDEN].SP_cargarClientes 
 AS
 BEGIN
-	Insert into [ASD].Clientes(Nombre,Apellido,DNI,Telefono,Direccion,Mail,Fecha_Nacimiento)
+	Insert into [MAIDEN].Clientes(Nombre,Apellido,DNI,Telefono,Direccion,Mail,Fecha_Nacimiento)
 	SELECT Distinct
 		[gd_esquema].Maestra.Cliente_Nombre,
 		[gd_esquema].Maestra.Cliente_Apellido,
@@ -24,18 +24,18 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_eliminarTodosClientes 
+CREATE PROCEDURE [MAIDEN].SP_eliminarTodosClientes 
 AS
 BEGIN
 	SET NOCOUNT OFF;
-	DELETE FROM [ASD].Clientes
+	DELETE FROM [MAIDEN].Clientes
 	
-	DELETE FROM [ASD].Clientes
-	DBCC CHECKIDENT ('[ASD].Clientes', RESEED, 0)
+	DELETE FROM [MAIDEN].Clientes
+	DBCC CHECKIDENT ('[MAIDEN].Clientes', RESEED, 0)
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_altaCliente(
+CREATE PROCEDURE [MAIDEN].SP_altaCliente(
 		@nombre varchar(255),
 		@apellido varchar(255),
 		@dni numeric(18,0),
@@ -45,12 +45,12 @@ CREATE PROCEDURE [ASD].SP_altaCliente(
 		@fecha_nacimiento datetime)
 AS
 BEGIN
-	INSERT INTO [ASD].Clientes
+	INSERT INTO [MAIDEN].Clientes
 	values(@nombre, @apellido, @dni, @telefono, @direccion, @mail, @fecha_nacimiento,1)
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_modifCliente(
+CREATE PROCEDURE [MAIDEN].SP_modifCliente(
 		@id int,
 		@nombre varchar(255),
 		@apellido varchar(255),
@@ -61,7 +61,7 @@ CREATE PROCEDURE [ASD].SP_modifCliente(
 		@fecha_nacimiento datetime)
 AS
 BEGIN
-	UPDATE [ASD].fx_getCliente(@id)
+	UPDATE [MAIDEN].fx_getCliente(@id)
    SET Nombre = @nombre,
        Apellido = @apellido,
 	   DNI = @dni,
@@ -72,16 +72,16 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_deshabilitarCliente(@id int)
+CREATE PROCEDURE [MAIDEN].SP_deshabilitarCliente(@id int)
 AS BEGIN
-	UPDATE [ASD].fx_getCliente(@id)
+	UPDATE [MAIDEN].fx_getCliente(@id)
 	SET Habilitado=0
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_habilitarCliente(@id int)
+CREATE PROCEDURE [MAIDEN].SP_habilitarCliente(@id int)
 AS BEGIN
-	UPDATE [ASD].fx_getCliente(@id)
+	UPDATE [MAIDEN].fx_getCliente(@id)
 	SET Habilitado=1
 END
 GO
@@ -89,10 +89,10 @@ GO
 
 --------------------------------------------------------------- >> CHOFERES
 
-CREATE PROCEDURE [ASD].SP_cargarChoferes 
+CREATE PROCEDURE [MAIDEN].SP_cargarChoferes 
 AS
 BEGIN
-	Insert into [ASD].Choferes(Nombre,Apellido,DNI,Telefono,Direccion,Mail,Fecha_Nacimiento)
+	Insert into [MAIDEN].Choferes(Nombre,Apellido,DNI,Telefono,Direccion,Mail,Fecha_Nacimiento)
 	SELECT Distinct
 		[gd_esquema].Maestra.Chofer_Nombre,
 		[gd_esquema].Maestra.Chofer_Apellido,
@@ -105,18 +105,18 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_eliminarTodosChoferes 
+CREATE PROCEDURE [MAIDEN].SP_eliminarTodosChoferes 
 AS
 BEGIN
 	SET NOCOUNT OFF;
-	DELETE FROM [ASD].Choferes
+	DELETE FROM [MAIDEN].Choferes
 	
-	DELETE FROM [ASD].Choferes
-	DBCC CHECKIDENT ('[ASD].Choferes', RESEED, 0)
+	DELETE FROM [MAIDEN].Choferes
+	DBCC CHECKIDENT ('[MAIDEN].Choferes', RESEED, 0)
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_altaChofer(
+CREATE PROCEDURE [MAIDEN].SP_altaChofer(
 		@nombre varchar(255),
 		@apellido varchar(255),
 		@dni numeric(18,0),
@@ -126,12 +126,12 @@ CREATE PROCEDURE [ASD].SP_altaChofer(
 		@fecha_nacimiento datetime)
 AS
 BEGIN
-	INSERT INTO [ASD].Choferes
+	INSERT INTO [MAIDEN].Choferes
 	values(@nombre, @apellido, @dni, @telefono, @direccion, @mail, @fecha_nacimiento, 1)
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_modifChofer(
+CREATE PROCEDURE [MAIDEN].SP_modifChofer(
 		@id int,
 		@nombre varchar(255),
 		@apellido varchar(255),
@@ -142,7 +142,7 @@ CREATE PROCEDURE [ASD].SP_modifChofer(
 		@fecha_nacimiento datetime)
 AS
 BEGIN
-	UPDATE [ASD].Choferes
+	UPDATE [MAIDEN].Choferes
    SET Nombre = @nombre,
        Apellido = @apellido,
 	   DNI = @dni,
@@ -154,49 +154,49 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_deshabilitarChofer(@id int)
+CREATE PROCEDURE [MAIDEN].SP_deshabilitarChofer(@id int)
 AS BEGIN
-	UPDATE [ASD].fx_getChofer(@id)
+	UPDATE [MAIDEN].fx_getChofer(@id)
 	SET Habilitado=0
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_habilitarChofer(@id int)
+CREATE PROCEDURE [MAIDEN].SP_habilitarChofer(@id int)
 AS BEGIN
-	UPDATE [ASD].fx_getChofer(@id)
+	UPDATE [MAIDEN].fx_getChofer(@id)
 	SET Habilitado=1
 END
 GO
 
 --------------------------------------------------------------- >> AUTOS
 --		******** TIENEN QUE ESTAR CARGADOS LOS CHOFERES ANTES*********
-CREATE PROCEDURE [ASD].SP_cargarAutos
+CREATE PROCEDURE [MAIDEN].SP_cargarAutos
 AS
 BEGIN
-	INSERT INTO [ASD].Autos(Marca, Modelo, Patente, Licencia, Rodado, Chofer)
+	INSERT INTO [MAIDEN].Autos(Marca, Modelo, Patente, Licencia, Rodado, Chofer)
 	SELECT DISTINCT 
 		[gd_esquema].Maestra.Auto_Marca,
 		[gd_esquema].Maestra.Auto_Modelo,
 		[gd_esquema].Maestra.Auto_Patente,
 		[gd_esquema].Maestra.Auto_Licencia,
 		[gd_esquema].Maestra.Auto_Rodado,
-		[ASD].fx_getChoferId([gd_esquema].Maestra.Chofer_Dni)
+		[MAIDEN].fx_getChoferId([gd_esquema].Maestra.Chofer_Dni)
 	FROM [gd_esquema].Maestra
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_eliminarTodosAutos
+CREATE PROCEDURE [MAIDEN].SP_eliminarTodosAutos
 AS
 Begin
 	SET NOCOUNT OFF;
-	DELETE FROM [ASD].Autos
+	DELETE FROM [MAIDEN].Autos
 	
-	DELETE FROM [ASD].Autos
-	DBCC CHECKIDENT ('[ASD].Autos', RESEED, 0)
+	DELETE FROM [MAIDEN].Autos
+	DBCC CHECKIDENT ('[MAIDEN].Autos', RESEED, 0)
 End
 go
 
-CREATE PROCEDURE [ASD].SP_altaAuto(
+CREATE PROCEDURE [MAIDEN].SP_altaAuto(
 			@marca varchar(255),
 			@modelo varchar(255),
 			@patente varchar(10),
@@ -204,26 +204,26 @@ CREATE PROCEDURE [ASD].SP_altaAuto(
 			@turno int)
 AS
 BEGIN
-	Insert into [ASD].Autos(Marca,Modelo,Patente,Chofer,Turno)
+	Insert into [MAIDEN].vw_Autos(Marca,Modelo,Patente,Chofer,Turno)
 	values(@marca, @modelo, @patente,@chofer, @turno)
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_deshabilitarAuto(@id int)
+CREATE PROCEDURE [MAIDEN].SP_deshabilitarAuto(@id int)
 AS BEGIN
-	UPDATE [ASD].fx_getAuto(@id)
+	UPDATE [MAIDEN].fx_getAuto(@id)
 	SET Habilitado=0
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_habilitarAuto(@id int)
+CREATE PROCEDURE [MAIDEN].SP_habilitarAuto(@id int)
 AS BEGIN
-	UPDATE [ASD].fx_getAuto(@id)
+	UPDATE [MAIDEN].fx_getAuto(@id)
 	SET Habilitado=1
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_modifAuto(
+CREATE PROCEDURE [MAIDEN].SP_modifAuto(
 				@id int,
 				@marca varchar(255),
 				@modelo varchar(255),
@@ -232,7 +232,7 @@ CREATE PROCEDURE [ASD].SP_modifAuto(
 				@turno int)
 AS
 BEGIN
-	UPDATE [ASD].Autos
+	UPDATE [MAIDEN].Autos
 	SET Marca = @marca,
 		Modelo = @modelo,
 		Patente = @patente,
@@ -244,10 +244,10 @@ GO
 
 --------------------------------------------------------------- >> TURNOS
 
-CREATE PROCEDURE [ASD].SP_cargarTurnos
+CREATE PROCEDURE [MAIDEN].SP_cargarTurnos
 AS
 BEGIN
-	INSERT INTO [ASD].Turnos(Hora_Inicio, Hora_Fin, Precio_Base, Precio_km, Descripcion)
+	INSERT INTO [MAIDEN].Turnos(Hora_Inicio, Hora_Fin, Precio_Base, Precio_km, Descripcion)
 	SELECT DISTINCT 
 		[gd_esquema].Maestra.Turno_Hora_Inicio,
 		[gd_esquema].Maestra.Turno_Hora_Fin,
@@ -258,7 +258,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_altaTurno(@inicio numeric(18,0),
+CREATE PROCEDURE [MAIDEN].SP_altaTurno(@inicio numeric(18,0),
 								 @fin numeric(18,0),
 								 @precioBase numeric(18,2),
 								 @precioKm numeric(18,2),
@@ -266,40 +266,40 @@ CREATE PROCEDURE [ASD].SP_altaTurno(@inicio numeric(18,0),
 								 @habilitado bit) 
 AS
 BEGIN
-	Insert into [ASD].Turnos
+	Insert into [MAIDEN].Turnos
 	values(@inicio, @fin, @precioBase, @precioKm, @descripcion, @habilitado)
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_eliminarTodosTurnos 
+CREATE PROCEDURE [MAIDEN].SP_eliminarTodosTurnos 
 AS
 BEGIN
 	SET NOCOUNT OFF;
-	DELETE FROM [ASD].Turnos
+	DELETE FROM [MAIDEN].Turnos
 	
-	DELETE FROM [ASD].Turnos
-	DBCC CHECKIDENT ('[ASD].Turnos', RESEED, 0)
+	DELETE FROM [MAIDEN].Turnos
+	DBCC CHECKIDENT ('[MAIDEN].Turnos', RESEED, 0)
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_deshabilitarTurno(@id int)
+CREATE PROCEDURE [MAIDEN].SP_deshabilitarTurno(@id int)
 AS
 BEGIN
-	UPDATE [ASD].fx_getTurno(@id)
+	UPDATE [MAIDEN].fx_getTurno(@id)
 	SET Habilitado=0
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_habilitarTurno(@id int)
+CREATE PROCEDURE [MAIDEN].SP_habilitarTurno(@id int)
 AS
 BEGIN
-	UPDATE [ASD].fx_getTurno(@id)
+	UPDATE [MAIDEN].fx_getTurno(@id)
 	SET Habilitado=1
 END
 GO
 
 
-CREATE PROCEDURE [ASD].[SP_modifTurno](
+CREATE PROCEDURE [MAIDEN].[SP_modifTurno](
 					@id int,
 					@inicio numeric(18,0),
 					@fin numeric(18,0),
@@ -309,7 +309,7 @@ CREATE PROCEDURE [ASD].[SP_modifTurno](
 					@habilitado bit)
 AS
 BEGIN
-	UPDATE [ASD].Turnos
+	UPDATE [MAIDEN].Turnos
 	SET Hora_Inicio = @inicio,
 		Hora_Fin = @fin,
 		Precio_Base = @precioBase,
@@ -321,23 +321,23 @@ END
 GO
 
 --------------------------------------------------------------- >> ROLES
-CREATE PROCEDURE [ASD].SP_altaRol(@rol varchar(20),
+CREATE PROCEDURE [MAIDEN].SP_altaRol(@rol varchar(20),
 					@clientes bit, @choferes bit, @autos bit, @roles bit,@turnos bit,
 					@viajes	bit, @facturacion bit, @rendicion bit, @estadisticas bit)
 AS
 BEGIN
-	INSERT INTO [ASD].Roles
+	INSERT INTO [MAIDEN].Roles
 	values(@rol, @clientes,@choferes,@autos,@roles,@turnos,@viajes,@facturacion,@rendicion,@estadisticas,1)
 END
 GO
 
 
-CREATE PROCEDURE [ASD].SP_modificarRol(@id int, @rol varchar(20),
+CREATE PROCEDURE [MAIDEN].SP_modificarRol(@id int, @rol varchar(20),
 					@clientes bit, @choferes bit, @autos bit, @roles bit,@turnos bit,
 					@viajes	bit, @facturacion bit, @rendicion bit, @estadisticas bit)
 AS
 BEGIN
-	UPDATE [ASD].fx_getRol(@id)
+	UPDATE [MAIDEN].fx_getRol(@id)
 	SET 
 	Rol = @rol,
 	Clientes = @clientes,
@@ -352,118 +352,109 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_eliminarRolEnUsuarios(@id int)
+CREATE PROCEDURE [MAIDEN].SP_eliminarRolEnUsuarios(@id int)
 AS
 BEGIN
-	DELETE [ASD].RolXUsuario where Rol = @id
+	DELETE [MAIDEN].RolXUsuario where Rol = @id
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_deshabilitarRol(@id int)
+CREATE PROCEDURE [MAIDEN].SP_deshabilitarRol(@id int)
 AS
 BEGIN
-	UPDATE [ASD].fx_getRol(@id)
+	UPDATE [MAIDEN].fx_getRol(@id)
 	SET Habilitado = 0
-	EXEC [ASD].SP_eliminarRolEnUsuarios @id
+	EXEC [MAIDEN].SP_eliminarRolEnUsuarios @id
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_habilitarRol(@id int)
+CREATE PROCEDURE [MAIDEN].SP_habilitarRol(@id int)
 AS
 BEGIN
-	UPDATE [ASD].fx_getRol(@id)
+	UPDATE [MAIDEN].fx_getRol(@id)
 	SET Habilitado = 1
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_eliminarTodosRoles
+CREATE PROCEDURE [MAIDEN].SP_eliminarTodosRoles
 AS
 BEGIN
 	SET NOCOUNT OFF;
-	DELETE FROM [ASD].Roles
+	DELETE FROM [MAIDEN].Roles
 
-	DELETE FROM [ASD].Turnos
-	DBCC CHECKIDENT ('[ASD].Roles', RESEED, 0)
+	DELETE FROM [MAIDEN].Turnos
+	DBCC CHECKIDENT ('[MAIDEN].Roles', RESEED, 0)
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_crearRolesDefault
+CREATE PROCEDURE [MAIDEN].SP_crearRolesDefault
 AS
 BEGIN
-	Exec [ASD].SP_altaRol 'admin',1,1,1,1,1,1,1,1,1
-	Exec [ASD].SP_altaRol 'cliente',0,0,0,0,0,0,0,1,0
-	Exec [ASD].SP_altaRol 'chofer',0,0,0,0,0,0,1,0,0
+	Exec [MAIDEN].SP_altaRol 'admin',1,1,1,1,1,1,1,1,1
+	Exec [MAIDEN].SP_altaRol 'cliente',0,0,0,0,0,0,0,1,0
+	Exec [MAIDEN].SP_altaRol 'chofer',0,0,0,0,0,0,1,0,0
 								 -- @rol, @clientes, @choferes, @autos, @roles, @turnos, @viajes,
 								 -- @facturacion, @rendicion, @estadisticas
 END
 GO
 
 --------------------------------------------------------------- USUARIOS
-CREATE PROCEDURE [ASD].SP_altaUsuario(@usuario varchar(30), @pass varchar(256))
+CREATE PROCEDURE [MAIDEN].SP_altaUsuario(@usuario varchar(30), @pass varchar(256))
 AS
 BEGIN
-	INSERT INTO [ASD].Usuarios
+	INSERT INTO [MAIDEN].Usuarios
 	values(@usuario,HASHBYTES('SHA2_256',@pass),0)
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_modifPass(@usuario varchar(30), @pass varchar(256))
+CREATE PROCEDURE [MAIDEN].SP_modifPass(@usuario varchar(30), @pass varchar(256))
 AS
 BEGIN
-	UPDATE [ASD].Usuarios
+	UPDATE [MAIDEN].Usuarios
 	SET Pass = HASHBYTES('SHA2_256',@pass)
 	WHERE Usuario = @usuario
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_eliminarUsuario(@usuario varchar(30))
+CREATE PROCEDURE [MAIDEN].SP_eliminarUsuario(@usuario varchar(30))
 AS
 BEGIN
-	DELETE [ASD].RolXUsuario						--- Primero se le borran los roles para evitar problemas con FK
+	DELETE [MAIDEN].RolXUsuario						--- Primero se le borran los roles para evitar problemas con FK
 	WHERE Usuario = @usuario
-	Delete [ASD].Usuarios							--- Despues se borra el usuario
+	Delete [MAIDEN].Usuarios							--- Despues se borra el usuario
 	WHERE Usuario = @usuario
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_crearUsuariosDefault
+CREATE PROCEDURE [MAIDEN].SP_eliminarTodosUsuarios
 AS
 BEGIN
-	Exec [ASD].SP_altaUsuario 'admin','w23e'
-	Exec [ASD].SP_altaUsuario 'cliente','cliente'
-	Exec [ASD].SP_altaUsuario 'chofer','chofer'
+	DELETE FROM [MAIDEN].RolXUsuario
+	DELETE FROM [MAIDEN].Usuarios
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_eliminarTodosUsuarios
-AS
-BEGIN
-	DELETE FROM [ASD].RolXUsuario
-	DELETE FROM [ASD].Usuarios
-END
-GO
-
-CREATE PROCEDURE [ASD].SP_loginOk(@usuario varchar(30))
+CREATE PROCEDURE [MAIDEN].SP_loginOk(@usuario varchar(30))
 AS
 BEGIN
 	Declare @intentos int
-	SET @intentos = (select intentosLogueo from [ASD].fx_getUsuario(@usuario))
+	SET @intentos = (select intentosLogueo from [MAIDEN].fx_getUsuario(@usuario))
 	if (@intentos >=3) return 0
 	else BEGIN
-		UPDATE [ASD].fx_getUsuario(@usuario)
+		UPDATE [MAIDEN].fx_getUsuario(@usuario)
 		SET intentosLogueo = 0
 		return 3
 	END
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_loginFail(@usuario varchar(30))
+CREATE PROCEDURE [MAIDEN].SP_loginFail(@usuario varchar(30))
 AS
 BEGIN
 	Declare @intentosRealizados int, @msg varchar(100)
-	SET @intentosRealizados = (select intentosLogueo from [ASD].fx_getUsuario(@usuario))
+	SET @intentosRealizados = (select intentosLogueo from [MAIDEN].fx_getUsuario(@usuario))
 	if (@intentosRealizados < 3) BEGIN							-- se le agrega un intento fallido
-						UPDATE [ASD].fx_getUsuario(@usuario)
+						UPDATE [MAIDEN].fx_getUsuario(@usuario)
 						SET intentosLogueo = intentosLogueo + 1
 						return (3-(@intentosRealizados+1))
 					   END;
@@ -474,44 +465,55 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_login(@usuario varchar(30), @password varchar(256))
+CREATE PROCEDURE [MAIDEN].SP_login(@usuario varchar(30), @password varchar(256))
 AS
 BEGIN 
 	Declare @contraseña varchar(256), @resultado int
-	SET @contraseña = (Select pass from [ASD].fx_getUsuario(@usuario))
+	SET @contraseña = (Select pass from [MAIDEN].fx_getUsuario(@usuario))
 	if( HASHBYTES('SHA2_256',@password) = @contraseña)
-		EXEC @resultado = [ASD].SP_loginOk @usuario
-	else Exec @resultado = [ASD].SP_loginFail @usuario
+		EXEC @resultado = [MAIDEN].SP_loginOk @usuario
+	else Exec @resultado = [MAIDEN].SP_loginFail @usuario
 	SELECT @resultado
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_asignarRol(@usuario varchar(30), @rol varchar(20))
+CREATE PROCEDURE [MAIDEN].SP_asignarRol(@usuario varchar(30), @rol varchar(20))
 AS
 BEGIN 
 	declare @rolId int
-	set @rolId = [ASD].fx_getRolId(@rol)
-	if (not exists (Select 1 from [ASD].RolXUsuario			-- Si no tenia asignado el rol se lo asigna. Sino no hace nada
+	set @rolId = [MAIDEN].fx_getRolId(@rol)
+	if (not exists (Select 1 from [MAIDEN].RolXUsuario			-- Si no tenia asignado el rol se lo asigna. Sino no hace nada
 						where usuario = @usuario and rol = @rolId))			  
 	Begin
-		Insert into [ASD].RolXUsuario
+		Insert into [MAIDEN].RolXUsuario
 		values(@usuario,@rolId)
 	End
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_quitarRol(@usuario varchar(30), @rol varchar(20))
+CREATE PROCEDURE [MAIDEN].SP_quitarRol(@usuario varchar(30), @rol varchar(20))
 AS
 BEGIN 
 	DECLARE @RolId int
-	Set @RolId = [ASD].fx_getRolId(@rol)
-	Delete from [ASD].RolXUsuario where(
+	Set @RolId = [MAIDEN].fx_getRolId(@rol)
+	Delete from [MAIDEN].RolXUsuario where(
 	Usuario = @usuario AND Rol = @RolId)
 END
 GO
 
+CREATE PROCEDURE [MAIDEN].SP_crearUsuariosDefault
+AS
+BEGIN
+	Exec [MAIDEN].SP_altaUsuario 'admin','w23e'
+	Exec [MAIDEN].SP_asignarRol 'admin', 'admin'
+	Exec [MAIDEN].SP_altaUsuario 'cliente','cliente'
+	Exec [MAIDEN].SP_asignarRol 'cliente', 'cliente'
+	Exec [MAIDEN].SP_altaUsuario 'chofer','chofer'
+	Exec [MAIDEN].SP_asignarRol 'chofer','chofer'
+END
+GO
 --------------------------------------------------------------- VIAJES
-CREATE PROCEDURE [ASD].SP_altaViaje(@idChofer int,
+CREATE PROCEDURE [MAIDEN].SP_altaViaje(@idChofer int,
 									@idAuto int,
 									@kms numeric(18,0),
 									@fecha datetime,
@@ -520,14 +522,14 @@ CREATE PROCEDURE [ASD].SP_altaViaje(@idChofer int,
 AS
 BEGIN 
 	Declare @idTurno int
-	Select @idTurno = ID from [ASD].Turnos where (
+	Select @idTurno = ID from [MAIDEN].Turnos where (
 		DATEPART(HOUR,@fecha) between Hora_Inicio and Hora_Fin
 	)
 	if (@idTurno is null) throw 51000,'No hay turno en ese horario',16;
 	else BEGIN
-			if (@idTurno = (select Turno from [ASD].Autos where ID = @idAuto))			-- Verifica que el turno que corresponde (segun los horarios ingresados) 
+			if (@idTurno = (select Turno from [MAIDEN].Autos where ID = @idAuto))			-- Verifica que el turno que corresponde (segun los horarios ingresados) 
 			BEGIN																			-- coincida con el turno registrado en el auto
-				INSERT INTO [ASD].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente,Hora_Fin)
+				INSERT INTO [MAIDEN].vw_Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente,Hora_Fin)
 				values(@idChofer, @idAuto,@idTurno , @kms, @fecha, @idCliente,@horaFin)
 			END
 			else throw 51000,'El horario no coincide con el turno del auto',16;
@@ -535,25 +537,25 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [ASD].SP_eliminarTodosViajes
+CREATE PROCEDURE [MAIDEN].SP_eliminarTodosViajes
 AS
 BEGIN
-	DELETE FROM [ASD].Viajes
-	DBCC CHECKIDENT ('[ASD].Viajes', RESEED, 0)
+	DELETE FROM [MAIDEN].Viajes
+	DBCC CHECKIDENT ('[MAIDEN].Viajes', RESEED, 0)
 END
 GO
 -------- ***** TIENEN QUE ESTAR CHOFERES, AUTOS, TURNOS y CLIENES CARGADOS****-----------
-CREATE PROCEDURE [ASD].SP_cargarViajes
+CREATE PROCEDURE [MAIDEN].SP_cargarViajes
 AS
 BEGIN
-	Insert into [ASD].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente)
+	Insert into [MAIDEN].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente)
 	Select distinct 
-		[ASD].fx_getChoferId(Chofer_dni),
-		[ASD].fx_getAutoId(Auto_Patente),
-		[ASD].fx_getTurnoId(Turno_Hora_Inicio),
+		[MAIDEN].fx_getChoferId(Chofer_dni),
+		[MAIDEN].fx_getAutoId(Auto_Patente),
+		[MAIDEN].fx_getTurnoId(Turno_Hora_Inicio),
 		Viaje_Cant_Kilometros,
 		Viaje_Fecha,
-		[ASD].fx_getClienteId(Cliente_Dni)
+		[MAIDEN].fx_getClienteId(Cliente_Dni)
 	From [gd_esquema].Maestra
 END
 GO
