@@ -14,8 +14,8 @@ using UberFrba.Abm_Turno;
 
 namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
     public partial class frmCargaAuto : FormsAdapter {
-        bool buscaChofer = false;
-        int idChofer;
+        bool buscaChofer = false, buscaTurno = false;
+        int idChofer, idTurno;
         
         public frmCargaAuto (Form anterior) {
             InitializeComponent();
@@ -25,7 +25,13 @@ namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
 
 
         public override void configurar (IDominio objeto) {
-           if (buscaChofer) {
+            if (buscaTurno) {
+                Turno turno = (Turno) objeto;
+                txtTurno.Text = turno.descripcion;
+                idTurno = turno.id;
+                buscaTurno=false;
+            }
+            else if (buscaChofer) {
                Persona chofer = (Persona) objeto;
                txtChofer.Text = chofer.nombre + " " + chofer.apellido;
                idChofer = chofer.id;
@@ -49,9 +55,12 @@ namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
                 idChofer = auto.choferID;
                 txtChofer.Text = auto.choferNombre;
             }
+            if (auto.turnoID!=-1) {
+                idTurno = auto.turnoID;
+                txtTurno.Text=auto.turnoDescripcion;
             ID = auto.id;
             if (!auto.habilitado) ID*=-1;               //Solo importa para la habilitacion/deshabilitacion... Si <0 => Deshabilitado,  
-                                                                                                        //        >0 => Habilitado
+            }                                                                                            //        >0 => Habilitado
         }
 
         private void btnAceptar_Click (object sender, EventArgs e) {
@@ -82,6 +91,7 @@ namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
                      new SqlParameter("@modelo",valor(txtModelo.Text)),
                      new SqlParameter("@patente",valor(txtPatente.Text)),
                      new SqlParameter("@chofer",idChofer),
+                     new SqlParameter("@turno",idTurno),
                 }
                  );
         }
@@ -109,6 +119,15 @@ namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
         private void btnVolver_Click (object sender, EventArgs e) {
             formAnterior.Show();
             this.Close();
+        }
+
+        private void btnBuscTurno_Click (object sender, EventArgs e) {
+            frmListaTurnos listaTurnos = new frmListaTurnos(this);
+                listaTurnos.soloHabilitados = true;
+                buscaTurno = true;
+                listaTurnos.formSiguiente=this;
+                listaTurnos.Show();
+                this.Hide();
         }
 
     }

@@ -52,11 +52,18 @@ namespace UberFrba.Abm_Automovil {
             auto.habilitado =(bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
 
             if (dgListado.CurrentRow.Cells["Chofer"].Value == DBNull.Value) {           //Carga los datos del chofer para la modificacion
-                auto.choferID=-1;
+                auto.choferID=-1;                                                               // Aunque nunca debería ser Null (por constraints en la base)
             }
             else {
                 auto.choferID =(int) dgListado.CurrentRow.Cells["Chofer"].Value;
                 auto.choferNombre = nombreChofer();
+            }
+            if (dgListado.CurrentRow.Cells["Turno"].Value == DBNull.Value) {        //carga los datos del turno para la modificacion
+                auto.turnoID = -1;                                                              // Aunque nunca debería ser Null (por constraints en la base)
+            }
+            else {
+                auto.turnoID = (int) dgListado.CurrentRow.Cells["Turno"].Value;
+                auto.turnoDescripcion = descripcionTurno();
             }
 
             formSiguiente.configurar(auto);

@@ -200,12 +200,12 @@ CREATE PROCEDURE [ASD].SP_altaAuto(
 			@marca varchar(255),
 			@modelo varchar(255),
 			@patente varchar(10),
-			@chofer int)
-		--	@turno int)
+			@chofer int,
+			@turno int)
 AS
 BEGIN
-	Insert into [ASD].Autos(Marca,Modelo,Patente,Chofer)
-	values(@marca, @modelo, @patente,@chofer)
+	Insert into [ASD].Autos(Marca,Modelo,Patente,Chofer,Turno)
+	values(@marca, @modelo, @patente,@chofer, @turno)
 END
 GO
 
@@ -228,16 +228,16 @@ CREATE PROCEDURE [ASD].SP_modifAuto(
 				@marca varchar(255),
 				@modelo varchar(255),
 				@patente varchar(10),
-				@chofer int)
-				--@turno int)
+				@chofer int,
+				@turno int)
 AS
 BEGIN
 	UPDATE [ASD].Autos
 	SET Marca = @marca,
 		Modelo = @modelo,
 		Patente = @patente,
-		Chofer = @chofer
---		Turno = @turno
+		Chofer = @chofer,
+		Turno = @turno
 	WHERE ID = @id
 END
 GO
@@ -525,8 +525,12 @@ BEGIN
 	)
 	if (@idTurno is null) throw 51000,'No hay turno en ese horario',16;
 	else BEGIN
-			INSERT INTO [ASD].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente,Hora_Fin)
-			values(@idChofer, @idAuto,@idTurno , @kms, @fecha, @idCliente,@horaFin)
+			if (@idTurno = (select Turno from [ASD].Autos where ID = @idAuto))			-- Verifica que el turno que corresponde (segun los horarios ingresados) 
+			BEGIN																			-- coincida con el turno registrado en el auto
+				INSERT INTO [ASD].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente,Hora_Fin)
+				values(@idChofer, @idAuto,@idTurno , @kms, @fecha, @idCliente,@horaFin)
+			END
+			else throw 51000,'El horario no coincide con el turno del auto',16;
 		END
 END
 GO

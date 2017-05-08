@@ -36,11 +36,17 @@
             this.btnHabilitacion = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.txtTurno = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtTurno);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtChofer);
             this.groupBox1.Controls.Add(this.btnBuscChofer);
             this.groupBox1.Controls.Add(this.label6);
@@ -174,6 +180,34 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // txtTurno
+            // 
+            this.txtTurno.Location = new System.Drawing.Point(150, 224);
+            this.txtTurno.MaxLength = 26;
+            this.txtTurno.Name = "txtTurno";
+            this.txtTurno.ReadOnly = true;
+            this.txtTurno.Size = new System.Drawing.Size(233, 20);
+            this.txtTurno.TabIndex = 22;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(399, 220);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 26);
+            this.button1.TabIndex = 20;
+            this.button1.TabStop = false;
+            this.button1.Text = "Buscar...";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(39, 230);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "Turno";
+            // 
             // frmCargaAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,5 +242,8 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.TextBox txtChofer;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.TextBox txtTurno;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label4;
     }
 }
