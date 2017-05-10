@@ -12,6 +12,7 @@ using UberFrba.Abm_Turno;
 using UberFrba.Listado_Estadistico;
 using UberFrba.Menues;
 using UberFrba.Registro_Viajes;
+using UberFrba.Rendicion_Viajes;
 
 namespace UberFrba
 {
@@ -36,9 +37,10 @@ namespace UberFrba
         //     Application.Run(new frmListaTurnos(new FormsAdapter()));
             //   Application.Run(new frmCargaCliente(new FormsAdapter()));
       //      Application.Run(new frmCargaAuto(new FormsAdapter()));
-            Application.Run(new Login());
+            //    Application.Run(new Login());
           //  Application.Run(new frmCargaViaje(new FormsAdapter()));
          //       Application.Run(new MenuInicial("admin"));
+                Application.Run(new frmRendicion(new FormsAdapter()));
 
         }
     }

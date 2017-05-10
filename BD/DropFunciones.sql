@@ -96,3 +96,11 @@ GO
 IF OBJECT_ID (N'[MAIDEN].fx_getCantidadRolesDeUsuario', N'FN') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_getCantidadRolesDeUsuario;  
 GO    
+
+IF OBJECT_ID (N'[MAIDEN].fx_crearRendicion', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_crearRendicion;  
+GO    
+
+IF OBJECT_ID (N'[MAIDEN].fx_cargarRendicion', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_cargarRendicion;  
+GO    

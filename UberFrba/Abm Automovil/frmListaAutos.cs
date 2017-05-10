@@ -35,7 +35,7 @@ namespace UberFrba.Abm_Automovil {
                     new SqlParameter ("@modelo", valor(txtModelo.Text)),
                     new SqlParameter ("@patente", valor(txtPatente.Text)),
                     new SqlParameter ("@marca", valor(cbMarca.Text)),
-                    new SqlParameter ("@choferID", ID),       //TODO: verificar que funcione
+                    new SqlParameter ("@choferID", ID),      
             });
 
             ejecutarQuery(command, dgListado);

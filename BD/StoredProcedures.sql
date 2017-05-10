@@ -559,3 +559,64 @@ BEGIN
 	From [gd_esquema].Maestra
 END
 GO
+
+
+--------------------------------------------------------------- RENDICION
+--****************** FALTA SUMARLE EL TEMA DEL IMPORTE DE LAS RENDICIONES QUE NO ENTIENDO COMO ES	**************************************
+CREATE PROCEDURE [MAIDEN].SP_rendicion(@idChofer int, @idTurno int, @fecha Date)
+AS BEGIN
+	DECLARE @total numeric(18,2)
+	DECLARE @nro_rendicion numeric(18,2)
+	DECLARE @Tabla_Viajes Table(							-- Guardo en una variable de tabla, los datos de los viajes, turnos, etc.
+		viajeId int, clienteId int,horaInicio datetime, horaFin time, kms numeric(18,0), precioBase numeric(18,2), precioKm numeric(18,2), totalDelViaje numeric(18,2), totalDelDia numeric(18,2)
+		)
+		if not exists (select 1 from [MAIDEN].Rendicion where Chofer = @idChofer and cast(Fecha as date) = @fecha)			-- Si la rendicion NO existia, la creo (tengo que consultar a TODOS los viajes para ver cuales corresponden)
+			BEGIN
+				Insert into @Tabla_Viajes(viajeId,clienteId,horaInicio,horaFin,kms,precioBase,precioKm,totalDelViaje)									
+				Select * from [MAIDEN].fx_crearRendicion(@idChofer,@idTurno,@fecha)
+				Select @total = sum(totalDelViaje) from @Tabla_Viajes
+
+				INSERT INTO @Tabla_Viajes(totalDelDia)
+				values(@total)
+	
+				INSERT INTO [MAIDEN].Rendicion(Chofer,Fecha,Total,Importe)
+				Values(@idChofer, CAST(@fecha as DateTime),@total,0)
+	
+				SET @nro_rendicion = @@IDENTITY
+	
+				Insert into [MAIDEN].Rendicion_viajes(Viaje,Nro_Rendicion)
+				Select viajeId,@nro_rendicion from @Tabla_Viajes where viajeId IS NOT NULL
+			END
+			ELSE BEGIN																							-- Si la rendicion ya existia, solo consulto los viajes que estaban registrados para la rendicion
+				Insert into @Tabla_Viajes(viajeId,clienteId,horaInicio,horaFin,kms,precioBase,precioKm,totalDelViaje)
+				SELECT * FROM [MAIDEN].fx_cargarRendicion(@idChofer)
+				Select @total = sum(totalDelViaje) from @Tabla_Viajes
+				INSERT INTO @Tabla_Viajes(totalDelDia)
+				values(@total)
+			END
+	
+
+	Select (select nombre+' '+apellido as Cliente from [MAIDEN].fx_getCliente(viaje.clienteId))as 'Cliente', FORMAT(viaje.horaInicio,'HH:mm') as 'Hora Inicio', FORMAT(viaje.horaFin,'HH:mm') as 'Hora Fin', viaje.kms as 'Distancia(Kms)', viaje.precioBase as 'Precio Base', viaje.precioKm as 'Precio Km', viaje.totalDelViaje as '$ del viaje', viaje.totalDelDia as '$ TOTAL'
+		FROM @Tabla_Viajes viaje
+		GROUP BY viaje.clienteId,viaje.horaInicio,viaje.horaFin,viaje.kms,viaje.precioBase,viaje.precioKm,viaje.totalDelViaje,viaje.totalDelDia
+		ORDER BY CASE WHEN viaje.horaInicio IS NULL THEN 1
+						 else 0
+						 END
+END
+GO
+
+CREATE PROCEDURE [MAIDEN].SP_eliminarTodasRendiciones
+AS
+Begin
+
+	DELETE FROM [MAIDEN].Rendicion_viajes				--Primero elimino esta porque hace referencia a RENDICION
+	
+	DELETE FROM [MAIDEN].Rendicion
+	
+	DELETE FROM [MAIDEN].Rendicion
+	DBCC CHECKIDENT ('[MAIDEN].Rendicion', RESEED, 0)
+
+
+End
+
+
