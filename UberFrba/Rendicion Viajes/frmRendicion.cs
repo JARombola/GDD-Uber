@@ -17,7 +17,6 @@ namespace UberFrba.Rendicion_Viajes
     public partial class frmRendicion : FormsAdapter
     {
         private bool buscaChofer { get; set; }
-        private int idTurno { get; set; }
         private int idChofer{get;set;}
 
         public frmRendicion(FormsAdapter anterior)
@@ -35,31 +34,16 @@ namespace UberFrba.Rendicion_Viajes
                 this.Hide();
         }
 
-        private void btnTurno_Click (object sender, EventArgs e) {
-            frmListaTurnos listaTurnos = new frmListaTurnos(this);
-                listaTurnos.formSiguiente=this;
-                listaTurnos.soloHabilitados=true;
-                listaTurnos.Show();
-            this.Hide();
-        }
-
         public override void configurar (IDominio elemento) {
-            if (buscaChofer) {Persona chofer = (Persona) elemento;
+            Persona chofer = (Persona) elemento;
                 idChofer = chofer.id;
                 txtChofer.Text = (chofer.nombre +" "+ chofer.apellido);
-                buscaChofer=false;
-            }
-            else {                                                              // Si no buscó chofer => Buscó turno
-                idTurno = ((Turno) elemento).id;
-                txtTurno.Text =  ((Turno) elemento).descripcion;
-            }
         }
 
         private void btnFacturar_Click (object sender, EventArgs e) {
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_Rendicion");
                 command.Parameters.AddRange(new[]{
                         new SqlParameter("@idChofer",idChofer),
-                        new SqlParameter("@idTurno",idTurno),
                         new SqlParameter("@fecha",fecha.Value.Date),
                     }
                 );

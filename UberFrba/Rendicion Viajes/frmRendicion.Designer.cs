@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnTurno = new System.Windows.Forms.Button();
             this.btnChofer = new System.Windows.Forms.Button();
-            this.txtTurno = new System.Windows.Forms.TextBox();
             this.txtChofer = new System.Windows.Forms.TextBox();
             this.fecha = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgListado = new System.Windows.Forms.DataGridView();
@@ -47,30 +44,17 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnTurno);
             this.groupBox1.Controls.Add(this.btnChofer);
-            this.groupBox1.Controls.Add(this.txtTurno);
             this.groupBox1.Controls.Add(this.txtChofer);
             this.groupBox1.Controls.Add(this.fecha);
-            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(25, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(546, 156);
+            this.groupBox1.Size = new System.Drawing.Size(546, 130);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
-            // 
-            // btnTurno
-            // 
-            this.btnTurno.Location = new System.Drawing.Point(376, 113);
-            this.btnTurno.Name = "btnTurno";
-            this.btnTurno.Size = new System.Drawing.Size(75, 23);
-            this.btnTurno.TabIndex = 2;
-            this.btnTurno.Text = "Buscar...";
-            this.btnTurno.UseVisualStyleBackColor = true;
-            this.btnTurno.Click += new System.EventHandler(this.btnTurno_Click);
             // 
             // btnChofer
             // 
@@ -81,14 +65,6 @@
             this.btnChofer.Text = "Buscar...";
             this.btnChofer.UseVisualStyleBackColor = true;
             this.btnChofer.Click += new System.EventHandler(this.btnChofer_Click);
-            // 
-            // txtTurno
-            // 
-            this.txtTurno.Location = new System.Drawing.Point(94, 110);
-            this.txtTurno.Name = "txtTurno";
-            this.txtTurno.ReadOnly = true;
-            this.txtTurno.Size = new System.Drawing.Size(215, 20);
-            this.txtTurno.TabIndex = 2;
             // 
             // txtChofer
             // 
@@ -105,15 +81,6 @@
             this.fecha.Name = "fecha";
             this.fecha.Size = new System.Drawing.Size(135, 20);
             this.fecha.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 113);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Turno";
             // 
             // label2
             // 
@@ -137,14 +104,14 @@
             // 
             this.dgListado.AllowUserToAddRows = false;
             this.dgListado.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgListado.EnableHeadersVisualStyles = false;
             this.dgListado.Location = new System.Drawing.Point(25, 232);
@@ -195,12 +162,9 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnTurno;
         private System.Windows.Forms.Button btnChofer;
-        private System.Windows.Forms.TextBox txtTurno;
         private System.Windows.Forms.TextBox txtChofer;
         private System.Windows.Forms.DateTimePicker fecha;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgListado;
