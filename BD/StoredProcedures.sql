@@ -563,40 +563,42 @@ GO
 
 --------------------------------------------------------------- RENDICION
 --****************** FALTA SUMARLE EL TEMA DEL IMPORTE DE LAS RENDICIONES QUE NO ENTIENDO COMO ES	**************************************
-CREATE PROCEDURE [MAIDEN].SP_rendicion(@idChofer int, @idTurno int, @fecha Date)
+CREATE PROCEDURE [MAIDEN].SP_actualizarRendicionEnViajes(@idChofer int, @fecha Date,@codRendicion numeric(18,0))
 AS BEGIN
-	DECLARE @total numeric(18,2)
-	DECLARE @nro_rendicion numeric(18,2)
+	UPDATE [MAIDEN].Viajes
+	SET NroRendicion = @codRendicion
+	WHERE(
+		cast(Fecha as DATE) = @fecha 
+		AND Chofer = @idChofer
+	)
+END
+GO
+
+CREATE PROCEDURE [MAIDEN].SP_rendicion(@idChofer int, @fecha Date)
+AS BEGIN
+	DECLARE @cod_Rendicion numeric(18,0)
+	DECLARE @total decimal(18,2)
 	DECLARE @Tabla_Viajes Table(							-- Guardo en una variable de tabla, los datos de los viajes, turnos, etc.
-		viajeId int, clienteId int,horaInicio datetime, horaFin time, kms numeric(18,0), precioBase numeric(18,2), precioKm numeric(18,2), totalDelViaje numeric(18,2), totalDelDia numeric(18,2)
-		)
-		if not exists (select 1 from [MAIDEN].Rendicion where Chofer = @idChofer and cast(Fecha as date) = @fecha)			-- Si la rendicion NO existia, la creo (tengo que consultar a TODOS los viajes para ver cuales corresponden)
-			BEGIN
-				Insert into @Tabla_Viajes(viajeId,clienteId,horaInicio,horaFin,kms,precioBase,precioKm,totalDelViaje)									
-				Select * from [MAIDEN].fx_crearRendicion(@idChofer,@idTurno,@fecha)
-				Select @total = sum(totalDelViaje) from @Tabla_Viajes
-
-				INSERT INTO @Tabla_Viajes(totalDelDia)
-				values(@total)
-	
-				INSERT INTO [MAIDEN].Rendicion(Chofer,Fecha,Total,Importe)
-				Values(@idChofer, CAST(@fecha as DateTime),@total,0)
-	
-				SET @nro_rendicion = @@IDENTITY
-	
-				Insert into [MAIDEN].Rendicion_viajes(Viaje,Nro_Rendicion)
-				Select viajeId,@nro_rendicion from @Tabla_Viajes where viajeId IS NOT NULL
-			END
-			ELSE BEGIN																							-- Si la rendicion ya existia, solo consulto los viajes que estaban registrados para la rendicion
-				Insert into @Tabla_Viajes(viajeId,clienteId,horaInicio,horaFin,kms,precioBase,precioKm,totalDelViaje)
-				SELECT * FROM [MAIDEN].fx_cargarRendicion(@idChofer)
-				Select @total = sum(totalDelViaje) from @Tabla_Viajes
-				INSERT INTO @Tabla_Viajes(totalDelDia)
-				values(@total)
-			END
-	
-
-	Select (select nombre+' '+apellido as Cliente from [MAIDEN].fx_getCliente(viaje.clienteId))as 'Cliente', FORMAT(viaje.horaInicio,'HH:mm') as 'Hora Inicio', FORMAT(viaje.horaFin,'HH:mm') as 'Hora Fin', viaje.kms as 'Distancia(Kms)', viaje.precioBase as 'Precio Base', viaje.precioKm as 'Precio Km', viaje.totalDelViaje as '$ del viaje', viaje.totalDelDia as '$ TOTAL'
+		clienteId int,turnoId int, horaInicio datetime, horaFin time, kms numeric(18,0), precioBase numeric(18,2), precioKm numeric(18,2), totalDelViaje numeric(18,2), totalDelDia numeric(18,2)
+	)
+	SET @cod_Rendicion = (SELECT r.Nro from [MAIDEN].Rendicion r where r.Chofer = @idChofer AND r.Fecha = @fecha)
+	if (@cod_Rendicion is null) BEGIN
+					INSERT INTO [MAIDEN].Rendicion(Chofer,Fecha)
+					values(@idChofer,@fecha)
+					SET @cod_Rendicion = @@IDENTITY
+					EXEC [MAIDEN].SP_actualizarRendicionEnViajes @idChofer, @fecha, @cod_Rendicion 
+				END
+	INSERT INTO @Tabla_Viajes(clienteId,horaInicio,horaFin, kms, precioBase, precioKm, totalDelViaje)
+	SELECT * FROM [MAIDEN].fx_getRendicion(@cod_Rendicion)
+	SELECT @total = SUM(totalDelViaje) from @Tabla_Viajes
+		UPDATE [MAIDEN].Rendicion
+			SET Total = @total,
+				Turno = (Select TOP 1 turnoId from @Tabla_Viajes)
+		WHERE Nro = @cod_Rendicion
+	INSERT INTO @Tabla_Viajes(totalDelDia)
+	values(@total)
+		
+		Select (select nombre+' '+apellido as Cliente from [MAIDEN].fx_getCliente(viaje.clienteId))as 'Cliente', FORMAT(viaje.horaInicio,'HH:mm') as 'Hora Inicio', FORMAT(viaje.horaFin,'HH:mm') as 'Hora Fin', viaje.kms as 'Distancia(Kms)', viaje.precioBase as 'Precio Base', viaje.precioKm as 'Precio Km', viaje.totalDelViaje as '$ del viaje', viaje.totalDelDia as '$ TOTAL'
 		FROM @Tabla_Viajes viaje
 		GROUP BY viaje.clienteId,viaje.horaInicio,viaje.horaFin,viaje.kms,viaje.precioBase,viaje.precioKm,viaje.totalDelViaje,viaje.totalDelDia
 		ORDER BY CASE WHEN viaje.horaInicio IS NULL THEN 1
@@ -605,12 +607,13 @@ AS BEGIN
 END
 GO
 
+
+
+
 CREATE PROCEDURE [MAIDEN].SP_eliminarTodasRendiciones
 AS
 Begin
 
-	DELETE FROM [MAIDEN].Rendicion_viajes				--Primero elimino esta porque hace referencia a RENDICION
-	
 	DELETE FROM [MAIDEN].Rendicion
 	
 	DELETE FROM [MAIDEN].Rendicion

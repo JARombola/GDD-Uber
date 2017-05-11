@@ -164,7 +164,7 @@ Returns int
 AS BEGIN
 	RETURN
 		(Select ID From [MAIDEN].Turnos t
-		where @hora_inicio =Hora_Inicio)
+		where @hora_inicio BETWEEN Hora_Inicio AND Hora_Fin-1)
 	END;
 GO
 
@@ -258,28 +258,42 @@ GO
 
 --------------------------------------------------------------- RENDICION
 
-CREATE FUNCTION [MAIDEN].fx_crearRendicion(@idChofer int, @idTurno int, @fecha Date)
+CREATE FUNCTION [MAIDEN].fx_getRendicion(@nroRendicion numeric(18,0))
 RETURNS TABLE
 AS
 RETURN(
-	Select viaje.ID, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km, sum((km * turno.precio_km)+turno.precio_base) as totalPorViaje
+	Select viaje.Cliente, cast(viaje.Fecha as time) as Hora_Inicio,viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km, sum((km * turno.precio_km)+turno.precio_base) as totalPorViaje
 	FROM [MAIDEN].Viajes viaje LEFT JOIN [MAIDEN].Turnos turno on (viaje.Turno = turno.ID) 
-	where (cast(viaje.Fecha as DATE) = @fecha AND
-		viaje.Turno = @idTurno AND
-		viaje.Chofer = @idChofer )
+	where (viaje.NroRendicion = @nroRendicion)
 	GROUP BY viaje.ID,viaje.Turno, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km,turno.Precio_Base, turno.Precio_km
 	)
 GO
 
-CREATE FUNCTION [MAIDEN].fx_cargarRendicion(@idChofer int)
-RETURNS TABLE
-AS
-RETURN(
-	Select viaje.ID, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km, sum((km * turno.precio_km)+turno.precio_base) as totalPorViaje
-	FROM [MAIDEN].Rendicion_viajes detalle,[MAIDEN].Rendicion rendicion, [MAIDEN].Viajes viaje, [MAIDEN].Turnos turno
-	where (detalle.Nro_Rendicion = rendicion.Nro
-	AND viaje.ID = detalle.Viaje
-	AND viaje.Turno = Turno.ID)
-	GROUP BY viaje.ID,viaje.Turno, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km,turno.Precio_Base, turno.Precio_km
-	)
-GO
+
+
+
+--CREATE FUNCTION [MAIDEN].fx_crearRendicion(@idChofer int, @idTurno int, @fecha Date)
+--RETURNS TABLE
+--AS
+--RETURN(
+--	Select viaje.ID, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km, sum((km * turno.precio_km)+turno.precio_base) as totalPorViaje
+--	FROM [MAIDEN].Viajes viaje LEFT JOIN [MAIDEN].Turnos turno on (viaje.Turno = turno.ID) 
+--	where (cast(viaje.Fecha as DATE) = @fecha AND
+--		viaje.Turno = @idTurno AND
+--		viaje.Chofer = @idChofer )
+--	GROUP BY viaje.ID,viaje.Turno, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km,turno.Precio_Base, turno.Precio_km
+--	)
+--GO
+
+--CREATE FUNCTION [MAIDEN].fx_cargarRendicion(@idChofer int)
+--RETURNS TABLE
+--AS
+--RETURN(
+--	Select viaje.ID, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km, sum((km * turno.precio_km)+turno.precio_base) as totalPorViaje
+--	FROM [MAIDEN].Rendicion_viajes detalle,[MAIDEN].Rendicion rendicion, [MAIDEN].Viajes viaje, [MAIDEN].Turnos turno
+--	where (detalle.Nro_Rendicion = rendicion.Nro
+--	AND viaje.ID = detalle.Viaje
+--	AND viaje.Turno = Turno.ID)
+--	GROUP BY viaje.ID,viaje.Turno, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km,turno.Precio_Base, turno.Precio_km
+--	)
+--GO
