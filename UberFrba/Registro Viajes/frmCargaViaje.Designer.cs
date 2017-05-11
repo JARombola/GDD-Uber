@@ -29,6 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.infoAuto = new System.Windows.Forms.ToolTip(this.components);
+            this.btnAtras = new System.Windows.Forms.Button();
+            this.btnRegistrar = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.horaFin = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.fecha = new System.Windows.Forms.DateTimePicker();
+            this.horaInicio = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtKms = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnCliente = new System.Windows.Forms.Button();
             this.txtCliente = new System.Windows.Forms.TextBox();
@@ -38,22 +50,130 @@
             this.lblAuto = new System.Windows.Forms.Label();
             this.txtChofer = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.horaInicio = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.fecha = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtKms = new System.Windows.Forms.NumericUpDown();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.horaFin = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnRegistrar = new System.Windows.Forms.Button();
-            this.btnAtras = new System.Windows.Forms.Button();
-            this.infoAuto = new System.Windows.Forms.ToolTip(this.components);
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtKms)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKms)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // infoAuto
+            // 
+            this.infoAuto.AutomaticDelay = 100;
+            this.infoAuto.AutoPopDelay = 3000;
+            this.infoAuto.InitialDelay = 100;
+            this.infoAuto.IsBalloon = true;
+            this.infoAuto.ReshowDelay = 20;
+            // 
+            // btnAtras
+            // 
+            this.btnAtras.Location = new System.Drawing.Point(48, 428);
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.Size = new System.Drawing.Size(96, 21);
+            this.btnAtras.TabIndex = 18;
+            this.btnAtras.Text = "<<Atras";
+            this.btnAtras.UseVisualStyleBackColor = true;
+            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
+            // 
+            // btnRegistrar
+            // 
+            this.btnRegistrar.Enabled = false;
+            this.btnRegistrar.Location = new System.Drawing.Point(256, 414);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(111, 35);
+            this.btnRegistrar.TabIndex = 17;
+            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.horaFin);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.fecha);
+            this.groupBox2.Controls.Add(this.horaInicio);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.txtKms);
+            this.groupBox2.Location = new System.Drawing.Point(48, 209);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(523, 178);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            // 
+            // horaFin
+            // 
+            this.horaFin.CustomFormat = "HH:mm";
+            this.horaFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.horaFin.Location = new System.Drawing.Point(342, 61);
+            this.horaFin.Name = "horaFin";
+            this.horaFin.ShowUpDown = true;
+            this.horaFin.Size = new System.Drawing.Size(92, 20);
+            this.horaFin.TabIndex = 15;
+            this.horaFin.Value = new System.DateTime(2017, 5, 1, 18, 0, 0, 0);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(289, 65);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(21, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Fin";
+            // 
+            // fecha
+            // 
+            this.fecha.CustomFormat = "dd/MM/yyyy";
+            this.fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.fecha.Location = new System.Drawing.Point(125, 31);
+            this.fecha.Name = "fecha";
+            this.fecha.Size = new System.Drawing.Size(120, 20);
+            this.fecha.TabIndex = 9;
+            this.fecha.Value = new System.DateTime(2017, 5, 1, 0, 0, 0, 0);
+            // 
+            // horaInicio
+            // 
+            this.horaInicio.CustomFormat = "HH:mm";
+            this.horaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.horaInicio.Location = new System.Drawing.Point(342, 35);
+            this.horaInicio.Name = "horaInicio";
+            this.horaInicio.ShowUpDown = true;
+            this.horaInicio.Size = new System.Drawing.Size(92, 20);
+            this.horaInicio.TabIndex = 11;
+            this.horaInicio.Value = new System.DateTime(2017, 5, 1, 18, 0, 0, 0);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(26, 125);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(85, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Recorrido (Kms.)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(27, 35);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Fecha";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(289, 39);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Inicio";
+            // 
+            // txtKms
+            // 
+            this.txtKms.Location = new System.Drawing.Point(125, 123);
+            this.txtKms.Name = "txtKms";
+            this.txtKms.Size = new System.Drawing.Size(120, 20);
+            this.txtKms.TabIndex = 13;
             // 
             // groupBox1
             // 
@@ -148,126 +268,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Chofer";
             // 
-            // horaInicio
-            // 
-            this.horaInicio.CustomFormat = "HH:mm";
-            this.horaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.horaInicio.Location = new System.Drawing.Point(342, 35);
-            this.horaInicio.Name = "horaInicio";
-            this.horaInicio.ShowUpDown = true;
-            this.horaInicio.Size = new System.Drawing.Size(92, 20);
-            this.horaInicio.TabIndex = 11;
-            this.horaInicio.Value = new System.DateTime(2017, 5, 1, 18, 0, 0, 0);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(289, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Inicio";
-            // 
-            // fecha
-            // 
-            this.fecha.CustomFormat = "dd/MM/yyyy";
-            this.fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.fecha.Location = new System.Drawing.Point(125, 31);
-            this.fecha.Name = "fecha";
-            this.fecha.Size = new System.Drawing.Size(120, 20);
-            this.fecha.TabIndex = 9;
-            this.fecha.Value = new System.DateTime(2017, 5, 1, 0, 0, 0, 0);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 35);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Fecha";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 125);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(85, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Recorrido (Kms.)";
-            // 
-            // txtKms
-            // 
-            this.txtKms.Location = new System.Drawing.Point(125, 123);
-            this.txtKms.Name = "txtKms";
-            this.txtKms.Size = new System.Drawing.Size(120, 20);
-            this.txtKms.TabIndex = 13;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.horaFin);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.fecha);
-            this.groupBox2.Controls.Add(this.horaInicio);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.txtKms);
-            this.groupBox2.Location = new System.Drawing.Point(48, 209);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(523, 178);
-            this.groupBox2.TabIndex = 14;
-            this.groupBox2.TabStop = false;
-            // 
-            // horaFin
-            // 
-            this.horaFin.CustomFormat = "HH:mm";
-            this.horaFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.horaFin.Location = new System.Drawing.Point(342, 61);
-            this.horaFin.Name = "horaFin";
-            this.horaFin.ShowUpDown = true;
-            this.horaFin.Size = new System.Drawing.Size(92, 20);
-            this.horaFin.TabIndex = 15;
-            this.horaFin.Value = new System.DateTime(2017, 5, 1, 18, 0, 0, 0);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(289, 65);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(21, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Fin";
-            // 
-            // btnRegistrar
-            // 
-            this.btnRegistrar.Enabled = false;
-            this.btnRegistrar.Location = new System.Drawing.Point(256, 414);
-            this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.Size = new System.Drawing.Size(111, 35);
-            this.btnRegistrar.TabIndex = 17;
-            this.btnRegistrar.Text = "Registrar";
-            this.btnRegistrar.UseVisualStyleBackColor = true;
-            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
-            // 
-            // btnAtras
-            // 
-            this.btnAtras.Location = new System.Drawing.Point(48, 428);
-            this.btnAtras.Name = "btnAtras";
-            this.btnAtras.Size = new System.Drawing.Size(96, 21);
-            this.btnAtras.TabIndex = 18;
-            this.btnAtras.Text = "<<Atras";
-            this.btnAtras.UseVisualStyleBackColor = true;
-            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
-            // 
-            // infoAuto
-            // 
-            this.infoAuto.AutomaticDelay = 100;
-            this.infoAuto.AutoPopDelay = 3000;
-            this.infoAuto.InitialDelay = 100;
-            this.infoAuto.IsBalloon = true;
-            this.infoAuto.ReshowDelay = 20;
-            // 
             // frmCargaViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -280,11 +280,11 @@
             this.Name = "frmCargaViaje";
             this.Text = "Registro Viaje";
             this.Load += new System.EventHandler(this.frmCargaViaje_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtKms)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKms)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }

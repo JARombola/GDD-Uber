@@ -127,7 +127,7 @@ namespace UberFrba.Registro_Viajes
                 });
             try {
                 command.ExecuteNonQuery();
-                MessageBox.Show("Viaje registrado corretamente", "Viaje registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Viaje registrado correctamente", "Viaje registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (SqlException error) {
