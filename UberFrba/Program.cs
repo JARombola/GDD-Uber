@@ -38,9 +38,9 @@ namespace UberFrba
             //   Application.Run(new frmCargaCliente(new FormsAdapter()));
       //      Application.Run(new frmCargaAuto(new FormsAdapter()));
             //    Application.Run(new Login());
-          //  Application.Run(new frmCargaViaje(new FormsAdapter()));
+            Application.Run(new frmCargaViaje(new FormsAdapter()));
          //       Application.Run(new MenuInicial("admin"));
-                Application.Run(new frmRendicion(new FormsAdapter()));
+         //       Application.Run(new frmRendicion(new FormsAdapter()));
 
         }
     }

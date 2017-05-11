@@ -521,10 +521,15 @@ CREATE PROCEDURE [MAIDEN].SP_altaViaje(@idChofer int,
 									@horaFin time)
 AS
 BEGIN 
-	Declare @idTurno int
+	Declare @idTurno int;
+	
+	if exists(select 1 from [MAIDEN].viajes where(Chofer = @idChofer AND 
+	Format(@fecha, 'HH:mm') BETWEEN Format(Fecha,'HH:mm') AND Hora_Fin)) throw 52000,'EL chofer ya tiene otro viaje registrado en ese horario',16
+
 	Select @idTurno = ID from [MAIDEN].Turnos where (
-		DATEPART(HOUR,@fecha) between Hora_Inicio and Hora_Fin
+		DATEPART(HOUR,@fecha) between Hora_Inicio and Hora_Fin-1
 	)
+
 	if (@idTurno is null) throw 51000,'No hay turno en ese horario',16;
 	else BEGIN
 			if (@idTurno = (select Turno from [MAIDEN].Autos where ID = @idAuto))			-- Verifica que el turno que corresponde (segun los horarios ingresados) 

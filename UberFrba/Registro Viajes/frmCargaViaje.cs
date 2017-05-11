@@ -52,8 +52,8 @@ namespace UberFrba.Registro_Viajes
             datosAuto.Read();
             if (datosAuto.HasRows) {                                //Si tiene auto asignado y habilitado
                 txtAuto.Text = datosAuto["marca"].ToString() +" "+datosAuto["modelo"].ToString()+"("+datosAuto["patente"]+")";
-                infoAuto.SetToolTip(txtAuto, String.Format("-Marca: {0}\n-Modelo: {1}\n-Patente: {2}\n-Licencia: {3}\n-Rodado: {4}",
-                    datosAuto["marca"].ToString(), datosAuto["modelo"].ToString(), datosAuto["patente"], datosAuto["licencia"], datosAuto["Rodado"]));
+                infoAuto.SetToolTip(txtAuto, String.Format("-Marca: {0}\n-Modelo: {1}\n-Patente: {2}\n-Licencia: {3}\n-Rodado: {4}\n-Turno:{5}hs-{6}hs",
+                    datosAuto["marca"].ToString(), datosAuto["modelo"].ToString(), datosAuto["patente"], datosAuto["licencia"], datosAuto["Rodado"], datosAuto["Hora_Inicio"],datosAuto["Hora_Fin"]));
                 txtAuto.Cursor=Cursors.IBeam;
                 autoId = (int) datosAuto["ID"];
             }

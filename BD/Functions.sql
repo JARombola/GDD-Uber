@@ -250,9 +250,10 @@ GO
 CREATE FUNCTION [MAIDEN].fx_getAutoDelChofer(@idChofer int)
 Returns Table
 AS Return(
-		Select * from [MAIDEN].Autos where
+		Select a.*,t.Hora_Inicio,t.Hora_Fin from [MAIDEN].Autos a LEFT JOIN [MAIDEN].Turnos t on (a.Turno =t.ID)
+		where
 		(Chofer = @idChofer 
-		AND Habilitado = 1)
+		AND a.Habilitado = 1)
 	)
 GO
 
