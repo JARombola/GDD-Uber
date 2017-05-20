@@ -81,7 +81,7 @@
             // 
             this.horaFin.Location = new System.Drawing.Point(151, 66);
             this.horaFin.Maximum = new decimal(new int[] {
-            24,
+            23,
             0,
             0,
             0});
@@ -94,7 +94,7 @@
             // 
             this.horaInicio.Location = new System.Drawing.Point(151, 29);
             this.horaInicio.Maximum = new decimal(new int[] {
-            24,
+            23,
             0,
             0,
             0});

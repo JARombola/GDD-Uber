@@ -18,6 +18,9 @@ EXECUTE @RC = [MAIDEN].[SP_cargarViajes]
 EXECUTE @RC = [MAIDEN].[SP_crearRolesDefault] 
 
 EXECUTE @RC = [MAIDEN].[SP_crearUsuariosDefault] 
+
+EXECUTE @RC = [MAIDEN].[SP_cargarRendiciones] 
+
 GO
 
 

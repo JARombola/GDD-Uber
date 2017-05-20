@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -102,6 +103,11 @@ namespace UberFrba.Abm_Cliente
        private void btnVolver_Click (object sender, EventArgs e) {
            formAnterior.Show();
            this.Close();
+       }
+
+       private void frmCargaCliente_Load (object sender, EventArgs e) {
+           dateNacimiento.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
+           dateNacimiento.Value = dateNacimiento.MinDate;
        }
 
     }

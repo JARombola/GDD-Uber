@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.infoAuto = new System.Windows.Forms.ToolTip(this.components);
+            this.txtAuto = new System.Windows.Forms.TextBox();
             this.btnAtras = new System.Windows.Forms.Button();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -46,7 +47,6 @@
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnChofer = new System.Windows.Forms.Button();
-            this.txtAuto = new System.Windows.Forms.TextBox();
             this.lblAuto = new System.Windows.Forms.Label();
             this.txtChofer = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -62,6 +62,17 @@
             this.infoAuto.InitialDelay = 100;
             this.infoAuto.IsBalloon = true;
             this.infoAuto.ReshowDelay = 20;
+            // 
+            // txtAuto
+            // 
+            this.txtAuto.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtAuto.Location = new System.Drawing.Point(140, 81);
+            this.txtAuto.Name = "txtAuto";
+            this.txtAuto.ReadOnly = true;
+            this.txtAuto.Size = new System.Drawing.Size(199, 20);
+            this.txtAuto.TabIndex = 4;
+            this.infoAuto.SetToolTip(this.txtAuto, "Este campo se completará automáticamente\r\ncuando seleccione un chofer");
+            this.txtAuto.TextChanged += new System.EventHandler(this.txtAuto_TextChanged);
             // 
             // btnAtras
             // 
@@ -109,7 +120,7 @@
             this.horaFin.ShowUpDown = true;
             this.horaFin.Size = new System.Drawing.Size(92, 20);
             this.horaFin.TabIndex = 15;
-            this.horaFin.Value = new System.DateTime(2017, 5, 1, 18, 0, 0, 0);
+            this.horaFin.Value = new System.DateTime(2017, 5, 1, 0, 0, 0, 0);
             // 
             // label6
             // 
@@ -139,7 +150,7 @@
             this.horaInicio.ShowUpDown = true;
             this.horaInicio.Size = new System.Drawing.Size(92, 20);
             this.horaInicio.TabIndex = 11;
-            this.horaInicio.Value = new System.DateTime(2017, 5, 1, 18, 0, 0, 0);
+            this.horaInicio.Value = new System.DateTime(2017, 5, 1, 0, 0, 0, 0);
             // 
             // label4
             // 
@@ -229,17 +240,6 @@
             this.btnChofer.Text = "Seleccionar...";
             this.btnChofer.UseVisualStyleBackColor = true;
             this.btnChofer.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtAuto
-            // 
-            this.txtAuto.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtAuto.Location = new System.Drawing.Point(140, 81);
-            this.txtAuto.Name = "txtAuto";
-            this.txtAuto.ReadOnly = true;
-            this.txtAuto.Size = new System.Drawing.Size(199, 20);
-            this.txtAuto.TabIndex = 4;
-            this.infoAuto.SetToolTip(this.txtAuto, "Este campo se completará automáticamente\r\ncuando seleccione un chofer");
-            this.txtAuto.TextChanged += new System.EventHandler(this.txtAuto_TextChanged);
             // 
             // lblAuto
             // 

@@ -259,42 +259,20 @@ GO
 
 --------------------------------------------------------------- RENDICION
 
-CREATE FUNCTION [MAIDEN].fx_getRendicion(@nroRendicion numeric(18,0))
+CREATE FUNCTION [MAIDEN].fx_getDatosRendicion(@nroRendicion numeric(18,0))
 RETURNS TABLE
 AS
 RETURN(
-	Select viaje.Cliente, cast(viaje.Fecha as time) as Hora_Inicio,viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km, sum((km * turno.precio_km)+turno.precio_base) as totalPorViaje
-	FROM [MAIDEN].Viajes viaje LEFT JOIN [MAIDEN].Turnos turno on (viaje.Turno = turno.ID) 
-	where (viaje.NroRendicion = @nroRendicion)
-	GROUP BY viaje.ID,viaje.Turno, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km,turno.Precio_Base, turno.Precio_km
-	)
+	Select c.nombre+' '+c.apellido as Cliente, 
+		FORMAT(viaje.Fecha,'HH:mm') as Inicio,
+		FORMAT(viaje.Hora_Fin,'HH:mm') as 'Hora Fin',
+		viaje.Km as 'Distancia(Kms)', turno.Precio_Base as 'Precio Base', turno.Precio_km as 'Precio Km', 
+		sum(turno.Precio_Base+turno.Precio_km*viaje.Km) as 'Precio del Viaje', null as 'Total del Dia'
+		FROM Clientes c, Viajes viaje, Turnos turno
+		Where Viaje.NroRendicion = @nroRendicion
+			AND c.ID = Viaje.Cliente
+			AND turno.ID = viaje.Turno
+		Group By c.Nombre, c.Apellido,viaje.Fecha, viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km
+)
 GO
 
-
-
-
---CREATE FUNCTION [MAIDEN].fx_crearRendicion(@idChofer int, @idTurno int, @fecha Date)
---RETURNS TABLE
---AS
---RETURN(
---	Select viaje.ID, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km, sum((km * turno.precio_km)+turno.precio_base) as totalPorViaje
---	FROM [MAIDEN].Viajes viaje LEFT JOIN [MAIDEN].Turnos turno on (viaje.Turno = turno.ID) 
---	where (cast(viaje.Fecha as DATE) = @fecha AND
---		viaje.Turno = @idTurno AND
---		viaje.Chofer = @idChofer )
---	GROUP BY viaje.ID,viaje.Turno, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km,turno.Precio_Base, turno.Precio_km
---	)
---GO
-
---CREATE FUNCTION [MAIDEN].fx_cargarRendicion(@idChofer int)
---RETURNS TABLE
---AS
---RETURN(
---	Select viaje.ID, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km, sum((km * turno.precio_km)+turno.precio_base) as totalPorViaje
---	FROM [MAIDEN].Rendicion_viajes detalle,[MAIDEN].Rendicion rendicion, [MAIDEN].Viajes viaje, [MAIDEN].Turnos turno
---	where (detalle.Nro_Rendicion = rendicion.Nro
---	AND viaje.ID = detalle.Viaje
---	AND viaje.Turno = Turno.ID)
---	GROUP BY viaje.ID,viaje.Turno, viaje.Cliente,viaje.Fecha,viaje.Hora_Fin, viaje.Km,turno.Precio_Base, turno.Precio_km
---	)
---GO

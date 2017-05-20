@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -26,6 +27,7 @@ namespace UberFrba.Registro_Viajes
 
         private void frmCargaViaje_Load (object sender, EventArgs e) {
             txtKms.Maximum=Decimal.MaxValue;
+            fecha.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
         }
 
 
