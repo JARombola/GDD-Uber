@@ -1,0 +1,4 @@
+- Saco restriccion (Chofer_Fecha unicos) de RENDICIONES 
+Porque en la tabla maestra hay varias rendiciones x dia para el mismo chofer.
+Si dejo la restriccion, no puedo migrarlos.
+=> El control de rendiciones duplicadas se hace en el Procedure de 'Rendicion'

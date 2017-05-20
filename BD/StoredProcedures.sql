@@ -549,18 +549,19 @@ BEGIN
 	DBCC CHECKIDENT ('[MAIDEN].Viajes', RESEED, 0)
 END
 GO
--------- ***** TIENEN QUE ESTAR CHOFERES, AUTOS, TURNOS y CLIENES CARGADOS****-----------
+-------- ***** TIENEN QUE ESTAR CHOFERES, AUTOS, TURNOS, CLIENES y RENDICIONES CARGADOS****-----------
 CREATE PROCEDURE [MAIDEN].SP_cargarViajes
 AS
 BEGIN
-	Insert into [MAIDEN].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente)
+	Insert into [MAIDEN].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente,NroRendicion)
 	Select distinct 
 		[MAIDEN].fx_getChoferId(Chofer_dni),
 		[MAIDEN].fx_getAutoId(Auto_Patente),
 		[MAIDEN].fx_getTurnoId(Turno_Hora_Inicio),
 		Viaje_Cant_Kilometros,
 		Viaje_Fecha,
-		[MAIDEN].fx_getClienteId(Cliente_Dni)
+		[MAIDEN].fx_getClienteId(Cliente_Dni),
+		Rendicion_Nro
 	From [gd_esquema].Maestra
 END
 GO
@@ -602,6 +603,20 @@ AS BEGIN
 	ELSE throw 51000,'La rendición para ese chofer ya ha sido realizada en el día',16;
 END
 GO
+
+CREATE PROCEDURE [MAIDEN].SP_cargarRendiciones
+AS
+BEGIN
+	SET IDENTITY_INSERT [MAIDEN].Rendicion ON				-- La tabla usa Identity, pero la tabla ya tiene ciertos valores. De esta forma permitirá setearle, sin problemas con los identity
+	INSERT INTO [MAIDEN].Rendicion(Chofer,Fecha,Nro, Importe_Total, Turno)
+	SELECT [MAIDEN].fx_getChoferId(Chofer_Dni), CAST(Rendicion_Fecha as Date),Rendicion_Nro,sum(Rendicion_Importe), [MAIDEN].fx_getTurnoId(Turno_Hora_Inicio)  
+	From [gd_esquema].Maestra
+	Where Rendicion_Nro is not null
+	Group by Chofer_Dni, CAST(Rendicion_Fecha as Date), Rendicion_Nro, Turno_Hora_Inicio
+	SET IDENTITY_INSERT [MAIDEN].Rendicion OFF
+END
+GO
+
 
 
 

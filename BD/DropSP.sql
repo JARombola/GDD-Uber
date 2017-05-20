@@ -191,6 +191,10 @@ IF OBJECT_ID ('[MAIDEN].SP_eliminarTodasRendiciones', 'P') IS NOT NULL
     DROP PROCEDURE [MAIDEN].SP_eliminarTodasRendiciones
 GO
 
+IF OBJECT_ID ('[MAIDEN].SP_cargarRendiciones', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_cargarRendiciones
+GO
+
 IF OBJECT_ID ('[MAIDEN].SP_actualizarRendicionEnViajes', 'P') IS NOT NULL  
     DROP PROCEDURE [MAIDEN].SP_actualizarRendicionEnViajes
 GO
