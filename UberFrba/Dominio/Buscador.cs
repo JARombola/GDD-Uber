@@ -14,8 +14,7 @@ namespace UberFrba.Dominio {
     class Buscador {
         private static Buscador instancia{ get; set; }
         public SqlConnection conexion { get; set; }
-        private string ESQUEMA = "[MAIDEN]";               //TODO: modificar nombre esquema
- 
+        private string ESQUEMA = "[MAIDEN]";               
 
         private Buscador () {
             String config = ConfigurationManager.AppSettings["configuracionSQL"];

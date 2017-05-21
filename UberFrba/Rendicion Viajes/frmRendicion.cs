@@ -38,6 +38,7 @@ namespace UberFrba.Rendicion_Viajes
             Persona chofer = (Persona) elemento;
                 idChofer = chofer.id;
                 txtChofer.Text = (chofer.nombre +" "+ chofer.apellido);
+            toolTip1.SetToolTip(txtChofer,String.Format("{0} {1} \nDNI:{2} \nMail:{3}",chofer.nombre, chofer.apellido, chofer.dni,chofer.mail)
         }
 
         private void btnFacturar_Click (object sender, EventArgs e) {
@@ -51,7 +52,7 @@ namespace UberFrba.Rendicion_Viajes
                     ejecutarQuery(command, dgListado);
                 }
                 catch (SqlException error) {
-                    MessageBox.Show(error.Message, "Error de facturacion",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show(error.Message, "Error de rendicion",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
 
         }

@@ -43,7 +43,7 @@ namespace UberFrba.Registro_Viajes
         private void configChofer (Persona chofer) {                //Acá se cargan los datos del chofer que envió el form de busqueda
             choferId = chofer.id;
             txtChofer.Text = chofer.nombre+" "+chofer.apellido+" ("+chofer.dni+")";
-            infoAuto.SetToolTip(txtChofer, String.Format("{0} {1}\n-DNI: {2}\n-Direccion: {3}\n-Teléfono: {4}\n-Mail: {5}", chofer.nombre, chofer.apellido, chofer.dni, chofer.direccion, chofer.telefono, chofer.mail));
+            infoCampo.SetToolTip(txtChofer, String.Format("{0} {1}\n-DNI: {2}\n-Direccion: {3}\n-Teléfono: {4}\n-Mail: {5}", chofer.nombre, chofer.apellido, chofer.dni, chofer.direccion, chofer.telefono, chofer.mail));
             buscarAuto();
         }
 
@@ -54,7 +54,7 @@ namespace UberFrba.Registro_Viajes
             datosAuto.Read();
             if (datosAuto.HasRows) {                                //Si tiene auto asignado y habilitado
                 txtAuto.Text = datosAuto["marca"].ToString() +" "+datosAuto["modelo"].ToString()+"("+datosAuto["patente"]+")";
-                infoAuto.SetToolTip(txtAuto, String.Format("-Marca: {0}\n-Modelo: {1}\n-Patente: {2}\n-Licencia: {3}\n-Rodado: {4}\n-Turno:{5}hs-{6}hs",
+                infoCampo.SetToolTip(txtAuto, String.Format("-Marca: {0}\n-Modelo: {1}\n-Patente: {2}\n-Licencia: {3}\n-Rodado: {4}\n-Turno:{5}hs-{6}hs",
                     datosAuto["marca"].ToString(), datosAuto["modelo"].ToString(), datosAuto["patente"], datosAuto["licencia"], datosAuto["Rodado"], datosAuto["Hora_Inicio"],datosAuto["Hora_Fin"]));
                 txtAuto.Cursor=Cursors.IBeam;
                 autoId = (int) datosAuto["ID"];
@@ -70,7 +70,7 @@ namespace UberFrba.Registro_Viajes
         private void configCliente (Persona cliente) {
             clienteId = cliente.id;
             txtCliente.Text = cliente.nombre+" "+cliente.apellido;
-            infoAuto.SetToolTip(txtCliente, String.Format("{0} {1}\n-DNI: {2}\n-Direccion: {3}\n-Teléfono: {4}\n-Mail: {5}", cliente.nombre, cliente.apellido, cliente.dni, cliente.direccion, cliente.telefono, cliente.mail));
+            infoCampo.SetToolTip(txtCliente, String.Format("{0} {1}\n-DNI: {2}\n-Direccion: {3}\n-Teléfono: {4}\n-Mail: {5}", cliente.nombre, cliente.apellido, cliente.dni, cliente.direccion, cliente.telefono, cliente.mail));
         }
 
 

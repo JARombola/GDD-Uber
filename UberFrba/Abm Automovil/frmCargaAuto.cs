@@ -12,7 +12,7 @@ using UberFrba.Dominio;
 using UberFrba.Abm_Chofer;
 using UberFrba.Abm_Turno;
 
-namespace UberFrba.Abm_Automovil {              //TODO: Terminar carga
+namespace UberFrba.Abm_Automovil {             
     public partial class frmCargaAuto : FormsAdapter {
         bool buscaChofer = false, buscaTurno = false;
         int idChofer, idTurno;

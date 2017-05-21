@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.infoAuto = new System.Windows.Forms.ToolTip(this.components);
+            this.infoCampo = new System.Windows.Forms.ToolTip(this.components);
             this.txtAuto = new System.Windows.Forms.TextBox();
             this.btnAtras = new System.Windows.Forms.Button();
             this.btnRegistrar = new System.Windows.Forms.Button();
@@ -55,13 +55,13 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // infoAuto
+            // infoCampo
             // 
-            this.infoAuto.AutomaticDelay = 100;
-            this.infoAuto.AutoPopDelay = 3000;
-            this.infoAuto.InitialDelay = 100;
-            this.infoAuto.IsBalloon = true;
-            this.infoAuto.ReshowDelay = 20;
+            this.infoCampo.AutomaticDelay = 100;
+            this.infoCampo.AutoPopDelay = 3000;
+            this.infoCampo.InitialDelay = 100;
+            this.infoCampo.IsBalloon = true;
+            this.infoCampo.ReshowDelay = 20;
             // 
             // txtAuto
             // 
@@ -71,7 +71,7 @@
             this.txtAuto.ReadOnly = true;
             this.txtAuto.Size = new System.Drawing.Size(199, 20);
             this.txtAuto.TabIndex = 4;
-            this.infoAuto.SetToolTip(this.txtAuto, "Este campo se completará automáticamente\r\ncuando seleccione un chofer");
+            this.infoCampo.SetToolTip(this.txtAuto, "Este campo se completará automáticamente\r\ncuando seleccione un chofer");
             this.txtAuto.TextChanged += new System.EventHandler(this.txtAuto_TextChanged);
             // 
             // btnAtras
@@ -309,7 +309,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Button btnAtras;
-        private System.Windows.Forms.ToolTip infoAuto;
+        private System.Windows.Forms.ToolTip infoCampo;
         private System.Windows.Forms.DateTimePicker horaFin;
         private System.Windows.Forms.Label label6;
     }

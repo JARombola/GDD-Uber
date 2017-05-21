@@ -132,13 +132,13 @@
     </Compile>
     <Compile Include="Dominio\Auto.cs" />
     <Compile Include="Dominio\Turno.cs" />
-    <Compile Include="Facturacion\Form1.cs">
+    <Compile Include="Dominio\IDominio.cs" />
+    <Compile Include="Facturacion\frmFacturacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Facturacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Facturacion\frmFacturacion.Designer.cs">
+      <DependentUpon>frmFacturacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dominio\IDominio.cs" />
     <Compile Include="Listado Estadistico\listEstadisticas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dominio\FormsAdapter.resx">
       <DependentUpon>FormsAdapter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturacion\frmFacturacion.resx">
+      <DependentUpon>frmFacturacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listado Estadistico\listEstadisticas.resx">
       <DependentUpon>listEstadisticas.cs</DependentUpon>

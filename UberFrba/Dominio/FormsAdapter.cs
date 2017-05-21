@@ -21,7 +21,7 @@ namespace UberFrba {
             ID = 0;
         }
 
-        protected void ejecutarQuery (SqlCommand command, DataGridView lista) {                            //TODO: Completar listas
+        protected void ejecutarQuery (SqlCommand command, DataGridView lista) {                      
             DataTable tabla = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             adapter.Fill(tabla);

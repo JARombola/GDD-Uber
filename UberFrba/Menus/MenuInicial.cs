@@ -16,7 +16,7 @@ namespace UberFrba.Menues {
     public partial class MenuInicial : FormsAdapter {
 
         public MenuInicial (string rol) {
-            InitializeComponent();              //TODO: Buscar funcionalidades y eliminar los botones que no corresponden
+            InitializeComponent();              
             groupBox1.Text="Funciones ("+rol+")";
             obtenerFuncionalidades(rol);
         }
