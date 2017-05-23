@@ -321,34 +321,29 @@ END
 GO
 
 --------------------------------------------------------------- >> ROLES
-CREATE PROCEDURE [MAIDEN].SP_altaRol(@rol varchar(20),
-					@clientes bit, @choferes bit, @autos bit, @roles bit,@turnos bit,
-					@viajes	bit, @facturacion bit, @rendicion bit, @estadisticas bit)
+CREATE PROCEDURE [MAIDEN].SP_altaRol(@rol varchar(20),@funcionalidades nvarchar(100))
 AS
 BEGIN
-	INSERT INTO [MAIDEN].Roles
-	values(@rol, @clientes,@choferes,@autos,@roles,@turnos,@viajes,@facturacion,@rendicion,@estadisticas,1)
+	Declare @ID_ROL int
+	INSERT INTO [MAIDEN].Roles(Rol,Habilitado)
+	values (@rol, 1)
+	SET @ID_ROL = @@IDENTITY
+	INSERT INTO [MAIDEN].FuncionalidadXRol(Rol,Funcionalidad)
+	Select @ID_ROL,ID FROM [MAIDEN].Funcionalidad where
+	@funcionalidades like '%;'+ cast(ID as nvarchar(3)) + ';%'
 END
 GO
 
 
-CREATE PROCEDURE [MAIDEN].SP_modificarRol(@id int, @rol varchar(20),
-					@clientes bit, @choferes bit, @autos bit, @roles bit,@turnos bit,
-					@viajes	bit, @facturacion bit, @rendicion bit, @estadisticas bit)
+CREATE PROCEDURE [MAIDEN].SP_modifRol(@idRol int, @nombreRol varchar(20),@funcionalidades nvarchar(100))
 AS
 BEGIN
-	UPDATE [MAIDEN].fx_getRol(@id)
-	SET 
-	Rol = @rol,
-	Clientes = @clientes,
-	Choferes = @choferes,
-	Autos = @autos,
-	Roles = @roles,
-	Turnos = @turnos,
-	Viajes = @viajes,
-	Facturacion = @facturacion,
-	Rendicion = @rendicion,
-	Estadisticas = @estadisticas
+	UPDATE [MAIDEN].fx_getRol(@idRol)
+	SET Rol = @nombreRol
+
+	DELETE FROM [MAIDEN].FuncionalidadXRol where Rol = @idRol 
+	INSERT INTO MAIDEN.FuncionalidadXRol 
+	Select @idRol, ID from [MAIDEN].Funcionalidad where @funcionalidades like '%;'+ cast(ID as nvarchar(3)) + ';%'
 END
 GO
 
@@ -382,18 +377,39 @@ BEGIN
 	SET NOCOUNT OFF;
 	DELETE FROM [MAIDEN].Roles
 
-	DELETE FROM [MAIDEN].Turnos
+	DELETE FROM [MAIDEN].Roles
 	DBCC CHECKIDENT ('[MAIDEN].Roles', RESEED, 0)
 END
 GO
 
+CREATE PROCEDURE [MAIDEN].SP_crearFuncionalidadesDefault		-- Se crean las funcionalidades basicas, cada una tendra su id segun el orde de creacion empezando por 1
+AS
+BEGIN
+	INSERT INTO Funcionalidad(Descripcion)
+	VALUES ('clientes'),('choferes'),('autos'),('roles'),('turnos'),('viajes'),('facturacion'),
+	('rendicion'),('estadisticas')
+								--1 = clientes, 2 = choferes, 3= autos....
+END
+GO
+
+CREATE PROCEDURE [MAIDEN].SP_eliminarTodasFuncionalidades		-- Se crean las funcionalidades basicas, cada una tendra su id segun el orde de creacion empezando por 1
+AS
+BEGIN
+	DELETE FROM [MAIDEN].FuncionalidadXRol
+
+	DELETE FROM [MAIDEN].Funcionalidad
+	DBCC CHECKIDENT ('[MAIDEN].Funcionalidad', RESEED, 0)
+END
+GO
+
+
 CREATE PROCEDURE [MAIDEN].SP_crearRolesDefault
 AS
 BEGIN
-	Exec [MAIDEN].SP_altaRol 'admin',1,1,1,1,1,1,1,1,1
-	Exec [MAIDEN].SP_altaRol 'cliente',0,0,0,0,0,0,0,1,0
-	Exec [MAIDEN].SP_altaRol 'chofer',0,0,0,0,0,0,1,0,0
-								 -- @rol, @clientes, @choferes, @autos, @roles, @turnos, @viajes,
+	Exec [MAIDEN].SP_altaRol 'admin',';1;2;3;4;5;6;7;8;9;'
+	Exec [MAIDEN].SP_altaRol 'cliente',';7;'
+	Exec [MAIDEN].SP_altaRol 'chofer',';8;'
+								 -- @clientes, @choferes, @autos, @roles, @turnos, @viajes,
 								 -- @facturacion, @rendicion, @estadisticas
 END
 GO

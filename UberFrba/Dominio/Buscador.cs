@@ -82,20 +82,6 @@ namespace UberFrba.Dominio {
             datos.Close();
         }
 
-        public Boolean cargarFunciones (int rolId, CheckedListBox listaFunciones) {
-            String query = "SELECT * FROM "+ESQUEMA+".Roles where ID = '"+rolId+"'";
-            SqlCommand command= this.getCommand(query);
-            SqlDataReader datos = command.ExecuteReader();
-            datos.Read();
-            int i;
-            for(i=1 ; i<datos.FieldCount-2;i++){        
-                listaFunciones.SetItemChecked(i-1, datos.GetBoolean(i)) ;
-            }
-            Boolean habilitado = datos.GetBoolean(i);
-            datos.Close();
-            return habilitado;           //devuelve si el rol está habilitado o no, se usa en el form de roles para el boton de habilitar
-        }
-
         //-------------- METODOS USUARIOS
 
         internal void cargarUsuarios (ComboBox cbUser) {

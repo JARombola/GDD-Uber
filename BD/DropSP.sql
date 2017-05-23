@@ -108,8 +108,8 @@ IF OBJECT_ID ('[MAIDEN].SP_eliminarRolEnUsuarios', 'P') IS NOT NULL
     DROP PROCEDURE [MAIDEN].SP_eliminarRolEnUsuarios
 GO
 
-IF OBJECT_ID ('[MAIDEN].SP_modificarRol', 'P') IS NOT NULL  
-    DROP PROCEDURE [MAIDEN].SP_modificarRol
+IF OBJECT_ID ('[MAIDEN].SP_modifRol', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_modifRol
 GO
 
 IF OBJECT_ID ('[MAIDEN].SP_deshabilitarRol', 'P') IS NOT NULL  
@@ -126,6 +126,14 @@ GO
 
 IF OBJECT_ID ('[MAIDEN].SP_crearRolesDefault', 'P') IS NOT NULL  
     DROP PROCEDURE [MAIDEN].SP_crearRolesDefault
+GO
+
+IF OBJECT_ID ('[MAIDEN].SP_crearFuncionalidadesDefault', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_crearFuncionalidadesDefault
+GO
+
+IF OBJECT_ID ('[MAIDEN].SP_eliminarTodasFuncionalidades', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].eliminarTodasFuncionalidades
 GO
 
 ----------------------------------- USUARIOS

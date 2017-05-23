@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,8 @@ using UberFrba.Registro_Viajes;
 
 namespace UberFrba.Menues {
     public partial class MenuInicial : FormsAdapter {
+
+        enum Funcion{CLIENTES=1, CHOFERES, AUTOS, ROLES, TURNOS, VIAJES, FACTURACION, RENDICION, ESTADISTICAS}
 
         public MenuInicial (string rol) {
             InitializeComponent();              
@@ -52,46 +55,28 @@ namespace UberFrba.Menues {
                 commandFuncionalidades.Parameters.AddWithValue("@rol", rol);
                 int rolID = (int) commandFuncionalidades.ExecuteScalar();                //Busco el ID del rol (Solo tenia el nombre...)
             
-            commandFuncionalidades = Buscador.getInstancia().getCommandFunctionDeTabla("fx_getRol(@id)");           //Busco las funcionalidades 
-            commandFuncionalidades.Parameters.AddWithValue("@id", rolID);
+            commandFuncionalidades = Buscador.getInstancia().getCommandFunctionDeTabla("fx_getFuncionalidades(@idRol)");           //Busco las funcionalidades 
+            commandFuncionalidades.Parameters.AddWithValue("@idRol", rolID);
 
             SqlDataReader funcionalidadesReader = commandFuncionalidades.ExecuteReader();
             actualizarBotones(funcionalidadesReader);
         }
 
         private void actualizarBotones(SqlDataReader funcionalidades){
-            funcionalidades.Read();
-            bool activado;
-            
-                activado = (bool) funcionalidades["Clientes"];
-                if (!activado) panel.Controls.Remove(btnClientes);
-            
-                activado = (bool) funcionalidades["Choferes"];
-                if (!activado) panel.Controls.Remove(btnChoferes);
-            
-                activado = (bool) funcionalidades["Autos"];
-                if (!activado) panel.Controls.Remove(btnAutos);
-            
-                activado = (bool) funcionalidades["Roles"];
-                if (!activado) panel.Controls.Remove(btnRoles);
-            
-                activado = (bool) funcionalidades["Turnos"];
-                if (!activado) panel.Controls.Remove(btnTurnos);
-            
-                activado = (bool) funcionalidades["Viajes"];
-                if (!activado) panel.Controls.Remove(btnViajes);
-            
-                activado = (bool) funcionalidades["Facturacion"];
-                if (!activado) panel.Controls.Remove(btnFacturacion);
-
-                activado = (bool) funcionalidades["Rendicion"];
-                if (!activado) panel.Controls.Remove(btnRendicion);
-            
-                activado = (bool) funcionalidades["Estadisticas"];
-                if (!activado) panel.Controls.Remove(btnEstadisticas);
-            
+            ArrayList funciones = new ArrayList();
+            while (funcionalidades.Read()) {
+                funciones.Add(funcionalidades.GetInt32(0));                    
+                }
             funcionalidades.Close();
-
+            if (!funciones.Contains((int)Funcion.CLIENTES)) panel.Controls.Remove(btnClientes);
+            if (!funciones.Contains((int) Funcion.CHOFERES)) panel.Controls.Remove(btnChoferes);
+            if (!funciones.Contains((int) Funcion.AUTOS)) panel.Controls.Remove(btnAutos);
+            if (!funciones.Contains((int) Funcion.ROLES)) panel.Controls.Remove(btnRoles);
+            if (!funciones.Contains((int) Funcion.TURNOS)) panel.Controls.Remove(btnTurnos);
+            if (!funciones.Contains((int) Funcion.VIAJES)) panel.Controls.Remove(btnViajes);
+            if (!funciones.Contains((int) Funcion.FACTURACION)) panel.Controls.Remove(btnFacturacion);
+            if (!funciones.Contains((int) Funcion.RENDICION)) panel.Controls.Remove(btnRendicion);
+            if (!funciones.Contains((int) Funcion.ESTADISTICAS)) panel.Controls.Remove(btnEstadisticas);
         }
 
         private void button1_Click (object sender, EventArgs e) {

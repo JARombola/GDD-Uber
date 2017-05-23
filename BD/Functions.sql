@@ -227,6 +227,12 @@ RETURNS TABLE
 AS
 RETURN (SELECT * From [MAIDEN].Usuarios WHERE Usuario = @user)
 GO
+-----------------------------------FUNCIONALIDADES
+CREATE FUNCTION [MAIDEN].fx_getFuncionalidades(@idRol int)		-- Devuelve las funcionalidades activas del rol
+RETURNS TABLE
+AS
+RETURN SELECT Funcionalidad from [MAIDEN].FuncionalidadXRol where Rol = @idRol
+GO
 
 ---------------------------------- LOGIN USUARIO
 CREATE FUNCTION [MAIDEN].fx_getRolesDeUsuario(@usuario varchar(30))
