@@ -17,3 +17,9 @@ GO
 IF OBJECT_ID ('[MAIDEN].tg_controlViajesSuperpuestos', 'TR') IS NOT NULL  
     DROP TRIGGER [MAIDEN].tg_controlViajesSuperpuestos;  
 GO
+
+---------------------------------------- CLIENTES
+IF OBJECT_ID ('[MAIDEN].tg_altaClientes', 'TR') IS NOT NULL  
+    DROP TRIGGER [MAIDEN].tg_altaClientes;  
+GO
+

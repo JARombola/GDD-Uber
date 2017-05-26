@@ -18,7 +18,7 @@ namespace UberFrba {
         public int ID { get; set; }
 
         public FormsAdapter () {
-            ID = 0;
+            ID = -1;
         }
 
         protected void ejecutarQuery (SqlCommand command, DataGridView lista) {                      

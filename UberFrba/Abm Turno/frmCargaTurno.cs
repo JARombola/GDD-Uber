@@ -20,7 +20,7 @@ namespace UberFrba.Abm_Turno {
         }
 
         private void btnAceptar_Click (object sender, EventArgs e) {
-            if (ID == 0) registrarTurno();
+            if (ID == -1) registrarTurno();
             else modificarTurno();
         }
 

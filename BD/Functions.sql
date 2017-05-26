@@ -281,4 +281,23 @@ RETURN(
 		Group By c.Nombre, c.Apellido,viaje.Fecha, viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km
 )
 GO
+------------------------------------------------------------ ESTADISTICAS
 
+CREATE FUNCTION [MAIDEN].fx_choferesMayorRecaudacion(@trimestre int)
+RETURNS TABLE
+AS
+RETURN(
+		SELECT TOP 5 c.Nombre, c.Apellido, c.Direccion, c.Telefono, c.Mail, sum(Importe_Total) as Total from Rendicion r join Choferes c on (r.Chofer = c.ID)
+		Group by r.Chofer, c.Nombre, c.Apellido, c.Direccion, c.Telefono, c.Mail
+		order by sum(Importe_Total) desc
+)
+GO
+
+CREATE FUNCTION [MAIDEN].fx_choferesViajesMasLargos(@trimestre int)
+RETURNS TABLE
+AS
+RETURN(
+		SELECT TOP 5 DATEDIFF(MI,cast(v.Fecha as time),v.Hora_Fin) as Duracion from Viajes v
+		order by Duracion desc
+)
+GO
