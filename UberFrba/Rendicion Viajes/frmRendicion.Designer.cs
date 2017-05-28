@@ -138,10 +138,11 @@
             // 
             this.button1.Location = new System.Drawing.Point(25, 420);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 26);
+            this.button1.Size = new System.Drawing.Size(90, 26);
             this.button1.TabIndex = 6;
             this.button1.Text = "<<Atrás";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmRendicion
             // 
@@ -153,6 +154,7 @@
             this.Controls.Add(this.dgListado);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmRendicion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rendicion viajes";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

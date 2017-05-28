@@ -283,21 +283,52 @@ RETURN(
 GO
 ------------------------------------------------------------ ESTADISTICAS
 
-CREATE FUNCTION [MAIDEN].fx_choferesMayorRecaudacion(@trimestre int)
+CREATE FUNCTION [MAIDEN].fx_choferesMayorRecaudacion(@anio int, @trimestre int)
 RETURNS TABLE
 AS
 RETURN(
-		SELECT TOP 5 c.Nombre, c.Apellido, c.Direccion, c.Telefono, c.Mail, sum(Importe_Total) as Total from Rendicion r join Choferes c on (r.Chofer = c.ID)
+		SELECT TOP 5 (c.Nombre+' '+c.Apellido) as Chofer,
+		count(*) as 'Cantidad de Viajes',
+		sum(Importe_Total) as Total
+		from Rendicion r join Choferes c on (r.Chofer = c.ID)
+		where year(r.fecha)=@anio AND DATEPART(qq,r.Fecha)=@trimestre 
 		Group by r.Chofer, c.Nombre, c.Apellido, c.Direccion, c.Telefono, c.Mail
 		order by sum(Importe_Total) desc
 )
 GO
 
-CREATE FUNCTION [MAIDEN].fx_choferesViajesMasLargos(@trimestre int)
+CREATE FUNCTION [MAIDEN].fx_choferesViajesMasLargos(@anio int,@trimestre int)
 RETURNS TABLE
 AS
 RETURN(
-		SELECT TOP 5 DATEDIFF(MI,cast(v.Fecha as time),v.Hora_Fin) as Duracion from Viajes v
+		SELECT TOP 5 (c.Nombre+' '+c.Apellido)as Cliente,c.Dni,
+		DATEDIFF(MI,cast(v.Fecha as time),v.Hora_Fin) as Duracion 
+		from Viajes v left join Choferes c on (v.Chofer = c.ID)
+		where year(v.fecha)=@anio AND DATEPART(qq,v.Fecha)=@trimestre AND v.Hora_Fin is not null and (DATEDIFF(MI,cast(v.Fecha as time),v.Hora_Fin) > 0)
 		order by Duracion desc
 )
 GO
+
+--CREATE FUNCTION [MAIDEN].fx_clientesMayorConsumo(@anio date,@trimestre int)
+--RETURNS TABLE
+--AS
+--RETURN(
+--		SELECT TOP 5 sum(total) as Cosumo from Facturas f 
+--		group by cliente
+--		order by consumo
+--)
+--GO
+
+CREATE FUNCTION [MAIDEN].fx_clientesMismoAuto(@anio int,@trimestre int)
+RETURNS TABLE
+AS
+RETURN(
+		SELECT TOP 5 (c.nombre+' '+c.apellido)as Cliente,
+		a.Marca, a.Modelo, a.Patente, count(*) as 'Cantidad Viajes'
+		From viajes v join Clientes c on (c.ID = v.Cliente) join Autos a on (a.ID = v.Auto)
+		where year(v.fecha)=@anio AND DATEPART(qq,v.Fecha)=@trimestre 
+		group by c.ID, c.nombre, c.Apellido,a.ID, a.Patente, a.Modelo, a.marca
+		order by count(*) desc
+)
+GO
+

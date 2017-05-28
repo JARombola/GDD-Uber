@@ -21,70 +21,59 @@ namespace UberFrba.Menues {
             InitializeComponent();
             tipo = clase;
             formAnterior = anterior;
+            Text=clase;
         }
 
         private void btnCarga_Click (object sender, EventArgs e) {
-            switch (tipo) {
-                case "CLIENTE": new frmCargaCliente(this).Show();
+            switch (tipo.ToUpper()) {
+                case "CLIENTES": new frmCargaCliente(this).Show();
                     this.Hide();
                     break;
-                case "CHOFER": new frmCargaChofer(this).Show();
+                case "CHOFERES": new frmCargaChofer(this).Show();
                     this.Hide();
                     break;
-                case "AUTO": new frmCargaAuto(this).Show();
+                case "AUTOS": new frmCargaAuto(this).Show();
                     this.Hide();
                     break;
-                case "TURNO": new frmCargaTurno(this).Show();
-                    this.Hide();
-                    break;
-                case "ROL": new frmCargaRol(this).Show();
+                case "TURNOS": new frmCargaTurno(this).Show();
                     this.Hide();
                     break;
 
-                default: MessageBox.Show("ESTO NO DEBERIA HABER PASADO, MAL MENUES CARGA");
-                    break;
+                default: throw new Exception("Error en menu ABM");
             }
         }
 
         private void btnModif_Click (object sender, EventArgs e) {
-            switch (tipo) {
-                case "CLIENTE": 
+            switch (tipo.ToUpper()) {
+                case "CLIENTES": 
                     FormsAdapter nuevo = new frmListaClientes(this);
                     nuevo.formSiguiente = new frmCargaCliente(this);
                     nuevo.Show();
                     this.Hide();
                     break;
                 
-                case "CHOFER": 
+                case "CHOFERES": 
                     nuevo = new frmListaChoferes(this);
                     nuevo.formSiguiente = new frmCargaChofer(this);
                     nuevo.Show();
                     this.Hide();
                     break;
 
-                case "AUTO":
+                case "AUTOS":
                     nuevo = new frmListaAutos(this);
                     nuevo.formSiguiente = new frmCargaAuto(this);
                     nuevo.Show();
                     this.Hide();
                     break;
 
-                case "TURNO": 
+                case "TURNOS": 
                     nuevo = new frmListaTurnos(this);
                     nuevo.formSiguiente = new frmCargaTurno(this);
                     nuevo.Show();
                     this.Hide();
                     break;
 
-                case "ROL":
-                    nuevo = new frmModifRol(this);
-                    nuevo.formSiguiente = new frmCargaRol(this);
-                    nuevo.Show();
-                    this.Hide();
-                    break;
-
-                default: MessageBox.Show("ESTO NO DEBERIA HABER PASADO, MAL MENUES MODIF");
-                    break;
+                default: throw new Exception("Error en menu modificacion");
             }
             
             

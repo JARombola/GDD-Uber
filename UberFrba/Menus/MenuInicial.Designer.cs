@@ -107,23 +107,25 @@
             // 
             // btnRendicion
             // 
-            this.btnRendicion.Location = new System.Drawing.Point(397, 123);
+            this.btnRendicion.Location = new System.Drawing.Point(206, 123);
             this.btnRendicion.Margin = new System.Windows.Forms.Padding(10);
             this.btnRendicion.Name = "btnRendicion";
             this.btnRendicion.Size = new System.Drawing.Size(171, 34);
             this.btnRendicion.TabIndex = 8;
             this.btnRendicion.Text = "Rendicion";
             this.btnRendicion.UseVisualStyleBackColor = true;
+            this.btnRendicion.Click += new System.EventHandler(this.btnRendicion_Click);
             // 
             // btnEstadisticas
             // 
-            this.btnEstadisticas.Location = new System.Drawing.Point(206, 123);
+            this.btnEstadisticas.Location = new System.Drawing.Point(397, 123);
             this.btnEstadisticas.Margin = new System.Windows.Forms.Padding(10);
             this.btnEstadisticas.Name = "btnEstadisticas";
             this.btnEstadisticas.Size = new System.Drawing.Size(171, 34);
             this.btnEstadisticas.TabIndex = 7;
             this.btnEstadisticas.Text = "Estadisticas";
             this.btnEstadisticas.UseVisualStyleBackColor = true;
+            this.btnEstadisticas.Click += new System.EventHandler(this.btnEstadisticas_Click);
             // 
             // panel
             // 
@@ -134,8 +136,8 @@
             this.panel.Controls.Add(this.btnTurnos);
             this.panel.Controls.Add(this.btnViajes);
             this.panel.Controls.Add(this.btnFacturacion);
-            this.panel.Controls.Add(this.btnEstadisticas);
             this.panel.Controls.Add(this.btnRendicion);
+            this.panel.Controls.Add(this.btnEstadisticas);
             this.panel.Location = new System.Drawing.Point(19, 38);
             this.panel.Name = "panel";
             this.panel.Padding = new System.Windows.Forms.Padding(5);

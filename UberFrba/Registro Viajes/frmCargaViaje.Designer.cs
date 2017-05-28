@@ -78,7 +78,7 @@
             // 
             this.btnAtras.Location = new System.Drawing.Point(48, 428);
             this.btnAtras.Name = "btnAtras";
-            this.btnAtras.Size = new System.Drawing.Size(96, 21);
+            this.btnAtras.Size = new System.Drawing.Size(79, 21);
             this.btnAtras.TabIndex = 18;
             this.btnAtras.Text = "<<Atras";
             this.btnAtras.UseVisualStyleBackColor = true;
@@ -278,6 +278,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmCargaViaje";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro Viaje";
             this.Load += new System.EventHandler(this.frmCargaViaje_Load);
             this.groupBox2.ResumeLayout(false);

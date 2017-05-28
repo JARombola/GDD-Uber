@@ -21,9 +21,8 @@ namespace UberFrba.Dominio {
             conexion = new SqlConnection(config);
             try { 
                 conexion.Open();
-               MessageBox.Show("CONEXION OK!");
             }
-            catch (Exception ex) {
+            catch (Exception) {
                 MessageBox.Show("Fallo la conexion");
             }
         }

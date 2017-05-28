@@ -181,6 +181,7 @@
             this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgListado.ContextMenuStrip = this.menuDerecho;
             this.dgListado.EnableHeadersVisualStyles = false;
+            this.dgListado.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dgListado.Location = new System.Drawing.Point(30, 189);
             this.dgListado.MultiSelect = false;
             this.dgListado.Name = "dgListado";

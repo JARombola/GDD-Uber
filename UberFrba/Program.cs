@@ -48,6 +48,7 @@ namespace UberFrba
            // Application.Run(new frmCargaViaje(new FormsAdapter()));
                 Application.Run(new MenuInicial("admin"));
            //   Application.Run(new frmRendicion(new FormsAdapter()));
+          //  Application.Run(new frmEstadistica(new FormsAdapter()));
 
         }
     }

@@ -37,7 +37,7 @@
             // 
             // btnAtras
             // 
-            this.btnAtras.Location = new System.Drawing.Point(42, 260);
+            this.btnAtras.Location = new System.Drawing.Point(24, 282);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(75, 23);
             this.btnAtras.TabIndex = 3;
@@ -128,7 +128,7 @@
             this.Controls.Add(this.btnAtras);
             this.Name = "MenuABMRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MenuABMRol";
+            this.Text = "Roles";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);

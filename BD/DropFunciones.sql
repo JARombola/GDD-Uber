@@ -118,3 +118,6 @@ IF OBJECT_ID (N'[MAIDEN].fx_choferesViajesMasLargos', N'IF') IS NOT NULL
     DROP FUNCTION [MAIDEN].fx_choferesViajesMasLargos;  
 GO  
 
+IF OBJECT_ID (N'[MAIDEN].fx_clientesMismoAuto', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_clientesMismoAuto;  
+GO  

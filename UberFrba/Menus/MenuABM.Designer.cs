@@ -26,11 +26,13 @@
             this.btnAlta = new System.Windows.Forms.Button();
             this.btnModif = new System.Windows.Forms.Button();
             this.btnAtras = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAlta
             // 
-            this.btnAlta.Location = new System.Drawing.Point(176, 58);
+            this.btnAlta.Location = new System.Drawing.Point(99, 30);
             this.btnAlta.Name = "btnAlta";
             this.btnAlta.Size = new System.Drawing.Size(160, 36);
             this.btnAlta.TabIndex = 0;
@@ -40,7 +42,7 @@
             // 
             // btnModif
             // 
-            this.btnModif.Location = new System.Drawing.Point(176, 165);
+            this.btnModif.Location = new System.Drawing.Point(99, 96);
             this.btnModif.Name = "btnModif";
             this.btnModif.Size = new System.Drawing.Size(160, 36);
             this.btnModif.TabIndex = 1;
@@ -50,7 +52,7 @@
             // 
             // btnAtras
             // 
-            this.btnAtras.Location = new System.Drawing.Point(31, 284);
+            this.btnAtras.Location = new System.Drawing.Point(12, 240);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(75, 23);
             this.btnAtras.TabIndex = 2;
@@ -58,17 +60,28 @@
             this.btnAtras.UseVisualStyleBackColor = true;
             this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnAlta);
+            this.groupBox1.Controls.Add(this.btnModif);
+            this.groupBox1.Location = new System.Drawing.Point(26, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(362, 165);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Funciones";
+            // 
             // MenuABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(556, 335);
+            this.ClientSize = new System.Drawing.Size(442, 275);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnAtras);
-            this.Controls.Add(this.btnModif);
-            this.Controls.Add(this.btnAlta);
             this.Name = "MenuABM";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuABM";
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -78,5 +91,6 @@
         private System.Windows.Forms.Button btnAlta;
         private System.Windows.Forms.Button btnModif;
         private System.Windows.Forms.Button btnAtras;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

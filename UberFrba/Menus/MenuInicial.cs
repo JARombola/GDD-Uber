@@ -10,8 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.Dominio;
+using UberFrba.Listado_Estadistico;
 using UberFrba.Menus;
 using UberFrba.Registro_Viajes;
+using UberFrba.Rendicion_Viajes;
 
 namespace UberFrba.Menues {
     public partial class MenuInicial : FormsAdapter {
@@ -24,33 +26,7 @@ namespace UberFrba.Menues {
             obtenerFuncionalidades(rol);
         }
 
-        private void btnClientes_Click (object sender, EventArgs e) {
-            new MenuABM("CLIENTE",this).Show();
-            this.Hide();
-        }
-
-        private void btnChoferes_Click (object sender, EventArgs e) {
-            new MenuABM("CHOFER",this).Show();
-            this.Hide();
-        }
-
-        private void btnAutos_Click (object sender, EventArgs e) {
-            new MenuABM("AUTO", this).Show();
-            this.Hide();
-        }
-
-        private void btnTurnos_Click (object sender, EventArgs e) {
-            new MenuABM("TURNO", this).Show();
-            this.Hide();
-        }
-
-        private void btnRoles_Click (object sender, EventArgs e) {
-            new MenuABMRol(this).Show();
-            this.Hide();
-        }
-
-
-        private void obtenerFuncionalidades(string rol){
+        private void obtenerFuncionalidades(string rol){                    // Consulta las funcionalidades del rol en la base de datos
             SqlCommand commandFuncionalidades = Buscador.getInstancia().getCommandFunction("fx_getRolId(@rol)");
                 commandFuncionalidades.Parameters.AddWithValue("@rol", rol);
                 int rolID = (int) commandFuncionalidades.ExecuteScalar();                //Busco el ID del rol (Solo tenia el nombre...)
@@ -62,7 +38,7 @@ namespace UberFrba.Menues {
             actualizarBotones(funcionalidadesReader);
         }
 
-        private void actualizarBotones(SqlDataReader funcionalidades){
+        private void actualizarBotones(SqlDataReader funcionalidades){              // Elimina botones que no corresponden con las funciones del rol
             ArrayList funciones = new ArrayList();
             while (funcionalidades.Read()) {
                 funciones.Add(funcionalidades.GetInt32(0));                    
@@ -79,6 +55,32 @@ namespace UberFrba.Menues {
             if (!funciones.Contains((int) Funcion.ESTADISTICAS)) panel.Controls.Remove(btnEstadisticas);
         }
 
+
+        private void btnClientes_Click (object sender, EventArgs e) {
+            new MenuABM("Clientes", this).Show();
+            this.Hide();
+        }
+
+        private void btnChoferes_Click (object sender, EventArgs e) {
+            new MenuABM("Choferes", this).Show();
+            this.Hide();
+        }
+
+        private void btnAutos_Click (object sender, EventArgs e) {
+            new MenuABM("Autos", this).Show();
+            this.Hide();
+        }
+
+        private void btnTurnos_Click (object sender, EventArgs e) {
+            new MenuABM("Turnos", this).Show();
+            this.Hide();
+        }
+
+        private void btnRoles_Click (object sender, EventArgs e) {
+            new MenuABMRol(this).Show();
+            this.Hide();
+        }
+
         private void button1_Click (object sender, EventArgs e) {
             this.Close();
             Login.mostrar();
@@ -86,6 +88,17 @@ namespace UberFrba.Menues {
 
         private void btnViajes_Click (object sender, EventArgs e) {
             new frmCargaViaje(this).Show();
+            this.Hide();
+        }
+
+        private void btnEstadisticas_Click (object sender, EventArgs e) {
+            new frmEstadistica(this).Show();
+            this.Hide();
+
+        }
+
+        private void btnRendicion_Click (object sender, EventArgs e) {
+            new frmRendicion(this).Show();
             this.Hide();
         }
 
