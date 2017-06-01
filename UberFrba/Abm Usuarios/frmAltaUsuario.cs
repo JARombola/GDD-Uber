@@ -18,14 +18,31 @@ namespace UberFrba.Abm_Usuarios {
         }
 
         private void button1_Click (object sender, EventArgs e) {
-            if (txtUsuario.Text!="" && txtPass.Text!="") {
+            String errores = errorCampos();
+            if (errores == null) {
                 SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_altaUsuario");
                 command.Parameters.AddWithValue("@usuario", txtUsuario.Text);
                 command.Parameters.AddWithValue("@pass", txtPass.Text);
-                int x = command.ExecuteNonQuery();
-                if (x==1) MessageBox.Show("Usuario registrado correctamente", "Registro correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                try {
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Usuario registrado correctamente", "Registro correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (SqlException error) {
+                    switch (error.Number) {
+                        case 2627: MessageBox.Show("El nombre de usuario ya se encuentra en uso", "Usuario existente", MessageBoxButtons.OK, MessageBoxIcon.Error);    //Violacion de restriccion UNIQUE 
+                            break;
+                        case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break;
+                    }
+               }
             }
-            else MessageBox.Show("El nombre de usuario o contraseña se encuentran vacíos", "Datos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else MessageBox.Show(errores,"Error de registro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+        }
+
+        public override string errorCampos () {
+            String errores = null;
+            if (String.IsNullOrWhiteSpace(txtUsuario.Text)) errores+= "- Nombre de usuario vacío\n";
+            if (String.IsNullOrWhiteSpace(txtPass.Text)) errores+= "- Contraseña vacía\n";
+            return errores;
         }
 
         private void button2_Click (object sender, EventArgs e) {

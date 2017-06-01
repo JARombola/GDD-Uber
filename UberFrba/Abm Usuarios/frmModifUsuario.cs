@@ -25,7 +25,7 @@ namespace UberFrba.Abm_Usuarios {
                 command.Parameters.AddWithValue("@pass", txtPass.Text);
 
                 int x = command.ExecuteNonQuery();
-                if (x==1) MessageBox.Show("Usuario Modificado correctamente");
+                MessageBox.Show("Usuario Modificado correctamente");
         }
 
         private void cbUsuario_SelectedIndexChanged (object sender, EventArgs e) {
@@ -36,8 +36,10 @@ namespace UberFrba.Abm_Usuarios {
         private void btnEliminar_Click (object sender, EventArgs e) {
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_eliminarUsuario");
                 command.Parameters.AddWithValue("@usuario", cbUsuario.Text);
-            int x = command.ExecuteNonQuery();
-            if (x>0) MessageBox.Show("Usuario eliminado correctamente");
+            command.ExecuteNonQuery();
+            MessageBox.Show("Usuario eliminado correctamente");
+            cbUsuario.Items.Clear();
+            Buscador.getInstancia().cargarUsuarios(cbUsuario);
         }
 
         private void button2_Click (object sender, EventArgs e) {
