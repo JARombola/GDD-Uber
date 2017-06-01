@@ -46,5 +46,9 @@ namespace UberFrba.Menus {
             new frmModifUsuario(this).Show();
             this.Hide();
         }
+
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
+        }
     }
 }

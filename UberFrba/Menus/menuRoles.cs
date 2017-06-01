@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UberFrba.Menues {
-    public partial class menuRoles : Form {
+    public partial class menuRoles : FormsAdapter {
 
         public menuRoles (ArrayList roles) {
             InitializeComponent();
@@ -26,6 +26,10 @@ namespace UberFrba.Menues {
 
         private void cbRol_SelectedIndexChanged (object sender, EventArgs e) {
             btnIngresar.Enabled=true;
+        }
+
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
         }
     }
 }

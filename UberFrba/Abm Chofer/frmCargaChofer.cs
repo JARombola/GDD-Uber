@@ -136,5 +136,9 @@ namespace UberFrba.Abm_Chofer {
         private void btnClean_Click (object sender, EventArgs e) {
             limpiar();
         }
+
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender,e);
+        }
     }
 }

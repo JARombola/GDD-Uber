@@ -111,6 +111,7 @@
             this.Name = "frmAltaUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro Usuario";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.exit);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

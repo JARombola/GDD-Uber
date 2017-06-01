@@ -131,5 +131,9 @@ namespace UberFrba.Abm_Turno {
             lblHabilitados.Visible=soloHabilitados;
         }
 
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
+        }
+
     }
 }

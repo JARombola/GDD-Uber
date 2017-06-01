@@ -128,6 +128,7 @@
             this.Name = "frmModifUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificacion Usuario";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.exit);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

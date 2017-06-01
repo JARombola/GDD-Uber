@@ -129,6 +129,7 @@
             this.Name = "MenuABMRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Roles";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.exit);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);

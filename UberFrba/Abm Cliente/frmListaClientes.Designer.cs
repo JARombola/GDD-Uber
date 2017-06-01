@@ -253,6 +253,7 @@
             this.Name = "frmListaClientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado Clientes";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.exit);
             this.Load += new System.EventHandler(this.frmListado_Load);
             this.grFiltros.ResumeLayout(false);
             this.grFiltros.PerformLayout();

@@ -52,5 +52,9 @@ namespace UberFrba.Abm_Usuario {
             else
             btnOk.Enabled=true;
         }
+
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
+        }
     }
 }

@@ -343,6 +343,7 @@
             this.Name = "frmCargaCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar Cliente";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.exit);
             this.Load += new System.EventHandler(this.frmCargaCliente_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

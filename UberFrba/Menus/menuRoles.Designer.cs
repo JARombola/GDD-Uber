@@ -81,6 +81,7 @@
             this.Name = "menuRoles";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rol de Acceso";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.exit);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

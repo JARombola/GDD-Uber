@@ -56,5 +56,9 @@ namespace UberFrba.Facturacion
                 }
 
         }
+
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
+        }
         }
 }

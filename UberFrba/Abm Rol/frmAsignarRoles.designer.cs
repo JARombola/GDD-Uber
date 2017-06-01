@@ -122,6 +122,7 @@
             this.Name = "frmAsignarRoles";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificacion Roles de Usuario";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.exit);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

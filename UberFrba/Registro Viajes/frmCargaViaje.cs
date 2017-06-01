@@ -149,5 +149,9 @@ namespace UberFrba.Registro_Viajes
             base.volver();
         }
 
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
+        }
+
     }
 }

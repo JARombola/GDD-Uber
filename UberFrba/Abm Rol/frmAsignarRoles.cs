@@ -70,5 +70,9 @@ namespace UberFrba.Abm_Usuario
             this.Close();
         }
 
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
+        }
+
     }
 }

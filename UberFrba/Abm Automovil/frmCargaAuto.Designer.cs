@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent () {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnClear = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtTurno = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -40,7 +41,6 @@
             this.btnHabilitacion = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +66,15 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Auto";
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(407, 335);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(110, 26);
+            this.btnClear.TabIndex = 23;
+            this.btnClear.Text = "Limpiar";
+            this.btnClear.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -223,15 +232,6 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // btnClear
-            // 
-            this.btnClear.Location = new System.Drawing.Point(407, 335);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(110, 26);
-            this.btnClear.TabIndex = 23;
-            this.btnClear.Text = "Limpiar";
-            this.btnClear.UseVisualStyleBackColor = true;
-            // 
             // frmCargaAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -245,6 +245,7 @@
             this.Name = "frmCargaAuto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro Autos";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.exit);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

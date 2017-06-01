@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using UberFrba.Dominio;
 using UberFrba.Abm_Chofer;
 using UberFrba.Abm_Turno;
+using UberFrba.Menues;
 
 namespace UberFrba.Abm_Automovil {             
     public partial class frmCargaAuto : FormsAdapter {
@@ -162,5 +163,8 @@ namespace UberFrba.Abm_Automovil {
             limpiar();
         }
 
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
+        }
     }
 }

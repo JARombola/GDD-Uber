@@ -22,15 +22,23 @@ namespace UberFrba.Abm_Usuarios {
                 SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_altaUsuario");
                 command.Parameters.AddWithValue("@usuario", txtUsuario.Text);
                 command.Parameters.AddWithValue("@pass", txtPass.Text);
-                int x = command.ExecuteNonQuery();
-                if (x==1) MessageBox.Show("Usuario registrado correctamente", "Registro correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                try {
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Usuario registrado correctamente", "Registro correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (SqlException error) {
+                    if (error.Number == 2627) MessageBox.Show("Nombre de usuario ya existente", "Error registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else MessageBox.Show("El nombre de usuario o contraseña se encuentran vacíos", "Datos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void button2_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
+        }
+
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
         }
 
     }

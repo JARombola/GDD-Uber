@@ -101,5 +101,9 @@ namespace UberFrba.Abm_Turno {
             limpiar();
         }
 
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
+        }
+
     }
 }

@@ -133,5 +133,9 @@ namespace UberFrba.Abm_Cliente{
             lblCantResultados.Text = "Resultados: "+dgListado.RowCount.ToString();
         }
 
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
+        }
+
     }
 }

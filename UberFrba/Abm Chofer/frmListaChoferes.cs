@@ -133,6 +133,10 @@ namespace UberFrba.Abm_Chofer{
             lblCantResultados.Visible=true;
             lblCantResultados.Text = "Resultados: "+dgListado.RowCount.ToString();
         }
+
+        private void exit (object sender, FormClosingEventArgs e) {
+            base.cerrar(sender, e);
+        }
         
     }
 }

@@ -139,5 +139,9 @@ namespace UberFrba.Abm_Cliente
            limpiar();
        }
 
+       private void exit (object sender, FormClosedEventArgs e) {
+           base.cerrar(sender, e);
+       }
+
     }
 }

@@ -182,6 +182,7 @@
             this.Name = "frmModifRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificación Roles";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.exit);
             this.Load += new System.EventHandler(this.frmModifRol_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

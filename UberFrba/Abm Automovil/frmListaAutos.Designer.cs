@@ -272,6 +272,7 @@
             this.Name = "frmListaAutos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado Automoviles";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.exit);
             this.Load += new System.EventHandler(this.frmListAutomoviles_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -1,0 +1,6 @@
+Se cambió el contexto de la base de datos a 'GD1C2017'.
+Se cambió el contexto de la base de datos a 'GD1C2017'.
+Mensaje 3701, Nivel 11, Estado 5, Servidor MARCELO\SQLSERVER2012, Línea 1
+No se puede quitar el vista 'MAIDEN.vw_Autos' porque no existe o el usuario no tiene permiso.
+Mensaje 3701, Nivel 11, Estado 5, Servidor MARCELO\SQLSERVER2012, Línea 1
+No se puede quitar el vista 'MAIDEN.vw_Viajes' porque no existe o el usuario no tiene permiso.

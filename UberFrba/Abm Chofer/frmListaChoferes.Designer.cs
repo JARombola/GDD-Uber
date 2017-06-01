@@ -254,6 +254,7 @@
             this.Name = "frmListaChoferes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado Choferes";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.exit);
             this.Load += new System.EventHandler(this.frmListado_Load);
             this.menuDerecho.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();

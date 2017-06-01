@@ -83,5 +83,9 @@ namespace UberFrba.Menues {
             formAnterior.Show();
             this.Close();
         }
+
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
+        }
     }
 }

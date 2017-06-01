@@ -102,6 +102,10 @@ namespace UberFrba.Menues {
             this.Hide();
         }
 
+        private void exit (object sender, FormClosedEventArgs e) {
+            base.cerrar(sender, e);
+        }
+
        
 
     }
