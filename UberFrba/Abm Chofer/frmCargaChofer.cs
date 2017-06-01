@@ -25,6 +25,7 @@ namespace UberFrba.Abm_Chofer {
             Persona chofer = (Persona) persona;
             btnHabilitacion.Text = chofer.habilitado?"Deshabilitar":"Habilitar";
             btnHabilitacion.Visible=true;
+            btnClear.Visible=false;
             cargarDatos(chofer);
         }
 
@@ -43,38 +44,63 @@ namespace UberFrba.Abm_Chofer {
         }
 
         private void btnAceptar_Click (object sender, EventArgs e) {
-            if (ID==-1) registrarChofer();          //NO hay un ID asociado ====> Es un registro
-            else modificarChofer();
-            volver();
+            String errorDatos = errorCampos();
+            if (errorDatos == null) {
+                try {
+                    if (ID==-1) registrarChofer();          //NO hay un ID asociado ====> Es un registro
+                    else modificarChofer();
+                    MessageBox.Show("Chofer registrado correctamente", "Operacion correcta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    limpiar();
+                }
+                catch (SqlException error) {
+                    switch (error.Number) {
+                        case 2627: MessageBox.Show("El DNI ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);    //Violacion de restriccion UNIQUE 
+                            break;
+                        case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break;        //ERROR de conversion de datos
+                    }
+                }
+            } else MessageBox.Show(errorDatos, "Error Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public override string errorCampos () {
+            String errores =null;
+            int asd;
+            if (String.IsNullOrWhiteSpace(txtNombre.Text)) errores+="- El campo 'Nombre' no puede estar vacío \n";
+            if (String.IsNullOrWhiteSpace(txtApellido.Text)) errores+="- El campo 'Apellido' no puede estar vacío\n";
+            if (!int.TryParse(txtDNI.Text, out asd)) errores+="- El 'DNI' debe ser numérico \n";
+            if (String.IsNullOrWhiteSpace(txtMail.Text)) errores+="- El campo 'Mail' no puede estar vacío\n";
+            if (!int.TryParse(txtTel.Text, out asd)) errores+="- El 'Teléfono' debe ser numérico\n";
+            if (String.IsNullOrWhiteSpace(txtDire.Text)) errores+="- El campo 'Direccion' no puede estar vacío\n";
+            if (String.IsNullOrWhiteSpace(txtDepto.Text)) errores+="- El campo 'Depto' no puede estar vacío\n";
+            if (String.IsNullOrWhiteSpace(txtLocalidad.Text)) errores+="- El campo 'Localidad' no puede estar vacío\n";
+            return errores;
         }
 
         private void registrarChofer () {
             SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_altaCliente");
             setParametros(ref cmd);
-            int p=cmd.ExecuteNonQuery();
-            MessageBox.Show("Agregados = "+p);
+            cmd.ExecuteNonQuery();
         }
 
         private void modificarChofer () {
             SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_modifChofer");
             setParametros(ref cmd);
             cmd.Parameters.AddWithValue("@id", Math.Abs(ID));
-            int p = cmd.ExecuteNonQuery();
-            MessageBox.Show("Modificados = "+ p);
+            cmd.ExecuteNonQuery();
         }
 
 
         private void setParametros (ref SqlCommand command) {
             command.Parameters.AddRange(new[]
-                    {new SqlParameter("@nombre",valor(txtNombre.Text)),
-                     new SqlParameter("@apellido",valor(txtApellido.Text)),
-                     new SqlParameter("@direccion",valor(txtDire.Text)),
-                     new SqlParameter("@dni",valor(txtDNI.Text)),
-                     new SqlParameter("@mail",valor(txtMail.Text)),
-                     new SqlParameter("@telefono",valor(txtTel.Text)),
-                     new SqlParameter("@fecha_nacimiento",dateNacimiento.Value)
-                }
-                 );
+                    {new SqlParameter("@nombre",txtNombre.Text),
+                     new SqlParameter("@apellido",txtApellido.Text),
+                     new SqlParameter("@dni",txtDNI.Text),
+                     new SqlParameter("@telefono",txtTel.Text),                     
+                      new SqlParameter("@direccion",txtDire.Text),
+                     new SqlParameter("@piso",cbPiso.Value),
+                     new SqlParameter("@depto",txtDepto.Text),
+                     new SqlParameter("@localidad",txtLocalidad.Text),
+                     new SqlParameter("@mail",txtMail.Text)});
         }
 
         private void btnHabilitacion_Click (object sender, EventArgs e) {
@@ -95,17 +121,20 @@ namespace UberFrba.Abm_Chofer {
             txtMail.Clear();
             txtTel.Clear();
             txtDire.Clear();
-            dateNacimiento.ResetText();
+            dateNacimiento.Value= dateNacimiento.MinDate;
         }
 
         private void btnVolver_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
         }
 
         private void frmCargaChofer_Load (object sender, EventArgs e) {
             dateNacimiento.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
             dateNacimiento.Value = dateNacimiento.MinDate;
+        }
+
+        private void btnClean_Click (object sender, EventArgs e) {
+            limpiar();
         }
     }
 }

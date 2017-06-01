@@ -41,12 +41,16 @@ CREATE PROCEDURE [MAIDEN].SP_altaCliente(
 		@dni numeric(18,0),
 		@telefono numeric(18,0),
 		@direccion varchar(255),
+		@piso int,
+		@depto char(1),
+		@localidad varchar(255),
 		@mail varchar(255),
 		@fecha_nacimiento datetime)
+		
 AS
 BEGIN
-	INSERT INTO [MAIDEN].Clientes
-	values(@nombre, @apellido, @dni, @telefono, @direccion, @mail, @fecha_nacimiento,1)
+	INSERT INTO [MAIDEN].Clientes(Nombre,Apellido,DNI,Telefono,Direccion,piso,depto,localidad,mail,Fecha_Nacimiento)
+	values(@nombre, @apellido, @dni,@telefono, @direccion,@piso,@depto,@localidad, @mail, @fecha_nacimiento)
 END
 GO
 
@@ -122,12 +126,15 @@ CREATE PROCEDURE [MAIDEN].SP_altaChofer(
 		@dni numeric(18,0),
 		@telefono numeric(18,0),
 		@direccion varchar(255),
+		@piso int,
+		@depto char(1),
+		@localidad varchar(255),
 		@mail varchar(255),
 		@fecha_nacimiento datetime)
 AS
 BEGIN
-	INSERT INTO [MAIDEN].Choferes
-	values(@nombre, @apellido, @dni, @telefono, @direccion, @mail, @fecha_nacimiento, 1)
+	INSERT INTO [MAIDEN].Choferes(Nombre,Apellido,Dni,Telefono,Direccion,piso,depto,localidad,Mail,Fecha_Nacimiento)
+	values(@nombre, @apellido, @dni,@telefono, @direccion,@piso,@depto,@localidad, @mail, @fecha_nacimiento)
 END
 GO
 
@@ -204,7 +211,7 @@ CREATE PROCEDURE [MAIDEN].SP_altaAuto(
 			@turno int)
 AS
 BEGIN
-	Insert into [MAIDEN].vw_Autos(Marca,Modelo,Patente,Chofer,Turno)
+	Insert into [MAIDEN].Autos(Marca,Modelo,Patente,Chofer,Turno)
 	values(@marca, @modelo, @patente,@chofer, @turno)
 END
 GO
@@ -540,7 +547,12 @@ BEGIN
 	Declare @idTurno int;
 	
 	if exists(select 1 from [MAIDEN].viajes where(Chofer = @idChofer AND 
-	Format(@fecha, 'HH:mm') BETWEEN Format(Fecha,'HH:mm') AND Hora_Fin)) throw 52000,'EL chofer ya tiene otro viaje registrado en ese horario',16
+	Format(@fecha, 'HH:mm') BETWEEN Format(Fecha,'HH:mm') AND Hora_Fin 
+	AND CAST(Fecha as Date) = CAST(@fecha as Date))) throw 51000,'EL chofer ya tiene otro viaje registrado en ese horario',16;
+
+	if exists(select 1 from [MAIDEN].viajes where(Cliente = @idCliente AND 
+	Format(@fecha, 'HH:mm') BETWEEN Format(Fecha,'HH:mm') AND Hora_Fin 
+	AND CAST(Fecha as Date) = CAST(@fecha as Date))) throw 51000,'EL cliente ya tiene otro viaje registrado en ese horario',16;
 
 	Select @idTurno = ID from [MAIDEN].Turnos where (
 		DATEPART(HOUR,@fecha) between Hora_Inicio and Hora_Fin-1
@@ -550,7 +562,7 @@ BEGIN
 	else BEGIN
 			if (@idTurno = (select Turno from [MAIDEN].Autos where ID = @idAuto))			-- Verifica que el turno que corresponde (segun los horarios ingresados) 
 			BEGIN																			-- coincida con el turno registrado en el auto
-				INSERT INTO [MAIDEN].vw_Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente,Hora_Fin)
+				INSERT INTO [MAIDEN].Viajes(Chofer,Auto,Turno,Km,Fecha,Cliente,Hora_Fin)
 				values(@idChofer, @idAuto,@idTurno , @kms, @fecha, @idCliente,@horaFin)
 			END
 			else throw 51000,'El horario no coincide con el turno del auto',16;

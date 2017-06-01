@@ -20,33 +20,40 @@ namespace UberFrba.Abm_Turno {
         }
 
         private void btnAceptar_Click (object sender, EventArgs e) {
-            if (ID == -1) registrarTurno();
-            else modificarTurno();
+            String errorDatos = errorCampos();
+            if (errorDatos == null) {
+                try {
+                    if (ID == -1) registrarTurno();
+                    else modificarTurno();
+                    MessageBox.Show("Turno registrado correctamente", "Operacion completada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    limpiar();
+                }
+                catch (SqlException error) {
+                    switch (error.Number) {
+                        case 51000: MessageBox.Show(null, error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break;
+                        case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break;        //ERROR de conversion de datos
+                    }
+                }
+            } else MessageBox.Show(errorDatos, "Error Datos", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+        }
+
+        public override string errorCampos () {
+            String errores=null;
+            if (horaInicio.Value>horaFin.Value) errores+="- La hora de inicio debe ser menor que la de fin\n";
+            if (String.IsNullOrEmpty(txtDescripcion.Text)) errores+="- La descripción no puede estar vacía\n";
+            return errores;
         }
 
         private void registrarTurno(){
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_altaTurno");
             setearParametros(ref command);
-            try {
-                command.ExecuteNonQuery();
-                MessageBox.Show("Guardado");
-            }
-            catch (SqlException error) {                // La excepcion desde SQL envia el mensaje de falla
-                MessageBox.Show(null,error.Message,"Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            command.ExecuteNonQuery();
         }
 
         private void modificarTurno () {
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_modifTurno");
             command.Parameters.AddWithValue("@id", ID);                         //Necesito agregarle el ID porque es una modificacion
-            setearParametros(ref command);
-            try {
-                command.ExecuteNonQuery();
-                MessageBox.Show("Modificado!");
-            }
-            catch (SqlException error) {
-                MessageBox.Show(null, error.Message, "Error de modificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            command.ExecuteNonQuery();
         }
 
         private void setearParametros (ref SqlCommand command) {
@@ -56,8 +63,7 @@ namespace UberFrba.Abm_Turno {
                 new SqlParameter ("@precioBase", precioBase.Value),
                 new SqlParameter ("@precioKm", precioKm.Value),
                 new SqlParameter ("@descripcion", txtDescripcion.Text),
-                new SqlParameter ("@habilitado", chkHabilitado.Checked),
-            }
+                new SqlParameter ("@habilitado", chkHabilitado.Checked)}
             );
         }
 
@@ -76,12 +82,23 @@ namespace UberFrba.Abm_Turno {
             btnAceptar.Text = "Modificar";
             Turno turnito = (Turno) unTurno;
             chkHabilitado.Checked = turnito.habilitado;
+            btnClear.Visible=false;
             cargarDatos(turnito);
         }
 
         private void btnVolver_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
+        }
+        public override void limpiar () {
+            horaInicio.Value=0;
+            horaFin.Value=0;
+            precioBase.Value=0;
+            precioKm.Value=0;
+            txtDescripcion.ResetText();
+        }
+
+        private void btnClear_Click (object sender, EventArgs e) {
+            limpiar();
         }
 
     }

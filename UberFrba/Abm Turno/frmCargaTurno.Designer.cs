@@ -39,6 +39,7 @@
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.horaFin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.horaInicio)).BeginInit();
@@ -58,6 +59,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnClear);
             this.groupBox1.Controls.Add(this.horaFin);
             this.groupBox1.Controls.Add(this.horaInicio);
             this.groupBox1.Controls.Add(this.precioKm);
@@ -135,7 +137,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(151, 179);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(345, 84);
+            this.txtDescripcion.Size = new System.Drawing.Size(335, 120);
             this.txtDescripcion.TabIndex = 4;
             // 
             // label4
@@ -213,6 +215,16 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(411, 318);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 22;
+            this.btnClear.Text = "Limpiar";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // frmCargaTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -252,5 +264,6 @@
         private System.Windows.Forms.NumericUpDown horaFin;
         private System.Windows.Forms.NumericUpDown horaInicio;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Button btnClear;
     }
 }

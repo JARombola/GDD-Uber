@@ -28,6 +28,10 @@ namespace UberFrba {
             lista.DataSource = tabla;
         }
 
+        protected Object valor (string texto) {
+            if (!String.IsNullOrWhiteSpace(texto)) return texto;
+            return DBNull.Value;
+        }
 
         protected int deshabilitar (string SP, int id){
             SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_deshabilitar"+SP);
@@ -41,11 +45,6 @@ namespace UberFrba {
             return cmd.ExecuteNonQuery();
         }
 
-        protected Object valor (string texto) {
-            if (!String.IsNullOrWhiteSpace(texto)) return texto;
-            return DBNull.Value;
-        }
-
         protected void volver () {
             formAnterior.Show();
             Close();
@@ -56,6 +55,9 @@ namespace UberFrba {
         public virtual void cargarDatos (IDominio elemento) {
         }
         public virtual void limpiar () {
+        }
+        public virtual string errorCampos() {
+            return null;
         }
 
         private void InitializeComponent () {

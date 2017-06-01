@@ -76,18 +76,17 @@
             // 
             // btnAtras
             // 
-            this.btnAtras.Location = new System.Drawing.Point(48, 428);
+            this.btnAtras.Location = new System.Drawing.Point(49, 421);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(79, 21);
             this.btnAtras.TabIndex = 18;
             this.btnAtras.Text = "<<Atras";
             this.btnAtras.UseVisualStyleBackColor = true;
-            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
             // 
             // btnRegistrar
             // 
             this.btnRegistrar.Enabled = false;
-            this.btnRegistrar.Location = new System.Drawing.Point(256, 414);
+            this.btnRegistrar.Location = new System.Drawing.Point(256, 407);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(111, 35);
             this.btnRegistrar.TabIndex = 17;
@@ -272,7 +271,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(625, 486);
+            this.ClientSize = new System.Drawing.Size(619, 462);
             this.Controls.Add(this.btnAtras);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.groupBox2);

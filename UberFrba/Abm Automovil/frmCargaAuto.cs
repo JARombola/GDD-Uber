@@ -42,6 +42,7 @@ namespace UberFrba.Abm_Automovil {
                 Auto autito = (Auto) objeto;
                 btnHabilitacion.Text = autito.habilitado?"Deshabilitar":"Habilitar";
                 btnHabilitacion.Visible=true;
+                btnClear.Visible=false;
                 cargarDatos(autito);
            }
         }
@@ -65,36 +66,55 @@ namespace UberFrba.Abm_Automovil {
         
 
         private void btnAceptar_Click (object sender, EventArgs e) {
-            if (ID==-1) registrarAuto();          //NO hay un ID asociado ====> Es un registro. SINO, sería una modificacion
-            else modificarAuto();
-            volver();
+            String errorDatos = errorCampos();
+            if (errorDatos == null) {
+                try {
+                    if (ID==-1) registrarAuto();          //NO hay un ID asociado ====> Es un registro. SINO, sería una modificacion
+                    else modificarAuto();
+                    limpiar();
+                }
+                catch (SqlException error) {
+                    switch (error.Number) {
+                        case 2627: MessageBox.Show("La Patente ya se encuentra registrada", "Patente Duplicada", MessageBoxButtons.OK, MessageBoxIcon.Error);    //Violacion de restriccion UNIQUE 
+                            break;
+                        case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break;        //ERROR de conversion de datos
+                    }
+                }
+            } else MessageBox.Show(errorDatos, "Error Datos", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+        }
+
+        public override string errorCampos () {
+            String errores = null;
+            int asd;
+            if (String.IsNullOrWhiteSpace(cbMarca.Text)) errores+="- Debe seleccionar una 'Marca'\n";
+            if (String.IsNullOrWhiteSpace(txtModelo.Text)) errores+="- El campo 'Modelo' no puede estar vacío \n";
+            if (!int.TryParse(txtPatente.Text, out asd)) errores+="- El campo 'Patente' no puede estar vacío \n";
+            if (String.IsNullOrWhiteSpace(txtChofer.Text)) errores+="- Debe seleccionar un 'Chofer'\n";
+            if (String.IsNullOrWhiteSpace(txtTurno.Text)) errores+="- Debe seleccionar un 'Turno'\n";
+            return errores;
         }
 
         private void registrarAuto () {
             SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_altaAuto");
             setParametros(ref cmd);
-            int p=cmd.ExecuteNonQuery();
-            MessageBox.Show("Agregados = "+p);
+            cmd.ExecuteNonQuery();
         }
 
         private void modificarAuto () {
             SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_modifAuto");
             setParametros(ref cmd);
             cmd.Parameters.AddWithValue("@id", Math.Abs(ID));
-            int p = cmd.ExecuteNonQuery();
-            MessageBox.Show("Modificados = "+ p);
+            cmd.ExecuteNonQuery();
         }
 
 
         private void setParametros (ref SqlCommand command) {
             command.Parameters.AddRange(new[]
-                    {new SqlParameter("@marca",valor(cbMarca.Text)),
-                     new SqlParameter("@modelo",valor(txtModelo.Text)),
-                     new SqlParameter("@patente",valor(txtPatente.Text)),
+                    {new SqlParameter("@marca",cbMarca.Text),
+                     new SqlParameter("@modelo",txtModelo.Text),
+                     new SqlParameter("@patente",txtPatente.Text),
                      new SqlParameter("@chofer",idChofer),
-                     new SqlParameter("@turno",idTurno),
-                }
-                 );
+                     new SqlParameter("@turno",idTurno)});
         }
 
         private void btnHabilitacion_Click (object sender, EventArgs e) {
@@ -118,8 +138,7 @@ namespace UberFrba.Abm_Automovil {
         }
 
         private void btnVolver_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
         }
 
         private void button1_Click (object sender, EventArgs e) {
@@ -129,6 +148,18 @@ namespace UberFrba.Abm_Automovil {
             listaTurnos.formSiguiente=this;
             listaTurnos.Show();
             this.Hide();
+        }
+
+        public override void limpiar () {
+            cbMarca.ResetText();
+            txtModelo.ResetText();
+            txtPatente.ResetText();
+            txtChofer.ResetText();
+            txtTurno.ResetText();
+        }
+
+        private void btnClean_Click (object sender, EventArgs e) {
+            limpiar();
         }
 
     }

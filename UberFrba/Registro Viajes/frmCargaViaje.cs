@@ -107,11 +107,28 @@ namespace UberFrba.Registro_Viajes
         }
 
         private void btnRegistrar_Click (object sender, EventArgs e) {
-            if (txtKms.Value != 0) {
-                if(horaInicio.Value < horaFin.Value)    registrarViaje();
-                else MessageBox.Show("La hora de inicio no puede ser menor que la de fin", "Error horarios", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else MessageBox.Show("La cantidad de kms. debe ser distinta de 0", "Error Kms.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            String errorDatos = errorCampos();
+            if (errorDatos == null) {
+                    try{
+                        registrarViaje();
+                        MessageBox.Show("Viaje registrado correctamente","Viaje registrado",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        limpiar();
+                    }
+                    catch(SqlException error){
+                        switch(error.Number){
+                            case 51000: MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error); break;
+                            case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break;        //ERROR de conversion de datos
+                        }
+                    }
+                }
+            else MessageBox.Show(errorDatos, "Error Datos", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+       }
+
+        public override string errorCampos(){
+            String errores = null;
+            if (txtKms.Value == 0) errores += "- La cantidad de kms. debe ser distinta de 0 \n";
+            if (horaInicio.Value >= horaFin.Value) errores += "- La hora de inicio no puede ser menor que la de fin\n";
+            return errores;
         }
 
         private void registrarViaje () {
@@ -124,22 +141,12 @@ namespace UberFrba.Registro_Viajes
                     new SqlParameter ("@kms",txtKms.Value),
                     new SqlParameter ("@fecha",date),
                     new SqlParameter ("@idCliente",clienteId),
-                    new SqlParameter ("@horaFin",horaFin.Value),
-
-                });
-            try {
-                command.ExecuteNonQuery();
-                MessageBox.Show("Viaje registrado correctamente", "Viaje registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    new SqlParameter ("@horaFin",horaFin.Value)});
+                command.ExecuteNonQuery();            
             }
-            catch (SqlException error) {
-                MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         private void btnAtras_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
         }
 
     }
