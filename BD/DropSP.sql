@@ -133,7 +133,7 @@ IF OBJECT_ID ('[MAIDEN].SP_crearFuncionalidadesDefault', 'P') IS NOT NULL
 GO
 
 IF OBJECT_ID ('[MAIDEN].SP_eliminarTodasFuncionalidades', 'P') IS NOT NULL  
-    DROP PROCEDURE [MAIDEN].eliminarTodasFuncionalidades
+    DROP PROCEDURE [MAIDEN].SP_eliminarTodasFuncionalidades
 GO
 
 ----------------------------------- USUARIOS

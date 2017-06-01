@@ -625,15 +625,17 @@ AS
 BEGIN
 	SET IDENTITY_INSERT [MAIDEN].Rendicion ON				-- La tabla usa Identity, pero la tabla ya tiene ciertos valores. De esta forma permitirá setearle, sin problemas con los identity
 	INSERT INTO [MAIDEN].Rendicion(Chofer,Fecha,Nro, Importe_Total, Turno)
-	SELECT [MAIDEN].fx_getChoferId(Chofer_Dni), CAST(Rendicion_Fecha as Date),Rendicion_Nro,sum(Rendicion_Importe), [MAIDEN].fx_getTurnoId(Turno_Hora_Inicio)  
+	SELECT [MAIDEN].fx_getChoferId(Chofer_Dni),
+		   CAST(Rendicion_Fecha as Date),
+		   Rendicion_Nro,
+		   sum(Rendicion_Importe),
+		   [MAIDEN].fx_getTurnoId(Turno_Hora_Inicio)  
 	From [gd_esquema].Maestra
 	Where Rendicion_Nro is not null
 	Group by Chofer_Dni, CAST(Rendicion_Fecha as Date), Rendicion_Nro, Turno_Hora_Inicio
 	SET IDENTITY_INSERT [MAIDEN].Rendicion OFF
 END
 GO
-
-
 
 
 CREATE PROCEDURE [MAIDEN].SP_eliminarTodasRendiciones
