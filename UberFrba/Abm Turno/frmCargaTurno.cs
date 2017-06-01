@@ -100,6 +100,5 @@ namespace UberFrba.Abm_Turno {
         private void btnClear_Click (object sender, EventArgs e) {
             limpiar();
         }
-
     }
 }

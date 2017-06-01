@@ -80,8 +80,7 @@ namespace UberFrba.Menues {
         }
 
         private void btnAtras_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
         }
     }
 }

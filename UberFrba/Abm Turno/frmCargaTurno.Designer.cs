@@ -25,6 +25,7 @@
         private void InitializeComponent () {
             this.btnAceptar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnClear = new System.Windows.Forms.Button();
             this.horaFin = new System.Windows.Forms.NumericUpDown();
             this.horaInicio = new System.Windows.Forms.NumericUpDown();
             this.precioKm = new System.Windows.Forms.NumericUpDown();
@@ -39,7 +40,6 @@
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.horaFin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.horaInicio)).BeginInit();
@@ -78,6 +78,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Turno";
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(411, 318);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 22;
+            this.btnClear.Text = "Limpiar";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // horaFin
             // 
@@ -214,16 +224,6 @@
             this.btnVolver.Text = "<< Atrás";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
-            // 
-            // btnClear
-            // 
-            this.btnClear.Location = new System.Drawing.Point(411, 318);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
-            this.btnClear.TabIndex = 22;
-            this.btnClear.Text = "Limpiar";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // frmCargaTurno
             // 

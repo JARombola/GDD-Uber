@@ -52,9 +52,7 @@ namespace UberFrba.Listado_Estadistico          // TODO: Eliminar barra herrmien
         }
 
         private void btnAtras_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
         }
-        }
-
+  }
 }

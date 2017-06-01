@@ -46,5 +46,6 @@ namespace UberFrba.Menus {
             new frmModifUsuario(this).Show();
             this.Hide();
         }
+
     }
 }

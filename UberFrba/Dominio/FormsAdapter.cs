@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.Dominio;
+using UberFrba.Menues;
 
 namespace UberFrba {
     public partial class FormsAdapter : Form {
@@ -67,9 +68,10 @@ namespace UberFrba {
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "FormsAdapter";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
 
         }
+
+ 
     }
 }

@@ -123,13 +123,11 @@ namespace UberFrba.Abm_Turno {
         }
 
         private void btnAtras_Click_1 (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
         }
 
         private void frmListaTurnos_Load (object sender, EventArgs e) {
             lblHabilitados.Visible=soloHabilitados;
         }
-
     }
 }

@@ -167,8 +167,7 @@ namespace UberFrba.Abm_Automovil {
         }
 
         private void button1_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
         }
 
         private void selecChofer_Click_1 (object sender, EventArgs e) {
@@ -188,7 +187,5 @@ namespace UberFrba.Abm_Automovil {
             lblCantResultados.Visible=true;
             lblCantResultados.Text = "Resultados: "+dgListado.RowCount.ToString();
         }
-        
-
     }
 }

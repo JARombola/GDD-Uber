@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UberFrba.Menues {
-    public partial class menuRoles : Form {
+    public partial class menuRoles : FormsAdapter {
 
         public menuRoles (ArrayList roles) {
             InitializeComponent();

@@ -119,8 +119,7 @@ namespace UberFrba.Abm_Cliente{
         }
 
         private void btnVolver_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
         }
 
         private void actualizar (object sender, DataGridViewRowsAddedEventArgs e) {
@@ -132,6 +131,7 @@ namespace UberFrba.Abm_Cliente{
             lblCantResultados.Visible=true;
             lblCantResultados.Text = "Resultados: "+dgListado.RowCount.ToString();
         }
+
 
     }
 }

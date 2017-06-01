@@ -120,8 +120,7 @@ namespace UberFrba.Abm_Chofer{
         }
 
         private void btnAtras_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
         }
 
         private void actualizarResultados (object sender, DataGridViewRowsAddedEventArgs e) {
@@ -132,7 +131,6 @@ namespace UberFrba.Abm_Chofer{
         private void actualizarResultados (object sender, DataGridViewRowsRemovedEventArgs e) {
             lblCantResultados.Visible=true;
             lblCantResultados.Text = "Resultados: "+dgListado.RowCount.ToString();
-        }
-        
+        }        
     }
 }

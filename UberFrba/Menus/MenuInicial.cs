@@ -101,8 +101,5 @@ namespace UberFrba.Menues {
             new frmRendicion(this).Show();
             this.Hide();
         }
-
-       
-
     }
 }

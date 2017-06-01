@@ -46,8 +46,7 @@ namespace UberFrba.Abm_Usuarios {
         }
 
         private void button2_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
         }
 
     }

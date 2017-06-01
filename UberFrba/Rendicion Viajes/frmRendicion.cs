@@ -58,8 +58,7 @@ namespace UberFrba.Rendicion_Viajes
         }
 
         private void button1_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
+            base.volver();
         }
         }
 }

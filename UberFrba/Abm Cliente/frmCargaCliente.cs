@@ -126,8 +126,7 @@ namespace UberFrba.Abm_Cliente
        }
 
        private void btnVolver_Click (object sender, EventArgs e) {
-           formAnterior.Show();
-           this.Close();
+           base.volver();
        }
 
        private void frmCargaCliente_Load (object sender, EventArgs e) {
