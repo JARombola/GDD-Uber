@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -59,6 +60,10 @@ namespace UberFrba.Rendicion_Viajes
 
         private void button1_Click (object sender, EventArgs e) {
             base.volver();
+        }
+
+        private void frmRendicion_Load (object sender, EventArgs e) {
+            fecha.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
         }
         }
 }

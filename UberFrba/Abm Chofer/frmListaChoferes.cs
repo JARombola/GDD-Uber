@@ -115,8 +115,8 @@ namespace UberFrba.Abm_Chofer{
         }
 
         private void btnTodos_Click (object sender, EventArgs e) {
-            if(soloHabilitados) ejecutarQuery(Buscador.getInstancia().verTodosHabilitados("Choferes"),dgListado);
-            else ejecutarQuery(Buscador.getInstancia().verTodos("Choferes"), dgListado);
+            if(soloHabilitados) ejecutarQuery(Buscador.getInstancia().verTodosHabilitados("Chofer"),dgListado);
+            else ejecutarQuery(Buscador.getInstancia().verTodos("Chofer"), dgListado);
         }
 
         private void btnAtras_Click (object sender, EventArgs e) {

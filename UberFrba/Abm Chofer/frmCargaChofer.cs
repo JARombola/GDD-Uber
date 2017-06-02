@@ -77,7 +77,7 @@ namespace UberFrba.Abm_Chofer {
         }
 
         private void registrarChofer () {
-            SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_altaCliente");
+            SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_altaChofer");
             setParametros(ref cmd);
             cmd.ExecuteNonQuery();
         }

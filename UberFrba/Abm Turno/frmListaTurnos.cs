@@ -107,19 +107,9 @@ namespace UberFrba.Abm_Turno {
             dgListado.Refresh();
         }
 
-
-        private void btnTodos_Click (object sender, EventArgs e) {
-            ejecutarQuery(Buscador.getInstancia().verTodos("Turnos"), dgListado);
-        }
-
-        private void btnAtras_Click (object sender, EventArgs e) {
-            formAnterior.Show();
-            this.Close();
-        }
-
         private void btnTodos_Click_1 (object sender, EventArgs e) {
-            if(soloHabilitados)ejecutarQuery(Buscador.getInstancia().verTodosHabilitados("Turnos"),dgListado);
-            else ejecutarQuery(Buscador.getInstancia().verTodos("Turnos"), dgListado);
+            if(soloHabilitados)ejecutarQuery(Buscador.getInstancia().verTodosHabilitados("Turno"),dgListado);
+            else ejecutarQuery(Buscador.getInstancia().verTodos("Turno"), dgListado);
         }
 
         private void btnAtras_Click_1 (object sender, EventArgs e) {

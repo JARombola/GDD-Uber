@@ -13,6 +13,8 @@ EXECUTE @RC = [MAIDEN].[SP_cargarAutos]
 
 EXECUTE @RC = [MAIDEN].[SP_cargarRendiciones] 
 
+EXECUTE @RC = [MAIDEN].[SP_cargarFacturas] 
+
 EXECUTE @RC = [MAIDEN].[SP_cargarViajes]
 
 EXECUTE @RC = [MAIDEN].[SP_crearFuncionalidadesDefault] 

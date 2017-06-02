@@ -163,7 +163,7 @@ namespace UberFrba.Abm_Automovil {
         }
 
         private void btnTodos_Click (object sender, EventArgs e) {
-            ejecutarQuery(Buscador.getInstancia().verTodos("Autos"), dgListado);
+            ejecutarQuery(Buscador.getInstancia().verTodos("Auto"), dgListado);
         }
 
         private void button1_Click (object sender, EventArgs e) {

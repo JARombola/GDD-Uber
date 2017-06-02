@@ -130,7 +130,7 @@
             this.btnFacturar.Name = "btnFacturar";
             this.btnFacturar.Size = new System.Drawing.Size(109, 26);
             this.btnFacturar.TabIndex = 5;
-            this.btnFacturar.Text = "Facturar";
+            this.btnFacturar.Text = "Generar";
             this.btnFacturar.UseVisualStyleBackColor = true;
             this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
             // 
@@ -156,6 +156,7 @@
             this.Name = "frmRendicion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rendicion viajes";
+            this.Load += new System.EventHandler(this.frmRendicion_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();

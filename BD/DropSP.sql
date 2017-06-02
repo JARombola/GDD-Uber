@@ -190,7 +190,7 @@ GO
 IF OBJECT_ID ('[MAIDEN].SP_cargarViajes', 'P') IS NOT NULL  
     DROP PROCEDURE [MAIDEN].SP_cargarViajes
 GO
-
+-------------------------------------------- RENDICIONES
 IF OBJECT_ID ('[MAIDEN].SP_rendicion', 'P') IS NOT NULL  
     DROP PROCEDURE [MAIDEN].SP_rendicion
 GO
@@ -206,3 +206,21 @@ GO
 IF OBJECT_ID ('[MAIDEN].SP_actualizarRendicionEnViajes', 'P') IS NOT NULL  
     DROP PROCEDURE [MAIDEN].SP_actualizarRendicionEnViajes
 GO
+
+------------------------------------------- FACTURAS
+IF OBJECT_ID ('[MAIDEN].SP_actualizarFacturaEnViajes', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_actualizarFacturaEnViajes
+GO
+
+IF OBJECT_ID ('[MAIDEN].SP_Factura', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_Factura
+GO
+
+IF OBJECT_ID ('[MAIDEN].SP_cargarFacturas', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_cargarFacturas
+GO
+
+IF OBJECT_ID ('[MAIDEN].SP_eliminarTodasFacturas', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_eliminarTodasFacturas
+GO
+

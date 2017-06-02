@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -55,6 +56,10 @@ namespace UberFrba.Facturacion
                     MessageBox.Show(error.Message, "Error de facturacion",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
 
+        }
+
+        private void frmFacturacion_Load (object sender, EventArgs e) {
+            fecha.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
         }
 
         }

@@ -93,6 +93,7 @@
             this.btnFacturacion.TabIndex = 6;
             this.btnFacturacion.Text = "Facturacion";
             this.btnFacturacion.UseVisualStyleBackColor = true;
+            this.btnFacturacion.Click += new System.EventHandler(this.btnFacturacion_Click);
             // 
             // btnViajes
             // 

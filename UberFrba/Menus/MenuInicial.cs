@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.Dominio;
+using UberFrba.Facturacion;
 using UberFrba.Listado_Estadistico;
 using UberFrba.Menus;
 using UberFrba.Registro_Viajes;
@@ -99,6 +100,11 @@ namespace UberFrba.Menues {
 
         private void btnRendicion_Click (object sender, EventArgs e) {
             new frmRendicion(this).Show();
+            this.Hide();
+        }
+
+        private void btnFacturacion_Click (object sender, EventArgs e) {
+            new frmFacturacion(this).Show();
             this.Hide();
         }
     }

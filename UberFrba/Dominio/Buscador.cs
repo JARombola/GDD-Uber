@@ -61,7 +61,7 @@ namespace UberFrba.Dominio {
 
         //------------ METODOS AUTOS--------------------------------
         public void cargarMarcas (ComboBox cbMarcas) {      
-            String query = "SELECT Distinct Marca FROM "+ESQUEMA+".Autos order by 1";
+            String query = "SELECT Distinct Marca FROM "+ESQUEMA+".Auto order by 1";
             SqlCommand command= this.getCommand(query);
             SqlDataReader marcas = command.ExecuteReader();
             while (marcas.Read()) {
@@ -72,7 +72,7 @@ namespace UberFrba.Dominio {
 
         //------------ METODOS ROLES--------------------------------
         public void cargarRoles(ComboBox cbRoles){
-            String query = "SELECT Rol FROM "+ESQUEMA+".Roles order by 1";
+            String query = "SELECT Rol FROM "+ESQUEMA+".Rol order by 1";
             SqlCommand command= this.getCommand(query);
             SqlDataReader datos = command.ExecuteReader();
             while (datos.Read()) {
@@ -84,7 +84,7 @@ namespace UberFrba.Dominio {
         //-------------- METODOS USUARIOS
 
         internal void cargarUsuarios (ComboBox cbUser) {
-            string query = "Select usuario From "+ESQUEMA+".Usuarios";
+            string query = "Select usuario From "+ESQUEMA+".Usuario";
             SqlCommand command = this.getCommand(query);
             SqlDataReader usuarios= command.ExecuteReader();
             while (usuarios.Read()) {
@@ -94,7 +94,7 @@ namespace UberFrba.Dominio {
         }
 
         internal void cargarRoles (CheckedListBox listRoles) {
-            string query = "Select Rol From "+ESQUEMA+".Roles order by 1";
+            string query = "Select Rol From "+ESQUEMA+".Rol order by 1";
             SqlCommand command = this.getCommand(query);
             SqlDataReader roles= command.ExecuteReader();
             while (roles.Read()) {
@@ -102,8 +102,6 @@ namespace UberFrba.Dominio {
             }
             roles.Close();
         }
-
-
 
         internal SqlCommand verTodos (string tabla) {
             string query = "SELECT * FROM "+ESQUEMA+"."+tabla;

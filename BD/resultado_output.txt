@@ -1,6 +1,48 @@
 Se cambió el contexto de la base de datos a 'GD1C2017'.
 Se cambió el contexto de la base de datos a 'GD1C2017'.
-Mensaje 3701, Nivel 11, Estado 5, Servidor MARCELO\SQLSERVER2012, Línea 1
-No se puede quitar el vista 'MAIDEN.vw_Autos' porque no existe o el usuario no tiene permiso.
-Mensaje 3701, Nivel 11, Estado 5, Servidor MARCELO\SQLSERVER2012, Línea 1
-No se puede quitar el vista 'MAIDEN.vw_Viajes' porque no existe o el usuario no tiene permiso.
+Se cambió el contexto de la base de datos a 'GD1C2017'.
+Mensaje 8197, Nivel 16, Estado 4, Servidor MARCELO\SQLSERVER2012, Procedimiento tg_controlTurnosSuperpuestos, Línea 8
+El objeto 'MAIDEN.Turnos' no existe o no es válido para esta operación.
+Mensaje 8197, Nivel 16, Estado 4, Servidor MARCELO\SQLSERVER2012, Procedimiento tg_controlActualizacionTurnos, Línea 5
+El objeto 'MAIDEN.Turnos' no existe o no es válido para esta operación.
+Se cambió el contexto de la base de datos a 'GD1C2017'.
+
+(47 filas afectadas)
+
+(41 filas afectadas)
+
+(3 filas afectadas)
+
+(41 filas afectadas)
+
+(40198 filas afectadas)
+
+(564 filas afectadas)
+
+(114039 filas afectadas)
+
+(9 filas afectadas)
+
+(1 filas afectadas)
+
+(9 filas afectadas)
+
+(1 filas afectadas)
+
+(1 filas afectadas)
+
+(1 filas afectadas)
+
+(1 filas afectadas)
+
+(1 filas afectadas)
+
+(1 filas afectadas)
+
+(1 filas afectadas)
+
+(1 filas afectadas)
+
+(1 filas afectadas)
+
+(1 filas afectadas)

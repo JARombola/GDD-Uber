@@ -114,8 +114,8 @@ namespace UberFrba.Abm_Cliente{
         }
 
         private void btnTodos_Click (object sender, EventArgs e) {
-            if(soloHabilitados) ejecutarQuery(Buscador.getInstancia().verTodosHabilitados("Clientes"), dgListado);
-            else ejecutarQuery(Buscador.getInstancia().verTodos("Clientes"), dgListado); 
+            if(soloHabilitados) ejecutarQuery(Buscador.getInstancia().verTodosHabilitados("Cliente"), dgListado);
+            else ejecutarQuery(Buscador.getInstancia().verTodos("Cliente"), dgListado); 
         }
 
         private void btnVolver_Click (object sender, EventArgs e) {

@@ -62,7 +62,7 @@ namespace UberFrba.Abm_Usuario
                 listFunciones.SetItemChecked(datos.GetInt32(0)-1,true);
             }
             datos.Close();
-            command = Buscador.getInstancia().getCommand("Select habilitado from [MAIDEN].Roles where ID = "+rolId);
+            command = Buscador.getInstancia().getCommand("Select habilitado from [MAIDEN].Rol where ID = "+rolId);
             Boolean habilitado = (bool)command.ExecuteScalar();
             datos.Close();
             return habilitado;           //devuelve si el rol está habilitado o no, se usa en el form de roles para el boton de habilitar

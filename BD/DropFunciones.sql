@@ -107,7 +107,11 @@ GO
 
 IF OBJECT_ID (N'[MAIDEN].fx_getFuncionalidades', N'IF') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_getFuncionalidades;  
-GO    
+GO  
+
+IF OBJECT_ID (N'[MAIDEN].fx_getDatosFactura', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getDatosFactura;  
+GO  
 
 ---------------------------------------- ESTADISTICAS
 IF OBJECT_ID (N'[MAIDEN].fx_choferesMayorRecaudacion', N'IF') IS NOT NULL  
