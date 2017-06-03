@@ -125,3 +125,7 @@ GO
 IF OBJECT_ID (N'[MAIDEN].fx_clientesMismoAuto', N'IF') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_clientesMismoAuto;  
 GO  
+
+IF OBJECT_ID (N'[MAIDEN].fx_clientesMayorConsumo', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_clientesMayorConsumo;  
+GO  
