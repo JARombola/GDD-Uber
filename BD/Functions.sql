@@ -330,15 +330,17 @@ RETURN(
 )
 GO
 
---CREATE FUNCTION [MAIDEN].fx_clientesMayorConsumo(@anio date,@trimestre int)
---RETURNS TABLE
---AS
---RETURN(
---		SELECT TOP 5 sum(total) as Cosumo from Facturas f 
---		group by cliente
---		order by consumo
---)
---GO
+CREATE FUNCTION [MAIDEN].fx_clientesMayorConsumo(@anio int,@trimestre int)
+RETURNS TABLE
+AS
+RETURN(
+		SELECT TOP 5 (c.Nombre+' '+c.Apellido) as Cliente,sum(Importe_Total) as Consumo 
+		from Factura f join Cliente c on (f.Cliente = c.ID)
+		WHERE year(f.Fecha) = @anio AND DATEPART(qq,f.Fecha) = @trimestre
+		GROUP BY f.Cliente, c.nombre, c.Apellido
+		ORDER BY Consumo Desc
+)
+GO
 
 CREATE FUNCTION [MAIDEN].fx_clientesMismoAuto(@anio int,@trimestre int)
 RETURNS TABLE

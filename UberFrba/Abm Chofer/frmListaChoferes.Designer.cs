@@ -74,7 +74,7 @@
             // lblCantResultados
             // 
             this.lblCantResultados.AutoSize = true;
-            this.lblCantResultados.Location = new System.Drawing.Point(475, 365);
+            this.lblCantResultados.Location = new System.Drawing.Point(475, 401);
             this.lblCantResultados.Name = "lblCantResultados";
             this.lblCantResultados.Size = new System.Drawing.Size(97, 13);
             this.lblCantResultados.TabIndex = 15;
@@ -85,7 +85,7 @@
             // 
             this.lblHabilitados.AutoSize = true;
             this.lblHabilitados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHabilitados.Location = new System.Drawing.Point(27, 191);
+            this.lblHabilitados.Location = new System.Drawing.Point(27, 175);
             this.lblHabilitados.Name = "lblHabilitados";
             this.lblHabilitados.Size = new System.Drawing.Size(237, 13);
             this.lblHabilitados.TabIndex = 14;
@@ -93,7 +93,7 @@
             // 
             // btnAtras
             // 
-            this.btnAtras.Location = new System.Drawing.Point(30, 360);
+            this.btnAtras.Location = new System.Drawing.Point(30, 396);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(80, 23);
             this.btnAtras.TabIndex = 5;
@@ -103,7 +103,7 @@
             // 
             // btnTodos
             // 
-            this.btnTodos.Location = new System.Drawing.Point(623, 360);
+            this.btnTodos.Location = new System.Drawing.Point(650, 396);
             this.btnTodos.Name = "btnTodos";
             this.btnTodos.Size = new System.Drawing.Size(80, 23);
             this.btnTodos.TabIndex = 6;
@@ -134,7 +134,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgListado.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgListado.EnableHeadersVisualStyles = false;
-            this.dgListado.Location = new System.Drawing.Point(30, 207);
+            this.dgListado.Location = new System.Drawing.Point(30, 191);
             this.dgListado.MultiSelect = false;
             this.dgListado.Name = "dgListado";
             this.dgListado.ReadOnly = true;
@@ -147,7 +147,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgListado.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgListado.Size = new System.Drawing.Size(700, 147);
+            this.dgListado.Size = new System.Drawing.Size(700, 199);
             this.dgListado.TabIndex = 11;
             this.dgListado.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.actualizarResultados);
             this.dgListado.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.actualizarResultados);
@@ -241,7 +241,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(767, 391);
+            this.ClientSize = new System.Drawing.Size(769, 431);
             this.Controls.Add(this.lblCantResultados);
             this.Controls.Add(this.lblHabilitados);
             this.Controls.Add(this.btnAtras);

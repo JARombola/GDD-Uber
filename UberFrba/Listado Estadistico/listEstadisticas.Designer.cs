@@ -133,7 +133,7 @@
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Location = new System.Drawing.Point(454, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(132, 122);
+            this.groupBox1.Size = new System.Drawing.Size(210, 122);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Periodo";
@@ -144,9 +144,9 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.cbTipo);
-            this.groupBox2.Location = new System.Drawing.Point(24, 12);
+            this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(408, 122);
+            this.groupBox2.Size = new System.Drawing.Size(420, 122);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Estadistica";
@@ -185,18 +185,18 @@
             this.dgEstadisticas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgEstadisticas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgEstadisticas.EnableHeadersVisualStyles = false;
-            this.dgEstadisticas.Location = new System.Drawing.Point(24, 191);
+            this.dgEstadisticas.Location = new System.Drawing.Point(12, 177);
             this.dgEstadisticas.MultiSelect = false;
             this.dgEstadisticas.Name = "dgEstadisticas";
             this.dgEstadisticas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgEstadisticas.Size = new System.Drawing.Size(562, 169);
+            this.dgEstadisticas.Size = new System.Drawing.Size(652, 213);
             this.dgEstadisticas.TabIndex = 9;
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(248, 140);
+            this.btnAceptar.Location = new System.Drawing.Point(283, 140);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(110, 36);
+            this.btnAceptar.Size = new System.Drawing.Size(110, 31);
             this.btnAceptar.TabIndex = 2;
             this.btnAceptar.Text = "Ver";
             this.btnAceptar.UseVisualStyleBackColor = true;
@@ -204,7 +204,7 @@
             // 
             // btnAtras
             // 
-            this.btnAtras.Location = new System.Drawing.Point(24, 366);
+            this.btnAtras.Location = new System.Drawing.Point(12, 396);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(95, 24);
             this.btnAtras.TabIndex = 10;
@@ -216,7 +216,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 405);
+            this.ClientSize = new System.Drawing.Size(676, 432);
             this.Controls.Add(this.btnAtras);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.dgEstadisticas);

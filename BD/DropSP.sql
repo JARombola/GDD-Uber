@@ -212,8 +212,8 @@ IF OBJECT_ID ('[MAIDEN].SP_actualizarFacturaEnViajes', 'P') IS NOT NULL
     DROP PROCEDURE [MAIDEN].SP_actualizarFacturaEnViajes
 GO
 
-IF OBJECT_ID ('[MAIDEN].SP_Factura', 'P') IS NOT NULL  
-    DROP PROCEDURE [MAIDEN].SP_Factura
+IF OBJECT_ID ('[MAIDEN].SP_Facturacion', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_Facturacion
 GO
 
 IF OBJECT_ID ('[MAIDEN].SP_cargarFacturas', 'P') IS NOT NULL  

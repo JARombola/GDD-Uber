@@ -46,7 +46,8 @@ namespace UberFrba.Facturacion
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_Facturacion");
                 command.Parameters.AddRange(new[]{
                         new SqlParameter("@idCliente",idCliente),
-                        new SqlParameter("@fecha",fecha.Value),
+                        new SqlParameter("@fechaInicio",fechaInicio.Value),
+                        new SqlParameter("@fechaFin",fechaFin.Value),                       
                     }
                 );
                 try {
@@ -59,7 +60,8 @@ namespace UberFrba.Facturacion
         }
 
         private void frmFacturacion_Load (object sender, EventArgs e) {
-            fecha.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
+            fechaInicio.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
+            fechaInicio.Value=fechaInicio.MinDate;
         }
 
         }

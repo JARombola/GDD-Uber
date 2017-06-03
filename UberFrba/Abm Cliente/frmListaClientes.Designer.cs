@@ -155,7 +155,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgListado.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgListado.EnableHeadersVisualStyles = false;
-            this.dgListado.Location = new System.Drawing.Point(30, 207);
+            this.dgListado.Location = new System.Drawing.Point(30, 182);
             this.dgListado.MultiSelect = false;
             this.dgListado.Name = "dgListado";
             this.dgListado.ReadOnly = true;
@@ -168,7 +168,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgListado.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgListado.Size = new System.Drawing.Size(700, 147);
+            this.dgListado.Size = new System.Drawing.Size(700, 208);
             this.dgListado.TabIndex = 12;
             this.dgListado.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.actualizar);
             this.dgListado.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.actualizar);
@@ -199,7 +199,7 @@
             // 
             // btnTodos
             // 
-            this.btnTodos.Location = new System.Drawing.Point(623, 360);
+            this.btnTodos.Location = new System.Drawing.Point(650, 396);
             this.btnTodos.Name = "btnTodos";
             this.btnTodos.Size = new System.Drawing.Size(80, 23);
             this.btnTodos.TabIndex = 6;
@@ -209,7 +209,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(30, 360);
+            this.btnVolver.Location = new System.Drawing.Point(30, 396);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(80, 23);
             this.btnVolver.TabIndex = 5;
@@ -221,7 +221,7 @@
             // 
             this.lblHabilitados.AutoSize = true;
             this.lblHabilitados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHabilitados.Location = new System.Drawing.Point(27, 191);
+            this.lblHabilitados.Location = new System.Drawing.Point(27, 166);
             this.lblHabilitados.Name = "lblHabilitados";
             this.lblHabilitados.Size = new System.Drawing.Size(232, 13);
             this.lblHabilitados.TabIndex = 15;
@@ -230,7 +230,7 @@
             // lblCantResultados
             // 
             this.lblCantResultados.AutoSize = true;
-            this.lblCantResultados.Location = new System.Drawing.Point(464, 365);
+            this.lblCantResultados.Location = new System.Drawing.Point(464, 401);
             this.lblCantResultados.Name = "lblCantResultados";
             this.lblCantResultados.Size = new System.Drawing.Size(97, 13);
             this.lblCantResultados.TabIndex = 16;
@@ -241,7 +241,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(760, 387);
+            this.ClientSize = new System.Drawing.Size(769, 431);
             this.Controls.Add(this.lblCantResultados);
             this.Controls.Add(this.lblHabilitados);
             this.Controls.Add(this.btnVolver);

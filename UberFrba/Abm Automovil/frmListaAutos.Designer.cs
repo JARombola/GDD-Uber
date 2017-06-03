@@ -187,7 +187,7 @@
             this.dgListado.Name = "dgListado";
             this.dgListado.ReadOnly = true;
             this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgListado.Size = new System.Drawing.Size(700, 147);
+            this.dgListado.Size = new System.Drawing.Size(700, 200);
             this.dgListado.TabIndex = 10;
             this.dgListado.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.actualizarResultados);
             this.dgListado.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.actualizarResultados);
@@ -218,7 +218,7 @@
             // 
             // btnTodos
             // 
-            this.btnTodos.Location = new System.Drawing.Point(655, 342);
+            this.btnTodos.Location = new System.Drawing.Point(655, 395);
             this.btnTodos.Name = "btnTodos";
             this.btnTodos.Size = new System.Drawing.Size(75, 23);
             this.btnTodos.TabIndex = 7;
@@ -228,7 +228,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(30, 342);
+            this.button1.Location = new System.Drawing.Point(30, 395);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
@@ -249,7 +249,7 @@
             // lblCantResultados
             // 
             this.lblCantResultados.AutoSize = true;
-            this.lblCantResultados.Location = new System.Drawing.Point(475, 347);
+            this.lblCantResultados.Location = new System.Drawing.Point(475, 400);
             this.lblCantResultados.Name = "lblCantResultados";
             this.lblCantResultados.Size = new System.Drawing.Size(97, 13);
             this.lblCantResultados.TabIndex = 14;
@@ -260,7 +260,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 373);
+            this.ClientSize = new System.Drawing.Size(770, 430);
             this.Controls.Add(this.lblCantResultados);
             this.Controls.Add(this.lblHabilitados);
             this.Controls.Add(this.button1);

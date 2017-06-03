@@ -673,11 +673,11 @@ GO
 CREATE PROCEDURE [MAIDEN].SP_Facturacion(@idCliente int, @fechaInicio datetime, @fechaFin datetime)
 AS BEGIN 
 	DECLARE @cod_Factura int, @total numeric(18,2)
-	IF NOT EXISTS (Select 1 FROM [MAIDEN].Factura WHERE Cliente = @idCliente AND Fecha BETWEEN @fechaInicio AND @fechaFin)
+	IF NOT EXISTS (Select 1 FROM [MAIDEN].Factura WHERE Cliente = @idCliente AND CAST(Fecha as DATE) BETWEEN CAST(@fechaInicio as DATE) AND cast(@fechaFin as DATE))
 		BEGIN
 			INSERT INTO [MAIDEN].Factura(Cliente,Fecha,Fecha_Inicio,Fecha_Fin,Importe_total)
 			SELECT @idCliente, GETDATE(), @fechaInicio, @fechaFin, sum(t.Precio_Base+t.Precio_km*v.Km)
-			FROM [MAIDEN].Viajes v join [MAIDEN].Turnos t on v.Turno = t.ID
+			FROM [MAIDEN].Viaje v join [MAIDEN].Turno t on v.Turno = t.ID
 			WHERE v.Cliente = @idCliente AND v.Fecha BETWEEN @fechaInicio AND @fechaFin
 			
 			SET @cod_Factura = @@IDENTITY

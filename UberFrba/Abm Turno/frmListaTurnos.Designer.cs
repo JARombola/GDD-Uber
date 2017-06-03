@@ -109,7 +109,7 @@
             this.dgListado.Name = "dgListado";
             this.dgListado.ReadOnly = true;
             this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgListado.Size = new System.Drawing.Size(648, 175);
+            this.dgListado.Size = new System.Drawing.Size(648, 198);
             this.dgListado.TabIndex = 3;
             this.dgListado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.seleccion);
             this.dgListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.derecho);
@@ -138,7 +138,7 @@
             // 
             // btnTodos
             // 
-            this.btnTodos.Location = new System.Drawing.Point(612, 373);
+            this.btnTodos.Location = new System.Drawing.Point(612, 396);
             this.btnTodos.Name = "btnTodos";
             this.btnTodos.Size = new System.Drawing.Size(75, 23);
             this.btnTodos.TabIndex = 4;
@@ -148,7 +148,7 @@
             // 
             // btnAtras
             // 
-            this.btnAtras.Location = new System.Drawing.Point(39, 373);
+            this.btnAtras.Location = new System.Drawing.Point(39, 396);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(75, 23);
             this.btnAtras.TabIndex = 3;
@@ -160,7 +160,7 @@
             // 
             this.lblHabilitados.AutoSize = true;
             this.lblHabilitados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHabilitados.Location = new System.Drawing.Point(36, 176);
+            this.lblHabilitados.Location = new System.Drawing.Point(36, 161);
             this.lblHabilitados.Name = "lblHabilitados";
             this.lblHabilitados.Size = new System.Drawing.Size(223, 13);
             this.lblHabilitados.TabIndex = 14;
@@ -170,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 400);
+            this.ClientSize = new System.Drawing.Size(730, 431);
             this.Controls.Add(this.lblHabilitados);
             this.Controls.Add(this.btnAtras);
             this.Controls.Add(this.btnTodos);

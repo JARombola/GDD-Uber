@@ -51,16 +51,16 @@
             this.groupBox1.Controls.Add(this.fecha);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(25, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(546, 151);
+            this.groupBox1.Size = new System.Drawing.Size(639, 151);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
             // 
             // btnChofer
             // 
-            this.btnChofer.Location = new System.Drawing.Point(416, 76);
+            this.btnChofer.Location = new System.Drawing.Point(535, 71);
             this.btnChofer.Name = "btnChofer";
             this.btnChofer.Size = new System.Drawing.Size(75, 23);
             this.btnChofer.TabIndex = 1;
@@ -70,16 +70,16 @@
             // 
             // txtChofer
             // 
-            this.txtChofer.Location = new System.Drawing.Point(94, 76);
+            this.txtChofer.Location = new System.Drawing.Point(352, 34);
             this.txtChofer.Name = "txtChofer";
             this.txtChofer.ReadOnly = true;
-            this.txtChofer.Size = new System.Drawing.Size(215, 20);
+            this.txtChofer.Size = new System.Drawing.Size(258, 20);
             this.txtChofer.TabIndex = 1;
             // 
             // fecha
             // 
             this.fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.fecha.Location = new System.Drawing.Point(94, 37);
+            this.fecha.Location = new System.Drawing.Point(94, 34);
             this.fecha.Name = "fecha";
             this.fecha.Size = new System.Drawing.Size(135, 20);
             this.fecha.TabIndex = 1;
@@ -87,7 +87,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 76);
+            this.label2.Location = new System.Drawing.Point(280, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 1;
@@ -96,7 +96,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 37);
+            this.label1.Location = new System.Drawing.Point(22, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 13);
             this.label1.TabIndex = 1;
@@ -116,17 +116,17 @@
             this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgListado.EnableHeadersVisualStyles = false;
-            this.dgListado.Location = new System.Drawing.Point(25, 232);
+            this.dgListado.Location = new System.Drawing.Point(12, 201);
             this.dgListado.MultiSelect = false;
             this.dgListado.Name = "dgListado";
             this.dgListado.ReadOnly = true;
             this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgListado.Size = new System.Drawing.Size(546, 182);
+            this.dgListado.Size = new System.Drawing.Size(639, 213);
             this.dgListado.TabIndex = 4;
             // 
             // btnFacturar
             // 
-            this.btnFacturar.Location = new System.Drawing.Point(462, 188);
+            this.btnFacturar.Location = new System.Drawing.Point(277, 169);
             this.btnFacturar.Name = "btnFacturar";
             this.btnFacturar.Size = new System.Drawing.Size(109, 26);
             this.btnFacturar.TabIndex = 5;
@@ -136,7 +136,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(25, 420);
+            this.button1.Location = new System.Drawing.Point(12, 420);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 26);
             this.button1.TabIndex = 6;
@@ -148,7 +148,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 457);
+            this.ClientSize = new System.Drawing.Size(663, 455);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnFacturar);
             this.Controls.Add(this.dgListado);
