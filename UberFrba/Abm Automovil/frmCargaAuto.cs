@@ -73,10 +73,13 @@ namespace UberFrba.Abm_Automovil {
                     if (ID==-1) registrarAuto();          //NO hay un ID asociado ====> Es un registro. SINO, sería una modificacion
                     else modificarAuto();
                     limpiar();
+                    MessageBox.Show("Auto registrado correctamente", "Registro Completo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (SqlException error) {
                     switch (error.Number) {
-                        case 2627: MessageBox.Show("La Patente ya se encuentra registrada", "Patente Duplicada", MessageBoxButtons.OK, MessageBoxIcon.Error);    //Violacion de restriccion UNIQUE 
+                        case 2627: 
+                            if (error.Message.Contains("Patente")) MessageBox.Show("La Patente ya se encuentra registrada", "Patente Duplicada", MessageBoxButtons.OK, MessageBoxIcon.Error);    //Violacion de restriccion UNIQUE de PATENTE
+                            else MessageBox.Show("El chofer ya posee un auto vinculado", "Chofer Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break;        //ERROR de conversion de datos
                     }
@@ -86,10 +89,9 @@ namespace UberFrba.Abm_Automovil {
 
         public override string errorCampos () {
             String errores = null;
-            int asd;
             if (String.IsNullOrWhiteSpace(cbMarca.Text)) errores+="- Debe seleccionar una 'Marca'\n";
             if (String.IsNullOrWhiteSpace(txtModelo.Text)) errores+="- El campo 'Modelo' no puede estar vacío \n";
-            if (!int.TryParse(txtPatente.Text, out asd)) errores+="- El campo 'Patente' no puede estar vacío \n";
+            if (String.IsNullOrWhiteSpace(txtPatente.Text)) errores+="- El campo 'Patente' no puede estar vacío \n";
             if (String.IsNullOrWhiteSpace(txtChofer.Text)) errores+="- Debe seleccionar un 'Chofer'\n";
             if (String.IsNullOrWhiteSpace(txtTurno.Text)) errores+="- Debe seleccionar un 'Turno'\n";
             return errores;
