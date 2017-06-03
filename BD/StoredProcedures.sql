@@ -581,21 +581,21 @@ GO
 CREATE PROCEDURE [MAIDEN].SP_cargarViajes
 AS
 BEGIN
-	INSERT INTO [MAIDEN].Viaje(Chofer,Auto,Turno,Km,Fecha,Cliente,NroRendicion, NroFactura)
-	SELECT DISTINCT 
-		[MAIDEN].fx_getChoferId(a.Chofer_dni),
-		[MAIDEN].fx_getAutoId(a.Auto_Patente),
-		[MAIDEN].fx_getTurnoId(a.Turno_Hora_Inicio),
-		a.Viaje_Cant_Kilometros,
-		a.Viaje_Fecha,
-		[MAIDEN].fx_getClienteId(a.Cliente_Dni),
-		a.Rendicion_Nro,
-		b.Factura_Nro
-	From [gd_esquema].Maestra a JOIN [gd_esquema].[Maestra] b on (a.Cliente_Dni = b.Cliente_Dni AND a.Viaje_Fecha = b.Viaje_Fecha)
-	WHERE (a.Rendicion_Nro is not null and b.Factura_Nro is not null)				-- Esto combina los registros que corresponden al mismo viaje pero estan separados por rendicion y factura
+INSERT INTO [MAIDEN].Viaje(Chofer,Auto,Turno,Km,Fecha,Cliente,NroRendicion, NroFactura)
+SELECT DISTINCT 
+	[MAIDEN].fx_getChoferId(a.Chofer_dni),
+	[MAIDEN].fx_getAutoId(a.Auto_Patente),
+	[MAIDEN].fx_getTurnoId(a.Turno_Hora_Inicio),
+	a.Viaje_Cant_Kilometros,
+	a.Viaje_Fecha,
+	[MAIDEN].fx_getClienteId(a.Cliente_Dni),
+	a.Rendicion_Nro,
+	b.Factura_Nro
+From [gd_esquema].Maestra a JOIN [gd_esquema].[Maestra] b on
+(a.Cliente_Dni = b.Cliente_Dni AND a.Viaje_Fecha = b.Viaje_Fecha AND a.Chofer_Dni = b.Chofer_Dni)
+WHERE (a.Rendicion_Nro is not null and b.Factura_Nro is not null)				-- Esto combina los registros que corresponden al mismo viaje pero estan separados por rendicion y factura
 END
 GO
-
 
 --------------------------------------------------------------- RENDICION
 CREATE PROCEDURE [MAIDEN].SP_actualizarRendicionEnViajes(@idChofer int, @fecha Date,@codRendicion numeric(18,0))
