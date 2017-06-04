@@ -619,7 +619,7 @@ AS BEGIN
 		group by t.ID
 
 		SET @cod_Rendicion = @@IDENTITY					-- Necesito el ID para actualizarlo en los viajes
-		
+	
 		Select @total = Importe_Total from [MAIDEN].Rendicion where Nro = @cod_Rendicion
 		EXEC [MAIDEN].SP_actualizarRendicionEnViajes @idChofer, @fecha, @cod_Rendicion				-- Seteo la FK en viajes, para saber a que Rendicion le corresponde
 	
@@ -673,7 +673,7 @@ GO
 CREATE PROCEDURE [MAIDEN].SP_Facturacion(@idCliente int, @fechaInicio datetime, @fechaFin datetime)
 AS BEGIN 
 	DECLARE @cod_Factura int, @total numeric(18,2)
-	IF NOT EXISTS (Select 1 FROM [MAIDEN].Factura WHERE Cliente = @idCliente AND Fecha BETWEEN @fechaInicio AND @fechaFin)
+	IF NOT EXISTS (Select 1 FROM [MAIDEN].Factura WHERE Cliente = @idCliente AND CAST(Fecha_inicio as DATE)= CAST(@fechaInicio AS DATE))
 		BEGIN
 			INSERT INTO [MAIDEN].Factura(Cliente,Fecha,Fecha_Inicio,Fecha_Fin,Importe_total)
 			SELECT @idCliente, GETDATE(), @fechaInicio, @fechaFin, sum(t.Precio_Base+t.Precio_km*v.Km)
@@ -682,7 +682,7 @@ AS BEGIN
 			
 			SET @cod_Factura = @@IDENTITY
 
-			SELECT @total = Importe_Total from [MAIDEN].Factura
+			SELECT @total = Importe_Total from [MAIDEN].Factura Where Nro = @cod_Factura
 
 			EXEC [MAIDEN].SP_actualizarFacturaEnViajes @idCliente, @fechaInicio, @fechaFin, @cod_Factura
 			

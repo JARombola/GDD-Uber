@@ -271,7 +271,7 @@ RETURN(
 		(turno.Precio_Base+turno.Precio_km*viaje.Km) as 'Precio del Viaje',
 		(turno.Precio_Base+turno.Precio_km*viaje.Km)*0.3 as 'Importe(30%)', 
 		null as 'Total del Dia'
-		FROM Cliente c join Viaje viaje on (c.ID = viaje.Cliente) join Turno turno on (turno.ID = viaje.Turno)
+		FROM [MAIDEN].Cliente c join [MAIDEN].Viaje viaje on (c.ID = viaje.Cliente) join [MAIDEN].Turno turno on (turno.ID = viaje.Turno)
 		Where viaje.NroRendicion = @nroRendicion
 	--	Group By c.Nombre, c.Apellido,viaje.Fecha, viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km
 )
@@ -290,8 +290,8 @@ RETURN(
 		   turno.Precio_km as 'Precio Km', 
 		   (turno.Precio_Base+turno.Precio_km*viaje.Km) as 'Precio del Viaje',
 		   null as 'Total de Factura'
-		FROM Viaje viaje join Turno turno on (viaje.Turno = turno.ID) 
-						 join Chofer chofer on (chofer.ID = viaje.Chofer)
+		FROM [MAIDEN].Viaje viaje join [MAIDEN].Turno turno on (viaje.Turno = turno.ID) 
+						 join [MAIDEN].Chofer chofer on (chofer.ID = viaje.Chofer)
 		Where Viaje.NroFactura = @nroFactura
 		)
 GO
@@ -301,10 +301,11 @@ CREATE FUNCTION [MAIDEN].fx_choferesMayorRecaudacion(@anio int, @trimestre int)
 RETURNS TABLE
 AS
 RETURN(
+
 		SELECT TOP 5 (c.Nombre+' '+c.Apellido) as Chofer,
 		count(*) as 'Cantidad de Viajes',
 		sum(Importe_Total) as Total
-		from Rendicion r join Chofer c on (r.Chofer = c.ID)
+		from [MAIDEN].Rendicion r join [MAIDEN].Chofer c on (r.Chofer = c.ID)
 		where year(r.fecha)=@anio AND DATEPART(qq,r.Fecha)=@trimestre 
 		Group by r.Chofer, c.Nombre, c.Apellido, c.Direccion, c.Telefono, c.Mail
 		order by sum(Importe_Total) desc
@@ -315,11 +316,11 @@ CREATE FUNCTION [MAIDEN].fx_choferesViajesMasLargos(@anio int,@trimestre int)
 RETURNS TABLE
 AS
 RETURN(
-		SELECT TOP 5 (c.Nombre+' '+c.Apellido)as Cliente,c.Dni,
-		DATEDIFF(MI,cast(v.Fecha as time),v.Hora_Fin) as Duracion 
-		from Viaje v left join Chofer c on (v.Chofer = c.ID)
-		where year(v.fecha)=@anio AND DATEPART(qq,v.Fecha)=@trimestre AND v.Hora_Fin is not null and (DATEDIFF(MI,cast(v.Fecha as time),v.Hora_Fin) > 0)
-		order by Duracion desc
+		SELECT TOP 5 (c.Nombre+' '+c.apellido)as Chofer,max(DATEDIFF(MI,cast(Fecha as time),Hora_Fin))as Duracion
+		FROM [MAIDEN].Viaje v join [MAIDEN].Chofer c on (v.Chofer = c.ID)
+		WHERE YEAR(v.fecha) = @anio AND DATEPART(qq,v.Fecha)=@trimestre AND v.Hora_Fin is not null
+		GROUP BY c.Nombre,c.Apellido,c.Dni
+		ORDER BY Duracion DESC
 )
 GO
 
@@ -328,7 +329,7 @@ RETURNS TABLE
 AS
 RETURN(
 		SELECT TOP 5 (c.Nombre+' '+c.Apellido) as Cliente,sum(Importe_Total) as Consumo 
-		from Factura f join Cliente c on (f.Cliente = c.ID)
+		from [MAIDEN].Factura f join [MAIDEN].Cliente c on (f.Cliente = c.ID)
 		WHERE year(f.Fecha) = @anio AND DATEPART(qq,f.Fecha) = @trimestre
 		GROUP BY f.Cliente, c.nombre, c.Apellido
 		ORDER BY Consumo Desc
@@ -341,7 +342,7 @@ AS
 RETURN(
 		SELECT TOP 5 (c.nombre+' '+c.apellido)as Cliente,
 		a.Marca, a.Modelo, a.Patente, count(*) as 'Cantidad Viajes'
-		From viaje v join Cliente c on (c.ID = v.Cliente) join Auto a on (a.ID = v.Auto)
+		From [MAIDEN].viaje v join [MAIDEN].Cliente c on (c.ID = v.Cliente) join [MAIDEN].Auto a on (a.ID = v.Auto)
 		where year(v.fecha)=@anio AND DATEPART(qq,v.Fecha)=@trimestre 
 		group by c.ID, c.nombre, c.Apellido,a.ID, a.Patente, a.Modelo, a.marca
 		order by count(*) desc
