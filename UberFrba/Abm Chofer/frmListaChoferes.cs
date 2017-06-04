@@ -31,6 +31,7 @@ namespace UberFrba.Abm_Chofer{
                 command.Parameters.AddWithValue("@DNI", valor(txtDNI.Text));
 
                 ejecutarQuery(command, dgListado);
+                dgListado.Columns["ID"].Visible=false;
         }
 
         private void btnClean_Click (object sender, EventArgs e) {

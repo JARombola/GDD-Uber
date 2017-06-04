@@ -60,8 +60,12 @@ namespace UberFrba.Facturacion
         }
 
         private void frmFacturacion_Load (object sender, EventArgs e) {
-            fechaInicio.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
-            fechaInicio.Value=fechaInicio.MinDate;
+            fechaFin.Value= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+           fechaInicio.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        }
+
+        private void button1_Click (object sender, EventArgs e) {
+            base.volver();
         }
 
         }

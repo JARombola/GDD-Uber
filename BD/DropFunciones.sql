@@ -57,7 +57,7 @@ IF OBJECT_ID (N'[MAIDEN].fx_getChofer', N'IF') IS NOT NULL
     DROP FUNCTION [MAIDEN].fx_getChofer;  
 GO    
 
-IF OBJECT_ID (N'[MAIDEN].fx_getNombreChofer', N'IF') IS NOT NULL  
+IF OBJECT_ID (N'[MAIDEN].fx_getNombreChofer', N'FN') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_getNombreChofer;  
 GO   
 
@@ -93,6 +93,14 @@ IF OBJECT_ID (N'[MAIDEN].fx_getUsuario', N'IF') IS NOT NULL
     DROP FUNCTION [MAIDEN].fx_getUsuario;  
 GO    
 
+IF OBJECT_ID (N'[MAIDEN].fx_getRoles', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getRoles;  
+GO   
+
+IF OBJECT_ID (N'[MAIDEN].fx_getRolesHabilitados', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getRolesHabilitados;  
+GO   
+
 IF OBJECT_ID (N'[MAIDEN].fx_getRolesDeUsuario', N'IF') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_getRolesDeUsuario;  
 GO    
@@ -112,6 +120,7 @@ GO
 IF OBJECT_ID (N'[MAIDEN].fx_getDatosFactura', N'IF') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_getDatosFactura;  
 GO  
+
 
 ---------------------------------------- ESTADISTICAS
 IF OBJECT_ID (N'[MAIDEN].fx_choferesMayorRecaudacion', N'IF') IS NOT NULL  

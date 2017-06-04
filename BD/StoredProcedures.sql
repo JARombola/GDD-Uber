@@ -390,9 +390,9 @@ GO
 CREATE PROCEDURE [MAIDEN].SP_crearFuncionalidadesDefault		-- Se crean las funcionalidades basicas, cada una tendra su id segun el orde de creacion empezando por 1
 AS
 BEGIN
-	INSERT INTO Funcionalidad(Descripcion)
-	VALUES ('clientes'),('choferes'),('autos'),('roles'),('turnos'),('viajes'),('facturacion'),
-	('rendicion'),('estadisticas')
+	INSERT INTO Funcionalidad(ID, Descripcion)
+	VALUES (1,'clientes'),(2,'choferes'),(4,'autos'),(5,'roles'),(6,'turnos'),(7,'viajes'),(8,'facturacion'),
+	(9,'rendicion'),(10,'estadisticas')
 								--1 = clientes, 2 = choferes, 3= autos....
 END
 GO
@@ -673,7 +673,7 @@ GO
 CREATE PROCEDURE [MAIDEN].SP_Facturacion(@idCliente int, @fechaInicio datetime, @fechaFin datetime)
 AS BEGIN 
 	DECLARE @cod_Factura int, @total numeric(18,2)
-	IF NOT EXISTS (Select 1 FROM [MAIDEN].Factura WHERE Cliente = @idCliente AND CAST(Fecha as DATE) BETWEEN CAST(@fechaInicio as DATE) AND cast(@fechaFin as DATE))
+	IF NOT EXISTS (Select 1 FROM [MAIDEN].Factura WHERE Cliente = @idCliente AND Fecha BETWEEN @fechaInicio AND @fechaFin)
 		BEGIN
 			INSERT INTO [MAIDEN].Factura(Cliente,Fecha,Fecha_Inicio,Fecha_Fin,Importe_total)
 			SELECT @idCliente, GETDATE(), @fechaInicio, @fechaFin, sum(t.Precio_Base+t.Precio_km*v.Km)

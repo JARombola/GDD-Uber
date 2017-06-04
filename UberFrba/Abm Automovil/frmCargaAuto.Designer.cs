@@ -88,7 +88,7 @@
             // 
             // txtTurno
             // 
-            this.txtTurno.Location = new System.Drawing.Point(150, 224);
+            this.txtTurno.Location = new System.Drawing.Point(150, 247);
             this.txtTurno.MaxLength = 26;
             this.txtTurno.Name = "txtTurno";
             this.txtTurno.ReadOnly = true;
@@ -97,9 +97,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(399, 220);
+            this.button1.Location = new System.Drawing.Point(399, 247);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 26);
+            this.button1.Size = new System.Drawing.Size(75, 22);
             this.button1.TabIndex = 20;
             this.button1.TabStop = false;
             this.button1.Text = "Buscar...";
@@ -109,7 +109,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(39, 230);
+            this.label4.Location = new System.Drawing.Point(39, 253);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 13);
             this.label4.TabIndex = 21;
@@ -126,9 +126,9 @@
             // 
             // btnBuscChofer
             // 
-            this.btnBuscChofer.Location = new System.Drawing.Point(399, 171);
+            this.btnBuscChofer.Location = new System.Drawing.Point(399, 175);
             this.btnBuscChofer.Name = "btnBuscChofer";
-            this.btnBuscChofer.Size = new System.Drawing.Size(75, 26);
+            this.btnBuscChofer.Size = new System.Drawing.Size(75, 22);
             this.btnBuscChofer.TabIndex = 6;
             this.btnBuscChofer.TabStop = false;
             this.btnBuscChofer.Text = "Buscar...";

@@ -20,7 +20,12 @@ CREATE FUNCTION [MAIDEN].fx_filtrarAutos (@modelo varchar(255),
 Returns Table
 AS
 	RETURN
-		(Select * From [MAIDEN].Auto
+		(Select a.ID as ID, a.Marca, a.Modelo,a.Patente,a.Licencia,a.Rodado,a.Habilitado,
+		(c.Nombre+' '+c.Apellido) as Chofer, c.ID as IDChofer, t.ID as IDTurno,
+		t.Descripcion as Turno 
+		From [MAIDEN].Auto a 
+		left join [MAIDEN].Chofer c on (a.Chofer = c.ID)
+		left join [MAIDEN].Turno t on (a.Turno = t.ID)
 		where 
 			Modelo like '%'+@modelo+'%'
 			OR
@@ -38,16 +43,7 @@ CREATE FUNCTION [MAIDEN].fx_filtrarAutosHabilitados (@modelo varchar(255),
 Returns Table
 AS
 	RETURN
-		(Select * From [MAIDEN].Auto
-		where (
-			Modelo like '%'+@modelo+'%'
-			OR
-			Patente = @patente
-			OR
-			Marca = @marca
-			OR
-			Chofer = @choferID)
-			AND Habilitado=1)
+		(Select * From [MAIDEN].fx_filtrarAutos(@modelo,@patente,@marca,@choferID) Where Habilitado = 1)
 GO
 
 CREATE FUNCTION [MAIDEN].fx_getAutoId(@patente varchar(10))
@@ -57,14 +53,16 @@ BEGIN
 END;
 GO
 
-----------------------FUNCION DE FILTRADO DE CHOFERES------------------------------
+----------------------FUNCIONES DE CHOFERES------------------------------
 CREATE FUNCTION [MAIDEN].fx_filtrarChoferes (@nombre varchar(255),			
 								 @apellido varchar(255),
 								 @DNI numeric(18,0))
 Returns Table
 AS
 	RETURN
-		(Select * From [MAIDEN].Chofer
+		(Select chofer.ID as ID, chofer.Nombre, chofer.Apellido, chofer.Dni, chofer.Mail,chofer.Telefono,
+		chofer.Direccion,chofer.Localidad, chofer.Piso, chofer.Depto,
+		chofer.Fecha_Nacimiento,chofer.Habilitado From [MAIDEN].Chofer chofer
 		where 
 			Nombre like '%'+ @nombre+ '%'
 			OR
@@ -80,15 +78,7 @@ CREATE FUNCTION [MAIDEN].fx_filtrarChoferesHabilitados (@nombre varchar(255),
 Returns Table
 AS
 	RETURN
-		(Select * From [MAIDEN].Chofer
-		where (
-			Nombre like '%'+ @nombre+ '%'
-			OR
-			Apellido like '%'+@apellido+'%'
-			OR
-			DNI = @DNI )
-			AND Habilitado=1
-		)
+		(Select * From [MAIDEN].fx_filtrarChoferes(@nombre, @apellido, @DNI) where habilitado = 1)
 GO
 
 CREATE FUNCTION [MAIDEN].fx_getChoferId(@Dni numeric(18,0))
@@ -104,7 +94,9 @@ CREATE FUNCTION [MAIDEN].fx_filtrarClientes (@nombre varchar(255),
 Returns Table
 AS
 	RETURN
-		(Select * From [MAIDEN].Cliente
+		(Select cliente.ID as ID, cliente.Nombre, cliente.Apellido, cliente.Dni, cliente.Mail, cliente.Telefono,
+		cliente.Direccion,cliente.Localidad, cliente.Piso, cliente.Depto,
+		cliente.Fecha_Nacimiento,cliente.Habilitado From [MAIDEN].Cliente cliente
 		where 
 			Nombre like '%'+ @nombre+ '%'
 			OR
@@ -120,15 +112,7 @@ CREATE FUNCTION [MAIDEN].fx_filtrarClientesHabilitados (@nombre varchar(255),
 Returns Table
 AS
 	RETURN
-		(Select * From [MAIDEN].Cliente
-		where (
-			Nombre like '%'+ @nombre+ '%'
-			OR
-			Apellido like '%'+@apellido+'%'
-			OR
-			DNI = @DNI
-		) AND Habilitado = 1
-		)
+		(Select * From [MAIDEN].fx_filtrarClientes(@nombre, @apellido, @DNI)where Habilitado = 1)
 GO
 
 CREATE FUNCTION [MAIDEN].fx_getClienteId(@dni int)
@@ -137,26 +121,20 @@ AS BEGIN
 	RETURN(Select id from [MAIDEN].Cliente where DNI = @dni)
 END;
 GO
-----------------------FUNCION DE FILTRADO DE TURNOS------------------------------
+----------------------FUNCIONES DE TURNOS------------------------------
 CREATE FUNCTION [MAIDEN].fx_filtrarTurnos (@descripcion varchar(255))		
 Returns Table
 AS
 	RETURN
-		(Select * From [MAIDEN].Turno
-		where 
-			Descripcion like '%'+ @descripcion+ '%'
-		)
+		(Select * From [MAIDEN].Turno where 
+			Descripcion like '%'+ @descripcion+ '%')
 GO
 
 CREATE FUNCTION [MAIDEN].fx_filtrarTurnosHabilitados (@descripcion varchar(255))		
 Returns Table
 AS
 	RETURN
-		(Select * From [MAIDEN].Turno
-		where 
-			Descripcion like '%'+ @descripcion+ '%'
-			AND Habilitado=1
-		)
+		(Select * From [MAIDEN].fx_filtrarTurnos(@descripcion) where Habilitado = 1)
 GO
 
 CREATE FUNCTION [MAIDEN].fx_getTurnoId (@hora_inicio numeric(18,0))		
@@ -217,9 +195,10 @@ END;
 GO
 
 CREATE FUNCTION [MAIDEN].fx_getNombreChofer(@id int)
-RETURNS TABLE
-AS
-	RETURN (SELECT Nombre, Apellido From [MAIDEN].fx_getChofer(@id))
+RETURNS nvarchar(255)
+AS BEGIN
+	RETURN (SELECT Nombre+' '+Apellido From [MAIDEN].fx_getChofer(@id))
+	END
 GO
 
 CREATE FUNCTION [MAIDEN].fx_getUsuario(@user varchar(30))
@@ -249,6 +228,20 @@ BEGIN
 	RETURN (Select count(*) as 'Cantidad de Roles' FROM [MAIDEN].Rol_por_Usuario Where Usuario = @usuario)
 END;
 GO
+
+
+CREATE FUNCTION [MAIDEN].fx_getRoles()			--Devuelve la cantidad de roles que tiene ese usuario
+RETURNS TABLE																		--(Usada para otorgar funcionalidades)
+AS
+	RETURN (Select Rol,Habilitado FROM [MAIDEN].Rol)
+GO
+
+CREATE FUNCTION [MAIDEN].fx_getRolesHabilitados()			--Devuelve la cantidad de roles que tiene ese usuario
+RETURNS TABLE																		--(Usada para otorgar funcionalidades)
+AS
+	RETURN (Select * FROM [MAIDEN].fx_getRoles() where Habilitado = 1)
+GO
+
 
 ----------------------- FUNCION PARA LOS VIAJES
 -- Devuelve los datos del Auto para autocompletar el viaje una vez seleccionado el chofer

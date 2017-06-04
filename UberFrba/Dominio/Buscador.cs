@@ -72,8 +72,7 @@ namespace UberFrba.Dominio {
 
         //------------ METODOS ROLES--------------------------------
         public void cargarRoles(ComboBox cbRoles){
-            String query = "SELECT Rol FROM "+ESQUEMA+".Rol order by 1";
-            SqlCommand command= this.getCommand(query);
+            SqlCommand command= this.getCommandFunctionDeTabla("fx_getRoles()");
             SqlDataReader datos = command.ExecuteReader();
             while (datos.Read()) {
                 cbRoles.Items.Add(datos.GetString(0));
@@ -94,8 +93,7 @@ namespace UberFrba.Dominio {
         }
 
         internal void cargarRoles (CheckedListBox listRoles) {
-            string query = "Select Rol From "+ESQUEMA+".Rol order by 1";
-            SqlCommand command = this.getCommand(query);
+            SqlCommand command = this.getCommandFunctionDeTabla("fx_getRolesHabilitados()");
             SqlDataReader roles= command.ExecuteReader();
             while (roles.Read()) {
                 listRoles.Items.Add(roles.GetString(0));

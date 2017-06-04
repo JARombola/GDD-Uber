@@ -27,6 +27,7 @@ namespace UberFrba.Abm_Turno {
             SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla(query);
                     command.Parameters.AddWithValue("@descripcion", valor(txtDescripcion.Text));
             ejecutarQuery(command, dgListado);
+            dgListado.Columns["ID"].Visible=false;
         }
 
 

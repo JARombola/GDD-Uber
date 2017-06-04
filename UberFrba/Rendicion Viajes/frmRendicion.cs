@@ -64,6 +64,7 @@ namespace UberFrba.Rendicion_Viajes
 
         private void frmRendicion_Load (object sender, EventArgs e) {
             fecha.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
+            fecha.MaxDate = DateTime.Now;
         }
         }
 }

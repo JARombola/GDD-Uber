@@ -39,6 +39,9 @@ namespace UberFrba.Abm_Automovil {
             });
 
             ejecutarQuery(command, dgListado);
+            dgListado.Columns["ID"].Visible=false;
+            dgListado.Columns["IDChofer"].Visible=false;
+            dgListado.Columns["IDTurno"].Visible=false;
         }
 
         private void enviarDatos () {
@@ -55,15 +58,15 @@ namespace UberFrba.Abm_Automovil {
                 auto.choferID=-1;                                                               // Aunque nunca debería ser Null (por constraints en la base)
             }
             else {
-                auto.choferID =(int) dgListado.CurrentRow.Cells["Chofer"].Value;
-                auto.choferNombre = nombreChofer();
+                auto.choferID =(int) dgListado.CurrentRow.Cells["IDChofer"].Value;
+                auto.choferNombre = (string) dgListado.CurrentRow.Cells["Chofer"].Value;
             }
             if (dgListado.CurrentRow.Cells["Turno"].Value == DBNull.Value) {        //carga los datos del turno para la modificacion
                 auto.turnoID = -1;                                                              // Aunque nunca debería ser Null (por constraints en la base)
             }
             else {
-                auto.turnoID = (int) dgListado.CurrentRow.Cells["Turno"].Value;
-                auto.turnoDescripcion = descripcionTurno();
+                auto.turnoID = (int) dgListado.CurrentRow.Cells["IDTurno"].Value;
+                auto.turnoDescripcion = (string) dgListado.CurrentRow.Cells["Turno"].Value; ;
             }
 
             formSiguiente.configurar(auto);
@@ -71,28 +74,9 @@ namespace UberFrba.Abm_Automovil {
             this.Close();
         }
          
-        private string nombreChofer(){
-            SqlCommand nombreChofer = Buscador.getInstancia().getCommandFunctionDeTabla("fx_getNombreChofer(@id)");
-                nombreChofer.Parameters.AddWithValue("@id", dgListado.CurrentRow.Cells["Chofer"].Value);
-            SqlDataReader datosChofer = nombreChofer.ExecuteReader();
-            string nombre = null;
-            while (datosChofer.Read()) {
-                nombre = datosChofer["nombre"] + " "+ datosChofer["apellido"];
-            }
-            datosChofer.Close();
-            return nombre;
-        }
-
-        private string descripcionTurno () {
-            SqlCommand descripcionTurno = Buscador.getInstancia().getCommandFunction("fx_getDescripcion(@id)");
-            descripcionTurno.Parameters.AddWithValue("@id", dgListado.CurrentRow.Cells["Turno"].Value);
-            string descripcion = (string) descripcionTurno.ExecuteScalar();
-            return descripcion;
-        }
-
         public override void configurar (IDominio elemento) {
             Persona chofer = (Persona) elemento;
-            txtChofer.Text = chofer.nombre + " (ID: "+chofer.id.ToString()+")";
+            txtChofer.Text = chofer.nombre;
             ID = chofer.id;
         }
 

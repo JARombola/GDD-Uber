@@ -53,7 +53,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(639, 151);
+            this.groupBox1.Size = new System.Drawing.Size(639, 106);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
@@ -116,17 +116,17 @@
             this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgListado.EnableHeadersVisualStyles = false;
-            this.dgListado.Location = new System.Drawing.Point(12, 201);
+            this.dgListado.Location = new System.Drawing.Point(12, 168);
             this.dgListado.MultiSelect = false;
             this.dgListado.Name = "dgListado";
             this.dgListado.ReadOnly = true;
             this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgListado.Size = new System.Drawing.Size(639, 213);
+            this.dgListado.Size = new System.Drawing.Size(639, 246);
             this.dgListado.TabIndex = 4;
             // 
             // btnFacturar
             // 
-            this.btnFacturar.Location = new System.Drawing.Point(277, 169);
+            this.btnFacturar.Location = new System.Drawing.Point(277, 124);
             this.btnFacturar.Name = "btnFacturar";
             this.btnFacturar.Size = new System.Drawing.Size(109, 26);
             this.btnFacturar.TabIndex = 5;

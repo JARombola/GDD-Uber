@@ -107,5 +107,6 @@ namespace UberFrba.Menues {
             new frmFacturacion(this).Show();
             this.Hide();
         }
+
     }
 }

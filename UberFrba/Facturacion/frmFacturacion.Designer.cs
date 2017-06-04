@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.fechaFin = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
@@ -64,8 +64,9 @@
             // 
             // fechaFin
             // 
+            this.fechaFin.Enabled = false;
             this.fechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.fechaFin.Location = new System.Drawing.Point(95, 86);
+            this.fechaFin.Location = new System.Drawing.Point(140, 97);
             this.fechaFin.Name = "fechaFin";
             this.fechaFin.Size = new System.Drawing.Size(135, 20);
             this.fechaFin.TabIndex = 2;
@@ -73,7 +74,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 90);
+            this.label3.Location = new System.Drawing.Point(46, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 13);
             this.label3.TabIndex = 3;
@@ -81,7 +82,7 @@
             // 
             // btnChofer
             // 
-            this.btnChofer.Location = new System.Drawing.Point(539, 63);
+            this.btnChofer.Location = new System.Drawing.Point(355, 18);
             this.btnChofer.Name = "btnChofer";
             this.btnChofer.Size = new System.Drawing.Size(75, 23);
             this.btnChofer.TabIndex = 1;
@@ -91,7 +92,7 @@
             // 
             // txtCliente
             // 
-            this.txtCliente.Location = new System.Drawing.Point(407, 28);
+            this.txtCliente.Location = new System.Drawing.Point(116, 19);
             this.txtCliente.Name = "txtCliente";
             this.txtCliente.ReadOnly = true;
             this.txtCliente.Size = new System.Drawing.Size(207, 20);
@@ -99,8 +100,9 @@
             // 
             // fechaInicio
             // 
+            this.fechaInicio.Enabled = false;
             this.fechaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.fechaInicio.Location = new System.Drawing.Point(95, 28);
+            this.fechaInicio.Location = new System.Drawing.Point(140, 67);
             this.fechaInicio.Name = "fechaInicio";
             this.fechaInicio.Size = new System.Drawing.Size(135, 20);
             this.fechaInicio.TabIndex = 1;
@@ -108,7 +110,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(335, 32);
+            this.label2.Location = new System.Drawing.Point(44, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 1;
@@ -117,7 +119,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 32);
+            this.label1.Location = new System.Drawing.Point(46, 71);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 1;
@@ -127,14 +129,14 @@
             // 
             this.dgListado.AllowUserToAddRows = false;
             this.dgListado.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgListado.EnableHeadersVisualStyles = false;
             this.dgListado.Location = new System.Drawing.Point(12, 201);
@@ -147,7 +149,7 @@
             // 
             // btnFacturar
             // 
-            this.btnFacturar.Location = new System.Drawing.Point(290, 169);
+            this.btnFacturar.Location = new System.Drawing.Point(277, 169);
             this.btnFacturar.Name = "btnFacturar";
             this.btnFacturar.Size = new System.Drawing.Size(109, 26);
             this.btnFacturar.TabIndex = 5;
@@ -163,6 +165,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "<<Atrás";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmFacturacion
             // 
@@ -174,6 +177,7 @@
             this.Controls.Add(this.dgListado);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmFacturacion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Facturacion viajes";
             this.Load += new System.EventHandler(this.frmFacturacion_Load);
             this.groupBox1.ResumeLayout(false);
