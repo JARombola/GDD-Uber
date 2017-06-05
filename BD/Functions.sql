@@ -340,12 +340,19 @@ CREATE FUNCTION [MAIDEN].fx_clientesMismoAuto(@anio int,@trimestre int)
 RETURNS TABLE
 AS
 RETURN(
-		SELECT TOP 5 (c.nombre+' '+c.apellido)as Cliente,
-		a.Marca, a.Modelo, a.Patente, count(*) as 'Cantidad Viajes'
-		From [MAIDEN].viaje v join [MAIDEN].Cliente c on (c.ID = v.Cliente) join [MAIDEN].Auto a on (a.ID = v.Auto)
-		where year(v.fecha)=@anio AND DATEPART(qq,v.Fecha)=@trimestre 
-		group by c.ID, c.nombre, c.Apellido,a.ID, a.Patente, a.Modelo, a.marca
-		order by count(*) desc
+		SELECT TOP 5 (c.Nombre+' '+c.Apellido)AS Cliente, 
+				(SELECT a.Patente FROM MAIDEN.Viaje V JOIN MAIDEN.Auto a on (a.ID = V.Auto) WHERE V.Cliente=Cliente AND YEAR(FECHA)=@anio AND DATEPART(qq,Fecha) = @trimestre
+				GROUP BY CLIENTE,a.Patente 
+				HAVING COUNT(*)=X.VIAJES) AS Patente
+				,X.Viajes 
+				FROM(
+					SELECT CLIENTE, MAX(CANTIDAD) AS VIAJES FROM
+						(SELECT CLIENTE,COUNT(*)AS CANTIDAD FROM MAIDEN.VIAJE
+							WHERE YEAR(FECHA)=@anio AND DATEPART(qq,Fecha) = @trimestre
+							GROUP BY CLIENTE,AUTO
+						)A
+						GROUP BY CLIENTE)X JOIN [MAIDEN].Cliente c ON (X.Cliente=c.ID)
+						ORDER BY VIAJES DESC
 )
 GO
 
