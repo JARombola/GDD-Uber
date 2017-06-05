@@ -272,10 +272,20 @@ RETURN(
 		(turno.Precio_Base+turno.Precio_km*viaje.Km)*0.3 as 'Importe(30%)', 
 		null as 'Total del Dia'
 		FROM [MAIDEN].Cliente c join [MAIDEN].Viaje viaje on (c.ID = viaje.Cliente) join [MAIDEN].Turno turno on (turno.ID = viaje.Turno)
-		Where viaje.NroRendicion = @nroRendicion
-	--	Group By c.Nombre, c.Apellido,viaje.Fecha, viaje.Hora_Fin, viaje.Km, turno.Precio_Base, turno.Precio_km
+		Where viaje.NroRendicion = @nroRendicion)
+GO
+
+CREATE FUNCTION [MAIDEN].fx_getRendicionExistente(@nroRendicion numeric(18,0))
+RETURNS TABLE
+AS
+RETURN(
+	Select * FROM [MAIDEN].fx_getDatosRendicion(@nroRendicion)
+	UNION
+	SELECT null,null,null,null,null,null,null,null,Importe_Total from [Maiden].Rendicion
+	WHERE Nro=@nroRendicion
 )
 GO
+
 
 ------------------------------------------------------------- FACTURA
 CREATE FUNCTION [MAIDEN].fx_getDatosFactura(@nroFactura numeric(18,0))
@@ -294,6 +304,17 @@ RETURN(
 						 join [MAIDEN].Chofer chofer on (chofer.ID = viaje.Chofer)
 		Where Viaje.NroFactura = @nroFactura
 		)
+GO
+
+CREATE FUNCTION [MAIDEN].fx_getFacturaExistente(@nroFactura numeric(18,0))
+RETURNS TABLE
+AS
+RETURN(
+	Select * FROM [MAIDEN].fx_getDatosFactura(@nroFactura)
+	UNION
+	SELECT null,null,null,null,null,null,null,Importe_Total from [Maiden].Factura
+	WHERE Nro=@nroFactura
+)
 GO
 ------------------------------------------------------------ ESTADISTICAS
 

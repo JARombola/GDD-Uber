@@ -53,13 +53,23 @@ namespace UberFrba.Facturacion {
                     ejecutarQuery(command, dgListado);
                 }
                 catch (SqlException error) {
-                    MessageBox.Show(error.Message, "Error de facturacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    if (error.Number == 51002){
+                        if (MessageBox.Show("La factura ya se encuentra registrada.\n Desea visualizarla?", "Factura Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes) mostrarFacturacionExistente(error.Message);
+                }else MessageBox.Show("Error de Facturacion.\nConsulte al administrador.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
-            else MessageBox.Show(errores, "Error de campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }else MessageBox.Show(errores, "Error de campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
+        private void mostrarFacturacionExistente(string p){
+            int codFactura;
+            int.TryParse(p, out codFactura);
+            SqlCommand command = Buscador.getInstancia().getCommandFunctionDeTabla("fx_getFacturaExistente(@nroFactura)");
+            command.Parameters.AddWithValue("@nroFactura", codFactura);
+            ejecutarQuery(command, dgListado);
+            dgListado.Sort(dgListado.Columns[7], ListSortDirection.Ascending);
+        }
+        
         public override string errorCampos () {
             String errores = null;
             if (String.IsNullOrWhiteSpace(txtCliente.Text)) errores+="- Debe seleccionar un Cliente\n";

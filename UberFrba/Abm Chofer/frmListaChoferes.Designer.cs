@@ -187,7 +187,7 @@
             this.grFiltros.Size = new System.Drawing.Size(700, 122);
             this.grFiltros.TabIndex = 0;
             this.grFiltros.TabStop = false;
-            this.grFiltros.Text = "Búsqueda Clientes";
+            this.grFiltros.Text = "Búsqueda Choferes";
             // 
             // txtDNI
             // 

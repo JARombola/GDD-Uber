@@ -391,8 +391,8 @@ CREATE PROCEDURE [MAIDEN].SP_crearFuncionalidadesDefault		-- Se crean las funcio
 AS
 BEGIN
 	INSERT INTO Funcionalidad(ID, Descripcion)
-	VALUES (1,'clientes'),(2,'choferes'),(4,'autos'),(5,'roles'),(6,'turnos'),(7,'viajes'),(8,'facturacion'),
-	(9,'rendicion'),(10,'estadisticas')
+	VALUES (1,'clientes'),(2,'choferes'),(3,'autos'),(4,'roles'),(5,'turnos'),(6,'viajes'),(7,'facturacion'),
+	(8,'rendicion'),(9,'estadisticas')
 								--1 = clientes, 2 = choferes, 3= autos....
 END
 GO
@@ -607,27 +607,28 @@ AS BEGIN
 END
 GO
 
-CREATE PROCEDURE [MAIDEN].SP_Rendicion(@idChofer int, @fecha Date)
+CREATE PROCEDURE [MAIDEN].SP_Rendicion(@idChofer int, @fecha Date, @idTurno int)
 AS BEGIN
 	Declare @cod_Rendicion int, @total numeric(18,2) 
-	if not exists (Select 1 from [MAIDEN].Rendicion Where @idChofer = Chofer and @fecha = Fecha)	-- Si la rendicion todavia no se habia hecho...
-	BEGIN
-		INSERT INTO [MAIDEN].Rendicion(Chofer,Fecha,Turno,Importe_Total)
-		Select @idChofer, @fecha, t.ID, sum(t.Precio_Base+t.Precio_km*v.Km)*0.3				-- Le corresponde el 30% del precio del viaje 
-		From Turno t join Viaje v on (t.ID = v.Turno)
-		Where Cast(v.Fecha as Date) = @fecha
-		group by t.ID
+	SET @cod_Rendicion= (Select Nro from [MAIDEN].Rendicion Where @idChofer = Chofer and @fecha = Fecha AND Turno = @idTurno)	
+	IF (@cod_Rendicion IS NULL)
+		BEGIN
+			INSERT INTO [MAIDEN].Rendicion(Chofer,Fecha,Turno,Importe_Total)
+			Select @idChofer, @fecha, t.ID, sum(t.Precio_Base+t.Precio_km*v.Km)*0.3				-- Le corresponde el 30% del precio del viaje 
+			From Turno t join Viaje v on (t.ID = v.Turno)
+			Where Cast(v.Fecha as Date) = @fecha
+			group by t.ID
 
-		SET @cod_Rendicion = @@IDENTITY					-- Necesito el ID para actualizarlo en los viajes
+			SET @cod_Rendicion = @@IDENTITY					-- Necesito el ID para actualizarlo en los viajes
 	
-		Select @total = Importe_Total from [MAIDEN].Rendicion where Nro = @cod_Rendicion
-		EXEC [MAIDEN].SP_actualizarRendicionEnViajes @idChofer, @fecha, @cod_Rendicion				-- Seteo la FK en viajes, para saber a que Rendicion le corresponde
+			Select @total = Importe_Total from [MAIDEN].Rendicion where Nro = @cod_Rendicion
+			EXEC [MAIDEN].SP_actualizarRendicionEnViajes @idChofer, @fecha, @cod_Rendicion				-- Seteo la FK en viajes, para saber a que Rendicion le corresponde
 	
-		Select * FROM [MAIDEN].fx_getDatosRendicion(@cod_Rendicion)
-		Union Select null,null,null,null,null,null,null,null, @total
-		ORDER BY 9			 
-	END
-	ELSE throw 51000,'La rendición para ese chofer ya ha sido realizada en el día',16;
+			Select * FROM [MAIDEN].fx_getDatosRendicion(@cod_Rendicion)
+			Union Select null,null,null,null,null,null,null,null, @total
+			ORDER BY 9			 
+		END
+	ELSE throw 51002,@cod_Rendicion,16;				--Devuelve el codigo de rendicion para poder cargarlo posteriormente si el usuario lo desea
 END
 GO
 
@@ -673,7 +674,8 @@ GO
 CREATE PROCEDURE [MAIDEN].SP_Facturacion(@idCliente int, @fechaInicio datetime, @fechaFin datetime)
 AS BEGIN 
 	DECLARE @cod_Factura int, @total numeric(18,2)
-	IF NOT EXISTS (Select 1 FROM [MAIDEN].Factura WHERE Cliente = @idCliente AND CAST(Fecha_inicio as DATE)= CAST(@fechaInicio AS DATE))
+	SET @cod_Factura = (Select Nro FROM [MAIDEN].Factura WHERE Cliente = @idCliente AND CAST(Fecha_inicio as DATE)= CAST(@fechaInicio AS DATE))
+	IF (@cod_Factura IS NULL)							-- No está registrada
 		BEGIN
 			INSERT INTO [MAIDEN].Factura(Cliente,Fecha,Fecha_Inicio,Fecha_Fin,Importe_total)
 			SELECT @idCliente, GETDATE(), @fechaInicio, @fechaFin, sum(t.Precio_Base+t.Precio_km*v.Km)
@@ -690,7 +692,7 @@ AS BEGIN
 			Union Select null,null,null,null,null,null,null,@total
 			ORDER BY 8	
 		END
-	ELSE throw 51000,'Ya fue realizada la factura al cliente para las fechas ingresadas.',16;
+	ELSE throw 51002,@cod_Factura,16; --Devuelve el codigo de Factura para poder cargarlo posteriormente si el usuario lo desea
 END
 GO
 

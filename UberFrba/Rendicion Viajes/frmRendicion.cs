@@ -19,43 +19,72 @@ namespace UberFrba.Rendicion_Viajes
     {
         private bool buscaChofer { get; set; }
         private int idChofer{get;set;}
+        private int idTurno { get; set; }
 
         public frmRendicion(FormsAdapter anterior)
         {
             InitializeComponent();
             formAnterior=anterior;
-        }
-
-        private void btnChofer_Click (object sender, EventArgs e) {
-            frmListaChoferes listaChoferes = new frmListaChoferes(this);
-                listaChoferes.formSiguiente=this;
-                listaChoferes.soloHabilitados=true;
-                buscaChofer = true;
-                listaChoferes.Show();
-                this.Hide();
+            idTurno=-1;
+            idChofer=-1;
         }
 
         public override void configurar (IDominio elemento) {
-            Persona chofer = (Persona) elemento;
+            if (buscaChofer) {
+                Persona chofer = (Persona) elemento;
                 idChofer = chofer.id;
                 txtChofer.Text = (chofer.nombre +" "+ chofer.apellido);
-            toolTip1.SetToolTip(txtChofer,String.Format("{0} {1} \nDNI:{2} \nMail:{3}",chofer.nombre, chofer.apellido, chofer.dni,chofer.mail));
+                toolTip1.SetToolTip(txtChofer, String.Format("{0} {1} \nDNI:{2} \nMail:{3}", chofer.nombre, chofer.apellido, chofer.dni, chofer.mail));
+                buscaChofer=false;
+            }
+            else {                              // Entonces busca turno 
+                    Turno turno = (Turno) elemento;
+                    idTurno = turno.id;
+                    txtTurno.Text = turno.descripcion;
+                    toolTip1.SetToolTip(txtTurno,String.Format("Descripcion:{0}\n Horario:{1} - {2} hs.",turno.descripcion,turno.inicio,turno.fin));
+                }
         }
 
         private void btnFacturar_Click (object sender, EventArgs e) {
-            SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_Rendicion");
+            String errores = errorCampos();
+            if (errores==null) {
+                SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_Rendicion");
                 command.Parameters.AddRange(new[]{
-                        new SqlParameter("@idChofer",idChofer),
-                        new SqlParameter("@fecha",fecha.Value.Date),
-                    }
+                            new SqlParameter("@idChofer",idChofer),
+                            new SqlParameter("@fecha",fecha.Value.Date),
+                            new SqlParameter("@idturno",idTurno),
+                        }
                 );
                 try {
                     ejecutarQuery(command, dgListado);
                 }
                 catch (SqlException error) {
-                    MessageBox.Show(error.Message, "Error de rendicion",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    switch (error.Number) {
+                        case 51002: 
+                            if (MessageBox.Show("La rendicion ya se encuentra realizada.\n Desea visualizarla?", "Rendicion Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes) mostrarFacturaExistente(error.Message);
+                            break;
+                        default: MessageBox.Show("Error de rendicion.\nConsulte al administrador.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error); break;
+                    }
                 }
+            }
+            else MessageBox.Show(errores, "Error campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+        }
+
+        private void mostrarFacturaExistente (string p) {
+            int codRendicion;
+            int.TryParse(p, out codRendicion);
+            SqlCommand command = Buscador.getInstancia().getCommandFunctionDeTabla("fx_getRendicionExistente(@nroRendicion)");
+                command.Parameters.AddWithValue("@nroRendicion", codRendicion);
+                ejecutarQuery(command, dgListado);
+                dgListado.Sort(dgListado.Columns[8],ListSortDirection.Ascending);
+        }
+
+        public override string errorCampos () {
+            String errores = null;
+            if (idChofer == -1) errores+= "- Debe seleccionar un chofer\n";
+            if (idTurno==-1) errores+= "- Debe seleccionar un turno\n";
+            return errores;
         }
 
         private void button1_Click (object sender, EventArgs e) {
@@ -65,6 +94,22 @@ namespace UberFrba.Rendicion_Viajes
         private void frmRendicion_Load (object sender, EventArgs e) {
             fecha.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
             fecha.MaxDate = DateTime.Now;
+        }
+
+        private void btnChofer_Click (object sender, EventArgs e) {
+            frmListaChoferes listaChoferes = new frmListaChoferes(this);
+            listaChoferes.formSiguiente=this;
+            listaChoferes.soloHabilitados=true;
+            buscaChofer = true;
+            listaChoferes.Show();
+            this.Hide();
+        }
+
+        private void btnTurno_Click (object sender, EventArgs e) {
+            frmListaTurnos listaTurnos = new frmListaTurnos(this);
+            listaTurnos.formSiguiente=this;
+            listaTurnos.Show();
+            this.Hide();
         }
         }
 }

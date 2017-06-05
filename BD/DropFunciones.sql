@@ -109,18 +109,26 @@ IF OBJECT_ID (N'[MAIDEN].fx_getCantidadRolesDeUsuario', N'FN') IS NOT NULL
     DROP FUNCTION [MAIDEN].fx_getCantidadRolesDeUsuario;  
 GO    
 
-IF OBJECT_ID (N'[MAIDEN].fx_getDatosRendicion', N'IF') IS NOT NULL  
-    DROP FUNCTION [MAIDEN].fx_getDatosRendicion;  
-GO    
-
 IF OBJECT_ID (N'[MAIDEN].fx_getFuncionalidades', N'IF') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_getFuncionalidades;  
 GO  
+------------------------------- RENDICION
+IF OBJECT_ID (N'[MAIDEN].fx_getDatosRendicion', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getDatosRendicion;  
+GO  
 
+IF OBJECT_ID (N'[MAIDEN].fx_getRendicionExistente', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getRendicionExistente;  
+GO   
+
+------------------------------- FACTURA
 IF OBJECT_ID (N'[MAIDEN].fx_getDatosFactura', N'IF') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_getDatosFactura;  
 GO  
 
+IF OBJECT_ID (N'[MAIDEN].fx_getFacturaExistente', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getFacturaExistente;  
+GO  
 
 ---------------------------------------- ESTADISTICAS
 IF OBJECT_ID (N'[MAIDEN].fx_choferesMayorRecaudacion', N'IF') IS NOT NULL  
@@ -138,3 +146,5 @@ GO
 IF OBJECT_ID (N'[MAIDEN].fx_clientesMayorConsumo', N'IF') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_clientesMayorConsumo;  
 GO  
+
+ 

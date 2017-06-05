@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnTurno = new System.Windows.Forms.Button();
+            this.txtTurno = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnChofer = new System.Windows.Forms.Button();
             this.txtChofer = new System.Windows.Forms.TextBox();
             this.fecha = new System.Windows.Forms.DateTimePicker();
@@ -46,6 +49,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnTurno);
+            this.groupBox1.Controls.Add(this.txtTurno);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btnChofer);
             this.groupBox1.Controls.Add(this.txtChofer);
             this.groupBox1.Controls.Add(this.fecha);
@@ -58,9 +64,36 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
             // 
+            // btnTurno
+            // 
+            this.btnTurno.Location = new System.Drawing.Point(558, 60);
+            this.btnTurno.Name = "btnTurno";
+            this.btnTurno.Size = new System.Drawing.Size(75, 23);
+            this.btnTurno.TabIndex = 2;
+            this.btnTurno.Text = "Buscar...";
+            this.btnTurno.UseVisualStyleBackColor = true;
+            this.btnTurno.Click += new System.EventHandler(this.btnTurno_Click);
+            // 
+            // txtTurno
+            // 
+            this.txtTurno.Location = new System.Drawing.Point(352, 63);
+            this.txtTurno.Name = "txtTurno";
+            this.txtTurno.ReadOnly = true;
+            this.txtTurno.Size = new System.Drawing.Size(187, 20);
+            this.txtTurno.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(280, 67);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Turno";
+            // 
             // btnChofer
             // 
-            this.btnChofer.Location = new System.Drawing.Point(535, 71);
+            this.btnChofer.Location = new System.Drawing.Point(558, 31);
             this.btnChofer.Name = "btnChofer";
             this.btnChofer.Size = new System.Drawing.Size(75, 23);
             this.btnChofer.TabIndex = 1;
@@ -73,7 +106,7 @@
             this.txtChofer.Location = new System.Drawing.Point(352, 34);
             this.txtChofer.Name = "txtChofer";
             this.txtChofer.ReadOnly = true;
-            this.txtChofer.Size = new System.Drawing.Size(258, 20);
+            this.txtChofer.Size = new System.Drawing.Size(187, 20);
             this.txtChofer.TabIndex = 1;
             // 
             // fecha
@@ -176,5 +209,8 @@
         private System.Windows.Forms.Button btnFacturar;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnTurno;
+        private System.Windows.Forms.TextBox txtTurno;
+        private System.Windows.Forms.Label label3;
     }
 }
