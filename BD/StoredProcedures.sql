@@ -325,7 +325,7 @@ BEGIN
 END
 GO
 
---------------------------------------------------------------- >> ROLES
+--------------------------------------------------------------- >> ROLES - Funcionalidades
 CREATE PROCEDURE [MAIDEN].SP_altaRol(@rol varchar(20),@funcionalidades nvarchar(100))
 AS
 BEGIN
@@ -338,7 +338,9 @@ BEGIN
 	@funcionalidades like '%;'+ cast(ID as nvarchar(3)) + ';%'
 END
 GO
-
+-- La aplicacion serializa los ID de las funciones entre ';', de forma que, 
+-- separando las "funcionalidades" de acuerdo a dicho caracter, podemos conocer
+-- cuales son las funcionalidades indicadas
 
 CREATE PROCEDURE [MAIDEN].SP_modifRol(@idRol int, @nombreRol varchar(20),@funcionalidades nvarchar(100))
 AS
@@ -348,9 +350,11 @@ BEGIN
 
 	DELETE FROM [MAIDEN].Funcionalidad_por_Rol where Rol = @idRol 
 	INSERT INTO MAIDEN.Funcionalidad_por_Rol 
-	Select @idRol, ID from [MAIDEN].Funcionalidad where @funcionalidades like '%;'+ cast(ID as nvarchar(3)) + ';%'
+	Select @idRol, ID from [MAIDEN].Funcionalidad where
+	 @funcionalidades like '%;'+ cast(ID as nvarchar(3)) + ';%'
 END
 GO
+-- Explicacion de "Funcionalidades" similiar al procedimiento anterior
 
 CREATE PROCEDURE [MAIDEN].SP_eliminarRolEnUsuarios(@id int)
 AS
@@ -427,6 +431,7 @@ BEGIN
 	values(@usuario,HASHBYTES('SHA2_256',@pass),0)
 END
 GO
+-- La contraseña se almacena encriptada segun algoritmo SHA256
 
 CREATE PROCEDURE [MAIDEN].SP_modifPass(@usuario varchar(30), @pass varchar(256))
 AS
@@ -454,50 +459,7 @@ BEGIN
 	DELETE FROM [MAIDEN].Usuario
 END
 GO
-
-CREATE PROCEDURE [MAIDEN].SP_loginOk(@usuario varchar(30))
-AS
-BEGIN
-	Declare @intentos int
-	SET @intentos = (select intentosLogueo from [MAIDEN].fx_getUsuario(@usuario))
-	if (@intentos >=3) return 0
-	else BEGIN
-		UPDATE [MAIDEN].fx_getUsuario(@usuario)
-		SET intentosLogueo = 0
-		return 3
-	END
-END
-GO
-
-CREATE PROCEDURE [MAIDEN].SP_loginFail(@usuario varchar(30))
-AS
-BEGIN
-	Declare @intentosRealizados int, @msg varchar(100)
-	SET @intentosRealizados = (select intentosLogueo from [MAIDEN].fx_getUsuario(@usuario))
-	if (@intentosRealizados < 3) BEGIN							-- se le agrega un intento fallido
-						UPDATE [MAIDEN].fx_getUsuario(@usuario)
-						SET intentosLogueo = intentosLogueo + 1
-						return (3-(@intentosRealizados+1))
-					   END;
-	else BEGIN
-		if (@intentosRealizados=3) return 0			--Intentos realizados = 3 = max => Deshabilitado
-		else throw 51000, 'Usuario Inexistente',1		-- Mal el usuario
-		END 
-END
-GO
-
-CREATE PROCEDURE [MAIDEN].SP_login(@usuario varchar(30), @password varchar(256))
-AS
-BEGIN 
-	Declare @contraseña varchar(256), @resultado int
-	SET @contraseña = (Select pass from [MAIDEN].fx_getUsuario(@usuario))
-	if( HASHBYTES('SHA2_256',@password) = @contraseña)
-		EXEC @resultado = [MAIDEN].SP_loginOk @usuario
-	else Exec @resultado = [MAIDEN].SP_loginFail @usuario
-	SELECT @resultado
-END
-GO
-
+----------------------------------------------------------------- ROLES / USUARIOS
 CREATE PROCEDURE [MAIDEN].SP_asignarRol(@usuario varchar(30), @rol varchar(20))
 AS
 BEGIN 
@@ -531,6 +493,50 @@ BEGIN
 	Exec [MAIDEN].SP_asignarRol 'cliente', 'cliente'
 	Exec [MAIDEN].SP_altaUsuario 'chofer','chofer'
 	Exec [MAIDEN].SP_asignarRol 'chofer','chofer'
+END
+GO
+------------------------------------------------ LOGIN
+CREATE PROCEDURE [MAIDEN].SP_loginOk(@usuario varchar(30))
+AS
+BEGIN
+	Declare @intentos int
+	SET @intentos = (select intentosLogueo from [MAIDEN].fx_getUsuario(@usuario))
+	IF (@intentos >=3) return 0					-- Aunque la contraseña sea correcta, si la cantidad de logueos era 3,
+	ELSE BEGIN									-- se considera que el usuario está bloqueado y se le niega el acceso
+		UPDATE [MAIDEN].fx_getUsuario(@usuario)
+		SET intentosLogueo = 0
+		return 3						--Caso contrario se "resetean" la cantidad de intentos fallidos a 0
+	END
+END
+GO
+
+CREATE PROCEDURE [MAIDEN].SP_loginFail(@usuario varchar(30))
+AS
+BEGIN
+	Declare @intentosRealizados int, @msg varchar(100)
+	SET @intentosRealizados = (select intentosLogueo from [MAIDEN].fx_getUsuario(@usuario))
+	if (@intentosRealizados < 3) BEGIN							-- se le agrega un intento fallido
+						SET @intentosRealizados = @intentosRealizados+1
+						UPDATE [MAIDEN].fx_getUsuario(@usuario)
+						SET intentosLogueo = @intentosRealizados
+						return (3-@intentosRealizados)				-- devuelve la cantidad de intentos restantes
+					   END;
+	else BEGIN
+		if (@intentosRealizados=3) return 0			--Intentos realizados = 3 = max => Deshabilitado
+		else throw 51000, 'Usuario Inexistente',1		-- Mal el usuario
+		END 
+END
+GO
+
+CREATE PROCEDURE [MAIDEN].SP_login(@usuario varchar(30), @password varchar(256))
+AS
+BEGIN 
+	Declare @contraseña varchar(256), @resultado int
+	SET @contraseña = (Select pass from [MAIDEN].fx_getUsuario(@usuario))
+	if( HASHBYTES('SHA2_256',@password) = @contraseña)			-- Verifica que la contraseña sea correcta
+		EXEC @resultado = [MAIDEN].SP_loginOk @usuario
+	else Exec @resultado = [MAIDEN].SP_loginFail @usuario
+	SELECT @resultado
 END
 GO
 --------------------------------------------------------------- VIAJES

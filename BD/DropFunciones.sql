@@ -112,6 +112,16 @@ GO
 IF OBJECT_ID (N'[MAIDEN].fx_getFuncionalidades', N'IF') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_getFuncionalidades;  
 GO  
+
+IF OBJECT_ID (N'[MAIDEN].fx_getMarcas', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getMarcas;  
+GO 
+
+IF OBJECT_ID (N'[MAIDEN].fx_getUsuarios', N'IF') IS NOT NULL  
+    DROP FUNCTION [MAIDEN].fx_getUsuarios;  
+GO 
+
+
 ------------------------------- RENDICION
 IF OBJECT_ID (N'[MAIDEN].fx_getDatosRendicion', N'IF') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_getDatosRendicion;  

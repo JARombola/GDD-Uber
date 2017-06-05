@@ -53,6 +53,12 @@ BEGIN
 END;
 GO
 
+CREATE FUNCTION [MAIDEN].fx_getMarcas()
+RETURNS TABLE
+AS
+RETURN (SELECT DISTINCT Marca FROM [MAIDEN].Auto)
+GO
+
 ----------------------FUNCIONES DE CHOFERES------------------------------
 CREATE FUNCTION [MAIDEN].fx_filtrarChoferes (@nombre varchar(255),			
 								 @apellido varchar(255),
@@ -213,7 +219,13 @@ AS
 RETURN SELECT Funcionalidad from [MAIDEN].Funcionalidad_por_Rol where Rol = @idRol
 GO
 
----------------------------------- LOGIN USUARIO
+---------------------------------- USUARIOS
+CREATE FUNCTION [MAIDEN].fx_getUsuarios()
+RETURNS TABLE
+AS
+RETURN (Select Usuario From [MAIDEN].Usuario)
+GO
+
 CREATE FUNCTION [MAIDEN].fx_getRolesDeUsuario(@usuario varchar(30))
 RETURNS TABLE
 AS

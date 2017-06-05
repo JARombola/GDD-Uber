@@ -61,8 +61,7 @@ namespace UberFrba.Dominio {
 
         //------------ METODOS AUTOS--------------------------------
         public void cargarMarcas (ComboBox cbMarcas) {      
-            String query = "SELECT Distinct Marca FROM "+ESQUEMA+".Auto order by 1";
-            SqlCommand command= this.getCommand(query);
+            SqlCommand command= this.getCommandFunctionDeTabla("fx_getMarcas()");
             SqlDataReader marcas = command.ExecuteReader();
             while (marcas.Read()) {
                 cbMarcas.Items.Add(marcas.GetString(0));
@@ -83,8 +82,7 @@ namespace UberFrba.Dominio {
         //-------------- METODOS USUARIOS
 
         internal void cargarUsuarios (ComboBox cbUser) {
-            string query = "Select usuario From "+ESQUEMA+".Usuario";
-            SqlCommand command = this.getCommand(query);
+            SqlCommand command = this.getCommandFunctionDeTabla("fx_getUsuarios()");
             SqlDataReader usuarios= command.ExecuteReader();
             while (usuarios.Read()) {
                 cbUser.Items.Add(usuarios["usuario"]);
