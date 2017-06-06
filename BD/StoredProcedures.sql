@@ -8,18 +8,18 @@ GO
 -- Description:	<Description,,>
 -- =============================================
 --------------------------------------------------------------- >> CLIENTES
-CREATE PROCEDURE [MAIDEN].SP_cargarClientes 
+CREATE PROCEDURE [MAIDEN].SP_migrarClientes 
 AS
 BEGIN
 	Insert into [MAIDEN].Cliente(Nombre,Apellido,DNI,Telefono,Direccion,Mail,Fecha_Nacimiento)
 	SELECT Distinct
-		[gd_esquema].Maestra.Cliente_Nombre,
-		[gd_esquema].Maestra.Cliente_Apellido,
-		[gd_esquema].Maestra.Cliente_DNI,
-		[gd_esquema].Maestra.Cliente_Telefono,
-		[gd_esquema].Maestra.Cliente_Direccion,
-		[gd_esquema].Maestra.Cliente_Mail,
-		[gd_esquema].Maestra.Cliente_Fecha_Nac		
+		Cliente_Nombre,
+		Cliente_Apellido,
+		Cliente_DNI,
+		Cliente_Telefono,
+		Cliente_Direccion,
+		Cliente_Mail,
+		Cliente_Fecha_Nac		
 	FROM [gd_esquema].Maestra
 END
 GO
@@ -96,18 +96,18 @@ GO
 
 --------------------------------------------------------------- >> CHOFERES
 
-CREATE PROCEDURE [MAIDEN].SP_cargarChoferes 
+CREATE PROCEDURE [MAIDEN].SP_migrarChoferes 
 AS
 BEGIN
 	Insert into [MAIDEN].Chofer(Nombre,Apellido,DNI,Telefono,Direccion,Mail,Fecha_Nacimiento)
 	SELECT Distinct
-		[gd_esquema].Maestra.Chofer_Nombre,
-		[gd_esquema].Maestra.Chofer_Apellido,
-		[gd_esquema].Maestra.Chofer_DNI,
-		[gd_esquema].Maestra.Chofer_Telefono,
-		[gd_esquema].Maestra.Chofer_Direccion,
-		[gd_esquema].Maestra.Chofer_Mail,
-		[gd_esquema].Maestra.Chofer_Fecha_Nac		
+		Chofer_Nombre,
+		Chofer_Apellido,
+		Chofer_DNI,
+		Chofer_Telefono,
+		Chofer_Direccion,
+		Chofer_Mail,
+		Chofer_Fecha_Nac		
 	FROM [gd_esquema].Maestra
 END
 GO
@@ -181,16 +181,16 @@ END
 GO
 
 --------------------------------------------------------------- >> AUTOS
-CREATE PROCEDURE [MAIDEN].SP_cargarAutos
+CREATE PROCEDURE [MAIDEN].SP_migrarAutos
 AS
 BEGIN
 	INSERT INTO [MAIDEN].Auto(Marca, Modelo, Patente, Licencia, Rodado, Chofer)
 	SELECT DISTINCT 
-		[gd_esquema].Maestra.Auto_Marca,
-		[gd_esquema].Maestra.Auto_Modelo,
-		[gd_esquema].Maestra.Auto_Patente,
-		[gd_esquema].Maestra.Auto_Licencia,
-		[gd_esquema].Maestra.Auto_Rodado,
+		Auto_Marca,
+		Auto_Modelo,
+		Auto_Patente,
+		Auto_Licencia,
+		Auto_Rodado,
 		[MAIDEN].fx_getChoferId([gd_esquema].Maestra.Chofer_Dni)
 	FROM [gd_esquema].Maestra
 END
@@ -257,16 +257,16 @@ GO
 
 --------------------------------------------------------------- >> TURNOS
 
-CREATE PROCEDURE [MAIDEN].SP_cargarTurnos
+CREATE PROCEDURE [MAIDEN].SP_migrarTurnos
 AS
 BEGIN
 	INSERT INTO [MAIDEN].Turno(Hora_Inicio, Hora_Fin, Precio_Base, Precio_km, Descripcion)
 	SELECT DISTINCT 
-		[gd_esquema].Maestra.Turno_Hora_Inicio,
-		[gd_esquema].Maestra.Turno_Hora_Fin,
-		[gd_esquema].Maestra.Turno_Precio_Base,
-		[gd_esquema].Maestra.Turno_Valor_Kilometro,
-		[gd_esquema].Maestra.Turno_Descripcion
+		Turno_Hora_Inicio,
+		Turno_Hora_Fin,
+		Turno_Precio_Base,
+		Turno_Valor_Kilometro,
+		Turno_Descripcion
 	FROM [gd_esquema].Maestra
 END
 GO
@@ -557,6 +557,25 @@ BEGIN
 END
 GO
 --------------------------------------------------------------- >> VIAJES
+CREATE PROCEDURE [MAIDEN].SP_migrarViajes
+AS
+BEGIN
+INSERT INTO [MAIDEN].Viaje(Chofer,Auto,Turno,Km,Fecha,Cliente,NroRendicion, NroFactura)
+SELECT DISTINCT 
+	[MAIDEN].fx_getChoferId(a.Chofer_dni),
+	[MAIDEN].fx_getAutoId(a.Auto_Patente),
+	[MAIDEN].fx_getTurnoId(a.Turno_Hora_Inicio),
+	a.Viaje_Cant_Kilometros,
+	a.Viaje_Fecha,
+	[MAIDEN].fx_getClienteId(a.Cliente_Dni),
+	a.Rendicion_Nro,
+	b.Factura_Nro
+From [gd_esquema].Maestra a LEFT JOIN [gd_esquema].[Maestra] b on
+(a.Cliente_Dni = b.Cliente_Dni AND a.Viaje_Fecha = b.Viaje_Fecha AND a.Chofer_Dni = b.Chofer_Dni)
+WHERE (a.Rendicion_Nro IS NOT NULL and b.Factura_Nro IS NOT NULL)				-- Esto combina los registros que corresponden al mismo viaje pero estan separados por rendicion y factura
+END
+GO
+
 CREATE PROCEDURE [MAIDEN].SP_altaViaje(@idChofer int,
 									@idAuto int,
 									@kms numeric(18,0),
@@ -601,26 +620,25 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [MAIDEN].SP_cargarViajes
+
+--------------------------------------------------------------- >> RENDICION
+CREATE PROCEDURE [MAIDEN].SP_migrarRendiciones
 AS
 BEGIN
-INSERT INTO [MAIDEN].Viaje(Chofer,Auto,Turno,Km,Fecha,Cliente,NroRendicion, NroFactura)
-SELECT DISTINCT 
-	[MAIDEN].fx_getChoferId(a.Chofer_dni),
-	[MAIDEN].fx_getAutoId(a.Auto_Patente),
-	[MAIDEN].fx_getTurnoId(a.Turno_Hora_Inicio),
-	a.Viaje_Cant_Kilometros,
-	a.Viaje_Fecha,
-	[MAIDEN].fx_getClienteId(a.Cliente_Dni),
-	a.Rendicion_Nro,
-	b.Factura_Nro
-From [gd_esquema].Maestra a JOIN [gd_esquema].[Maestra] b on
-(a.Cliente_Dni = b.Cliente_Dni AND a.Viaje_Fecha = b.Viaje_Fecha AND a.Chofer_Dni = b.Chofer_Dni)
-WHERE (a.Rendicion_Nro is not null and b.Factura_Nro is not null)				-- Esto combina los registros que corresponden al mismo viaje pero estan separados por rendicion y factura
+	SET IDENTITY_INSERT [MAIDEN].Rendicion ON				-- La tabla usa Identity, pero la tabla ya tiene ciertos valores. De esta forma permitirá setearle, sin problemas con los identity
+	INSERT INTO [MAIDEN].Rendicion(Chofer,Fecha,Nro, Importe_Total, Turno)
+	SELECT [MAIDEN].fx_getChoferId(Chofer_Dni),
+		   CAST(Rendicion_Fecha as Date),
+		   Rendicion_Nro,
+		   sum(Rendicion_Importe),
+		   [MAIDEN].fx_getTurnoId(Turno_Hora_Inicio)  
+	From [gd_esquema].Maestra
+	Where Rendicion_Nro IS NOT NULL
+	Group by Chofer_Dni, CAST(Rendicion_Fecha as Date), Rendicion_Nro, Turno_Hora_Inicio
+	SET IDENTITY_INSERT [MAIDEN].Rendicion OFF
 END
 GO
 
---------------------------------------------------------------- >> RENDICION
 CREATE PROCEDURE [MAIDEN].SP_actualizarRendicionEnViajes(@idChofer int, @fecha Date,@codRendicion numeric(18,0))
 AS BEGIN
 	UPDATE [MAIDEN].Viaje
@@ -655,24 +673,6 @@ AS BEGIN
 END
 GO
 
-CREATE PROCEDURE [MAIDEN].SP_cargarRendiciones
-AS
-BEGIN
-	SET IDENTITY_INSERT [MAIDEN].Rendicion ON				-- La tabla usa Identity, pero la tabla ya tiene ciertos valores. De esta forma permitirá setearle, sin problemas con los identity
-	INSERT INTO [MAIDEN].Rendicion(Chofer,Fecha,Nro, Importe_Total, Turno)
-	SELECT [MAIDEN].fx_getChoferId(Chofer_Dni),
-		   CAST(Rendicion_Fecha as Date),
-		   Rendicion_Nro,
-		   sum(Rendicion_Importe),
-		   [MAIDEN].fx_getTurnoId(Turno_Hora_Inicio)  
-	From [gd_esquema].Maestra
-	Where Rendicion_Nro is not null
-	Group by Chofer_Dni, CAST(Rendicion_Fecha as Date), Rendicion_Nro, Turno_Hora_Inicio
-	SET IDENTITY_INSERT [MAIDEN].Rendicion OFF
-END
-GO
-
-
 CREATE PROCEDURE [MAIDEN].SP_eliminarTodasRendiciones
 AS
 BEGIN
@@ -685,6 +685,30 @@ END
 GO
 
 ----------------------------------------------------- >> FACTURAS
+CREATE PROCEDURE [MAIDEN].SP_migrarFacturas
+AS BEGIN
+	SET IDENTITY_INSERT [MAIDEN].Factura ON				-- Los id de la tabla son de tipo IDENTITY, pero la tabla maestra ya tiene ciertos valores setados. De esta forma permitirá setearle, sin problemas con los identity
+	INSERT INTO [MAIDEN].Factura(Nro,Cliente,Fecha,Fecha_Inicio,Fecha_Fin,Importe_Total)
+	SELECT	Factura_Nro,
+		   cliente,
+		   Factura_Fecha,
+		   Factura_Fecha_Inicio,
+		   Factura_Fecha_Fin,
+		   SUM(Turno_Precio_Base+Turno_Valor_Kilometro*Viaje_Cant_Kilometros)
+			FROM (SELECT DISTINCT 
+					Factura_Nro,
+				   [MAIDEN].fx_getClienteId(Cliente_Dni) as cliente,
+				   Factura_Fecha,
+				   Factura_Fecha_Inicio,
+				   Factura_Fecha_Fin,
+				  Turno_Precio_Base,Turno_Valor_Kilometro,Viaje_Cant_Kilometros
+				From [gd_esquema].Maestra
+				WHERE Factura_Nro IS NOT NULL)A
+	GROUP BY Factura_Nro, cliente, Factura_Fecha, Factura_Fecha_Inicio, Factura_Fecha_Fin
+	SET IDENTITY_INSERT [MAIDEN].Rendicion OFF
+END
+GO
+
 CREATE PROCEDURE [MAIDEN].SP_actualizarFacturaEnViajes(@idCliente int, @fechaInicio datetime, @fechaFin datetime, @codFactura numeric(18,0))
 AS BEGIN 
 	UPDATE [MAIDEN].Viaje
@@ -719,29 +743,7 @@ AS BEGIN
 END
 GO
 
-CREATE PROCEDURE [MAIDEN].SP_cargarFacturas
-AS BEGIN
-	SET IDENTITY_INSERT [MAIDEN].Factura ON				-- Los id de la tabla son de tipo IDENTITY, pero la tabla maestra ya tiene ciertos valores setados. De esta forma permitirá setearle, sin problemas con los identity
-	INSERT INTO [MAIDEN].Factura(Nro,Cliente,Fecha,Fecha_Inicio,Fecha_Fin,Importe_Total)
-	SELECT	Factura_Nro,
-		   cliente,
-		   Factura_Fecha,
-		   Factura_Fecha_Inicio,
-		   Factura_Fecha_Fin,
-		   SUM(Turno_Precio_Base+Turno_Valor_Kilometro*Viaje_Cant_Kilometros)
-			FROM (SELECT DISTINCT 
-					Factura_Nro,
-				   [MAIDEN].fx_getClienteId(Cliente_Dni) as cliente,
-				   Factura_Fecha,
-				   Factura_Fecha_Inicio,
-				   Factura_Fecha_Fin,
-				  Turno_Precio_Base,Turno_Valor_Kilometro,Viaje_Cant_Kilometros
-				From [gd_esquema].Maestra
-				WHERE Factura_Nro IS NOT NULL)A
-	GROUP BY Factura_Nro, cliente, Factura_Fecha, Factura_Fecha_Inicio, Factura_Fecha_Fin
-	SET IDENTITY_INSERT [MAIDEN].Rendicion OFF
-END
-GO
+
 
 CREATE PROCEDURE [MAIDEN].SP_eliminarTodasFacturas
 AS

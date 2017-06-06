@@ -1,6 +1,6 @@
 ----------------------------------------------->>CLIENTES
-IF OBJECT_ID ('[MAIDEN].SP_cargarClientes', 'P') IS NOT NULL  
-    DROP PROCEDURE [MAIDEN].SP_cargarClientes;  
+IF OBJECT_ID ('[MAIDEN].SP_migrarClientes', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_migrarClientes;  
 GO
 
 IF OBJECT_ID ('[MAIDEN].SP_eliminarTodosClientes', 'P') IS NOT NULL  
@@ -24,8 +24,8 @@ IF OBJECT_ID ('[MAIDEN].SP_habilitarCliente', 'P') IS NOT NULL
 GO
 
 ------------------------------------------------->>TURNOS
-IF OBJECT_ID ('[MAIDEN].SP_cargarTurnos', 'P') IS NOT NULL  
-    DROP PROCEDURE [MAIDEN].SP_cargarTurnos;  
+IF OBJECT_ID ('[MAIDEN].SP_migrarTurnos', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_migrarTurnos;  
 GO
 
 IF OBJECT_ID ('[MAIDEN].SP_altaTurno', 'P') IS NOT NULL  
@@ -49,8 +49,8 @@ IF OBJECT_ID ('[MAIDEN].SP_modifTurno', 'P') IS NOT NULL
 GO
 
 ------------------------------------------------->>CHOFERES
-IF OBJECT_ID ('[MAIDEN].SP_cargarChoferes', 'P') IS NOT NULL  
-    DROP PROCEDURE [MAIDEN].SP_cargarChoferes;  
+IF OBJECT_ID ('[MAIDEN].SP_migrarChoferes', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_migrarChoferes;  
 GO
 
 IF OBJECT_ID ('[MAIDEN].SP_eliminarTodosChoferes', 'P') IS NOT NULL  
@@ -74,8 +74,8 @@ IF OBJECT_ID ('[MAIDEN].SP_habilitarChofer', 'P') IS NOT NULL
 GO
 
 ------------------------------------- AUTOS
-IF OBJECT_ID ('[MAIDEN].SP_cargarAutos', 'P') IS NOT NULL  
-    DROP PROCEDURE [MAIDEN].SP_cargarAutos;  
+IF OBJECT_ID ('[MAIDEN].SP_migrarAutos', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_migrarAutos;  
 GO
 
 IF OBJECT_ID ('[MAIDEN].SP_eliminarTodosAutos', 'P') IS NOT NULL  
@@ -187,8 +187,8 @@ IF OBJECT_ID ('[MAIDEN].SP_eliminarTodosViajes', 'P') IS NOT NULL
     DROP PROCEDURE [MAIDEN].SP_eliminarTodosViajes
 GO
 
-IF OBJECT_ID ('[MAIDEN].SP_cargarViajes', 'P') IS NOT NULL  
-    DROP PROCEDURE [MAIDEN].SP_cargarViajes
+IF OBJECT_ID ('[MAIDEN].SP_migrarViajes', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_migrarViajes
 GO
 -------------------------------------------- RENDICIONES
 IF OBJECT_ID ('[MAIDEN].SP_rendicion', 'P') IS NOT NULL  
@@ -199,8 +199,8 @@ IF OBJECT_ID ('[MAIDEN].SP_eliminarTodasRendiciones', 'P') IS NOT NULL
     DROP PROCEDURE [MAIDEN].SP_eliminarTodasRendiciones
 GO
 
-IF OBJECT_ID ('[MAIDEN].SP_cargarRendiciones', 'P') IS NOT NULL  
-    DROP PROCEDURE [MAIDEN].SP_cargarRendiciones
+IF OBJECT_ID ('[MAIDEN].SP_migrarRendiciones', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_migrarRendiciones
 GO
 
 IF OBJECT_ID ('[MAIDEN].SP_actualizarRendicionEnViajes', 'P') IS NOT NULL  
@@ -216,8 +216,8 @@ IF OBJECT_ID ('[MAIDEN].SP_Facturacion', 'P') IS NOT NULL
     DROP PROCEDURE [MAIDEN].SP_Facturacion
 GO
 
-IF OBJECT_ID ('[MAIDEN].SP_cargarFacturas', 'P') IS NOT NULL  
-    DROP PROCEDURE [MAIDEN].SP_cargarFacturas
+IF OBJECT_ID ('[MAIDEN].SP_migrarFacturas', 'P') IS NOT NULL  
+    DROP PROCEDURE [MAIDEN].SP_migrarFacturas
 GO
 
 IF OBJECT_ID ('[MAIDEN].SP_eliminarTodasFacturas', 'P') IS NOT NULL  

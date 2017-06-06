@@ -3,19 +3,19 @@ GO
 
 DECLARE @RC int
 
-EXECUTE @RC = [MAIDEN].[SP_cargarClientes] 
+EXECUTE @RC = [MAIDEN].[SP_migrarClientes] 
 
-EXECUTE @RC = [MAIDEN].[SP_cargarChoferes] 
+EXECUTE @RC = [MAIDEN].[SP_migrarChoferes] 
 
-EXECUTE @RC = [MAIDEN].[SP_cargarTurnos] 
+EXECUTE @RC = [MAIDEN].[SP_migrarTurnos] 
 
-EXECUTE @RC = [MAIDEN].[SP_cargarAutos] 
+EXECUTE @RC = [MAIDEN].[SP_migrarAutos] 
 
-EXECUTE @RC = [MAIDEN].[SP_cargarRendiciones] 
+EXECUTE @RC = [MAIDEN].[SP_migrarRendiciones] 
 
-EXECUTE @RC = [MAIDEN].[SP_cargarFacturas] 
+EXECUTE @RC = [MAIDEN].[SP_migrarFacturas] 
 
-EXECUTE @RC = [MAIDEN].[SP_cargarViajes]
+EXECUTE @RC = [MAIDEN].[SP_migrarViajes]
 
 EXECUTE @RC = [MAIDEN].[SP_crearFuncionalidadesDefault] 
 
