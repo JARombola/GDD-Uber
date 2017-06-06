@@ -83,13 +83,15 @@ CREATE FUNCTION [MAIDEN].fx_filtrarChoferesHabilitados (@nombre varchar(255),
 								 @DNI numeric(18,0))
 Returns Table
 AS
-	RETURN
-		(Select * From [MAIDEN].fx_filtrarChoferes(@nombre, @apellido, @DNI) where habilitado = 1)
+	RETURN(
+			Select * From [MAIDEN].fx_filtrarChoferes(@nombre, @apellido, @DNI) 
+				where habilitado = 1
+		)
 GO
 
 CREATE FUNCTION [MAIDEN].fx_getChoferId(@Dni numeric(18,0))
 RETURNS int 
-as Begin
+AS Begin
 	return (Select id from [MAIDEN].Chofer where Dni = @Dni)
 End;
 GO
@@ -133,7 +135,7 @@ Returns Table
 AS
 	RETURN
 		(Select * From [MAIDEN].Turno where 
-			Descripcion like '%'+ @descripcion+ '%')
+			Descripcion like '%'+ @descripcion+ '%' AND Respaldo = 0)
 GO
 
 CREATE FUNCTION [MAIDEN].fx_filtrarTurnosHabilitados (@descripcion varchar(255))		
@@ -152,46 +154,7 @@ AS BEGIN
 	END;
 GO
 
------------------------ BUSQUEDAS POR ID --------------------------
-CREATE FUNCTION [MAIDEN].fx_getCliente(@id int)
-RETURNS TABLE 
-AS
-RETURN 
-(SELECT * From [MAIDEN].Cliente WHERE id = @id)
-GO
-
-CREATE FUNCTION [MAIDEN].fx_getChofer(@id int)
-RETURNS TABLE 
-AS
-RETURN (SELECT * From [MAIDEN].Chofer WHERE id = @id)
-GO
-
-CREATE FUNCTION [MAIDEN].fx_getAuto(@id int)
-RETURNS TABLE 
-AS
-RETURN (SELECT * From [MAIDEN].Auto WHERE id = @id)
-GO
-
-CREATE FUNCTION [MAIDEN].fx_getTurno(@id int)
-RETURNS TABLE 
-AS
-RETURN (SELECT * From [MAIDEN].Turno WHERE id = @id)
-GO
-
-CREATE FUNCTION [MAIDEN].fx_getDescripcion(@id int)
-RETURNS VARCHAR(256) 
-AS
-BEGIN
-	RETURN (SELECT Descripcion From [MAIDEN].fx_getTurno(@id))
-END;
-GO
-
-CREATE FUNCTION [MAIDEN].fx_getRol(@Id int)
-RETURNS TABLE 
-AS
-RETURN (SELECT * From [MAIDEN].Rol WHERE ID = @id)
-GO
-
+------------------------------------------- FUNCIONES DE ROLES
 CREATE FUNCTION [MAIDEN].fx_getRolId(@rol varchar(20))
 RETURNS int 
 AS
@@ -200,18 +163,6 @@ BEGIN
 END;
 GO
 
-CREATE FUNCTION [MAIDEN].fx_getNombreChofer(@id int)
-RETURNS nvarchar(255)
-AS BEGIN
-	RETURN (SELECT Nombre+' '+Apellido From [MAIDEN].fx_getChofer(@id))
-	END
-GO
-
-CREATE FUNCTION [MAIDEN].fx_getUsuario(@user varchar(30))
-RETURNS TABLE 
-AS
-RETURN (SELECT * From [MAIDEN].Usuario WHERE Usuario = @user)
-GO
 -----------------------------------FUNCIONALIDADES
 CREATE FUNCTION [MAIDEN].fx_getFuncionalidades(@idRol int)		-- Devuelve las funcionalidades activas del rol
 RETURNS TABLE
@@ -219,7 +170,7 @@ AS
 RETURN SELECT Funcionalidad from [MAIDEN].Funcionalidad_por_Rol where Rol = @idRol
 GO
 
----------------------------------- USUARIOS
+------------------------------------------- USUARIOS
 CREATE FUNCTION [MAIDEN].fx_getUsuarios()
 RETURNS TABLE
 AS
@@ -233,15 +184,6 @@ RETURN (Select Rol From [MAIDEN].Rol
 		Where ID IN (Select Rol FROM [MAIDEN].Rol_por_Usuario Where Usuario = @usuario))
 GO
 
-CREATE FUNCTION [MAIDEN].fx_getCantidadRolesDeUsuario(@usuario varchar(30))			--Devuelve la cantidad de roles que tiene ese usuario
-RETURNS int																		--(Usada para otorgar funcionalidades)
-AS
-BEGIN
-	RETURN (Select count(*) as 'Cantidad de Roles' FROM [MAIDEN].Rol_por_Usuario Where Usuario = @usuario)
-END;
-GO
-
-
 CREATE FUNCTION [MAIDEN].fx_getRoles()			--Devuelve la cantidad de roles que tiene ese usuario
 RETURNS TABLE																		--(Usada para otorgar funcionalidades)
 AS
@@ -253,15 +195,14 @@ RETURNS TABLE																		--(Usada para otorgar funcionalidades)
 AS
 	RETURN (Select * FROM [MAIDEN].fx_getRoles() where Habilitado = 1)
 GO
-
-
 ----------------------- FUNCION PARA LOS VIAJES
 -- Devuelve los datos del Auto para autocompletar el viaje una vez seleccionado el chofer
 
 CREATE FUNCTION [MAIDEN].fx_getAutoDelChofer(@idChofer int)
 Returns Table
 AS Return(
-		Select a.*,t.Hora_Inicio,t.Hora_Fin from [MAIDEN].Auto a LEFT JOIN [MAIDEN].Turno t on (a.Turno =t.ID)
+		Select a.*,t.Hora_Inicio,t.Hora_Fin from [MAIDEN].Auto a 
+						LEFT JOIN [MAIDEN].Turno t on (a.Turno =t.ID)
 		where
 		(Chofer = @idChofer 
 		AND a.Habilitado = 1)
@@ -269,7 +210,8 @@ AS Return(
 GO
 
 --------------------------------------------------------------- RENDICION
-
+-- Devuelve los datos de la rendicion que todavia NO FUE REGISTRADA y está siendo registrada(Se usa en SP_Rendicion)
+-- La diferencia con la funcion siguiente es que aún no tenemos el total de la rendición
 CREATE FUNCTION [MAIDEN].fx_getDatosRendicion(@nroRendicion numeric(18,0))
 RETURNS TABLE
 AS
@@ -287,6 +229,7 @@ RETURN(
 		Where viaje.NroRendicion = @nroRendicion)
 GO
 
+-- Devuelve los datos de la rendicion que YA había sido registrada. (Por eso podemos obtener el total directamente)
 CREATE FUNCTION [MAIDEN].fx_getRendicionExistente(@nroRendicion numeric(18,0))
 RETURNS TABLE
 AS
@@ -298,8 +241,9 @@ RETURN(
 )
 GO
 
-
 ------------------------------------------------------------- FACTURA
+-- Devuelve los datos de la factura que todavia NO FUE REGISTRADA y está siendo registrada(Se usa en SP_Facturacion)
+-- La diferencia con la funcion siguiente es que aún no tenemos el total de la factura
 CREATE FUNCTION [MAIDEN].fx_getDatosFactura(@nroFactura numeric(18,0))
 RETURNS TABLE
 AS
@@ -318,6 +262,7 @@ RETURN(
 		)
 GO
 
+-- Devuelve los datos de la factura que YA había sido registrada. (Por eso podemos obtener el total directamente)
 CREATE FUNCTION [MAIDEN].fx_getFacturaExistente(@nroFactura numeric(18,0))
 RETURNS TABLE
 AS
@@ -329,34 +274,53 @@ RETURN(
 )
 GO
 ------------------------------------------------------------ ESTADISTICAS
-
+-- 1) Se agrupan las rendiciones por chofer
+-- 2) Se suman los importes de cada una de la rendicion (Total)
+-- 3) Se ordenan de forma descendente según el Total (es decir, quedaran primeros los de mayor recaudación)
+-- 4) Se muestran los datos de los 5 primeros. (es decir, los 5 de mayor recaudación)
 CREATE FUNCTION [MAIDEN].fx_choferesMayorRecaudacion(@anio int, @trimestre int)
 RETURNS TABLE
 AS
 RETURN(
-
-		SELECT TOP 5 (c.Nombre+' '+c.Apellido) as Chofer,
-		count(*) as 'Cantidad de Viajes',
-		sum(Importe_Total) as Total
-		from [MAIDEN].Rendicion r join [MAIDEN].Chofer c on (r.Chofer = c.ID)
-		where year(r.fecha)=@anio AND DATEPART(qq,r.Fecha)=@trimestre 
-		Group by r.Chofer, c.Nombre, c.Apellido, c.Direccion, c.Telefono, c.Mail
-		order by sum(Importe_Total) desc
+		SELECT TOP 5 (
+			c.Nombre+' '+c.Apellido) as Chofer,
+			count(*) as 'Cantidad de Viajes',
+			sum(Importe_Total) as Total	
+			from [MAIDEN].Rendicion r join [MAIDEN].Chofer c on (r.Chofer = c.ID)
+			where year(r.fecha)=@anio AND DATEPART(qq,r.Fecha)=@trimestre 
+			Group by r.Chofer, c.Nombre, c.Apellido, c.Direccion, c.Telefono, c.Mail
+			order by sum(Importe_Total) desc
 )
 GO
+
+-- 1) Los viajes se ordenan, para cada chofer, de forma descendente segun la duracion de los mismos (Hora fin - hora inicio)
+--		(la numeracion de las filas se reinicia para cada chofer)
+-- 2) Se selecciona de los 5 primeros choferes su viaje mas largo (fila = 1)
 
 CREATE FUNCTION [MAIDEN].fx_choferesViajesMasLargos(@anio int,@trimestre int)
 RETURNS TABLE
 AS
 RETURN(
-		SELECT TOP 5 (c.Nombre+' '+c.apellido)as Chofer,max(DATEDIFF(MI,cast(Fecha as time),Hora_Fin))as Duracion
-		FROM [MAIDEN].Viaje v join [MAIDEN].Chofer c on (v.Chofer = c.ID)
-		WHERE YEAR(v.fecha) = @anio AND DATEPART(qq,v.Fecha)=@trimestre AND v.Hora_Fin is not null
-		GROUP BY c.Nombre,c.Apellido,c.Dni
-		ORDER BY Duracion DESC
+		SELECT TOP 5 (c.nombre+' '+c.Apellido) as Chofer,Resultados.Fecha,a.Patente,Duracion 
+				FROM (
+					SELECT v.Chofer,
+							v.Auto,
+							ROW_NUMBER() OVER (PARTITION BY v.Chofer ORDER BY DATEDIFF(MI,cast(v.fecha as time),v.Hora_Fin) DESC) AS fila,
+							DATEDIFF(MI,cast(v.fecha as time),v.Hora_Fin) as Duracion,
+							v.Fecha
+					FROM [MAIDEN].Viaje v
+					WHERE YEAR(v.fecha) = @anio AND DATEPART(qq,v.Fecha)=@trimestre AND v.Hora_Fin is not null
+					)Resultados 
+							JOIN [MAIDEN].Chofer c on Resultados.Chofer = c.ID
+							JOIN MAIDEN.Auto a on (Resultados.Auto = a.ID)
+				WHERE Resultados.fila = 1
+				ORDER BY Duracion DESC
 )
 GO
-
+-- 1) Se agrupan las facturas por cliente
+-- 2) Para cada cliente se suman los importes de cada una de estas facturas
+-- 3) Se ordenan de mayor a menor según el total de cada cliente (quedarán primeros los de mayor consumo)
+-- 4) Se seleccionan los 5 primeros clientes (es decir, los de mayor recaudación)
 CREATE FUNCTION [MAIDEN].fx_clientesMayorConsumo(@anio int,@trimestre int)
 RETURNS TABLE
 AS
@@ -369,23 +333,22 @@ RETURN(
 )
 GO
 
+-- 1) Los viajes se ordenan, para cada cliente, en forma descendente segun la cantidad de veces que utilizó el mismo auto
+--				(la numeracion de las filas se reinicia para cada cliente)
+-- 2)  Se selecciona de los 5 primeros clientes el vehículo con el que mayor viajes realizó (fila = 1).
 CREATE FUNCTION [MAIDEN].fx_clientesMismoAuto(@anio int,@trimestre int)
 RETURNS TABLE
 AS
 RETURN(
-		SELECT TOP 5 (c.Nombre+' '+c.Apellido)AS Cliente, 
-				(SELECT a.Patente FROM MAIDEN.Viaje V JOIN MAIDEN.Auto a on (a.ID = V.Auto) WHERE V.Cliente=Cliente AND YEAR(FECHA)=@anio AND DATEPART(qq,Fecha) = @trimestre
-				GROUP BY CLIENTE,a.Patente 
-				HAVING COUNT(*)=X.VIAJES) AS Patente
-				,X.Viajes 
-				FROM(
-					SELECT CLIENTE, MAX(CANTIDAD) AS VIAJES FROM
-						(SELECT CLIENTE,COUNT(*)AS CANTIDAD FROM MAIDEN.VIAJE
-							WHERE YEAR(FECHA)=@anio AND DATEPART(qq,Fecha) = @trimestre
-							GROUP BY CLIENTE,AUTO
-						)A
-						GROUP BY CLIENTE)X JOIN [MAIDEN].Cliente c ON (X.Cliente=c.ID)
-						ORDER BY VIAJES DESC
+		SELECT TOP 5 (cliente.nombre+' '+cliente.Apellido)as Cliente,auto.Marca, auto.Patente,Viajes
+				FROM ( SELECT v.cliente, v.Auto,
+						 ROW_NUMBER() OVER (PARTITION BY v.Cliente ORDER BY count(*) DESC) AS fila,
+						 count(*) as Viajes
+				   FROM MAIDEN.Viaje v
+				   WHERE YEAR(FECHA)=@anio AND DATEPART(qq,Fecha) = @trimestre
+				   GROUP BY v.Cliente,v.Auto)Resultados JOIN [MAIDEN].Cliente cliente ON (Resultados.Cliente = cliente.ID)
+														JOIN [MAIDEN].Auto auto on (Resultados.Auto = auto.ID)
+				   WHERE Resultados.fila = 1
+				   ORDER BY Viajes DESC
 )
 GO
-

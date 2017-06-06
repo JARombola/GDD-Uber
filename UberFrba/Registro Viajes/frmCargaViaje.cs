@@ -73,10 +73,6 @@ namespace UberFrba.Registro_Viajes
             infoCampo.SetToolTip(txtCliente, String.Format("{0} {1}\n-DNI: {2}\n-Direccion: {3}\n-Teléfono: {4}\n-Mail: {5}", cliente.nombre, cliente.apellido, cliente.dni, cliente.direccion, cliente.telefono, cliente.mail));
         }
 
-
-
-
-
         //----------------------------------------- BOTONES---------------------------------------------------------------
 
         private void button1_Click (object sender, EventArgs e) {

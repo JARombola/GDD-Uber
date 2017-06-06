@@ -65,7 +65,7 @@ CREATE PROCEDURE [MAIDEN].SP_modifCliente(
 		@fecha_nacimiento datetime)
 AS
 BEGIN
-   UPDATE [MAIDEN].fx_getCliente(@id)
+   UPDATE [MAIDEN].Cliente
    SET Nombre = @nombre,
        Apellido = @apellido,
 	   DNI = @dni,
@@ -73,20 +73,23 @@ BEGIN
 	   Direccion = @direccion,
 	   Mail = @mail,
 	   Fecha_Nacimiento = @fecha_nacimiento
+	   WHERE ID=@id
 END
 GO
 
 CREATE PROCEDURE [MAIDEN].SP_deshabilitarCliente(@id int)
 AS BEGIN
-	UPDATE [MAIDEN].fx_getCliente(@id)
+	UPDATE [MAIDEN].Cliente
 	SET Habilitado=0
+	WHERE ID=@id
 END
 GO
 
 CREATE PROCEDURE [MAIDEN].SP_habilitarCliente(@id int)
 AS BEGIN
-	UPDATE [MAIDEN].fx_getCliente(@id)
+	UPDATE [MAIDEN].Cliente
 	SET Habilitado=1
+	WHERE ID=@id
 END
 GO
 
@@ -149,7 +152,7 @@ CREATE PROCEDURE [MAIDEN].SP_modifChofer(
 		@fecha_nacimiento datetime)
 AS
 BEGIN
-	UPDATE [MAIDEN].getChofer(@id)
+	UPDATE [MAIDEN].Chofer
    SET Nombre = @nombre,
        Apellido = @apellido,
 	   DNI = @dni,
@@ -157,26 +160,27 @@ BEGIN
 	   Direccion = @direccion,
 	   Mail = @mail,
 	   Fecha_Nacimiento = @fecha_nacimiento
- WHERE ID = @id
+	WHERE ID = @id
 END
 GO
 
 CREATE PROCEDURE [MAIDEN].SP_deshabilitarChofer(@id int)
 AS BEGIN
-	UPDATE [MAIDEN].fx_getChofer(@id)
+	UPDATE [MAIDEN].Chofer
 	SET Habilitado=0
+	WHERE ID=@id
 END
 GO
 
 CREATE PROCEDURE [MAIDEN].SP_habilitarChofer(@id int)
 AS BEGIN
-	UPDATE [MAIDEN].fx_getChofer(@id)
+	UPDATE [MAIDEN].Chofer
 	SET Habilitado=1
+	WHERE ID=@id
 END
 GO
 
 --------------------------------------------------------------- >> AUTOS
---		******** TIENEN QUE ESTAR CARGADOS LOS CHOFERES ANTES*********
 CREATE PROCEDURE [MAIDEN].SP_cargarAutos
 AS
 BEGIN
@@ -218,15 +222,17 @@ GO
 
 CREATE PROCEDURE [MAIDEN].SP_deshabilitarAuto(@id int)
 AS BEGIN
-	UPDATE [MAIDEN].fx_getAuto(@id)
+	UPDATE [MAIDEN].Auto
 	SET Habilitado=0
+	WHERE ID = @id
 END
 GO
 
 CREATE PROCEDURE [MAIDEN].SP_habilitarAuto(@id int)
 AS BEGIN
-	UPDATE [MAIDEN].fx_getAuto(@id)
+	UPDATE [MAIDEN].Auto
 	SET Habilitado=1
+	WHERE ID=@id
 END
 GO
 
@@ -239,12 +245,13 @@ CREATE PROCEDURE [MAIDEN].SP_modifAuto(
 				@turno int)
 AS
 BEGIN
-	UPDATE [MAIDEN].fx_getAuto(@id)
+	UPDATE [MAIDEN].AUTO
 	SET Marca = @marca,
 		Modelo = @modelo,
 		Patente = @patente,
 		Chofer = @chofer,
 		Turno = @turno
+		WHERE ID=@id
 END
 GO
 
@@ -272,8 +279,8 @@ CREATE PROCEDURE [MAIDEN].SP_altaTurno(@inicio numeric(18,0),
 								 @habilitado bit) 
 AS
 BEGIN
-	Insert into [MAIDEN].Turno
-	values(@inicio, @fin, @precioBase, @precioKm, @descripcion, @habilitado)
+	Insert into [MAIDEN].Turno(Hora_Inicio,Hora_Fin,Precio_Base,Precio_km,Descripcion)
+	values(@inicio, @fin, @precioBase, @precioKm, @descripcion)
 END
 GO
 
@@ -291,16 +298,18 @@ GO
 CREATE PROCEDURE [MAIDEN].SP_deshabilitarTurno(@id int)
 AS
 BEGIN
-	UPDATE [MAIDEN].fx_getTurno(@id)
+	UPDATE [MAIDEN].Turno
 	SET Habilitado=0
+	WHERE ID=@id
 END
 GO
 
 CREATE PROCEDURE [MAIDEN].SP_habilitarTurno(@id int)
 AS
 BEGIN
-	UPDATE [MAIDEN].fx_getTurno(@id)
+	UPDATE [MAIDEN].Turno
 	SET Habilitado=1
+	WHERE ID=@id
 END
 GO
 
@@ -315,13 +324,14 @@ CREATE PROCEDURE [MAIDEN].[SP_modifTurno](
 					@habilitado bit)
 AS
 BEGIN
-	UPDATE [MAIDEN].fx_getTurno(@id)
+	UPDATE [MAIDEN].Turno
 	SET Hora_Inicio = @inicio,
 		Hora_Fin = @fin,
 		Precio_Base = @precioBase,
 		Precio_km = @precioKM,
 		Descripcion = @descripcion,
 		Habilitado = @habilitado
+	WHERE ID=@id
 END
 GO
 
@@ -345,8 +355,9 @@ GO
 CREATE PROCEDURE [MAIDEN].SP_modifRol(@idRol int, @nombreRol varchar(20),@funcionalidades nvarchar(100))
 AS
 BEGIN
-	UPDATE [MAIDEN].fx_getRol(@idRol)
-	SET Rol = @nombreRol
+	UPDATE [MAIDEN].Rol
+		SET Rol = @nombreRol
+	WHERE ID=@idRol
 
 	DELETE FROM [MAIDEN].Funcionalidad_por_Rol where Rol = @idRol 
 	INSERT INTO MAIDEN.Funcionalidad_por_Rol 
@@ -366,8 +377,9 @@ GO
 CREATE PROCEDURE [MAIDEN].SP_deshabilitarRol(@id int)
 AS
 BEGIN
-	UPDATE [MAIDEN].fx_getRol(@id)
+	UPDATE [MAIDEN].Rol
 	SET Habilitado = 0
+	WHERE ID=@id
 	EXEC [MAIDEN].SP_eliminarRolEnUsuarios @id
 END
 GO
@@ -375,8 +387,9 @@ GO
 CREATE PROCEDURE [MAIDEN].SP_habilitarRol(@id int)
 AS
 BEGIN
-	UPDATE [MAIDEN].fx_getRol(@id)
+	UPDATE [MAIDEN].Rol
 	SET Habilitado = 1
+	WHERE ID=@id
 END
 GO
 
@@ -391,16 +404,6 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [MAIDEN].SP_crearFuncionalidadesDefault		-- Se crean las funcionalidades basicas, cada una tendra su id segun el orde de creacion empezando por 1
-AS
-BEGIN
-	INSERT INTO Funcionalidad(ID, Descripcion)
-	VALUES (1,'clientes'),(2,'choferes'),(3,'autos'),(4,'roles'),(5,'turnos'),(6,'viajes'),(7,'facturacion'),
-	(8,'rendicion'),(9,'estadisticas')
-								--1 = clientes, 2 = choferes, 3= autos....
-END
-GO
-
 CREATE PROCEDURE [MAIDEN].SP_eliminarTodasFuncionalidades		-- Se crean las funcionalidades basicas, cada una tendra su id segun el orde de creacion empezando por 1
 AS
 BEGIN
@@ -411,6 +414,17 @@ BEGIN
 END
 GO
 
+
+------------------------------------------------------ Funcionalidades/Roles DEFAULT
+CREATE PROCEDURE [MAIDEN].SP_crearFuncionalidadesDefault		-- Se crean las funcionalidades basicas, cada una tendra su id segun el orde de creacion empezando por 1
+AS
+BEGIN
+	INSERT INTO Funcionalidad(ID, Descripcion)
+	VALUES (1,'clientes'),(2,'choferes'),(3,'autos'),(4,'roles'),(5,'turnos'),(6,'viajes'),(7,'facturacion'),
+	(8,'rendicion'),(9,'estadisticas')
+								--1 = clientes, 2 = choferes, 3= autos....
+END
+GO
 
 CREATE PROCEDURE [MAIDEN].SP_crearRolesDefault
 AS
@@ -423,7 +437,8 @@ BEGIN
 END
 GO
 
---------------------------------------------------------------- USUARIOS
+
+--------------------------------------------------------------- >> USUARIOS
 CREATE PROCEDURE [MAIDEN].SP_altaUsuario(@usuario varchar(30), @pass varchar(256))
 AS
 BEGIN
@@ -459,7 +474,7 @@ BEGIN
 	DELETE FROM [MAIDEN].Usuario
 END
 GO
------------------------------------------------------------------ ROLES / USUARIOS
+----------------------------------------------------------------- >> ROLES / USUARIOS
 CREATE PROCEDURE [MAIDEN].SP_asignarRol(@usuario varchar(30), @rol varchar(20))
 AS
 BEGIN 
@@ -483,7 +498,7 @@ BEGIN
 	Usuario = @usuario AND Rol = @RolId)
 END
 GO
-
+--------------------------------------------- Usuarios - Roles DEFAULT
 CREATE PROCEDURE [MAIDEN].SP_crearUsuariosDefault
 AS
 BEGIN
@@ -500,11 +515,12 @@ CREATE PROCEDURE [MAIDEN].SP_loginOk(@usuario varchar(30))
 AS
 BEGIN
 	Declare @intentos int
-	SET @intentos = (select intentosLogueo from [MAIDEN].fx_getUsuario(@usuario))
+	SET @intentos = (select intentosLogueo from [MAIDEN].Usuario WHERE Usuario=@usuario)
 	IF (@intentos >=3) return 0					-- Aunque la contraseña sea correcta, si la cantidad de logueos era 3,
 	ELSE BEGIN									-- se considera que el usuario está bloqueado y se le niega el acceso
-		UPDATE [MAIDEN].fx_getUsuario(@usuario)
+		UPDATE [MAIDEN].Usuario
 		SET intentosLogueo = 0
+		WHERE Usuario = @usuario
 		return 3						--Caso contrario se "resetean" la cantidad de intentos fallidos a 0
 	END
 END
@@ -514,11 +530,12 @@ CREATE PROCEDURE [MAIDEN].SP_loginFail(@usuario varchar(30))
 AS
 BEGIN
 	Declare @intentosRealizados int, @msg varchar(100)
-	SET @intentosRealizados = (select intentosLogueo from [MAIDEN].fx_getUsuario(@usuario))
+	SET @intentosRealizados = (select intentosLogueo from [MAIDEN].Usuario WHERE Usuario=@usuario)
 	if (@intentosRealizados < 3) BEGIN							-- se le agrega un intento fallido
 						SET @intentosRealizados = @intentosRealizados+1
-						UPDATE [MAIDEN].fx_getUsuario(@usuario)
+						UPDATE [MAIDEN].Usuario
 						SET intentosLogueo = @intentosRealizados
+						WHERE Usuario=@usuario
 						return (3-@intentosRealizados)				-- devuelve la cantidad de intentos restantes
 					   END;
 	else BEGIN
@@ -532,14 +549,14 @@ CREATE PROCEDURE [MAIDEN].SP_login(@usuario varchar(30), @password varchar(256))
 AS
 BEGIN 
 	Declare @contraseña varchar(256), @resultado int
-	SET @contraseña = (Select pass from [MAIDEN].fx_getUsuario(@usuario))
+	SET @contraseña = (Select pass from [MAIDEN].USUARIO WHERE Usuario=@usuario)
 	if( HASHBYTES('SHA2_256',@password) = @contraseña)			-- Verifica que la contraseña sea correcta
 		EXEC @resultado = [MAIDEN].SP_loginOk @usuario
 	else Exec @resultado = [MAIDEN].SP_loginFail @usuario
 	SELECT @resultado
 END
 GO
---------------------------------------------------------------- VIAJES
+--------------------------------------------------------------- >> VIAJES
 CREATE PROCEDURE [MAIDEN].SP_altaViaje(@idChofer int,
 									@idAuto int,
 									@kms numeric(18,0),
@@ -583,7 +600,7 @@ BEGIN
 	DBCC CHECKIDENT ('[MAIDEN].Viaje', RESEED, 0)
 END
 GO
--------- ***** TIENEN QUE ESTAR CHOFERES, AUTOS, TURNOS, CLIENES y RENDICIONES CARGADOS****-----------
+
 CREATE PROCEDURE [MAIDEN].SP_cargarViajes
 AS
 BEGIN
@@ -603,7 +620,7 @@ WHERE (a.Rendicion_Nro is not null and b.Factura_Nro is not null)				-- Esto com
 END
 GO
 
---------------------------------------------------------------- RENDICION
+--------------------------------------------------------------- >> RENDICION
 CREATE PROCEDURE [MAIDEN].SP_actualizarRendicionEnViajes(@idChofer int, @fecha Date,@codRendicion numeric(18,0))
 AS BEGIN
 	UPDATE [MAIDEN].Viaje
@@ -621,9 +638,9 @@ AS BEGIN
 		BEGIN
 			INSERT INTO [MAIDEN].Rendicion(Chofer,Fecha,Turno,Importe_Total)
 			Select @idChofer, @fecha, t.ID, sum(t.Precio_Base+t.Precio_km*v.Km)*0.3				-- Le corresponde el 30% del precio del viaje 
-			From Turno t join Viaje v on (t.ID = v.Turno)
-			Where Cast(v.Fecha as Date) = @fecha
-			group by t.ID
+			From Turno t join Viaje v on (t.ID = v.Turno) 
+			WHERE Cast(v.Fecha as Date) = @fecha AND v.Chofer = @idChofer
+			GROUP BY t.ID
 
 			SET @cod_Rendicion = @@IDENTITY					-- Necesito el ID para actualizarlo en los viajes
 	
@@ -667,7 +684,7 @@ BEGIN
 END
 GO
 
---------------------------------------------FACTURAS
+----------------------------------------------------- >> FACTURAS
 CREATE PROCEDURE [MAIDEN].SP_actualizarFacturaEnViajes(@idCliente int, @fechaInicio datetime, @fechaFin datetime, @codFactura numeric(18,0))
 AS BEGIN 
 	UPDATE [MAIDEN].Viaje
@@ -704,18 +721,24 @@ GO
 
 CREATE PROCEDURE [MAIDEN].SP_cargarFacturas
 AS BEGIN
-	SET IDENTITY_INSERT [MAIDEN].Factura ON				-- La tabla usa Identity, pero la tabla ya tiene ciertos valores. De esta forma permitirá setearle, sin problemas con los identity
+	SET IDENTITY_INSERT [MAIDEN].Factura ON				-- Los id de la tabla son de tipo IDENTITY, pero la tabla maestra ya tiene ciertos valores setados. De esta forma permitirá setearle, sin problemas con los identity
 	INSERT INTO [MAIDEN].Factura(Nro,Cliente,Fecha,Fecha_Inicio,Fecha_Fin,Importe_Total)
-	SELECT DISTINCT
-		   Factura_Nro,
-		   [MAIDEN].fx_getClienteId(Cliente_Dni),
+	SELECT	Factura_Nro,
+		   cliente,
 		   Factura_Fecha,
 		   Factura_Fecha_Inicio,
 		   Factura_Fecha_Fin,
-		   sum(Turno_Precio_Base+Turno_Valor_Kilometro*Viaje_Cant_Kilometros)
-	From [gd_esquema].Maestra
-	Where Factura_Nro IS NOT NULL
-	Group by Cliente_Dni,Factura_Nro, Factura_Fecha_Inicio, Factura_Fecha_Fin,Factura_Fecha
+		   SUM(Turno_Precio_Base+Turno_Valor_Kilometro*Viaje_Cant_Kilometros)
+			FROM (SELECT DISTINCT 
+					Factura_Nro,
+				   [MAIDEN].fx_getClienteId(Cliente_Dni) as cliente,
+				   Factura_Fecha,
+				   Factura_Fecha_Inicio,
+				   Factura_Fecha_Fin,
+				  Turno_Precio_Base,Turno_Valor_Kilometro,Viaje_Cant_Kilometros
+				From [gd_esquema].Maestra
+				WHERE Factura_Nro IS NOT NULL)A
+	GROUP BY Factura_Nro, cliente, Factura_Fecha, Factura_Fecha_Inicio, Factura_Fecha_Fin
 	SET IDENTITY_INSERT [MAIDEN].Rendicion OFF
 END
 GO
