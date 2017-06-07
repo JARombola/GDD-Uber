@@ -92,8 +92,6 @@ AS BEGIN
 	WHERE ID=@id
 END
 GO
-
-
 --------------------------------------------------------------- >> CHOFERES
 
 CREATE PROCEDURE [MAIDEN].SP_migrarChoferes 
@@ -191,10 +189,12 @@ BEGIN
 		Auto_Patente,
 		Auto_Licencia,
 		Auto_Rodado,
-		[MAIDEN].fx_getChoferId([gd_esquema].Maestra.Chofer_Dni)
-	FROM [gd_esquema].Maestra
+		chofer.ID
+	FROM [gd_esquema].Maestra maestra 
+				join [MAIDEN].Chofer chofer on (maestra.Chofer_Dni = chofer.Dni)
 END
 GO
+
 
 CREATE PROCEDURE [MAIDEN].SP_eliminarTodosAutos
 AS
@@ -479,7 +479,7 @@ CREATE PROCEDURE [MAIDEN].SP_asignarRol(@usuario varchar(30), @rol varchar(20))
 AS
 BEGIN 
 	declare @rolId int
-	set @rolId = [MAIDEN].fx_getRolId(@rol)
+	set @rolId =(SELECT ID FROM [MAIDEN].Rol where rol=@rol)
 	if (not exists (Select 1 from [MAIDEN].Rol_por_Usuario			-- Si no tenia asignado el rol se lo asigna. Sino no hace nada
 						where usuario = @usuario and rol = @rolId))			  
 	Begin
@@ -493,7 +493,7 @@ CREATE PROCEDURE [MAIDEN].SP_quitarRol(@usuario varchar(30), @rol varchar(20))
 AS
 BEGIN 
 	DECLARE @RolId int
-	Set @RolId = [MAIDEN].fx_getRolId(@rol)
+	Set @RolId = (SELECT ID FROM [MAIDEN].Rol where rol=@rol)
 	Delete from [MAIDEN].Rol_por_Usuario where(
 	Usuario = @usuario AND Rol = @RolId)
 END
@@ -561,18 +561,32 @@ CREATE PROCEDURE [MAIDEN].SP_migrarViajes
 AS
 BEGIN
 INSERT INTO [MAIDEN].Viaje(Chofer,Auto,Turno,Km,Fecha,Cliente,NroRendicion, NroFactura)
-SELECT DISTINCT 
-	[MAIDEN].fx_getChoferId(a.Chofer_dni),
-	[MAIDEN].fx_getAutoId(a.Auto_Patente),
-	[MAIDEN].fx_getTurnoId(a.Turno_Hora_Inicio),
-	a.Viaje_Cant_Kilometros,
-	a.Viaje_Fecha,
-	[MAIDEN].fx_getClienteId(a.Cliente_Dni),
-	a.Rendicion_Nro,
-	b.Factura_Nro
-From [gd_esquema].Maestra a LEFT JOIN [gd_esquema].[Maestra] b on
-(a.Cliente_Dni = b.Cliente_Dni AND a.Viaje_Fecha = b.Viaje_Fecha AND a.Chofer_Dni = b.Chofer_Dni)
-WHERE (a.Rendicion_Nro IS NOT NULL and b.Factura_Nro IS NOT NULL)				-- Esto combina los registros que corresponden al mismo viaje pero estan separados por rendicion y factura
+SELECT 	choferes.ID,
+		auto.ID,
+		turno.ID,
+		nulos.Viaje_Cant_Kilometros,
+		nulos.Viaje_Fecha,
+		cliente.ID,
+		nulos.Rendicion_Nro,
+		nulos.Factura_Nro FROM [gd_esquema].Maestra nulos LEFT JOIN (
+		SELECT DISTINCT 
+			a.Chofer_dni,
+			a.Auto_Patente,
+			a.Turno_Hora_Inicio,
+			a.Viaje_Cant_Kilometros,
+			a.Viaje_Fecha,
+			a.Cliente_Dni,
+			a.Rendicion_Nro,
+			b.Factura_Nro
+		From [gd_esquema].Maestra a JOIN [gd_esquema].[Maestra] b on
+		(a.Cliente_Dni = b.Cliente_Dni AND a.Viaje_Fecha = b.Viaje_Fecha AND a.Chofer_Dni = b.Chofer_Dni)
+		WHERE (a.Rendicion_Nro IS NOT NULL and b.Factura_Nro IS NOT NULL))con 
+			on (con.Chofer_Dni = nulos.Chofer_Dni) AND (con.Cliente_Dni = nulos.Cliente_Dni) AND (con.Viaje_Fecha = nulos.Viaje_Fecha)
+			JOIN MAIDEN.Chofer choferes on (choferes.dni=nulos.Chofer_Dni)
+			JOIN Maiden.Auto auto on (auto.Patente=nulos.Auto_Patente)
+			JOIN Maiden.Cliente cliente on (cliente.DNI = nulos.Cliente_Dni)
+			JOIN MAIDEN.Turno turno on (turno.Hora_Inicio = nulos.Turno_Hora_Inicio)
+		WHERE nulos.Factura_Nro IS NULL AND nulos.Rendicion_Nro IS NULL			-- Esto combina los registros que corresponden al mismo viaje pero estan separados por rendicion y factura
 END
 GO
 
@@ -627,14 +641,15 @@ AS
 BEGIN
 	SET IDENTITY_INSERT [MAIDEN].Rendicion ON				-- La tabla usa Identity, pero la tabla ya tiene ciertos valores. De esta forma permitirá setearle, sin problemas con los identity
 	INSERT INTO [MAIDEN].Rendicion(Chofer,Fecha,Nro, Importe_Total, Turno)
-	SELECT [MAIDEN].fx_getChoferId(Chofer_Dni),
+	SELECT chofer.ID,
 		   CAST(Rendicion_Fecha as Date),
 		   Rendicion_Nro,
 		   sum(Rendicion_Importe),
-		   [MAIDEN].fx_getTurnoId(Turno_Hora_Inicio)  
-	From [gd_esquema].Maestra
+		   turno.ID
+		   From [gd_esquema].Maestra JOIN MAIDEN.Chofer chofer on (chofer.Dni=Chofer_Dni)
+							  JOIN MAIDEN.Turno turno on (turno.Hora_Inicio=Turno_Hora_Inicio)
 	Where Rendicion_Nro IS NOT NULL
-	Group by Chofer_Dni, CAST(Rendicion_Fecha as Date), Rendicion_Nro, Turno_Hora_Inicio
+	Group by chofer.ID, CAST(Rendicion_Fecha as Date), Rendicion_Nro, turno.ID
 	SET IDENTITY_INSERT [MAIDEN].Rendicion OFF
 END
 GO
@@ -697,12 +712,12 @@ AS BEGIN
 		   SUM(Turno_Precio_Base+Turno_Valor_Kilometro*Viaje_Cant_Kilometros)
 			FROM (SELECT DISTINCT 
 					Factura_Nro,
-				   [MAIDEN].fx_getClienteId(Cliente_Dni) as cliente,
+				   cliente.ID as cliente,
 				   Factura_Fecha,
 				   Factura_Fecha_Inicio,
 				   Factura_Fecha_Fin,
 				  Turno_Precio_Base,Turno_Valor_Kilometro,Viaje_Cant_Kilometros
-				From [gd_esquema].Maestra
+				From [gd_esquema].Maestra JOIN MAIDEN.Cliente cliente on (cliente.DNI = Cliente_Dni)
 				WHERE Factura_Nro IS NOT NULL)A
 	GROUP BY Factura_Nro, cliente, Factura_Fecha, Factura_Fecha_Inicio, Factura_Fecha_Fin
 	SET IDENTITY_INSERT [MAIDEN].Rendicion OFF

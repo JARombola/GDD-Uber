@@ -32,23 +32,6 @@ GO
 IF OBJECT_ID (N'[MAIDEN].fx_filtrarTurnosHabilitados', N'IF') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_filtrarTurnosHabilitados;  
 GO  
-------------------------------------------- BUSQUEDAS PARA MIGRACION
-IF OBJECT_ID (N'[MAIDEN].fx_getTurnoId', N'FN') IS NOT NULL  
-    DROP FUNCTION [MAIDEN].fx_getTurnoId;  
-GO  
-
-IF OBJECT_ID (N'[MAIDEN].fx_getChoferId', N'FN') IS NOT NULL  
-    DROP FUNCTION [MAIDEN].fx_getChoferId;  
-GO 
-
-IF OBJECT_ID (N'[MAIDEN].fx_getAutoId', N'FN') IS NOT NULL  
-    DROP FUNCTION [MAIDEN].fx_getAutoId;  
-GO 
-
-IF OBJECT_ID (N'[MAIDEN].fx_getClienteId', N'FN') IS NOT NULL  
-    DROP FUNCTION [MAIDEN].fx_getClienteId;  
-GO 
-
 -------------------------------------------- LOGIN - USUARIOS
 IF OBJECT_ID (N'[MAIDEN].fx_getRolId', N'FN') IS NOT NULL  
     DROP FUNCTION [MAIDEN].fx_getRolId;  

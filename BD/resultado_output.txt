@@ -15,7 +15,7 @@ Se cambió el contexto de la base de datos a 'GD1C2017'.
 
 (564 filas afectadas)
 
-(114039 filas afectadas)
+(114823 filas afectadas)
 
 (9 filas afectadas)
 

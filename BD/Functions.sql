@@ -46,13 +46,6 @@ AS
 		(Select * From [MAIDEN].fx_filtrarAutos(@modelo,@patente,@marca,@choferID) Where Habilitado = 1)
 GO
 
-CREATE FUNCTION [MAIDEN].fx_getAutoId(@patente varchar(10))
-RETURNS INT AS
-BEGIN
-	RETURN(Select id from [MAIDEN].Auto Where Patente = @patente)
-END;
-GO
-
 CREATE FUNCTION [MAIDEN].fx_getMarcas()
 RETURNS TABLE
 AS
@@ -89,12 +82,6 @@ AS
 		)
 GO
 
-CREATE FUNCTION [MAIDEN].fx_getChoferId(@Dni numeric(18,0))
-RETURNS int 
-AS Begin
-	return (Select id from [MAIDEN].Chofer where Dni = @Dni)
-End;
-GO
 ----------------------FUNCIONES DE CLIENTES------------------------------
 CREATE FUNCTION [MAIDEN].fx_filtrarClientes (@nombre varchar(255),			
 								 @apellido varchar(255),
@@ -123,12 +110,6 @@ AS
 		(Select * From [MAIDEN].fx_filtrarClientes(@nombre, @apellido, @DNI)where Habilitado = 1)
 GO
 
-CREATE FUNCTION [MAIDEN].fx_getClienteId(@dni int)
-RETURNS INT
-AS BEGIN
-	RETURN(Select id from [MAIDEN].Cliente where DNI = @dni)
-END;
-GO
 ----------------------FUNCIONES DE TURNOS------------------------------
 CREATE FUNCTION [MAIDEN].fx_filtrarTurnos (@descripcion varchar(255))		
 Returns Table
@@ -143,15 +124,6 @@ Returns Table
 AS
 	RETURN
 		(Select * From [MAIDEN].fx_filtrarTurnos(@descripcion) where Habilitado = 1)
-GO
-
-CREATE FUNCTION [MAIDEN].fx_getTurnoId (@hora_inicio numeric(18,0))		
-Returns int
-AS BEGIN
-	RETURN
-		(Select ID From [MAIDEN].Turno t
-		where @hora_inicio BETWEEN Hora_Inicio AND Hora_Fin-1)
-	END;
 GO
 
 ------------------------------------------- FUNCIONES DE ROLES
