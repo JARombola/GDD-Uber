@@ -67,7 +67,17 @@ namespace UberFrba.Abm_Turno {
             );
         }
 
-        public override void cargarDatos (IDominio unTurno) {              //Carga los datos porque es una modificacion
+
+        public override void configurar (IDominio unTurno) {                //El listado de Turnos usa este formulario para indicar que es una Modiicacion
+            this.Text="Modificación Turno";                                 // Envia como parametro un "Turno" (sus datos)
+            btnAceptar.Text = "Modificar";
+            Turno turnito = (Turno) unTurno;
+            chkHabilitado.Checked = turnito.habilitado;
+            btnClear.Visible=false;
+            cargarDatos(turnito);
+        }
+
+        public override void cargarDatos (IDominio unTurno) {              // Se completa el formulario con los datos del Turno recibido
             Turno turno = (Turno) unTurno;
             horaInicio.Value= turno.inicio;
             horaFin.Value= turno.fin;
@@ -75,15 +85,6 @@ namespace UberFrba.Abm_Turno {
             precioKm.Value= turno.precioKm;
             txtDescripcion.Text=turno.descripcion;
             ID = turno.id;   
-        }
-
-        public override void configurar (IDominio unTurno) {                //IDominio, para respetar polimorfismo superclase
-            this.Text="Modificación Turno";
-            btnAceptar.Text = "Modificar";
-            Turno turnito = (Turno) unTurno;
-            chkHabilitado.Checked = turnito.habilitado;
-            btnClear.Visible=false;
-            cargarDatos(turnito);
         }
 
         private void btnVolver_Click (object sender, EventArgs e) {

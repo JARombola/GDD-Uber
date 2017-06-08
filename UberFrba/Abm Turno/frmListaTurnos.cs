@@ -31,7 +31,7 @@ namespace UberFrba.Abm_Turno {
         }
 
 
-        private void enviarDatos () {               //Crea un Turno para que el formulario de carga muestre estos datos (para modificar)
+        private void enviarDatos () {               //Crea un data-object TURNO (con los datos obtenidos de la base) para enviar al formulario de carga
             Turno turno = new Turno();
                 turno.inicio = (decimal) dgListado.CurrentRow.Cells["Hora_inicio"].Value;
                 turno.fin = (decimal) dgListado.CurrentRow.Cells["Hora_fin"].Value;
@@ -40,7 +40,7 @@ namespace UberFrba.Abm_Turno {
                 turno.descripcion= (string) dgListado.CurrentRow.Cells["Descripcion"].Value;
                 turno.habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
                 turno.id = (int) dgListado.CurrentRow.Cells["ID"].Value;
-         formSiguiente.configurar(turno);
+         formSiguiente.configurar(turno);                       // Envia los datos del turno y lo "configura" para una modificacion
          formSiguiente.Show();
          this.Close();  
         }
@@ -53,11 +53,7 @@ namespace UberFrba.Abm_Turno {
         }
 
         //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
         //--------------------------- BOTONES -----------------------------------
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
         //------------------------------------------------------------------------
 
         private void seleccion (object sender, MouseEventArgs e) {

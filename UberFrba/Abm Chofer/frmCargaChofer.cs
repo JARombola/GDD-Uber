@@ -19,8 +19,8 @@ namespace UberFrba.Abm_Chofer {
             formAnterior = (FormsAdapter) anterior;
         }
 
-        public override void configurar (IDominio persona) {
-            this.Text = "Modificación Chofer";
+        public override void configurar (IDominio persona) {                    // Este metodo es usado por el Listado de Choferes
+            this.Text = "Modificación Chofer";                                  // Por lo tanto, se quiere modificar un chofer => Se configuran los botones
             btnAceptar.Text = "Modificar";
             Persona chofer = (Persona) persona;
             btnHabilitacion.Text = chofer.habilitado?"Deshabilitar":"Habilitar";
@@ -30,16 +30,16 @@ namespace UberFrba.Abm_Chofer {
         }
 
 
-        public override void cargarDatos (IDominio unChofer) {
+        public override void cargarDatos (IDominio unChofer) {                  // Se cargan los datos del CHOFER que se desea modificar
             Persona chofer = (Persona) unChofer;
-            txtApellido.Text = chofer.apellido;
-            txtNombre.Text = chofer.nombre;
-            txtDNI.Text = chofer.dni.ToString();
-            txtMail.Text = chofer.mail;
-            txtTel.Text = chofer.telefono.ToString();
-            txtDire.Text = chofer.direccion;
-            dateNacimiento.Value = chofer.fecha_nacimiento;
-            ID = chofer.id;
+                txtApellido.Text = chofer.apellido;
+                txtNombre.Text = chofer.nombre;
+                txtDNI.Text = chofer.dni.ToString();
+                txtMail.Text = chofer.mail;
+                txtTel.Text = chofer.telefono.ToString();
+                txtDire.Text = chofer.direccion;
+                dateNacimiento.Value = chofer.fecha_nacimiento;
+                ID = chofer.id;
             if (!chofer.habilitado) ID*=-1;         // Solo importa para la habilitacion
         }
 
@@ -62,7 +62,7 @@ namespace UberFrba.Abm_Chofer {
             } else MessageBox.Show(errorDatos, "Error Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public override string errorCampos () {
+        public override string errorCampos () {             // Verifica campos correctos
             String errores =null;
             int asd;
             if (String.IsNullOrWhiteSpace(txtNombre.Text)) errores+="- El campo 'Nombre' no puede estar vacío \n";
@@ -89,7 +89,6 @@ namespace UberFrba.Abm_Chofer {
             cmd.ExecuteNonQuery();
         }
 
-
         private void setParametros (ref SqlCommand command) {
             command.Parameters.AddRange(new[]
                     {new SqlParameter("@nombre",txtNombre.Text),
@@ -115,6 +114,7 @@ namespace UberFrba.Abm_Chofer {
             }
             ID*=-1;
         }
+
 
         public override void limpiar () {
             txtApellido.Clear();

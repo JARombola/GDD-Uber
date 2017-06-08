@@ -23,7 +23,7 @@ namespace UberFrba.Abm_Cliente{
             formAnterior = (FormsAdapter) anterior;
         }
 
-        private void btnBuscar_Click (object sender, EventArgs e) {
+        private void btnBuscar_Click (object sender, EventArgs e) {             // En algunos casos se verán solo los habilitados (por ejemplo, para asignar viajes) y en otros se pueden ver todos (ej, modificacion clientes)
             string query = soloHabilitados?"fx_filtrarClientesHabilitados(@nombre, @apellido, @DNI)":"fx_filtrarClientes(@nombre, @apellido, @DNI)";
             SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla(query);
                 command.Parameters.AddWithValue("@nombre", valor(txtNombre.Text));
@@ -34,7 +34,7 @@ namespace UberFrba.Abm_Cliente{
             dgListado.Columns["ID"].Visible=false;
         }
 
-        private void enviarDatos () {
+        private void enviarDatos () {                           // Crea una "Persona" (dataobject Cliente) para enviar al formulario que los requiere
             Persona cliente= new Persona();
             cliente.nombre = dgListado.CurrentRow.Cells["Nombre"].Value.ToString();
             cliente.telefono = dgListado.CurrentRow.Cells["Telefono"].Value.ToString();
@@ -47,7 +47,7 @@ namespace UberFrba.Abm_Cliente{
             cliente.fecha_nacimiento = DateTime.Parse(dgListado.CurrentRow.Cells["Fecha_Nacimiento"].Value.ToString());
             cliente.habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
 
-            formSiguiente.configurar(cliente);
+            formSiguiente.configurar(cliente);                          // Envia el "Cliente" al formulario correspondiente y lo "configura"
             formSiguiente.Show();
             this.Close();
         }
@@ -61,11 +61,7 @@ namespace UberFrba.Abm_Cliente{
         }
 
         //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
         //--------------------------- BOTONES -----------------------------------
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
         //------------------------------------------------------------------------
 
         private void seleccion (object sender, MouseEventArgs e) {

@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace UberFrba.Dominio {
-    public class Auto : IDominio {          //PARA POLIMORFISMO Y REUTILIZACION EN LOS FORMS DE CARGA/MODIF
-        public string marca { get; set; }
+    public class Auto : IDominio {          //Interfaz para polimorfismo en metodos del FormAdapter.
+        public string marca { get; set; }               // Sirve como DataObject para enviar datos de un AUTO entre formularios
         public string modelo { get; set; }
         public string patente { get; set; }
         public string licencia { get; set; }

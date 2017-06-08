@@ -45,15 +45,15 @@ namespace UberFrba.Abm_Automovil {
             dgListado.Columns["IDTurno"].Visible=false;
         }
 
-        private void enviarDatos () {
+        private void enviarDatos () {                       // Configura un "Auto" para enviar al formulario que solicito los datos
             Auto auto = new Auto();
-            auto.id = (int) dgListado.CurrentRow.Cells["ID"].Value;
-            auto.licencia = dgListado.CurrentRow.Cells["Licencia"].Value.ToString();
-            auto.marca = dgListado.CurrentRow.Cells["Marca"].Value.ToString();
-            auto.modelo = dgListado.CurrentRow.Cells["Modelo"].Value.ToString();
-            auto.patente = dgListado.CurrentRow.Cells["Patente"].Value.ToString();
-            auto.rodado = dgListado.CurrentRow.Cells["Rodado"].Value.ToString();
-            auto.habilitado=(bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
+                auto.id = (int) dgListado.CurrentRow.Cells["ID"].Value;
+                auto.licencia = dgListado.CurrentRow.Cells["Licencia"].Value.ToString();
+                auto.marca = dgListado.CurrentRow.Cells["Marca"].Value.ToString();
+                auto.modelo = dgListado.CurrentRow.Cells["Modelo"].Value.ToString();
+                auto.patente = dgListado.CurrentRow.Cells["Patente"].Value.ToString();
+                auto.rodado = dgListado.CurrentRow.Cells["Rodado"].Value.ToString();
+                auto.habilitado=(bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
 
             if (dgListado.CurrentRow.Cells["Chofer"].Value == DBNull.Value) {           //Carga los datos del chofer para la modificacion
                 auto.choferID=-1;                                                               // Aunque nunca debería ser Null (por constraints en la base)
@@ -69,12 +69,12 @@ namespace UberFrba.Abm_Automovil {
                 auto.turnoID = (int) dgListado.CurrentRow.Cells["IDTurno"].Value;
                 auto.turnoDescripcion = (string) dgListado.CurrentRow.Cells["Turno"].Value; ;
             }
-            formSiguiente.configurar(auto);
+            formSiguiente.configurar(auto);                         // Envía los datos del "Auto" al formulario que los solicitó y "lo configura"
             formSiguiente.Show();
             this.Close();
         }
          
-        public override void configurar (IDominio elemento) {
+        public override void configurar (IDominio elemento) {           // Cuando se busca un chofer, el listado va a usar este metodo para que se configure ESTE formulario
             Persona chofer = (Persona) elemento;
             txtChofer.Text = chofer.nombre;
             ID = chofer.id;
@@ -89,13 +89,9 @@ namespace UberFrba.Abm_Automovil {
             dgListado.Refresh();
         }
 
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
+
+        
         //--------------------------- BOTONES -----------------------------------
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
 
         private void seleccion (object sender, MouseEventArgs e) {
             if (e.Button==MouseButtons.Left) enviarDatos();

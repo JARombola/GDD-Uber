@@ -37,7 +37,7 @@ namespace UberFrba.Abm_Usuarios {
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_eliminarUsuario");
                 command.Parameters.AddWithValue("@usuario", cbUsuario.Text);
             command.ExecuteNonQuery();
-            MessageBox.Show("Usuario eliminado correctamente");
+            MessageBox.Show("Usuario eliminado correctamente","Usuario eliminado",MessageBoxButtons.OK,MessageBoxIcon.Information);
             cbUsuario.Items.Clear();
             Buscador.getInstancia().cargarUsuarios(cbUsuario);
         }

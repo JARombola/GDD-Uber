@@ -42,7 +42,7 @@ namespace UberFrba.Abm_Chofer{
             dgListado.Refresh();
         }
 
-        private void enviarDatos () {
+        private void enviarDatos () {               // Configura una "Persona" para enviarla al Formulario que solicitó los datos
             Persona chofer = new Persona();
                 chofer.nombre = dgListado.CurrentRow.Cells["Nombre"].Value.ToString();
                 chofer.telefono = dgListado.CurrentRow.Cells["Telefono"].Value.ToString();
@@ -54,18 +54,13 @@ namespace UberFrba.Abm_Chofer{
                 chofer.id = (int) dgListado.CurrentRow.Cells["ID"].Value;
                 chofer.habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
 
-            formSiguiente.configurar(chofer);
+            formSiguiente.configurar(chofer);                   // Envía la "Persona" al formulario y "lo configura"
             formSiguiente.Show();
             this.Close();
         }
 
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
+
         //--------------------------- BOTONES -----------------------------------
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------
 
         private void seleccion (object sender, MouseEventArgs e) {
             if (e.Button==MouseButtons.Left) enviarDatos();

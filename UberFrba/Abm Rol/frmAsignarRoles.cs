@@ -18,8 +18,8 @@ namespace UberFrba.Abm_Usuario
         {
             InitializeComponent();
             formAnterior = anterior;
-            Buscador.getInstancia().cargarUsuarios(cbUsuario);
-            Buscador.getInstancia().cargarRoles(listRoles);
+            Buscador.getInstancia().cargarUsuarios(cbUsuario);                  //Carga los usuarios en el combobox
+            Buscador.getInstancia().cargarRoles(listRoles);                     // Carga la lista de roles con los existentes
         }
 
         private void cbUsuario_SelectedIndexChanged (object sender, EventArgs e) {
@@ -29,11 +29,11 @@ namespace UberFrba.Abm_Usuario
                 while (i++<listRoles.Items.Count) {
                     listRoles.SetItemChecked(i-1, false);               //Desactivo todos los roles
                 }
-                actualizarRoles(command);                       //Marco los del usuario
+                actualizarRoles(command);                       //Activo los del usuario
                 btnOk.Enabled=true;
         }
 
-        private void actualizarRoles (SqlCommand command) {
+        private void actualizarRoles (SqlCommand command) {                 // Cuando cambia el usuario hay que actualizar sus roles
             SqlDataReader roles = command.ExecuteReader();
             while (roles.Read()) {
                 string rol = (string) roles["Rol"];
@@ -50,7 +50,7 @@ namespace UberFrba.Abm_Usuario
             roles.Close();
         }
 
-        private void btnOk_Click (object sender, EventArgs e) {
+        private void btnOk_Click (object sender, EventArgs e) {             // Por cada rol existente, se le asigna o se le quita segun esté chequeado o no
             int i = 0;
             string accion, rol;
             while (i<listRoles.Items.Count) {

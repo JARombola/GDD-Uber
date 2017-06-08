@@ -34,14 +34,14 @@ namespace UberFrba.Abm_Cliente
 
        public override void cargarDatos (IDominio unCliente) {                  // Carga los textBox con los datos existentes del Cliente (para modificacion)
             Persona cliente = (Persona) unCliente;
-            txtApellido.Text = cliente.apellido;
-            txtNombre.Text = cliente.nombre;
-            txtDNI.Text = cliente.dni.ToString();
-            txtMail.Text = cliente.mail;
-            txtTel.Text = cliente.telefono.ToString();
-            txtDire.Text = cliente.direccion;
-            dateNacimiento.Value = cliente.fecha_nacimiento;
-            ID = cliente.id;
+                txtApellido.Text = cliente.apellido;
+                txtNombre.Text = cliente.nombre;
+                txtDNI.Text = cliente.dni.ToString();
+                txtMail.Text = cliente.mail;
+                txtTel.Text = cliente.telefono.ToString();
+                txtDire.Text = cliente.direccion;
+                dateNacimiento.Value = cliente.fecha_nacimiento;
+                ID = cliente.id;
             if (!cliente.habilitado) ID*=-1;            // Solo importa para la habilitacion/deshabilitacion
         }
 
@@ -65,16 +65,16 @@ namespace UberFrba.Abm_Cliente
            else MessageBox.Show(errorDatos, "Error Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
        }
 
-       public override string errorCampos() {
+       public override string errorCampos() {               // Validacion de campos
            String errores =null;
            int asd;
-           if (String.IsNullOrWhiteSpace(txtNombre.Text)) errores+="- El campo 'Nombre' no puede estar vacío \n";
-           if (String.IsNullOrWhiteSpace(txtApellido.Text)) errores+="- El campo 'Apellido' no puede estar vacío\n";
-           if (!int.TryParse(txtDNI.Text, out asd)) errores+="- El 'DNI' debe ser numérico \n";
-           if (!int.TryParse(txtTel.Text, out asd)) errores+="- El 'Teléfono' debe ser numérico\n";
-           if (String.IsNullOrWhiteSpace(txtDire.Text)) errores+="- El campo 'Direccion' no puede estar vacío\n";
-           if (String.IsNullOrWhiteSpace(txtDepto.Text)) errores+="- El campo 'Depto' no puede estar vacío\n";
-           if (String.IsNullOrWhiteSpace(txtLocalidad.Text)) errores+="- El campo 'Localidad' no puede estar vacío\n";
+               if (String.IsNullOrWhiteSpace(txtNombre.Text)) errores+="- El campo 'Nombre' no puede estar vacío \n";
+               if (String.IsNullOrWhiteSpace(txtApellido.Text)) errores+="- El campo 'Apellido' no puede estar vacío\n";
+               if (!int.TryParse(txtDNI.Text, out asd)) errores+="- El 'DNI' debe ser numérico \n";
+               if (!int.TryParse(txtTel.Text, out asd)) errores+="- El 'Teléfono' debe ser numérico\n";
+               if (String.IsNullOrWhiteSpace(txtDire.Text)) errores+="- El campo 'Direccion' no puede estar vacío\n";
+               if (String.IsNullOrWhiteSpace(txtDepto.Text)) errores+="- El campo 'Depto' no puede estar vacío\n";
+               if (String.IsNullOrWhiteSpace(txtLocalidad.Text)) errores+="- El campo 'Localidad' no puede estar vacío\n";
            return errores;
        }
 

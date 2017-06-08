@@ -31,8 +31,8 @@ namespace UberFrba.Abm_Usuario {
             this.Close();
         }
 
-        private void setearParametros (ref SqlCommand stored) {
-            String funcionalidades = ";";
+        private void setearParametros (ref SqlCommand stored) {             // Se serializan las funcionalidades según Base de Datos:
+            String funcionalidades = ";";                                   // ;ID1;ID2;ID3;ID4;...;IDN;
             foreach (int i in listFunciones.CheckedIndices) {
                 funcionalidades+=(i+1)+";";
             }
