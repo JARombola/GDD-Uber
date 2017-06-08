@@ -12,7 +12,9 @@ GO
 -- Description:	Creacion de Funciones
 -- =============================================
 
------------------------ >> AUTOS -----------------------
+-- =============================================
+--					**  AUTOS  **
+-- =============================================
 CREATE FUNCTION [MAIDEN].fx_filtrarAutos (@modelo varchar(255),			
 								 @patente varchar(10),
 								 @marca varchar(255),
@@ -50,7 +52,9 @@ AS RETURN
 		(SELECT DISTINCT Marca FROM [MAIDEN].Auto)
 GO
 
------------------------ >> CHOFERES -----------------------
+-- =============================================
+--					**  CHOFERES  **
+-- =============================================
 CREATE FUNCTION [MAIDEN].fx_filtrarChoferes (@nombre varchar(255),			
 								 @apellido varchar(255),
 								 @DNI numeric(18,0))
@@ -75,7 +79,9 @@ AS RETURN
 			where habilitado = 1)
 GO
 
------------------------ >> CLIENTES -----------------------
+-- =============================================
+--					**  CLIENTES  **
+-- =============================================
 CREATE FUNCTION [MAIDEN].fx_filtrarClientes (@nombre varchar(255),			
 								 @apellido varchar(255),
 								 @DNI numeric(18,0))
@@ -100,11 +106,13 @@ AS RETURN
 			where Habilitado = 1)
 GO
 
------------------------ >> TURNOS -----------------------
+-- =============================================
+--					**  TURNOS  **
+-- =============================================
 CREATE FUNCTION [MAIDEN].fx_filtrarTurnos (@descripcion varchar(255))		
 RETURNS TABLE
 AS RETURN
-		(Select * From [MAIDEN].Turno where 
+		(Select t.Descripcion,t.Hora_Inicio,t.Hora_Fin,t.Precio_Base,t.Precio_km, t.Habilitado From [MAIDEN].Turno t where 
 			Descripcion like '%'+ @descripcion+ '%' AND Respaldo = 0)
 GO
 
@@ -114,7 +122,9 @@ AS RETURN
 		(Select * From [MAIDEN].fx_filtrarTurnos(@descripcion) where Habilitado = 1)
 GO
 
------------------------ >> ROLES -----------------------
+-- =============================================
+--					**  ROLES  **
+-- =============================================
 CREATE FUNCTION [MAIDEN].fx_getRolId(@rol varchar(20))
 RETURNS INT 
 AS
@@ -123,14 +133,17 @@ BEGIN
 END;
 GO
 
------------------------ >> FUNCIONALIDADES -----------------------
+-- =============================================
+--					**  FUNCIONALIDADES  **
+-- =============================================
 CREATE FUNCTION [MAIDEN].fx_getFuncionalidades(@idRol int)		-- Devuelve las funcionalidades del rol
 RETURNS TABLE
 AS
 RETURN SELECT Funcionalidad from [MAIDEN].Funcionalidad_por_Rol where Rol = @idRol
 GO
-
------------------------ >> USUARIOS -----------------------
+-- =============================================
+--					**  USUARIOS  **
+-- =============================================
 CREATE FUNCTION [MAIDEN].fx_getUsuarios()			-- Devuelve todos los usuarios registrados
 RETURNS TABLE
 AS
@@ -144,7 +157,9 @@ RETURN (Select Rol From [MAIDEN].Rol
 		Where ID IN (Select Rol FROM [MAIDEN].Rol_por_Usuario Where Usuario = @usuario))
 GO
 
------------------------ >> ROLES -----------------------
+-- =============================================
+--					**  ROLES  **
+-- =============================================
 CREATE FUNCTION [MAIDEN].fx_getRoles()			-- Devuelve los roles existentes
 RETURNS TABLE
 AS
@@ -156,7 +171,9 @@ RETURNS TABLE
 AS
 	RETURN (Select * FROM [MAIDEN].fx_getRoles() where Habilitado = 1)
 GO
------------------------ >> VIAJES
+-- =============================================
+--					**  VIAJES  **
+-- =============================================
 -- Devuelve los datos del Auto para autocompletar el viaje una vez seleccionado el chofer
 CREATE FUNCTION [MAIDEN].fx_getAutoDelChofer(@idChofer int)
 RETURNS TABLE 
@@ -167,7 +184,9 @@ AS RETURN(
 			AND a.Habilitado = 1)
 GO
 
---------------------------------------------------------------- RENDICION
+-- =============================================
+--					**  RENDICION  **
+-- =============================================
 -- Devuelve los datos de la rendicion que ESTÁ SIENDO REGISTRADA (Se usa en SP_Rendicion)
 -- La diferencia con la funcion siguiente es que aún no tenemos el total de la rendición
 CREATE FUNCTION [MAIDEN].fx_getDatosRendicion(@nroRendicion numeric(18,0))
@@ -175,7 +194,7 @@ RETURNS TABLE
 AS
 RETURN(
 	Select c.nombre+' '+c.apellido as Cliente, 
-		FORMAT(viaje.Fecha,'HH:mm') as Inicio,
+		FORMAT(viaje.Fecha,'HH:mm') as 'Hora Inicio',
 		FORMAT(viaje.Hora_Fin,'HH:mm') as 'Hora Fin',
 		viaje.Km as 'Distancia(Kms)', 
 		turno.Precio_Base as 'Precio Base',
@@ -199,7 +218,9 @@ RETURN(
 )
 GO
 
-------------------------------------------------------------- FACTURA
+-- =============================================
+--					**  FACTURA  **
+-- =============================================
 -- Devuelve los datos de la factura que ESTÁ SIENDO REGISTRADA (Se usa en SP_Facturacion)
 -- La diferencia con la funcion siguiente es que aún no tenemos el total de la factura
 CREATE FUNCTION [MAIDEN].fx_getDatosFactura(@nroFactura numeric(18,0))
@@ -207,8 +228,8 @@ RETURNS TABLE
 AS
 RETURN(
 	Select CAST(viaje.Fecha as Date)as 'Fecha',
-		   FORMAT (viaje.Fecha,'HH:mm') as Inicio,
-		   FORMAT(viaje.Hora_Fin,'HH:mm') as 'Fin',
+		   FORMAT (viaje.Fecha,'HH:mm') as 'Hora Inicio',
+		   FORMAT(viaje.Hora_Fin,'HH:mm') as 'Hora Fin',
 		   viaje.Km as 'Distancia(Kms)',
 		   turno.Precio_Base as 'Precio Base',
 		   turno.Precio_km as 'Precio Km', 
@@ -231,7 +252,10 @@ RETURN(
 	WHERE Nro=@nroFactura
 )
 GO
------------------------------------------------------------- ESTADISTICAS
+
+-- =============================================
+--					**  ESTADISTICAS  **
+-- =============================================
 -- 1) Se agrupan las rendiciones por chofer
 -- 2) Se suman los importes de cada una de la rendicion (Total)
 -- 3) Se ordenan de forma descendente según el Total (es decir, quedaran primeros los de mayor recaudación)

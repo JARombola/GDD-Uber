@@ -51,6 +51,7 @@ namespace UberFrba.Facturacion {
                 );
                 try {
                     ejecutarQuery(command, dgListado);
+                    if (dgListado.Rows.Count==1) MessageBox.Show("No hay viajes registrados en ese mes", "Sin viajes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (SqlException error) {
                     if (error.Number == 51002){

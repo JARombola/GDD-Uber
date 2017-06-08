@@ -57,6 +57,7 @@ namespace UberFrba.Rendicion_Viajes
                 );
                 try {
                     ejecutarQuery(command, dgListado);
+                    if (dgListado.Rows.Count==1) MessageBox.Show("No hay viajes registrados en esa fecha", "Sin viajes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (SqlException error) {
                     switch (error.Number) {

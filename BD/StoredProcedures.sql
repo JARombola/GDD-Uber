@@ -607,8 +607,8 @@ SELECT 	choferes.ID,
 		viajeSimple.Viaje_Cant_Kilometros,
 		viajeSimple.Viaje_Fecha,
 		cliente.ID,
-		viajeSimple.Rendicion_Nro,
-		viajeSimple.Factura_Nro FROM [gd_esquema].Maestra viajeSimple			--Viajes SIN factura ni rendicion
+		viajeCompleto.Rendicion_Nro,
+		viajeCompleto.Factura_Nro FROM [gd_esquema].Maestra viajeSimple			--Viajes SIN factura ni rendicion
 		LEFT JOIN (
 				SELECT DISTINCT 
 					conRendicion.Chofer_dni,
