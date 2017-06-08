@@ -36,10 +36,11 @@ namespace UberFrba.Abm_Automovil {
                     new SqlParameter ("@patente", valor(txtPatente.Text)),
                     new SqlParameter ("@marca", valor(cbMarca.Text)),
                     new SqlParameter ("@choferID", ID),      
+                    new SqlParameter ("@habilitado", ID),      
             });
 
             ejecutarQuery(command, dgListado);
-            dgListado.Columns["ID"].Visible=false;
+            base.ocultarColumnas(dgListado);
             dgListado.Columns["IDChofer"].Visible=false;
             dgListado.Columns["IDTurno"].Visible=false;
         }
@@ -52,7 +53,7 @@ namespace UberFrba.Abm_Automovil {
             auto.modelo = dgListado.CurrentRow.Cells["Modelo"].Value.ToString();
             auto.patente = dgListado.CurrentRow.Cells["Patente"].Value.ToString();
             auto.rodado = dgListado.CurrentRow.Cells["Rodado"].Value.ToString();
-            auto.habilitado =(bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
+            auto.habilitado=(bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
 
             if (dgListado.CurrentRow.Cells["Chofer"].Value == DBNull.Value) {           //Carga los datos del chofer para la modificacion
                 auto.choferID=-1;                                                               // Aunque nunca debería ser Null (por constraints en la base)
@@ -68,7 +69,6 @@ namespace UberFrba.Abm_Automovil {
                 auto.turnoID = (int) dgListado.CurrentRow.Cells["IDTurno"].Value;
                 auto.turnoDescripcion = (string) dgListado.CurrentRow.Cells["Turno"].Value; ;
             }
-
             formSiguiente.configurar(auto);
             formSiguiente.Show();
             this.Close();
@@ -114,34 +114,7 @@ namespace UberFrba.Abm_Automovil {
             dgListado[hit.ColumnIndex, hit.RowIndex].Selected = true;
         }
 
-        private void derecho (object sender, MouseEventArgs e) {
-            if (e.Button==MouseButtons.Right) {
-                marcarFila(sender, e);
-                bool habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
-                if (habilitado) {
-                    menuDerecho.Items[0].Visible=false;            //Habilitar
-                    menuDerecho.Items[1].Visible=true;
-                }
-                else {
-                    menuDerecho.Items[0].Visible=true;
-                    menuDerecho.Items[1].Visible=false;
-                }
-            }
-        }
-
-        private void habilitar (object sender, EventArgs e) {
-            int p = base.habilitar("Auto", (int) dgListado.CurrentRow.Cells["ID"].Value);
-            MessageBox.Show("Habilitados: "+ p);
-            dgListado.CurrentRow.Cells["Habilitado"].Value = true;
-        }
-
-        private void deshabilitar (object sender, EventArgs e) {
-            int p = base.deshabilitar("Auto", (int) dgListado.CurrentRow.Cells["ID"].Value);
-            MessageBox.Show("Deshabilitados: "+ p);
-            dgListado.CurrentRow.Cells["Habilitado"].Value= false;
-        }
-
-        private void selecChofer_Click (object sender, EventArgs e) {
+         private void selecChofer_Click (object sender, EventArgs e) {
             new frmListaChoferes(this).Show();
             this.Hide();
         }
@@ -171,5 +144,6 @@ namespace UberFrba.Abm_Automovil {
             lblCantResultados.Visible=true;
             lblCantResultados.Text = "Resultados: "+dgListado.RowCount.ToString();
         }
+
     }
 }

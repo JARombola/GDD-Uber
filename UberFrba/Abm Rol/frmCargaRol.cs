@@ -22,10 +22,10 @@ namespace UberFrba.Abm_Usuario {
             setearParametros(ref command);
             try {
                 command.ExecuteNonQuery();
-                MessageBox.Show("Rol registrado correctamente");
+                MessageBox.Show("Rol registrado correctamente","Rol Registrado",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             catch (SqlException x) {
-                MessageBox.Show(x.Message);
+                MessageBox.Show(x.Message,"Error de registro",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             formAnterior.Show();
             this.Close();

@@ -85,35 +85,6 @@ namespace UberFrba.Abm_Cliente{
             dgListado[hit.ColumnIndex, hit.RowIndex].Selected = true;
         }
 
-        private void derecho (object sender, MouseEventArgs e) {
-            if (e.Button==MouseButtons.Right) {
-                marcarFila(sender, e);
-                bool habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
-                if (habilitado) {
-                    menuDerecho.Items[0].Visible=false;            //Habilitar
-                    menuDerecho.Items[1].Visible=true;
-                }
-                else {
-                    menuDerecho.Items[0].Visible=true;
-                    menuDerecho.Items[1].Visible=false;
-                }
-            }
-        }
-
-        private void habilitar (object sender, EventArgs e) {
-            int p = base.habilitar("Cliente", (int) dgListado.CurrentRow.Cells["ID"].Value);
-            MessageBox.Show("Habilitados: "+ p);
-            dgListado.CurrentRow.Cells["Habilitado"].Value = true;
-            dgListado.Refresh();
-        }
-
-        private void deshabilitar (object sender, EventArgs e) {
-            int p = base.deshabilitar("Cliente", (int) dgListado.CurrentRow.Cells["ID"].Value);
-            MessageBox.Show("Deshabilitados: "+ p);
-            dgListado.CurrentRow.Cells["Habilitado"].Value= false;
-            dgListado.Refresh();
-        }
-
         private void btnTodos_Click (object sender, EventArgs e) {
             if(soloHabilitados) ejecutarQuery(Buscador.getInstancia().verTodosHabilitados("Cliente"), dgListado);
             else ejecutarQuery(Buscador.getInstancia().verTodos("Cliente"), dgListado); 

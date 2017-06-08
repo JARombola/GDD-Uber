@@ -120,17 +120,6 @@ namespace UberFrba.Abm_Automovil {
                      new SqlParameter("@turno",idTurno)});
         }
 
-        private void btnHabilitacion_Click (object sender, EventArgs e) {
-            SqlCommand command;
-            if (ID<0)           //Deshabilitado => Hay que habilitar
-                command = Buscador.getInstancia().getCommandStoredProcedure("SP_habilitarAuto");
-            else command = Buscador.getInstancia().getCommandStoredProcedure("SP_deshabilitarAuto");
-            command.Parameters.AddWithValue("@id", Math.Abs(ID));
-            int resultado = command.ExecuteNonQuery();
-            MessageBox.Show("Actualizados: "+resultado);
-            volver();
-        }
-
         private void btnBuscChofer_Click (object sender, EventArgs e) {
             frmListaChoferes listaChoferes = new frmListaChoferes(this);
             listaChoferes.soloHabilitados=true;
@@ -164,5 +153,19 @@ namespace UberFrba.Abm_Automovil {
         private void btnClean_Click (object sender, EventArgs e) {
             limpiar();
         }
+
+        private void btnHabilitacion_Click (object sender, EventArgs e) {
+            int ok;
+            if (ID<0) {           //Deshabilitado => Hay que habilitar
+                ok = base.habilitar("Auto", Math.Abs(ID));
+                if(ok>0) btnHabilitacion.Text="Deshabilitar";
+            }
+            else {
+                ok =base.deshabilitar("Auto", ID);
+                if (ok>0)btnHabilitacion.Text="Habilitar";
+            }
+            ID*=-1;
+        }
+
     }
 }

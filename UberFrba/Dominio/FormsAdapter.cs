@@ -37,13 +37,17 @@ namespace UberFrba {
         protected int deshabilitar (string SP, int id){
             SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_deshabilitar"+SP);
             cmd.Parameters.AddWithValue("@id", id);
-            return cmd.ExecuteNonQuery();
+            int resultado= cmd.ExecuteNonQuery();
+            if (resultado>0) MessageBox.Show(SP+" deshabilitado correctamente", SP+" deshabilitado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return resultado;
         }
 
         protected int habilitar (string SP, int id) {
             SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_habilitar"+SP);
             cmd.Parameters.AddWithValue("@id", id);
-            return cmd.ExecuteNonQuery();
+            int resultado= cmd.ExecuteNonQuery();
+            if (resultado>0) MessageBox.Show(SP+" habilitado correctamente", SP+" habilitado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return resultado;
         }
 
         protected void volver () {
@@ -72,6 +76,9 @@ namespace UberFrba {
 
         }
 
- 
+        internal void ocultarColumnas (DataGridView listado) {
+            listado.Columns["ID"].Visible=false;
+            listado.Columns["Habilitado"].Visible=false;
+        }
     }
 }

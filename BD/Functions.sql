@@ -11,7 +11,6 @@ GO
 -- Create date: 22/04/2017
 -- Description:	Creacion de Funciones
 -- =============================================
-
 -- =============================================
 --					**  AUTOS  **
 -- =============================================
@@ -21,7 +20,7 @@ CREATE FUNCTION [MAIDEN].fx_filtrarAutos (@modelo varchar(255),
 								 @choferID int)
 RETURNS TABLE
 AS RETURN
-		(Select a.ID as ID, a.Marca, a.Modelo,a.Patente,a.Licencia,a.Rodado,a.Habilitado,
+		(Select a.ID, a.Marca, a.Modelo,a.Patente,a.Licencia,a.Rodado, a.Habilitado,
 		(c.Nombre+' '+c.Apellido) as Chofer, c.ID as IDChofer, t.ID as IDTurno,
 		t.Descripcion as Turno 
 		From [MAIDEN].Auto a 
@@ -43,7 +42,20 @@ CREATE FUNCTION [MAIDEN].fx_filtrarAutosHabilitados (@modelo varchar(255),
 								 @choferID int)
 RETURNS TABLE
 AS RETURN
-		(Select * From [MAIDEN].fx_filtrarAutos(@modelo,@patente,@marca,@choferID) Where Habilitado = 1)
+		(Select a.ID as ID, a.Marca, a.Modelo,a.Patente,a.Licencia,a.Rodado, a.Habilitado,
+		(c.Nombre+' '+c.Apellido) as Chofer, c.ID as IDChofer, t.ID as IDTurno,
+		t.Descripcion as Turno 
+		From [MAIDEN].Auto a 
+		left join [MAIDEN].Chofer c on (a.Chofer = c.ID)
+		left join [MAIDEN].Turno t on (a.Turno = t.ID)
+		where 
+			(Modelo like '%'+@modelo+'%'
+			OR
+			Patente = @patente
+			OR
+			Marca = @marca
+			OR
+			Chofer = @choferID) AND a.Habilitado = 1)
 GO
 
 CREATE FUNCTION [MAIDEN].fx_getMarcas()
@@ -62,7 +74,7 @@ RETURNS TABLE
 AS RETURN(
 		Select chofer.ID as ID, chofer.Nombre, chofer.Apellido, chofer.Dni, chofer.Mail,chofer.Telefono,
 			chofer.Direccion,chofer.Localidad, chofer.Piso, chofer.Depto,
-			chofer.Fecha_Nacimiento,chofer.Habilitado From [MAIDEN].Chofer chofer
+			chofer.Fecha_Nacimiento, chofer.habilitado From [MAIDEN].Chofer chofer
 		WHERE Nombre like '%'+ @nombre+ '%'
 			  OR
 			  Apellido like '%'+@apellido+'%'
@@ -75,8 +87,15 @@ CREATE FUNCTION [MAIDEN].fx_filtrarChoferesHabilitados (@nombre varchar(255),
 								 @DNI numeric(18,0))
 RETURNS TABLE
 AS RETURN
-		(Select * From [MAIDEN].fx_filtrarChoferes(@nombre, @apellido, @DNI) 
-			where habilitado = 1)
+		(	Select chofer.ID as ID, chofer.Nombre, chofer.Apellido, chofer.Dni, chofer.Mail,chofer.Telefono,
+			chofer.Direccion,chofer.Localidad, chofer.Piso, chofer.Depto,
+			chofer.Fecha_Nacimiento,chofer.Habilitado From [MAIDEN].Chofer chofer
+		WHERE ((Nombre like '%'+ @nombre+ '%'
+			  OR
+			  Apellido like '%'+@apellido+'%'
+			  OR
+			  DNI = @DNI) AND Habilitado=1)
+			  )
 GO
 
 -- =============================================
@@ -89,7 +108,7 @@ RETURNS TABLE
 AS RETURN
 		(Select cliente.ID as ID, cliente.Nombre, cliente.Apellido, cliente.Dni, cliente.Mail, cliente.Telefono,
 		cliente.Direccion,cliente.Localidad, cliente.Piso, cliente.Depto,
-		cliente.Fecha_Nacimiento,cliente.Habilitado From [MAIDEN].Cliente cliente
+		cliente.Fecha_Nacimiento, cliente.Habilitado From [MAIDEN].Cliente cliente
 		WHERE Nombre like '%'+ @nombre+ '%'
 				OR
 			  Apellido like '%'+@apellido+'%'
@@ -102,8 +121,14 @@ CREATE FUNCTION [MAIDEN].fx_filtrarClientesHabilitados (@nombre varchar(255),
 								 @DNI numeric(18,0))
 RETURNS TABLE
 AS RETURN
-		(Select * From [MAIDEN].fx_filtrarClientes(@nombre, @apellido, @DNI)
-			where Habilitado = 1)
+		(Select cliente.ID as ID, cliente.Nombre, cliente.Apellido, cliente.Dni, cliente.Mail, cliente.Telefono,
+		cliente.Direccion,cliente.Localidad, cliente.Piso, cliente.Depto,
+		cliente.Fecha_Nacimiento, cliente.Habilitado From [MAIDEN].Cliente cliente
+		WHERE (Nombre like '%'+ @nombre+ '%'
+				OR
+			  Apellido like '%'+@apellido+'%'
+				OR
+			  DNI = @DNI) AND Habilitado = 1)
 GO
 
 -- =============================================
@@ -112,14 +137,16 @@ GO
 CREATE FUNCTION [MAIDEN].fx_filtrarTurnos (@descripcion varchar(255))		
 RETURNS TABLE
 AS RETURN
-		(Select t.Descripcion,t.Hora_Inicio,t.Hora_Fin,t.Precio_Base,t.Precio_km, t.Habilitado From [MAIDEN].Turno t where 
+		(Select t.ID,t.Descripcion,t.Hora_Inicio,t.Hora_Fin,t.Precio_Base,t.Precio_km, t.Habilitado From [MAIDEN].Turno t where 
 			Descripcion like '%'+ @descripcion+ '%' AND Respaldo = 0)
 GO
 
 CREATE FUNCTION [MAIDEN].fx_filtrarTurnosHabilitados (@descripcion varchar(255))		
 RETURNS TABLE
 AS RETURN
-		(Select * From [MAIDEN].fx_filtrarTurnos(@descripcion) where Habilitado = 1)
+		(Select t.ID,t.Descripcion,t.Hora_Inicio,t.Hora_Fin,t.Precio_Base,t.Precio_km,t.Habilitado From [MAIDEN].Turno t where 
+			Descripcion like '%'+ @descripcion+ '%' AND Respaldo = 0 
+			AND Habilitado = 1)
 GO
 
 -- =============================================

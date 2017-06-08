@@ -104,14 +104,16 @@ namespace UberFrba.Abm_Chofer {
         }
 
         private void btnHabilitacion_Click (object sender, EventArgs e) {
-            SqlCommand command;
-            if (ID<0)           //Deshabilitado => Hay que habilitar
-                command = Buscador.getInstancia().getCommandStoredProcedure("SP_habilitarChofer");
-            else command = Buscador.getInstancia().getCommandStoredProcedure("SP_deshabilitarChofer");
-            command.Parameters.AddWithValue("@id", Math.Abs(ID));
-            int resultado = command.ExecuteNonQuery();
-            MessageBox.Show("Actualizados: "+resultado);
-            volver();
+            int ok;
+            if (ID<0) {           //Deshabilitado => Hay que habilitar
+                ok = base.habilitar("Chofer", Math.Abs(ID));
+                if (ok>0) btnHabilitacion.Text="Deshabilitar";
+            }
+            else {
+                ok =base.deshabilitar("Chofer", ID);
+                if (ok>0) btnHabilitacion.Text="Habilitar";
+            }
+            ID*=-1;
         }
 
         public override void limpiar () {

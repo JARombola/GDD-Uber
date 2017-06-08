@@ -112,7 +112,6 @@
             this.dgListado.Size = new System.Drawing.Size(648, 198);
             this.dgListado.TabIndex = 3;
             this.dgListado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.seleccion);
-            this.dgListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.derecho);
             // 
             // menuDerecho
             // 
@@ -127,14 +126,12 @@
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
             this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.eliminarToolStripMenuItem.Text = "Habilitar";
-            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.habilitar);
             // 
             // deshabilitarToolStripMenuItem
             // 
             this.deshabilitarToolStripMenuItem.Name = "deshabilitarToolStripMenuItem";
             this.deshabilitarToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.deshabilitarToolStripMenuItem.Text = "Deshabilitar";
-            this.deshabilitarToolStripMenuItem.Click += new System.EventHandler(this.deshabilitar);
             // 
             // btnTodos
             // 

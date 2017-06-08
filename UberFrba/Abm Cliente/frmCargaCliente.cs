@@ -115,14 +115,16 @@ namespace UberFrba.Abm_Cliente
        }
 
        private void btnHabilitacion_Click (object sender, EventArgs e) {
-           SqlCommand command ;
-           if (ID<0)           //Deshabilitado => Hay que habilitar
-               command = Buscador.getInstancia().getCommandStoredProcedure("SP_habilitarCliente");
-           else command = Buscador.getInstancia().getCommandStoredProcedure("SP_deshabilitarCliente");
-           command.Parameters.AddWithValue("@id", Math.Abs(ID));
-           command.ExecuteNonQuery();
-           limpiar();
-          
+           int ok;
+           if (ID<0) {           //Deshabilitado => Hay que habilitar
+               ok = base.habilitar("Cliente", Math.Abs(ID));
+               if (ok>0) btnHabilitacion.Text="Deshabilitar";
+           }
+           else {
+               ok =base.deshabilitar("Cliente", ID);
+               if (ok>0) btnHabilitacion.Text="Habilitar";
+           }
+           ID*=-1;
        }
 
        private void btnVolver_Click (object sender, EventArgs e) {
@@ -137,6 +139,6 @@ namespace UberFrba.Abm_Cliente
        private void btnClear_Click (object sender, EventArgs e) {
            limpiar();
        }
-
+        
     }
 }

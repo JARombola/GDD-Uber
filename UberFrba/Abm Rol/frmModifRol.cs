@@ -79,8 +79,8 @@ namespace UberFrba.Abm_Usuario
             storedProcedure = Buscador.getInstancia().getCommandStoredProcedure("SP_modifRol");
             setearParametros(ref storedProcedure);
             try {
-                int x = storedProcedure.ExecuteNonQuery();
-                MessageBox.Show("Actualizado: "+x.ToString());
+                storedProcedure.ExecuteNonQuery();
+                MessageBox.Show("Rol modificado correctamente","Rol modificado",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             catch(SqlException){                // TODO: Modificar excepcion, mje desde sql
                 MessageBox.Show(null,"Ya existe un rol con el nombre \" "+cbRol.Text+"\".\nIntente con uno diferente.","Error de Registro",MessageBoxButtons.OK,MessageBoxIcon.Error);

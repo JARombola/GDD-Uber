@@ -62,14 +62,12 @@
             this.opcHabilitar.Name = "opcHabilitar";
             this.opcHabilitar.Size = new System.Drawing.Size(136, 22);
             this.opcHabilitar.Text = "Habilitar";
-            this.opcHabilitar.Click += new System.EventHandler(this.habilitar);
             // 
             // opcDeshabilitar
             // 
             this.opcDeshabilitar.Name = "opcDeshabilitar";
             this.opcDeshabilitar.Size = new System.Drawing.Size(136, 22);
             this.opcDeshabilitar.Text = "Deshabilitar";
-            this.opcDeshabilitar.Click += new System.EventHandler(this.deshabilitar);
             // 
             // lblCantResultados
             // 
@@ -152,7 +150,6 @@
             this.dgListado.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.actualizarResultados);
             this.dgListado.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.actualizarResultados);
             this.dgListado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.seleccion);
-            this.dgListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.derecho);
             // 
             // btnClean
             // 

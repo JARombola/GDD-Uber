@@ -25,7 +25,7 @@ namespace UberFrba.Abm_Usuarios {
                 command.Parameters.AddWithValue("@pass", txtPass.Text);
 
                 int x = command.ExecuteNonQuery();
-                MessageBox.Show("Usuario Modificado correctamente");
+                MessageBox.Show("Usuario Modificado correctamente","Usuario modificado",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
         private void cbUsuario_SelectedIndexChanged (object sender, EventArgs e) {

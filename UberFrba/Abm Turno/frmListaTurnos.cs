@@ -27,7 +27,7 @@ namespace UberFrba.Abm_Turno {
             SqlCommand command= Buscador.getInstancia().getCommandFunctionDeTabla(query);
                     command.Parameters.AddWithValue("@descripcion", valor(txtDescripcion.Text));
             ejecutarQuery(command, dgListado);
-            dgListado.Columns["ID"].Visible=false;
+            base.ocultarColumnas(dgListado);
         }
 
 
@@ -77,35 +77,6 @@ namespace UberFrba.Abm_Turno {
             try { dgListado[hit.ColumnIndex, hit.RowIndex].Selected = true; }
             catch (System.ArgumentOutOfRangeException) { //.... Hizo click derecho en cualquier lado
             }
-        }
-
-        private void derecho (object sender, MouseEventArgs e) {
-            if (e.Button==MouseButtons.Right) {
-                marcarFila(sender, e);
-                bool habilitado = (bool) dgListado.CurrentRow.Cells["Habilitado"].Value;
-                if (habilitado) {
-                    menuDerecho.Items[0].Visible=false;            //Habilitar
-                    menuDerecho.Items[1].Visible=true;
-                }
-                else {
-                    menuDerecho.Items[0].Visible=true;
-                    menuDerecho.Items[1].Visible=false;
-                }
-            }
-        }
-
-        private void habilitar (object sender, EventArgs e) {
-            int p = base.habilitar("Turno", (int) dgListado.CurrentRow.Cells["ID"].Value);              //La SuperClase implementa el metodo para habilitar
-            MessageBox.Show("Habilitados: "+ p);
-            dgListado.CurrentRow.Cells["Habilitado"].Value = true;
-            dgListado.Refresh();
-        }
-
-        private void deshabilitar (object sender, EventArgs e) {
-            int p = base.deshabilitar("Turno", (int) dgListado.CurrentRow.Cells["ID"].Value);           //La superclase implementa el metodo para deshabilitar
-            MessageBox.Show("Deshabilitados: "+ p);
-            dgListado.CurrentRow.Cells["Habilitado"].Value= false;
-            dgListado.Refresh();
         }
 
         private void btnTodos_Click_1 (object sender, EventArgs e) {
