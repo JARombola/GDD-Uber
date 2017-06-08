@@ -29,7 +29,7 @@ namespace UberFrba.Rendicion_Viajes
             idChofer=-1;
         }
 
-        public override void configurar (IDominio elemento) {
+        public override void configurar (IDominio elemento) {           // Método usado por el Listado de Choferes. Envía el Chofer seleccionado (al que se le realizará la rendicion)
             if (buscaChofer) {
                 Persona chofer = (Persona) elemento;
                 idChofer = chofer.id;
@@ -72,9 +72,9 @@ namespace UberFrba.Rendicion_Viajes
 
         }
 
-        private void mostrarFacturaExistente (string p) {
-            int codRendicion;
-            int.TryParse(p, out codRendicion);
+        private void mostrarFacturaExistente (string codRendicionString) {               // Si la Rendicion ya existía y el usuario desea ver el detalle
+            int codRendicion;                     // desde acá se cargan sus datos, en base al Nro de Rendicion obtenido desde la excepcion
+            int.TryParse(codRendicionString, out codRendicion);
             SqlCommand command = Buscador.getInstancia().getCommandFunctionDeTabla("fx_getRendicionExistente(@nroRendicion)");
                 command.Parameters.AddWithValue("@nroRendicion", codRendicion);
                 ejecutarQuery(command, dgListado);

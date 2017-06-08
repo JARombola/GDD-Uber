@@ -31,7 +31,7 @@ namespace UberFrba.Listado_Estadistico          // TODO: Eliminar barra herrmien
             SqlCommand command = Buscador.getInstancia().getCommandFunctionDeTabla(funcion+"(@anio, @trimestre)");
             command.Parameters.AddWithValue("@anio", dateAnio.Value.Year);
             command.Parameters.AddWithValue("@trimestre", trimestre);
-            ejecutarQuery(command, dgEstadisticas);
+            ejecutarQuery(command, dgEstadisticas);             // <<----- Ejecuta la query (o sea, la funcion indicada) y carga el listado
         }
 
         private int getTrimestre () {               // Devuelve el trimestre segun el radioButton seleccionado

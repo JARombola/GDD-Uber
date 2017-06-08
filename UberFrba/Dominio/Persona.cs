@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UberFrba {                    //PARA ENVIAR A LOS FORMS DE MODIFICACION
-    public class Persona : IDominio{
-        public string nombre {get; set; }
+namespace UberFrba {
+      public class Persona : IDominio {                    //Interfaz para polimorfismo en metodos del FormAdapter.   
+        public string nombre { get; set; }                   // Sirve como DataObject para enviar datos de una PERSONA (chofer/cliente) entre formularios
         public string apellido { get; set; }
         public string direccion { get; set; }
         public string codPost { get; set; }

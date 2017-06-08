@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace UberFrba.Dominio {
-    public class Turno : IDominio {
-        public decimal inicio { get; set; }
+    public class Turno : IDominio {                 //Interfaz para polimorfismo en metodos del FormAdapter.   
+        public decimal inicio { get; set; }                 // Sirve como DataObject para enviar datos de un TURNO entre formularios
         public decimal fin { get; set; }
         public decimal precioBase { get; set; }
         public decimal precioKm { get; set; }

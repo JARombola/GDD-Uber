@@ -16,17 +16,12 @@ namespace UberFrba.Menues {
 
         private static Form singleton;
 
-        public Login () {
+        public Login () {               //se hace Singleton para poder volver a mostrarlo cuando el usuario sale de su cuenta
             InitializeComponent();
             if (singleton==null) singleton = this;
         }
 
-        private void checkBox1_CheckedChanged (object sender, EventArgs e) {
-            if (checkPass.Checked) txtPass.UseSystemPasswordChar=false;
-            else txtPass.UseSystemPasswordChar=true ;
-        }
-
-        private void btnValidar_Click (object sender, EventArgs e) {            //Verifica Usuario y Contraseña
+        private void btnValidar_Click (object sender, EventArgs e) {            
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_login");
             command.Parameters.AddRange(new[]{
                 new SqlParameter("@usuario",txtUser.Text),
@@ -34,18 +29,18 @@ namespace UberFrba.Menues {
             });
             try {
                 int restantes =(int) command.ExecuteScalar();           // Devuelve la cantidad de intentos restantes del usuario
-                if (restantes == 3) iniciarSesion();                // Pass ok!, inicia sesion
-                else {
+                if (restantes == 3) iniciarSesion();                // Pass ok y restantes = 3 (si tenia menos, se le reiniciaron por ponerla bien)
+                else {                                                      
                     if (restantes>0) {                              // Pass mal, le quedan X intentos
                         actualizarLabelIntentos(restantes);
                     }
-                    else {
-                        lblIntentos.Text="USUARIO DESHABILITADO: "+txtUser.Text;   //Pass mal, no le quedan intentos (=0)
+                    else {                                              // Esta bloqueado, tiene 0 intentos restantes 
+                        lblIntentos.Text="USUARIO DESHABILITADO: "+txtUser.Text;   
                         lblIntentos.Visible=true;
                     }
                     }
             }
-            catch (SqlException error) {            //No existia el usuario
+            catch (SqlException error) {           
                 if (error.Number == 51000) MessageBox.Show(error.Message, "Error de logueo", MessageBoxButtons.OK, MessageBoxIcon.Error);      //Usuario inexistente
                 else MessageBox.Show("Error de logueo.\nConsulte al administrador", "Error BD", MessageBoxButtons.OK, MessageBoxIcon.Error);    
                 lblIntentos.Visible=false;
@@ -59,11 +54,11 @@ namespace UberFrba.Menues {
             lblIntentos.Visible=true;
         }
 
-        private void iniciarSesion () {
-            SqlDataReader roles = obtenerRoles();
+        private void iniciarSesion () {                     //Controla los roles del usuario
+            SqlDataReader roles = obtenerRoles();                   // Obtiene los roles
             ArrayList nombresRoles = new ArrayList();
             while (roles.Read()) {
-                nombresRoles.Add(roles.GetString(0));           //Obtiene el nombre de cada Rol del usuario
+                nombresRoles.Add(roles.GetString(0));           //Obtiene el nombre de cada Rol del usuario y lo agrega a un array.
             }
             roles.Close();
             if (nombresRoles.Count==0) MessageBox.Show("El usuario no tiene ningun rol asignado.\nNo podrá ingresar al sistema.", "Usuario sin roles", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -85,6 +80,12 @@ namespace UberFrba.Menues {
                 commandRol.Parameters.AddWithValue("@usuario", txtUser.Text);
             SqlDataReader rolesReader = commandRol.ExecuteReader();
             return rolesReader;
+        }
+
+
+        private void checkBox1_CheckedChanged (object sender, EventArgs e) {
+            if (checkPass.Checked) txtPass.UseSystemPasswordChar=false;
+            else txtPass.UseSystemPasswordChar=true;
         }
 
         public static void mostrar () {

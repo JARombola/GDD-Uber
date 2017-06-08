@@ -56,7 +56,7 @@ namespace UberFrba.Menues {
             if (!funciones.Contains((int) Funcion.ESTADISTICAS)) panel.Controls.Remove(btnEstadisticas);
         }
 
-
+        //------------------- Cada BOTON envia el "tipo" de entidad que va a consultarse (Choferes / Autos / Clientes / Turnos) para reutilizar formulario de seleccion de ABM
         private void btnClientes_Click (object sender, EventArgs e) {
             new MenuABM("Clientes", this).Show();
             this.Hide();
@@ -76,7 +76,7 @@ namespace UberFrba.Menues {
             new MenuABM("Turnos", this).Show();
             this.Hide();
         }
-
+        // -------------------------------------------------------------------
         private void btnRoles_Click (object sender, EventArgs e) {
             new MenuABMRol(this).Show();
             this.Hide();

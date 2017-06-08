@@ -11,30 +11,30 @@ using UberFrba.Dominio;
 using UberFrba.Menues;
 
 namespace UberFrba {
-    public partial class FormsAdapter : Form {
-
+    public partial class FormsAdapter : Form {              // Clase de la que herdan todos los formularios de la aplicacion.
+                                                                // Para reutilizar metodos
         protected string TABLA { get; set; }
         public FormsAdapter formAnterior { get; set; }
         public FormsAdapter formSiguiente { get; set; }
         public int ID { get; set; }
 
-        public FormsAdapter () {
-            ID = -1;
+        public FormsAdapter () {                        // Inicializa con -1 
+            ID = -1;    
         }
 
-        protected void ejecutarQuery (SqlCommand command, DataGridView lista) {                      
+        protected void ejecutarQuery (SqlCommand command, DataGridView lista) {                // Ejecuta una query y completa una lista con los resultados obtenidos           
             DataTable tabla = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             adapter.Fill(tabla);
             lista.DataSource = tabla;
         }
 
-        protected Object valor (string texto) {
+        protected Object valor (string texto) {                                 // Devuelve nulo (para la base) en caso de que que el string esté vacio
             if (!String.IsNullOrWhiteSpace(texto)) return texto;
             return DBNull.Value;
         }
 
-        protected int deshabilitar (string SP, int id){
+        protected int deshabilitar (string SP, int id){                             // Metodo usado por los formularios para deshabilitar Choferes/Autos/Turnos/Roles/Clientes
             SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_deshabilitar"+SP);
             cmd.Parameters.AddWithValue("@id", id);
             int resultado= cmd.ExecuteNonQuery();
@@ -42,7 +42,7 @@ namespace UberFrba {
             return resultado;
         }
 
-        protected int habilitar (string SP, int id) {
+        protected int habilitar (string SP, int id) {                           // Metodo usado por los formularios para habilitar Choferes/Autos/Turnos/Roles/Clientes
             SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_habilitar"+SP);
             cmd.Parameters.AddWithValue("@id", id);
             int resultado= cmd.ExecuteNonQuery();
@@ -50,7 +50,7 @@ namespace UberFrba {
             return resultado;
         }
 
-        protected void volver () {
+        protected void volver () {                              // Usado en todos los formularios para volver al formulario anterior
             formAnterior.Show();
             Close();
         }
@@ -76,7 +76,7 @@ namespace UberFrba {
 
         }
 
-        internal void ocultarColumnas (DataGridView listado) {
+        internal void ocultarColumnas (DataGridView listado) {                  // Oculta columnas que el usuario no necesita ver, pero la aplicacion SI las utiliza
             listado.Columns["ID"].Visible=false;
             listado.Columns["Habilitado"].Visible=false;
         }

@@ -17,14 +17,14 @@ namespace UberFrba.Menues {
     public partial class MenuABM : FormsAdapter {
         private string tipo { get; set; }
        
-        public MenuABM (String clase, FormsAdapter anterior) {
+        public MenuABM (String clase, FormsAdapter anterior) {          // El menú envia como string, el nombre de la "entidad" (chofer, auto, cliente, turno) que se va a "consultar" (alta/baja/modificacion)
             InitializeComponent();
             tipo = clase;
             formAnterior = anterior;
             Text=clase;
         }
 
-        private void btnCarga_Click (object sender, EventArgs e) {
+        private void btnCarga_Click (object sender, EventArgs e) {                  // Conocemos la "clase" a dar de alta => sabemos que form (carga) hay que mostrar para dar de Alta
             switch (tipo.ToUpper()) {
                 case "CLIENTES": new frmCargaCliente(this).Show();
                     this.Hide();
@@ -43,7 +43,7 @@ namespace UberFrba.Menues {
             }
         }
 
-        private void btnModif_Click (object sender, EventArgs e) {
+        private void btnModif_Click (object sender, EventArgs e) {                  // Conocemos la "clase" a modificar => sabemos que form (listado) hay que mostrar para seleccionar
             switch (tipo.ToUpper()) {
                 case "CLIENTES": 
                     FormsAdapter nuevo = new frmListaClientes(this);

@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 
 namespace UberFrba.Dominio {
-    class Buscador {
-        private static Buscador instancia{ get; set; }
+    class Buscador {                                                // Singleton para facilitar las consultas a la base
+        private static Buscador instancia{ get; set; }                      // Crea SqlCommands
         public SqlConnection conexion { get; set; }
         private string ESQUEMA = "[MAIDEN]";               
 
-        private Buscador () {
+        private Buscador () {                           //Se conecta con la base al ser creado
             String config = ConfigurationManager.AppSettings["configuracionSQL"];
             conexion = new SqlConnection(config);
             try { 
@@ -32,35 +32,35 @@ namespace UberFrba.Dominio {
             return instancia;
         }
 
-        public SqlCommand getCommandStoredProcedure (string storedProcedure) {
-            string query = ESQUEMA + "."+storedProcedure;
+        public SqlCommand getCommandStoredProcedure (string storedProcedure) {                  // Para Procedimientos almacenados
+            string query = ESQUEMA + "."+storedProcedure;                                       //Recibe el nombre del SP
             SqlCommand command= this.getCommand(query);
                 command.CommandType = CommandType.StoredProcedure;
             return command;
         }
 
-        public SqlCommand getCommandFunction (string funcion) {
-            string query= "SELECT "+ESQUEMA+".";
+        public SqlCommand getCommandFunction (string funcion) {                 // Para funciones escalares
+            string query= "SELECT "+ESQUEMA+".";                                //Recibe el nombre de la funcion
                 query+=funcion;
             SqlCommand command= new SqlCommand(query, conexion);
             return command;
         }
 
-        public SqlCommand getCommandFunctionDeTabla (string funcion) {
-            string query= "SELECT * From "+ESQUEMA+".";
+        public SqlCommand getCommandFunctionDeTabla (string funcion) {              // Para funciones de TABLA
+            string query= "SELECT * From "+ESQUEMA+".";                             // Recibe el nombre de la funcion
                 query+=funcion;
             SqlCommand command= new SqlCommand(query, conexion);
             return command;
         }
 
 
-        public SqlCommand getCommand(string query) {
+        public SqlCommand getCommand(string query) {                        // Para consultas directas (NO SE USA)
             SqlCommand command= new SqlCommand(query, conexion);
             return command;
         }
 
         //------------ METODOS AUTOS--------------------------------
-        public void cargarMarcas (ComboBox cbMarcas) {      
+        public void cargarMarcas (ComboBox cbMarcas) {                          // Obtiene todas las marcas de autos registradas y los carga en un combobox (se usa en los formularios de AUTOS)
             SqlCommand command= this.getCommandFunctionDeTabla("fx_getMarcas()");
             SqlDataReader marcas = command.ExecuteReader();
             while (marcas.Read()) {
@@ -70,7 +70,7 @@ namespace UberFrba.Dominio {
         }
 
         //------------ METODOS ROLES--------------------------------
-        public void cargarRoles(ComboBox cbRoles){
+        public void cargarRoles(ComboBox cbRoles){                                      // Obtiene los roles existentes y los carga en un combobox (se usa en los formularios de ROLES)
             SqlCommand command= this.getCommandFunctionDeTabla("fx_getRoles()");
             SqlDataReader datos = command.ExecuteReader();
             while (datos.Read()) {
@@ -81,7 +81,7 @@ namespace UberFrba.Dominio {
 
         //-------------- METODOS USUARIOS
 
-        internal void cargarUsuarios (ComboBox cbUser) {
+        internal void cargarUsuarios (ComboBox cbUser) {                                // Obtiene los usuarios existentes y los carga en un combobox(se usa en los formularios de Roles, para asignarle)
             SqlCommand command = this.getCommandFunctionDeTabla("fx_getUsuarios()");
             SqlDataReader usuarios= command.ExecuteReader();
             while (usuarios.Read()) {
@@ -90,7 +90,7 @@ namespace UberFrba.Dominio {
             usuarios.Close();
         }
 
-        internal void cargarRoles (CheckedListBox listRoles) {
+        internal void cargarRoles (CheckedListBox listRoles) {                              // Carga los roles en un listado (se usa en form de Roles)
             SqlCommand command = this.getCommandFunctionDeTabla("fx_getRolesHabilitados()");
             SqlDataReader roles= command.ExecuteReader();
             while (roles.Read()) {
@@ -99,7 +99,7 @@ namespace UberFrba.Dominio {
             roles.Close();
         }
 
-        internal SqlCommand verTodos (string tabla) {
+        internal SqlCommand verTodos (string tabla) {                   //TODO: BORRAR ESTOS METODOS
             string query = "SELECT * FROM "+ESQUEMA+"."+tabla;
             SqlCommand command = this.getCommand(query);
             return command;

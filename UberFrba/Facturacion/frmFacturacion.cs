@@ -23,16 +23,12 @@ namespace UberFrba.Facturacion {
             formAnterior=anterior;
         }
 
-        private void btnChofer_Click (object sender, EventArgs e) {
-            frmListaClientes listaClientes = new frmListaClientes(this);
-            listaClientes.formSiguiente=this;
-            listaClientes.soloHabilitados=true;
-            buscaCliente = true;
-            listaClientes.Show();
-            this.Hide();
+        private void frmFacturacion_Load (object sender, EventArgs e) {
+            fechaFin.Value= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+            fechaInicio.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
         }
 
-        public override void configurar (IDominio elemento) {
+        public override void configurar (IDominio elemento) {               // Método usado por el Listado de Clientes. Envía el Cliente seleccionado (al que se le realizará la facturación)
             Persona cliente = (Persona) elemento;
             idCliente = cliente.id;
             txtCliente.Text = (cliente.nombre +" "+ cliente.apellido);
@@ -55,32 +51,37 @@ namespace UberFrba.Facturacion {
                 }
                 catch (SqlException error) {
                     if (error.Number == 51002){
-                        if (MessageBox.Show("La factura ya se encuentra registrada.\n Desea visualizarla?", "Factura Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes) mostrarFacturacionExistente(error.Message);
+                        if (MessageBox.Show("La factura ya se encuentra registrada.\n Desea visualizarla?", "Factura Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                            ==DialogResult.Yes) mostrarFacturacionExistente(error.Message);             // Si el cliente desea ver una factura que YA ESTABA registrada
                 }else MessageBox.Show("Error de Facturacion.\nConsulte al administrador.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             }else MessageBox.Show(errores, "Error de campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
         }
 
-        private void mostrarFacturacionExistente(string p){
-            int codFactura;
-            int.TryParse(p, out codFactura);
+        private void mostrarFacturacionExistente(string codFacturaString){                 // Si la factura ya existía y el usuario desea ver el detalle
+            int codFactura;                                                                 // desde acá se cargan sus datos, en base al cod de factura obtenido de la excepcion
+            int.TryParse(codFacturaString, out codFactura);
             SqlCommand command = Buscador.getInstancia().getCommandFunctionDeTabla("fx_getFacturaExistente(@nroFactura)");
             command.Parameters.AddWithValue("@nroFactura", codFactura);
             ejecutarQuery(command, dgListado);
             dgListado.Sort(dgListado.Columns[7], ListSortDirection.Ascending);
         }
-        
-        public override string errorCampos () {
+            
+        public override string errorCampos () {                 //Valida campos
             String errores = null;
             if (String.IsNullOrWhiteSpace(txtCliente.Text)) errores+="- Debe seleccionar un Cliente\n";
             if (fechaInicio.Value>=fechaFin.Value) errores+= "- La fecha de inicio debe ser mayor que la de fin\n";
             return errores;
         }
 
-        private void frmFacturacion_Load (object sender, EventArgs e) {
-            fechaFin.Value= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
-            fechaInicio.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        //--------------------------------------------- BOTONES---------------------------------
+        private void btnChofer_Click (object sender, EventArgs e) {
+            frmListaClientes listaClientes = new frmListaClientes(this);
+            listaClientes.formSiguiente=this;
+            listaClientes.soloHabilitados=true;
+            buscaCliente = true;
+            listaClientes.Show();
+            this.Hide();
         }
 
         private void button1_Click (object sender, EventArgs e) {
