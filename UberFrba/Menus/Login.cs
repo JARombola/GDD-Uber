@@ -46,8 +46,10 @@ namespace UberFrba.Menues {
                     }
             }
             catch (SqlException error) {            //No existia el usuario
-                MessageBox.Show(error.Message);
+                if (error.Number == 51000) MessageBox.Show(error.Message, "Error de logueo", MessageBoxButtons.OK, MessageBoxIcon.Error);      //Usuario inexistente
+                else MessageBox.Show("Error de logueo.\nConsulte al administrador", "Error BD", MessageBoxButtons.OK, MessageBoxIcon.Error);    
                 lblIntentos.Visible=false;
+
             }
         }
 

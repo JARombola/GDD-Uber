@@ -121,7 +121,7 @@
             this.Controls.Add(this.btnOk);
             this.Name = "frmAsignarRoles";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Modificacion Roles de Usuario";
+            this.Text = "Roles de Usuarios";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

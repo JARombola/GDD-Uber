@@ -27,9 +27,9 @@ namespace UberFrba.Abm_Usuario
                 command.Parameters.AddWithValue("@usuario", cbUsuario.SelectedItem);
                 int i = 0;
                 while (i++<listRoles.Items.Count) {
-                    listRoles.SetItemChecked(i-1, false);
+                    listRoles.SetItemChecked(i-1, false);               //Desactivo todos los roles
                 }
-                actualizarRoles(command);
+                actualizarRoles(command);                       //Marco los del usuario
                 btnOk.Enabled=true;
         }
 
@@ -62,7 +62,7 @@ namespace UberFrba.Abm_Usuario
                 command.ExecuteNonQuery();
                 i++;
             }
-            MessageBox.Show(null,"Rol actualizado correctamente","Rol actualizado",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+            MessageBox.Show(null,"Usuario actualizado correctamente","Usuario actualizado",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
         }
 
         private void button1_Click (object sender, EventArgs e) {
