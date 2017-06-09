@@ -145,6 +145,7 @@
             // txtDepto
             // 
             this.txtDepto.Location = new System.Drawing.Point(296, 280);
+            this.txtDepto.MaxLength = 1;
             this.txtDepto.Name = "txtDepto";
             this.txtDepto.Size = new System.Drawing.Size(50, 20);
             this.txtDepto.TabIndex = 29;
@@ -184,6 +185,7 @@
             this.btnClear.TabIndex = 20;
             this.btnClear.Text = "Limpiar";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // dateNacimiento
             // 

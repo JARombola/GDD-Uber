@@ -315,7 +315,7 @@ RETURN(
 					SELECT v.Chofer,
 							v.Auto,
 							ROW_NUMBER() OVER (PARTITION BY v.Chofer ORDER BY DATEDIFF(MI,cast(v.fecha as time),v.Hora_Fin) DESC) AS fila,
-							DATEDIFF(MI,cast(v.fecha as time),v.Hora_Fin) as Duracion,
+							DATEDIFF(MI,cast(v.fecha as time),v.Hora_Fin) as 'Duracion(Minutos)',
 							v.Fecha
 					FROM [MAIDEN].Viaje v
 					WHERE YEAR(v.fecha) = @anio AND DATEPART(qq,v.Fecha)=@trimestre AND v.Hora_Fin is not null
@@ -323,7 +323,7 @@ RETURN(
 							JOIN [MAIDEN].Chofer c on Resultados.Chofer = c.ID
 							JOIN MAIDEN.Auto a on (Resultados.Auto = a.ID)
 				WHERE Resultados.fila = 1
-				ORDER BY Duracion DESC
+				ORDER BY 4 DESC
 )
 GO
 -- 1) Se agrupan las facturas por cliente

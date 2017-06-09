@@ -25,8 +25,6 @@ namespace UberFrba.Abm_Turno {
                 try {
                     if (ID == -1) registrarTurno();
                     else modificarTurno();
-                    MessageBox.Show("Turno registrado correctamente", "Operacion completada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    limpiar();
                 }
                 catch (SqlException error) {
                     switch (error.Number) {
@@ -48,12 +46,18 @@ namespace UberFrba.Abm_Turno {
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_altaTurno");
             setearParametros(ref command);
             command.ExecuteNonQuery();
+            MessageBox.Show("Turno registrado correctamente", "Registro completo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            limpiar();
         }
 
         private void modificarTurno () {
             SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_modifTurno");
+            setearParametros(ref command);
             command.Parameters.AddWithValue("@id", ID);                         //Necesito agregarle el ID porque es una modificacion
             command.ExecuteNonQuery();
+            MessageBox.Show("Turno modificado correctamente", "Modificacion completa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            formAnterior.Show();
+            this.Close();
         }
 
         private void setearParametros (ref SqlCommand command) {
@@ -91,6 +95,7 @@ namespace UberFrba.Abm_Turno {
             base.volver();
         }
         public override void limpiar () {
+            ID=-1;
             horaInicio.Value=0;
             horaFin.Value=0;
             precioBase.Value=0;

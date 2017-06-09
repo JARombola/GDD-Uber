@@ -56,7 +56,8 @@ CREATE PROCEDURE [MAIDEN].SP_modifCliente(
 		@telefono numeric(18,0),
 		@direccion varchar(255),
 		@mail varchar(255),
-		@fecha_nacimiento datetime)
+		@fecha_nacimiento datetime,
+		@piso int, @depto char(1), @localidad varchar(255))
 AS BEGIN
    UPDATE [MAIDEN].Cliente
    SET Nombre = @nombre,
@@ -65,7 +66,10 @@ AS BEGIN
 	   Telefono = @telefono,
 	   Direccion = @direccion,
 	   Mail = @mail,
-	   Fecha_Nacimiento = @fecha_nacimiento
+	   Fecha_Nacimiento = @fecha_nacimiento,
+	   Piso = @piso,
+	   Depto = @depto,
+	   Localidad = @localidad
 	   WHERE ID=@id
 END
 GO
@@ -146,7 +150,8 @@ CREATE PROCEDURE [MAIDEN].SP_modifChofer(
 		@telefono numeric(18,0),
 		@direccion varchar(255),
 		@mail varchar(255),
-		@fecha_nacimiento datetime)
+		@fecha_nacimiento datetime,
+		@piso int, @depto char(1), @localidad varchar(255))
 AS BEGIN
 	UPDATE [MAIDEN].Chofer
    SET Nombre = @nombre,
@@ -155,7 +160,10 @@ AS BEGIN
 	   Telefono = @telefono,
 	   Direccion = @direccion,
 	   Mail = @mail,
-	   Fecha_Nacimiento = @fecha_nacimiento
+	   Fecha_Nacimiento = @fecha_nacimiento,
+	   Piso = @piso,
+	   Depto = @depto,
+	   Localidad = @localidad
 	WHERE ID = @id
 END
 GO
@@ -298,8 +306,8 @@ CREATE PROCEDURE [MAIDEN].SP_altaTurno(@inicio numeric(18,0),
 								 @descripcion varchar(255),
 								 @habilitado bit) 
 AS BEGIN
-	INSERT INTO [MAIDEN].Turno(Hora_Inicio,Hora_Fin,Precio_Base,Precio_km,Descripcion)
-	VALUES(@inicio, @fin, @precioBase, @precioKm, @descripcion)
+	INSERT INTO [MAIDEN].Turno(Hora_Inicio,Hora_Fin,Precio_Base,Precio_km,Descripcion,Habilitado)
+	VALUES(@inicio, @fin, @precioBase, @precioKm, @descripcion,@habilitado)
 END
 GO
 

@@ -21,31 +21,34 @@ namespace UberFrba.Menues {
             if (singleton==null) singleton = this;
         }
 
-        private void btnValidar_Click (object sender, EventArgs e) {            
-            SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_login");
-            command.Parameters.AddRange(new[]{
-                new SqlParameter("@usuario",txtUser.Text),
-                new SqlParameter("@password",txtPass.Text),
-            });
-            try {
-                int restantes =(int) command.ExecuteScalar();           // Devuelve la cantidad de intentos restantes del usuario
-                if (restantes == 3) iniciarSesion();                // Pass ok y restantes = 3 (si tenia menos, se le reiniciaron por ponerla bien)
-                else {                                                      
-                    if (restantes>0) {                              // Pass mal, le quedan X intentos
-                        actualizarLabelIntentos(restantes);
+        private void btnValidar_Click (object sender, EventArgs e) {
+            if (!(string.IsNullOrWhiteSpace(txtPass.Text) || String.IsNullOrWhiteSpace(txtUser.Text))) {
+                SqlCommand command = Buscador.getInstancia().getCommandStoredProcedure("SP_login");
+                command.Parameters.AddRange(new[]{
+                    new SqlParameter("@usuario",txtUser.Text),
+                    new SqlParameter("@password",txtPass.Text),
+                });
+                try {
+                    int restantes =(int) command.ExecuteScalar();           // Devuelve la cantidad de intentos restantes del usuario
+                    if (restantes == 3) iniciarSesion();                // Pass ok y restantes = 3 (si tenia menos, se le reiniciaron por ponerla bien)
+                    else {
+                        if (restantes>0) {                              // Pass mal, le quedan X intentos
+                            actualizarLabelIntentos(restantes);
+                        }
+                        else {                                              // Esta bloqueado, tiene 0 intentos restantes 
+                            lblIntentos.Text="USUARIO DESHABILITADO: "+txtUser.Text;
+                            lblIntentos.Visible=true;
+                        }
                     }
-                    else {                                              // Esta bloqueado, tiene 0 intentos restantes 
-                        lblIntentos.Text="USUARIO DESHABILITADO: "+txtUser.Text;   
-                        lblIntentos.Visible=true;
-                    }
-                    }
-            }
-            catch (SqlException error) {           
-                if (error.Number == 51000) MessageBox.Show(error.Message, "Error de logueo", MessageBoxButtons.OK, MessageBoxIcon.Error);      //Usuario inexistente
-                else MessageBox.Show("Error de logueo.\nConsulte al administrador", "Error BD", MessageBoxButtons.OK, MessageBoxIcon.Error);    
-                lblIntentos.Visible=false;
+                }
+                catch (SqlException error) {
+                    if (error.Number == 51000) MessageBox.Show(error.Message, "Error de logueo", MessageBoxButtons.OK, MessageBoxIcon.Error);      //Usuario inexistente
+                    else MessageBox.Show("Error de logueo.\nConsulte al administrador", "Error BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblIntentos.Visible=false;
 
+                }
             }
+            else MessageBox.Show("El nombre de usuario y contraseña no pueden estar estar vacios", "Error de logueo", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void actualizarLabelIntentos (int restantes) {          //Actualiza el label con la cantidad de intentos restantes

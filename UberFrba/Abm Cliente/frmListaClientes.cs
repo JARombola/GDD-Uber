@@ -40,6 +40,10 @@ namespace UberFrba.Abm_Cliente{
             cliente.telefono = dgListado.CurrentRow.Cells["Telefono"].Value.ToString();
             cliente.apellido = dgListado.CurrentRow.Cells["Apellido"].Value.ToString();
             cliente.direccion = dgListado.CurrentRow.Cells["Direccion"].Value.ToString();
+            cliente.localidad = dgListado.CurrentRow.Cells["Localidad"].Value.ToString();
+
+            cliente.piso = (dgListado.CurrentRow.Cells["Piso"].Value==DBNull.Value)?0:(int) dgListado.CurrentRow.Cells["Piso"].Value;
+            cliente.dpto= dgListado.CurrentRow.Cells["Depto"].Value.ToString();
             cliente.dni = dgListado.CurrentRow.Cells["DNI"].Value.ToString();
             cliente.fecha_nacimiento= DateTime.Parse(dgListado.CurrentRow.Cells["Fecha_Nacimiento"].Value.ToString());
             cliente.mail= dgListado.CurrentRow.Cells["Mail"].Value.ToString();

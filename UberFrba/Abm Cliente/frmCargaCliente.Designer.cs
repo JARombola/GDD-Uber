@@ -118,6 +118,7 @@
             // txtDepto
             // 
             this.txtDepto.Location = new System.Drawing.Point(296, 279);
+            this.txtDepto.MaxLength = 1;
             this.txtDepto.Name = "txtDepto";
             this.txtDepto.Size = new System.Drawing.Size(50, 20);
             this.txtDepto.TabIndex = 23;

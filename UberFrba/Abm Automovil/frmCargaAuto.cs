@@ -73,8 +73,6 @@ namespace UberFrba.Abm_Automovil {
                 try {
                     if (ID==-1) registrarAuto();          //NO hay un ID asociado ====> Es un registro. SINO, sería una modificacion
                     else modificarAuto();
-                    limpiar();
-                    MessageBox.Show("Auto registrado correctamente", "Registro Completo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (SqlException error) {
                     switch (error.Number) {
@@ -102,6 +100,8 @@ namespace UberFrba.Abm_Automovil {
             SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_altaAuto");
             setParametros(ref cmd);
             cmd.ExecuteNonQuery();
+            MessageBox.Show("Auto registrado correctamente", "Registro Completo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            limpiar();
         }
 
         private void modificarAuto () {
@@ -109,6 +109,9 @@ namespace UberFrba.Abm_Automovil {
             setParametros(ref cmd);
             cmd.Parameters.AddWithValue("@id", Math.Abs(ID));
             cmd.ExecuteNonQuery();
+            MessageBox.Show("Auto modificado correctamente", "Modificacion Completa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            formAnterior.Show();
+            this.Close();
         }
 
         private void setParametros (ref SqlCommand command) {
@@ -162,6 +165,7 @@ namespace UberFrba.Abm_Automovil {
             txtPatente.ResetText();
             txtChofer.ResetText();
             txtTurno.ResetText();
+            ID=-1;
         }
 
         private void btnClean_Click (object sender, EventArgs e) {

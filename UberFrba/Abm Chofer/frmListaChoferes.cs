@@ -48,6 +48,11 @@ namespace UberFrba.Abm_Chofer{
                 chofer.telefono = dgListado.CurrentRow.Cells["Telefono"].Value.ToString();
                 chofer.apellido = dgListado.CurrentRow.Cells["Apellido"].Value.ToString();
                 chofer.direccion = dgListado.CurrentRow.Cells["Direccion"].Value.ToString();
+                chofer.localidad= dgListado.CurrentRow.Cells["Localidad"].Value.ToString();
+                chofer.piso = (dgListado.CurrentRow.Cells["Piso"].Value==DBNull.Value)?0:(int) dgListado.CurrentRow.Cells["Piso"].Value;
+
+                chofer.dpto = dgListado.CurrentRow.Cells["Depto"].Value.ToString();
+
                 chofer.dni = dgListado.CurrentRow.Cells["DNI"].Value.ToString();
                 chofer.fecha_nacimiento = DateTime.Parse(dgListado.CurrentRow.Cells["Fecha_Nacimiento"].Value.ToString());
                 chofer.mail= dgListado.CurrentRow.Cells["Mail"].Value.ToString();

@@ -42,6 +42,10 @@ namespace UberFrba.Abm_Cliente
                 txtDire.Text = cliente.direccion;
                 dateNacimiento.Value = cliente.fecha_nacimiento;
                 ID = cliente.id;
+                txtDepto.Text=cliente.dpto;
+                txtLocalidad.Text = cliente.localidad;
+                cbPiso.Value = cliente.piso;
+                dateNacimiento.Value = cliente.fecha_nacimiento;
             if (!cliente.habilitado) ID*=-1;            // Solo importa para la habilitacion/deshabilitacion
         }
 
@@ -51,8 +55,6 @@ namespace UberFrba.Abm_Cliente
                try {
                    if (ID==-1) registrarCliente();          //NO hay un ID asociado ====> Es un registro
                    else modificarCliente();
-                   MessageBox.Show("Cliente registrado correctamente", "Operacion correcta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                   limpiar();
                }
                catch (SqlException error) {
                    switch (error.Number) {
@@ -82,12 +84,18 @@ namespace UberFrba.Abm_Cliente
            SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_altaCliente");
                setParametros(ref cmd);
                cmd.ExecuteNonQuery();
-           }
+               MessageBox.Show("Cliente registrado correctamente", "Registro completo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               limpiar();    
+       }
 
        private void modificarCliente () {
            SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_modifCliente");
                setParametros(ref cmd);
                cmd.Parameters.AddWithValue("@id", Math.Abs(ID));
+               cmd.ExecuteNonQuery();
+               MessageBox.Show("Cliente actualizado correctamente", "Registro completo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               formAnterior.Show();
+               this.Close();
        }
 
 
@@ -101,17 +109,22 @@ namespace UberFrba.Abm_Cliente
                      new SqlParameter("@piso",cbPiso.Value),
                      new SqlParameter("@depto",valor(txtDepto.Text)),
                      new SqlParameter("@localidad",valor(txtLocalidad.Text)),
+                     new SqlParameter("@fecha_nacimiento",dateNacimiento.Value),
                      new SqlParameter("@mail",valor(txtMail.Text))});
             }
 
        public override void limpiar () {
+           ID=-1;
            txtApellido.Clear();
            txtNombre.Clear();
            txtDNI.Clear();
            txtMail.Clear();
            txtTel.Clear();
            txtDire.Clear();
-           dateNacimiento.Value = dateNacimiento.MinDate;
+           txtLocalidad.Clear();
+           cbPiso.ResetText();
+           txtDepto.ResetText();
+           dateNacimiento.Value= DateTime.Now.Date;
        }
 
        private void btnHabilitacion_Click (object sender, EventArgs e) {
@@ -132,8 +145,8 @@ namespace UberFrba.Abm_Cliente
        }
 
        private void frmCargaCliente_Load (object sender, EventArgs e) {
-           dateNacimiento.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
-           dateNacimiento.Value = dateNacimiento.MinDate;
+           dateNacimiento.MaxDate= DateTime.Now.Date;
+           if (ID==-1) dateNacimiento.Value = DateTime.Now.Date;
        }
 
        private void btnClear_Click (object sender, EventArgs e) {

@@ -38,6 +38,9 @@ namespace UberFrba.Abm_Chofer {
                 txtMail.Text = chofer.mail;
                 txtTel.Text = chofer.telefono.ToString();
                 txtDire.Text = chofer.direccion;
+                txtDepto.Text=chofer.dpto;
+                txtLocalidad.Text = chofer.localidad;
+                cbPiso.Value = chofer.piso;
                 dateNacimiento.Value = chofer.fecha_nacimiento;
                 ID = chofer.id;
             if (!chofer.habilitado) ID*=-1;         // Solo importa para la habilitacion
@@ -49,8 +52,6 @@ namespace UberFrba.Abm_Chofer {
                 try {
                     if (ID==-1) registrarChofer();          //NO hay un ID asociado ====> Es un registro
                     else modificarChofer();
-                    MessageBox.Show("Chofer registrado correctamente", "Operacion correcta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    limpiar();
                 }
                 catch (SqlException error) {
                     switch (error.Number) {
@@ -80,6 +81,8 @@ namespace UberFrba.Abm_Chofer {
             SqlCommand cmd = Buscador.getInstancia().getCommandStoredProcedure("SP_altaChofer");
             setParametros(ref cmd);
             cmd.ExecuteNonQuery();
+            MessageBox.Show("Chofer registrado correctamente", "Registro completo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            limpiar();
         }
 
         private void modificarChofer () {
@@ -87,6 +90,9 @@ namespace UberFrba.Abm_Chofer {
             setParametros(ref cmd);
             cmd.Parameters.AddWithValue("@id", Math.Abs(ID));
             cmd.ExecuteNonQuery();
+            MessageBox.Show("Chofer actualizado correctamente", "Modificacion completa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            formAnterior.Show();
+            this.Close();
         }
 
         private void setParametros (ref SqlCommand command) {
@@ -99,6 +105,7 @@ namespace UberFrba.Abm_Chofer {
                      new SqlParameter("@piso",cbPiso.Value),
                      new SqlParameter("@depto",txtDepto.Text),
                      new SqlParameter("@localidad",txtLocalidad.Text),
+                     new SqlParameter("@fecha_nacimiento",dateNacimiento.Value),
                      new SqlParameter("@mail",txtMail.Text)});
         }
 
@@ -115,15 +122,18 @@ namespace UberFrba.Abm_Chofer {
             ID*=-1;
         }
 
-
         public override void limpiar () {
+            ID=-1;
             txtApellido.Clear();
             txtNombre.Clear();
             txtDNI.Clear();
             txtMail.Clear();
             txtTel.Clear();
             txtDire.Clear();
-            dateNacimiento.Value= dateNacimiento.MinDate;
+            txtLocalidad.Clear();
+            cbPiso.ResetText();
+            txtDepto.ResetText();
+            dateNacimiento.Value= DateTime.Now.Date;
         }
 
         private void btnVolver_Click (object sender, EventArgs e) {
@@ -131,11 +141,11 @@ namespace UberFrba.Abm_Chofer {
         }
 
         private void frmCargaChofer_Load (object sender, EventArgs e) {
-            dateNacimiento.MinDate = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
-            dateNacimiento.Value = dateNacimiento.MinDate;
+            dateNacimiento.MaxDate= DateTime.Now.Date;
+            if (ID==-1) dateNacimiento.Value = DateTime.Now.Date;
         }
 
-        private void btnClean_Click (object sender, EventArgs e) {
+        private void btnClear_Click (object sender, EventArgs e) {
             limpiar();
         }
     }
