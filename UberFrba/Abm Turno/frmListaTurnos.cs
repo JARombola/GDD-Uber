@@ -87,5 +87,13 @@ namespace UberFrba.Abm_Turno {
         private void frmListaTurnos_Load (object sender, EventArgs e) {
             lblHabilitados.Visible=soloHabilitados;
         }
+
+        private void btnAceptar_Click (object sender, EventArgs e) {
+            this.enviarDatos();
+        }
+
+        private void dgListado_CellContentClick (object sender, DataGridViewCellEventArgs e) {
+            btnAceptar.Enabled=true;
+        }
     }
 }

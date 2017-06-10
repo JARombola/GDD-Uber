@@ -310,12 +310,12 @@ CREATE FUNCTION [MAIDEN].fx_choferesViajesMasLargos(@anio int,@trimestre int)
 RETURNS TABLE
 AS
 RETURN(
-		SELECT TOP 5 (c.nombre+' '+c.Apellido) as Chofer,Resultados.Fecha,a.Patente,Duracion 
+		SELECT TOP 5 (c.nombre+' '+c.Apellido) as Chofer,Resultados.Fecha,a.Patente,Duracion as 'Duracion(min)'
 				FROM (
 					SELECT v.Chofer,
 							v.Auto,
 							ROW_NUMBER() OVER (PARTITION BY v.Chofer ORDER BY DATEDIFF(MI,cast(v.fecha as time),v.Hora_Fin) DESC) AS fila,
-							DATEDIFF(MI,cast(v.fecha as time),v.Hora_Fin) as 'Duracion(Minutos)',
+							DATEDIFF(MI,cast(v.fecha as time),v.Hora_Fin) as Duracion,
 							v.Fecha
 					FROM [MAIDEN].Viaje v
 					WHERE YEAR(v.fecha) = @anio AND DATEPART(qq,v.Fecha)=@trimestre AND v.Hora_Fin is not null

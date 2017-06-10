@@ -41,10 +41,10 @@
             this.menuDerecho = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.opcHabilitar = new System.Windows.Forms.ToolStripMenuItem();
             this.opcDeshabilitar = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnTodos = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.lblHabilitados = new System.Windows.Forms.Label();
             this.lblCantResultados = new System.Windows.Forms.Label();
+            this.btnAceptar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.menuDerecho.SuspendLayout();
@@ -189,6 +189,7 @@
             this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgListado.Size = new System.Drawing.Size(700, 200);
             this.dgListado.TabIndex = 10;
+            this.dgListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgListado_CellContentClick);
             this.dgListado.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.actualizarResultados);
             this.dgListado.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.actualizarResultados);
             this.dgListado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.seleccion);
@@ -213,16 +214,6 @@
             this.opcDeshabilitar.Size = new System.Drawing.Size(136, 22);
             this.opcDeshabilitar.Text = "Deshabilitar";
             // 
-            // btnTodos
-            // 
-            this.btnTodos.Location = new System.Drawing.Point(655, 395);
-            this.btnTodos.Name = "btnTodos";
-            this.btnTodos.Size = new System.Drawing.Size(75, 23);
-            this.btnTodos.TabIndex = 7;
-            this.btnTodos.Text = "Ver Todos";
-            this.btnTodos.UseVisualStyleBackColor = true;
-            this.btnTodos.Click += new System.EventHandler(this.btnTodos_Click);
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(30, 395);
@@ -246,22 +237,33 @@
             // lblCantResultados
             // 
             this.lblCantResultados.AutoSize = true;
-            this.lblCantResultados.Location = new System.Drawing.Point(475, 400);
+            this.lblCantResultados.Location = new System.Drawing.Point(633, 404);
             this.lblCantResultados.Name = "lblCantResultados";
             this.lblCantResultados.Size = new System.Drawing.Size(97, 13);
             this.lblCantResultados.TabIndex = 14;
             this.lblCantResultados.Text = "<Cant Resultados>";
             this.lblCantResultados.Visible = false;
             // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Enabled = false;
+            this.btnAceptar.Location = new System.Drawing.Point(339, 395);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 31);
+            this.btnAceptar.TabIndex = 15;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
             // frmListaAutos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(770, 430);
+            this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.lblCantResultados);
             this.Controls.Add(this.lblHabilitados);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnTodos);
             this.Controls.Add(this.dgListado);
             this.Controls.Add(this.btnClean);
             this.Controls.Add(this.btnBuscar);
@@ -297,10 +299,10 @@
         private System.Windows.Forms.ContextMenuStrip menuDerecho;
         private System.Windows.Forms.ToolStripMenuItem opcHabilitar;
         private System.Windows.Forms.ToolStripMenuItem opcDeshabilitar;
-        private System.Windows.Forms.Button btnTodos;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblHabilitados;
         private System.Windows.Forms.Label lblCantResultados;
+        private System.Windows.Forms.Button btnAceptar;
     }
 
 }

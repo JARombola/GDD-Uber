@@ -141,5 +141,12 @@ namespace UberFrba.Abm_Automovil {
             lblCantResultados.Text = "Resultados: "+dgListado.RowCount.ToString();
         }
 
+        private void btnAceptar_Click (object sender, EventArgs e) {
+            this.enviarDatos();
+        }
+
+        private void dgListado_CellContentClick (object sender, DataGridViewCellEventArgs e) {
+            btnAceptar.Enabled=true;
+        }
     }
 }
