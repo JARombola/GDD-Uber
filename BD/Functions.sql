@@ -293,8 +293,7 @@ AS
 RETURN(
 		SELECT TOP 5 (
 			c.Nombre+' '+c.Apellido) as Chofer,
-			count(*) as 'Cantidad de Viajes',
-			sum(Importe_Total) as Total	
+			sum(Importe_Total) as 'Total($)'	
 			from [MAIDEN].Rendicion r join [MAIDEN].Chofer c on (r.Chofer = c.ID)
 			where year(r.fecha)=@anio AND DATEPART(qq,r.Fecha)=@trimestre 
 			Group by r.Chofer, c.Nombre, c.Apellido, c.Direccion, c.Telefono, c.Mail
@@ -310,20 +309,10 @@ CREATE FUNCTION [MAIDEN].fx_choferesViajesMasLargos(@anio int,@trimestre int)
 RETURNS TABLE
 AS
 RETURN(
-		SELECT TOP 5 (c.nombre+' '+c.Apellido) as Chofer,Resultados.Fecha,a.Patente,Duracion as 'Duracion(min)'
-				FROM (
-					SELECT v.Chofer,
-							v.Auto,
-							ROW_NUMBER() OVER (PARTITION BY v.Chofer ORDER BY DATEDIFF(MI,cast(v.fecha as time),v.Hora_Fin) DESC) AS fila,
-							DATEDIFF(MI,cast(v.fecha as time),v.Hora_Fin) as Duracion,
-							v.Fecha
-					FROM [MAIDEN].Viaje v
-					WHERE YEAR(v.fecha) = @anio AND DATEPART(qq,v.Fecha)=@trimestre AND v.Hora_Fin is not null
-					)Resultados 
-							JOIN [MAIDEN].Chofer c on Resultados.Chofer = c.ID
-							JOIN MAIDEN.Auto a on (Resultados.Auto = a.ID)
-				WHERE Resultados.fila = 1
-				ORDER BY 4 DESC
+		SELECT TOP 5 (chofer.Nombre+' '+chofer.Apellido)as Chofer, max(km) as Distancia
+		FROM [MAIDEN].Viaje viaje JOIN [MAIDEN].Chofer chofer on  viaje.Chofer = chofer.ID
+		GROUP BY chofer.Nombre, chofer.Apellido
+		ORDER BY Distancia DESC
 )
 GO
 -- 1) Se agrupan las facturas por cliente
