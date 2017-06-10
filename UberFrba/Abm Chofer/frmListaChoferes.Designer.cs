@@ -23,13 +23,9 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent () {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.menuDerecho = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.opcHabilitar = new System.Windows.Forms.ToolStripMenuItem();
-            this.opcDeshabilitar = new System.Windows.Forms.ToolStripMenuItem();
             this.lblCantResultados = new System.Windows.Forms.Label();
             this.lblHabilitados = new System.Windows.Forms.Label();
             this.btnAtras = new System.Windows.Forms.Button();
@@ -44,30 +40,9 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
-            this.menuDerecho.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
             this.grFiltros.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // menuDerecho
-            // 
-            this.menuDerecho.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.opcHabilitar,
-            this.opcDeshabilitar});
-            this.menuDerecho.Name = "cgDerecho";
-            this.menuDerecho.Size = new System.Drawing.Size(137, 48);
-            // 
-            // opcHabilitar
-            // 
-            this.opcHabilitar.Name = "opcHabilitar";
-            this.opcHabilitar.Size = new System.Drawing.Size(136, 22);
-            this.opcHabilitar.Text = "Habilitar";
-            // 
-            // opcDeshabilitar
-            // 
-            this.opcDeshabilitar.Name = "opcDeshabilitar";
-            this.opcDeshabilitar.Size = new System.Drawing.Size(136, 22);
-            this.opcDeshabilitar.Text = "Deshabilitar";
             // 
             // lblCantResultados
             // 
@@ -112,7 +87,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgListado.ContextMenuStrip = this.menuDerecho;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -137,7 +111,7 @@
             this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgListado.Size = new System.Drawing.Size(700, 199);
             this.dgListado.TabIndex = 11;
-            this.dgListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgListado_CellContentClick);
+            this.dgListado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgListado_CellClick);
             this.dgListado.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.actualizarResultados);
             this.dgListado.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.actualizarResultados);
             this.dgListado.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.seleccion);
@@ -254,7 +228,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado Choferes";
             this.Load += new System.EventHandler(this.frmListado_Load);
-            this.menuDerecho.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();
             this.grFiltros.ResumeLayout(false);
             this.grFiltros.PerformLayout();
@@ -279,9 +252,6 @@
         private System.Windows.Forms.Button btnClean;
         private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.DataGridView dgListado;
-        private System.Windows.Forms.ContextMenuStrip menuDerecho;
-        private System.Windows.Forms.ToolStripMenuItem opcHabilitar;
-        private System.Windows.Forms.ToolStripMenuItem opcDeshabilitar;
         private System.Windows.Forms.Button btnAtras;
         private System.Windows.Forms.Label lblHabilitados;
         private System.Windows.Forms.Label lblCantResultados;

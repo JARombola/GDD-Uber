@@ -32,6 +32,7 @@ namespace UberFrba.Abm_Cliente{
 
             ejecutarQuery(command, dgListado);
             dgListado.Columns["ID"].Visible=false;
+
         }
 
         private void enviarDatos () {                           // Crea una "Persona" (dataobject Cliente) para enviar al formulario que los requiere
@@ -108,8 +109,9 @@ namespace UberFrba.Abm_Cliente{
             this.enviarDatos();
         }
 
-        private void dgListado_CellContentClick (object sender, DataGridViewCellEventArgs e) {
-            btnAceptar.Enabled=true;
+        private void dgListado_CellClick (object sender, DataGridViewCellEventArgs e) {
+            if (e.RowIndex!=-1) btnAceptar.Enabled=true;
+            else btnAceptar.Enabled=false;
         }
     }
 }

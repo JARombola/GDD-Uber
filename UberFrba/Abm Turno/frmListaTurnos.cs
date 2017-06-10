@@ -92,8 +92,10 @@ namespace UberFrba.Abm_Turno {
             this.enviarDatos();
         }
 
-        private void dgListado_CellContentClick (object sender, DataGridViewCellEventArgs e) {
-            btnAceptar.Enabled=true;
+        private void dgListado_CellClick (object sender, DataGridViewCellEventArgs e) {
+            if (e.RowIndex!=-1) btnAceptar.Enabled=true;
+            else btnAceptar.Enabled=false;
         }
+
     }
 }
