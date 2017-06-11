@@ -181,7 +181,6 @@
             this.Name = "frmFacturacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Facturacion viajes";
-            this.Load += new System.EventHandler(this.frmFacturacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -800,14 +800,14 @@ GO
 -- >>	Se realiza la facturación al cliente indicado de los viajes comprendido entre las fechas indicadas.
 -- Si no existia => Se registra la factura y se devuelven sus datos
 -- Si existia => Se devuelve el Nro de Factura correspondiente (por si el usuario desea ver el detalle)
-CREATE PROCEDURE [MAIDEN].SP_Facturacion(@idCliente int, @fechaInicio datetime, @fechaFin datetime)
+CREATE PROCEDURE [MAIDEN].SP_Facturacion(@idCliente int, @fechaInicio datetime, @fechaFin datetime, @fechaFactura datetime)
 AS BEGIN 
 	DECLARE @cod_Factura int, @total numeric(18,2)
 	SET @cod_Factura = (Select Nro FROM [MAIDEN].Factura WHERE Cliente = @idCliente AND CAST(Fecha_inicio as DATE)= CAST(@fechaInicio AS DATE))
 	IF (@cod_Factura IS NULL)							-- No está registrada
 		BEGIN
 			INSERT INTO [MAIDEN].Factura(Cliente,Fecha,Fecha_Inicio,Fecha_Fin,Importe_total)
-			SELECT @idCliente, GETDATE(), @fechaInicio, @fechaFin, sum(t.Precio_Base+t.Precio_km*v.Km)
+			SELECT @idCliente, @fechaFactura, @fechaInicio, @fechaFin, sum(t.Precio_Base+t.Precio_km*v.Km)
 			FROM [MAIDEN].Viaje v join [MAIDEN].Turno t on v.Turno = t.ID
 			WHERE v.Cliente = @idCliente AND v.Fecha BETWEEN @fechaInicio AND @fechaFin
 			

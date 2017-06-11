@@ -22,13 +22,11 @@ namespace UberFrba.Facturacion {
             InitializeComponent();
             formAnterior=anterior;
             FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha_Inicio"]);
-            fechaInicio.MaxDate = FECHA_ACTUAL;
-            fechaFin.MaxDate = FECHA_ACTUAL;
-        }
-
-        private void frmFacturacion_Load (object sender, EventArgs e) {
-            fechaFin.Value= new DateTime(FECHA_ACTUAL.Year, FECHA_ACTUAL.Month, DateTime.DaysInMonth(FECHA_ACTUAL.Year,FECHA_ACTUAL.Month));
-            fechaInicio.Value = new DateTime(FECHA_ACTUAL.Year, FECHA_ACTUAL.Month, 1);
+            FECHA_ACTUAL=FECHA_ACTUAL.AddMonths(-1);              //LA factura podrá ser del mes anterior
+            fechaInicio.MaxDate = new DateTime(FECHA_ACTUAL.Year,FECHA_ACTUAL.Month,1);
+            fechaFin.MaxDate = new DateTime(fechaInicio.MaxDate.Year, fechaInicio.MaxDate.Month, DateTime.DaysInMonth(fechaInicio.MaxDate.Year, fechaInicio.MaxDate.Month));
+            fechaFin.Value = fechaFin.MaxDate;
+            fechaInicio.Value =fechaInicio.MaxDate;
         }
 
         public override void configurar (IDominio elemento) {               // Método usado por el Listado de Clientes. Envía el Cliente seleccionado (al que se le realizará la facturación)
@@ -46,6 +44,7 @@ namespace UberFrba.Facturacion {
                         new SqlParameter("@idCliente",idCliente),
                         new SqlParameter("@fechaInicio",fechaInicio.Value),
                         new SqlParameter("@fechaFin",fechaFin.Value),                       
+                        new SqlParameter("@fechaFactura",FECHA_ACTUAL),                       
                     }
                 );
                 try {
@@ -56,7 +55,7 @@ namespace UberFrba.Facturacion {
                     if (error.Number == 51002){
                         if (MessageBox.Show("La factura ya se encuentra registrada.\n Desea visualizarla?", "Factura Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                             ==DialogResult.Yes) mostrarFacturacionExistente(error.Message);             // Si el cliente desea ver una factura que YA ESTABA registrada
-                }else MessageBox.Show("Error de Facturacion.\nConsulte al administrador.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                }else MessageBox.Show(error.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             }else MessageBox.Show(errores, "Error de campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
