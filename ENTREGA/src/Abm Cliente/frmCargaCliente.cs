@@ -126,7 +126,7 @@ namespace UberFrba.Abm_Cliente
            txtLocalidad.Clear();
            cbPiso.ResetText();
            txtDepto.ResetText();
-           dateNacimiento.Value= FECHA_ACTUAL.Date;
+           dateNacimiento.Value= FECHA_ACTUAL;
        }
 
        private void btnHabilitacion_Click (object sender, EventArgs e) {
